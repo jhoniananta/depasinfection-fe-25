@@ -260,6 +260,93 @@ export default function ButtonPage() {
 
         <div>
           <Typography as="h2" variant="h2">
+            Yellow Gradient
+          </Typography>
+          <div className="mt-3 flex flex-wrap items-end gap-3">
+            <Button
+              variant="gradient-yellow"
+              size="lg"
+              leftIcon={BiPlus}
+              rightIcon={BsArrowRight}
+            >
+              Yellow Button
+            </Button>
+            <Button
+              variant="gradient-yellow"
+              leftIcon={BiPlus}
+              rightIcon={BsArrowRight}
+            >
+              Yellow Button
+            </Button>
+            <Button
+              variant="gradient-yellow"
+              size="sm"
+              leftIcon={BiPlus}
+              rightIcon={BsArrowRight}
+            >
+              Yellow Button
+            </Button>
+          </div>
+          <div className="mt-3 flex flex-wrap items-end gap-3">
+            <Button
+              variant="gradient-yellow"
+              size="lg"
+              leftIcon={BiPlus}
+              rightIcon={BsArrowRight}
+              disabled
+            >
+              Yellow Disabled
+            </Button>
+            <Button
+              variant="gradient-yellow"
+              leftIcon={BiPlus}
+              rightIcon={BsArrowRight}
+              disabled
+            >
+              Yellow Disabled
+            </Button>
+            <Button
+              variant="gradient-yellow"
+              size="sm"
+              leftIcon={BiPlus}
+              rightIcon={BsArrowRight}
+              disabled
+            >
+              Yellow Disabled
+            </Button>
+          </div>
+          <div className="mt-3 flex flex-wrap items-end gap-3">
+            <Button
+              variant="gradient-yellow"
+              size="lg"
+              leftIcon={BiPlus}
+              rightIcon={BsArrowRight}
+              isLoading
+            >
+              Yellow Disabled
+            </Button>
+            <Button
+              variant="gradient-yellow"
+              leftIcon={BiPlus}
+              rightIcon={BsArrowRight}
+              isLoading
+            >
+              Yellow Disabled
+            </Button>
+            <Button
+              variant="gradient-yellow"
+              size="sm"
+              leftIcon={BiPlus}
+              rightIcon={BsArrowRight}
+              isLoading
+            >
+              Yellow Disabled
+            </Button>
+          </div>
+        </div>
+
+        <div>
+          <Typography as="h2" variant="h2">
             Red
           </Typography>
           <div className="mt-3 flex flex-wrap items-end gap-3">

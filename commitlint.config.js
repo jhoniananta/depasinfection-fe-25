@@ -1,4 +1,13 @@
 module.exports = {
+  theme: {
+    extend: {
+      fontFamily: {
+        inter: ["var(--font-inter)"],
+        rubik: ["var(--font-rubik)"],
+        bagnard: ["var(--font-bagnard)"],
+      },
+    },
+  },
   extends: ["@commitlint/config-conventional"],
   rules: {
     "type-enum": [
