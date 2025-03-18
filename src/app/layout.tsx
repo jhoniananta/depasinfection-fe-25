@@ -1,18 +1,23 @@
 import "./globals.css";
 
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Rubik } from "next/font/google";
+import localFont from "next/font/local";
 
 import Providers from "@/app/providers";
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
+const rubik = Rubik({ subsets: ["latin"], variable: "--font-rubik" });
+const bagnard = localFont({
+  src: "../fonts/Bagnard.otf",
+  variable: "--font-bagnard",
+});
 
 export const metadata: Metadata = {
   title: {
-    default: "Nextjs Starter Template",
+    default: "Depass Infection",
     template: "%s | Nextjs Starter Template",
   },
-  description: "Nextjs 14.2.1 + Tailwind CSS starter template",
+  description: "Depass Infection",
 };
 
 export default function RootLayout({
@@ -22,7 +27,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={`${rubik.variable} ${bagnard.variable}`}>
         <Providers>{children}</Providers>
       </body>
     </html>

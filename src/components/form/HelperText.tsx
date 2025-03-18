@@ -14,7 +14,7 @@ export default function HelperText({
     <div className="flex space-x-1">
       <Typography
         as="p"
-        font="Inter"
+        font="Rubik"
         weight="regular"
         variant="p"
         className={clsxm(

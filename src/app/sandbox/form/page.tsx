@@ -14,14 +14,17 @@ export default function FormSandbox() {
         <Typography
           as="h1"
           variant="h3"
-          font="Inter"
+          font="Bagnard"
           weight="bold"
-          className="text-gray-900"
+          className="text-gray-900 text-bagnard"
         >
           Form Sandbox
         </Typography>
         <FormProvider {...methods}>
           <form className="w-[600px]">
+            <Typography variant="h2" font="Rubik">
+              Test
+            </Typography>
             <Input id="Test" label="Haloo" placeholder="Ini placeholder" />
           </form>
         </FormProvider>

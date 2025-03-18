@@ -13,7 +13,8 @@ export enum TypographyVariant {
 }
 
 enum FontVariant {
-  Inter,
+  Rubik,
+  Bagnard,
 }
 
 enum FontWeight {
@@ -42,7 +43,7 @@ export default function Typography<T extends React.ElementType>({
   children,
   weight = "regular",
   className,
-  font = "Inter",
+  font = "Rubik",
   variant = "p",
   ...props
 }: TypographyProps<T> &
@@ -54,14 +55,15 @@ export default function Typography<T extends React.ElementType>({
         // *=============== Font Type ==================
         "text-black",
         [
-          font === "Inter" && [
-            "font-inter",
+          font === "Rubik" && [
+            "font-rubik",
             [
               weight === "regular" && "font-normal",
               weight === "medium" && "font-medium",
               weight === "bold" && "font-bold",
             ],
           ],
+          font === "Bagnard" && "font-bagnard",
         ],
         // *=============== Font Variants ==================
         [
