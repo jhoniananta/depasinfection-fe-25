@@ -1,9 +1,9 @@
 import "./globals.css";
 
 import type { Metadata } from "next";
+import { getLocale } from "next-intl/server";
 import { Rubik } from "next/font/google";
 import localFont from "next/font/local";
-import { getLocale } from "next-intl/server";
 
 import Providers from "@/app/providers";
 import { NextIntlClientProvider } from "next-intl";
