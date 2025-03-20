@@ -1,6 +1,6 @@
-import Button from "@/components/buttons/Button";
 import NextImage from "@/components/NextImage";
 import Typography from "@/components/Typography";
+import Button from "@/components/buttons/Button";
 import Layout from "@/layouts/Layout";
 
 // Data merchandise untuk mapping
