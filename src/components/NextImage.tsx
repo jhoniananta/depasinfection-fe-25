@@ -11,18 +11,8 @@ type NextImageProps = {
   serverStaticImg?: boolean;
   blurClassName?: string;
   alt: string;
-  width: string | number;
-} & (
-  | { width: string | number; height: string | number }
-  | { layout: "fill"; width?: string | number; height?: string | number }
-) &
-  ImageProps;
+} & ImageProps;
 
-/**
- *
- * @description Must set width using `w-` className
- * @param useSkeleton add background with pulse animation, don't use it if image is transparent
- */
 export default function NextImage({
   useSkeleton = false,
   serverStaticImg = false,
@@ -33,6 +23,7 @@ export default function NextImage({
   className,
   imgClassName,
   blurClassName,
+  fill,
   ...rest
 }: NextImageProps) {
   const [status, setStatus] = React.useState(
@@ -42,7 +33,7 @@ export default function NextImage({
 
   return (
     <figure
-      style={!widthIsSet ? { width: `${width}px` } : undefined}
+      style={!widthIsSet && !fill ? { width: `${width}px` } : undefined}
       className={className}
     >
       <Image
@@ -52,8 +43,9 @@ export default function NextImage({
             clsxm("animate-pulse bg-red-50", blurClassName),
         )}
         src={serverStaticImg ? src : "/images" + src}
-        width={width}
-        height={height}
+        width={!fill ? width : undefined}
+        height={!fill ? height : undefined}
+        fill={fill}
         alt={alt}
         onLoad={() => setStatus("complete")}
         {...rest}
