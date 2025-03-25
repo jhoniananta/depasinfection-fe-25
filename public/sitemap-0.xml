@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:mobile="http://www.google.com/schemas/sitemap-mobile/1.0" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
-<url><loc>https://example.com/sandbox/form</loc><lastmod>2025-03-20T01:12:49.559Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://example.com</loc><lastmod>2025-03-20T01:12:49.564Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://example.com/sandbox/button</loc><lastmod>2025-03-20T01:12:49.564Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://example.com</loc><lastmod>2025-03-25T10:37:05.654Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://example.com/sandbox/button</loc><lastmod>2025-03-25T10:37:05.656Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://example.com/sandbox/form</loc><lastmod>2025-03-25T10:37:05.656Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://example.com/sandbox/layout</loc><lastmod>2025-03-25T10:37:05.656Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://example.com/merchandise</loc><lastmod>2025-03-25T10:37:05.656Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://example.com/login</loc><lastmod>2025-03-25T10:37:05.656Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://example.com/forgot-password</loc><lastmod>2025-03-25T10:37:05.656Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://example.com/register</loc><lastmod>2025-03-25T10:37:05.656Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
 </urlset>
