@@ -42,7 +42,7 @@ export default function MerchandisePage() {
     <Layout withFooter withNavbar>
       {/* Hero Section */}
       <section className="min-h-screen w-screen bg-gradient-to-t py-52 lg:pb-32 lg:pt-60 flex flex-col items-center justify-center from-purple-900 to-purple-600">
-        <div className="flex flex-col items-center justify-center px-6 text-center gap-6">
+        <div className="flex flex-col container items-center justify-center px-6 text-center gap-6">
           <Typography
             variant="h3"
             font="Bagnard"
@@ -66,13 +66,13 @@ export default function MerchandisePage() {
           serverStaticImg
           height={360}
           width={1460}
-          className="w-screen"
+          className="w-screen items-center justify-center flex"
           src="/images/hero-merch.png"
         />
       </section>
 
       {/* Merchandise Section */}
-      <section className="w-screen py-36 flex flex-col gap-12">
+      <section className="w-screen container py-36 flex flex-col gap-12">
         <div className="flex flex-col items-center px-6 gap-6">
           <div className="flex flex-col items-center justify-center gap-2">
             <Typography
