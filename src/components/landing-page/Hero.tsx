@@ -2,12 +2,14 @@
 
 import NextImage from "@/components/NextImage";
 import Typography from "@/components/Typography";
+import { useScrollRef } from "@/components/custom-hooks/ScrollProvider";
 import Button from "../buttons/Button";
 
 export default function Hero() {
+  const { scrollToSection } = useScrollRef("hero");
   return (
     <>
-      <section className=" relative w-screen h-screen bg-purple-700">
+      <section className="relative w-screen h-screen bg-purple-700">
         {/* Hero Image background */}
         <NextImage
           src="/landing-page/bg-hero.png"
@@ -15,7 +17,7 @@ export default function Hero() {
           width={2560}
           height={600}
           priority
-          className="w-full absolute flex  justify-center items-center"
+          className="w-full absolute flex justify-center items-center"
           imgClassName="w-screen lg:container object-cover h-screen "
           quality={100}
         />
@@ -70,6 +72,7 @@ export default function Hero() {
 
             <div className="flex md:justify-end md:items-end justify-center items-center">
               <Button
+                onClick={() => scrollToSection("category")}
                 variant="gradient-yellow"
                 size="lg"
                 className="py-2 px-4 lg:py-6 lg:px-12 text-xl md:text-2xl"

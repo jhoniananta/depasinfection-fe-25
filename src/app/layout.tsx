@@ -31,7 +31,7 @@ export default async function RootLayout({
 
   return (
     <html lang={locale}>
-      <body className={`${rubik.variable} ${bagnard.variable} bg-purple-700`}>
+      <body className={`${rubik.variable} ${bagnard.variable} bg-neutral-50`}>
         <NextIntlClientProvider>
           <Providers>{children}</Providers>
         </NextIntlClientProvider>

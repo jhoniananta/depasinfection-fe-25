@@ -1,24 +1,29 @@
+"use client";
 import NextImage from "@/components/NextImage";
 import Typography from "@/components/Typography";
+import { useScrollRef } from "@/components/custom-hooks/ScrollProvider";
 
 export default function DentalEvent() {
+  const { ref } = useScrollRef("dental-event");
   return (
-    <section className="relative w-full min-h-screen bg-gradient-to-br from-purple-900 to-purple-700 text-white p-4 md:p-8 lg:p-12 overflow-hidden flex items-center justify-center">
+    <section
+      className="relative w-full min-h-screen bg-gradient-to-br from-purple-900 to-purple-700 text-white overflow-hidden flex items-center justify-center"
+      ref={ref}
+    >
       {/* Background overlay */}
       <div className="absolute inset-0 bg-gradient-to-br from-purple-900/90 to-purple-700/90 z-0"></div>
-      {/* Background Image */}
-      <div className="hidden md:block absolute inset-0 w-full h-full">
-        <NextImage
-          src="/landing-page/bg-event.png"
-          alt="Hero background"
-          fill
-          sizes="100vw"
-          quality={100}
-          priority
-          className="object-contain w-full"
-        />
-      </div>
-      <div className="relative z-10 max-w-7xl mx-auto">
+      {/* Image background */}
+      <NextImage
+        src="/landing-page/bg-event.png"
+        alt="background"
+        width={2560}
+        height={600}
+        priority
+        className="w-full absolute flex justify-center items-center"
+        imgClassName="w-screen object-cover h-screen 2xl:container"
+        quality={100}
+      />
+      <div className="relative z-10 max-w-7xl mx-auto container">
         <div className="flex flex-col lg:flex-row gap-8 md:gap-12 items-start ">
           {/* Left side - Quote and description */}
           <div className="w-full lg:w-1/2 space-y-4">

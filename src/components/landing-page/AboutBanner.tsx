@@ -2,7 +2,13 @@ import NextImage from "@/components/NextImage";
 import Typography from "@/components/Typography";
 import Button from "@/components/buttons/Button";
 
-export default function AboutBanner() {
+export interface ScrollProps {
+  handleScroll: () => void;
+}
+
+export default function AboutBanner({
+  handleScroll,
+}: ScrollProps): React.ReactElement {
   return (
     <div className="max-w-6xl rounded-xl bg-white shadow-xl z-20">
       <div className="flex flex-col md:flex-row items-center justify-center md:justify-between px-6 py-8 md:px-12 md:py-16 gap-8">
@@ -54,6 +60,7 @@ export default function AboutBanner() {
               variant="gradient-yellow"
               size="base"
               className="text-md md:text-lg"
+              onClick={handleScroll}
             >
               Explore Now
             </Button>

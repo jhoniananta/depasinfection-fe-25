@@ -1,10 +1,17 @@
+"use client";
+
 import NextImage from "@/components/NextImage";
 import Typography from "@/components/Typography";
+import { useScrollRef } from "@/components/custom-hooks/ScrollProvider";
 import AboutBanner from "@/components/landing-page/AboutBanner";
 import CardEvent from "./CardEvent";
 export default function Category() {
+  const { ref, scrollToSection } = useScrollRef("category");
   return (
-    <section className="bg-neutral-50 relative min-h-screen md:min-h-[1120px] w-full flex justify-end items-center flex-col pb-[10vh] overflow-hidden gap-0 px-8 md:px-12 lg:px-14">
+    <section
+      ref={ref}
+      className="bg-neutral-50 relative min-h-screen md:min-h-[1120px] w-full flex justify-end items-center flex-col pb-[10vh] overflow-hidden gap-0 px-8 md:px-12 lg:px-14"
+    >
       {/* Background Image */}
       <div className="absolute inset-0 w-full h-full">
         <NextImage
@@ -24,7 +31,7 @@ export default function Category() {
         <NextImage
           src="/landing-page/tr-bg.png"
           alt="top right"
-          width={1124}
+          width={1116}
           height={613}
           className="w-full h-full"
         />
@@ -32,7 +39,7 @@ export default function Category() {
 
       {/* About Banner */}
       <div className="w-full z-20 flex items-center justify-center">
-        <AboutBanner />
+        <AboutBanner handleScroll={() => scrollToSection("dental-event")} />
       </div>
 
       {/* Content Section */}

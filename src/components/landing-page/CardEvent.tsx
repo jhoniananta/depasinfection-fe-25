@@ -1,3 +1,4 @@
+"use client";
 import NextImage from "@/components/NextImage";
 import Typography from "@/components/Typography";
 
