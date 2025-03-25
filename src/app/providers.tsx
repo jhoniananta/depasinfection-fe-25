@@ -5,8 +5,8 @@ import {
   QueryClientProvider,
   QueryOptions,
 } from "@tanstack/react-query";
-import { Toaster } from "react-hot-toast";
 
+import { Toaster } from "@/components/ui/toaster";
 import api from "@/lib/api";
 
 const defaultQueryFn = async ({ queryKey }: QueryOptions) => {
@@ -24,7 +24,7 @@ const queryClient = new QueryClient({
 export default function Providers({ children }: { children: React.ReactNode }) {
   return (
     <QueryClientProvider client={queryClient}>
-      <Toaster position="top-center" />
+      <Toaster />
       {children}
     </QueryClientProvider>
   );
