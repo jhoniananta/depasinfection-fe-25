@@ -41,7 +41,7 @@ export default function MerchandisePage() {
   return (
     <Layout withFooter withNavbar>
       {/* Hero Section */}
-      <section className="min-h-screen w-screen bg-gradient-to-t py-52 lg:pb-32 lg:pt-60 flex flex-col items-center justify-center from-purple-900 to-purple-600">
+      <section className="bg-neutral-50 min-h-screen w-screen bg-gradient-to-t py-52 lg:pb-32 lg:pt-60 flex flex-col items-center justify-center from-purple-900 to-purple-700">
         <div className="flex flex-col container items-center justify-center px-6 text-center gap-6">
           <Typography
             variant="h3"
@@ -67,12 +67,13 @@ export default function MerchandisePage() {
           height={360}
           width={1460}
           className="w-screen items-center justify-center flex"
+          imgClassName="lg:container h-auto "
           src="/images/hero-merch.png"
         />
       </section>
 
       {/* Merchandise Section */}
-      <section className="w-screen container py-36 flex flex-col gap-12">
+      <section className="bg-neutral-50 w-screen mx-auto py-36 flex flex-col gap-12">
         <div className="flex flex-col items-center px-6 gap-6">
           <div className="flex flex-col items-center justify-center gap-2">
             <Typography
@@ -101,7 +102,7 @@ export default function MerchandisePage() {
           </Typography>
         </div>
 
-        <div className="px-6 flex flex-wrap gap-6 md:gap-8 justify-center items-center">
+        <div className=" px-6 flex flex-wrap gap-6 md:gap-8 justify-center items-center">
           {merchandiseItems.map((item) => (
             <div
               key={item.id}

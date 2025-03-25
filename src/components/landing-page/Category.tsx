@@ -4,7 +4,7 @@ import AboutBanner from "@/components/landing-page/AboutBanner";
 import CardEvent from "./CardEvent";
 export default function Category() {
   return (
-    <section className="relative min-h-screen md:min-h-[1120px] w-full flex justify-end items-center flex-col pb-[10vh] overflow-hidden gap-0 px-8 md:px-12 lg:px-14">
+    <section className="bg-neutral-50 relative min-h-screen md:min-h-[1120px] w-full flex justify-end items-center flex-col pb-[10vh] overflow-hidden gap-0 px-8 md:px-12 lg:px-14">
       {/* Background Image */}
       <div className="absolute inset-0 w-full h-full">
         <NextImage
@@ -15,6 +15,7 @@ export default function Category() {
           quality={100}
           priority
           className="object-cover inset-0 w-full"
+          imgClassName="object-cover w-full h-full"
         />
       </div>
 
@@ -25,7 +26,7 @@ export default function Category() {
           alt="top right"
           width={1124}
           height={613}
-          className="w-full h-full object-fit"
+          className="w-full h-full"
         />
       </div>
 

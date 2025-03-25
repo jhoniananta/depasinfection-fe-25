@@ -7,19 +7,19 @@ import Button from "../buttons/Button";
 export default function Hero() {
   return (
     <>
-      <section className="relative w-full h-screen overflow-hiden bg-purple-700 pb-[2vh] px-20">
+      <section className=" relative w-screen h-screen bg-purple-700">
         {/* Hero Image background */}
-        <div className="absolute inset-0 w-full z-0 bg-center bg-no-repeat">
-          <NextImage
-            src="/landing-page/bg-hero.png"
-            alt="Hero background"
-            width={2560}
-            height={600}
-            priority
-            className="object-fit object-center inset-0 w-full"
-            quality={100}
-          />
-        </div>
+        <NextImage
+          src="/landing-page/bg-hero.png"
+          alt="Hero background"
+          width={2560}
+          height={600}
+          priority
+          className="w-full absolute flex  justify-center items-center"
+          imgClassName="w-screen lg:container object-cover h-screen "
+          quality={100}
+        />
+
         {/* Decorative right gold */}
         <div className="absolute right-0 bottom-0 opacity-80 z-10">
           <NextImage
