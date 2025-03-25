@@ -4,7 +4,7 @@ import NextImage from "@/components/NextImage";
 
 import IconButton from "@/components/buttons/IconButton";
 import UnstyledLink from "@/components/links/UnstyledLink";
-import { Button, buttonVariants } from "@/components/ui/button";
+import { Button } from "@/components/ui/button";
 
 import {
   Select,
