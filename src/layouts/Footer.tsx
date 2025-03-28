@@ -71,7 +71,7 @@ export default function Footer() {
                     weight="medium"
                     className="w-fit !text-[14px] text-neutral-50"
                   >
-                    UDSPEC
+                    UDSRC
                   </Typography>
                   <Typography
                     variant="p"

@@ -4,9 +4,13 @@ import NextImage from "@/components/NextImage";
 import Typography from "@/components/Typography";
 import { useScrollRef } from "@/components/custom-hooks/ScrollProvider";
 import AboutBanner from "@/components/landing-page/AboutBanner";
+import { useTranslations } from "next-intl";
 import CardEvent from "./CardEvent";
+
 export default function Category() {
   const { ref, scrollToSection } = useScrollRef("category");
+  const t = useTranslations("HomePage");
+
   return (
     <section
       ref={ref}
@@ -51,8 +55,10 @@ export default function Category() {
           className="text-[48px] md:text-[64px] text-black text-center lg:text-left leading-none"
           weight="extrabold"
         >
-          What's your{" "}
-          <span className="font-bagnard text-purple-600">Category?</span>
+          {t("category.title")}{" "}
+          <span className="font-bagnard text-purple-600">
+            {t("category.titleDifferentFont")}
+          </span>
         </Typography>
         {/* Card section */}
         <div className="h-full w-full mt-10 flex flex-col lg:flex-row justify-center items-center lg:items-end relative gap-12 md:gap-14 lg:gap-18">
@@ -61,12 +67,14 @@ export default function Category() {
             src="/landing-page/bg-card-okgd.png"
             title="OKGD"
             subtitle="Olimpiade Kedokteran Gigi Dasar"
+            urlLink="/okgd-event"
           />
           {/* UDSRC Card */}
           <CardEvent
             src="/landing-page/bg-card-udsrc.png"
             title="UDSRC"
             subtitle="UGM Dental Student Poster and Essay Competition"
+            urlLink="/udsrc-event"
           />
         </div>
       </div>
