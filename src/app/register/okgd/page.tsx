@@ -8,6 +8,7 @@ import { isValidPhoneNumber } from "react-phone-number-input";
 import en from "react-phone-number-input/locale/en";
 import { z } from "zod";
 
+import Title from "@/components/Title";
 import Typography from "@/components/Typography";
 import { Button } from "@/components/ui/button";
 import {
@@ -24,8 +25,8 @@ import { PhoneInput } from "@/components/ui/phone-input";
 import { Progress } from "@/components/ui/progress";
 import { Separator } from "@/components/ui/separator";
 import { toast } from "@/hooks/use-toast";
+import FormLayout from "@/layouts/FormLayout";
 import Link from "next/link";
-import Title from "../../../components/Title";
 
 const steps = [
   { label: "Create Account", value: 0 },
@@ -84,7 +85,16 @@ function RegisterPage() {
   const email = form.watch("email");
 
   return (
-    <>
+    <FormLayout
+      heroImage={{
+        src: "/auth-hero.png",
+        alt: "Auth Hero",
+        width: 1280,
+        height: 1096,
+      }}
+      title="Depa's Infection"
+      subtitle="Denta Paramitha's Science Festival and Competition FKG Universitas Gadjah Mada"
+    >
       <div className="flex w-full flex-col">
         <Typography
           variant="p"
@@ -301,7 +311,7 @@ function RegisterPage() {
           </Button>
         </div>
       )}
-    </>
+    </FormLayout>
   );
 }
 

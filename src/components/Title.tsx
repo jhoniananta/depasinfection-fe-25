@@ -7,12 +7,12 @@ type TitleType = {
 
 function Title({ title, desc }: TitleType) {
   return (
-    <div className="flex flex-col gap-2 w-full">
+    <div className="flex w-full flex-col gap-2">
       <Typography
         variant="h6"
         font="Rubik"
         weight="bold"
-        className=" text-neutral-900 text-3xl sm:text-4xl md:text-5xl w-fit flex lg:text-6xl"
+        className="flex w-fit text-3xl text-neutral-900 sm:text-4xl md:text-5xl lg:text-6xl"
       >
         {title}
       </Typography>
@@ -20,7 +20,7 @@ function Title({ title, desc }: TitleType) {
         variant="p"
         font="Rubik"
         weight="regular"
-        className=" text-neutral-900 text-[12px] w-fit flex sm:text-lg md:text-xl lg:text-2xl"
+        className="flex w-fit text-[12px] text-neutral-900 sm:text-lg md:text-xl lg:text-2xl"
       >
         {desc}
       </Typography>

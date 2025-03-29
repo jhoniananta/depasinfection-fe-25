@@ -16,7 +16,7 @@ export default function OKGDHome() {
   const t = useTranslations("OKGDpage");
   return (
     <Layout withFooter withNavbar>
-      <main className="flex min-h-screen flex-col items-center justify-between w-full relative overflow-hidden">
+      <main className="relative flex min-h-screen w-full flex-col items-center justify-between overflow-hidden">
         <HeroEvent
           bgImage="/okgd-page/bg-event-okgd.png"
           buttonText={t("home.buttonText")}
