@@ -1,0 +1,48 @@
+{
+  "HomePage": {
+    "about": {
+      "title": "Tentang ",
+      "titleDifferentFont": "Depa's Infection",
+      "description": "Depa's Infection atau Denta Paramitha's Science Festival and Competition merupakan salah satu kompetisi besar yang diselenggarakan oleh Denta Paramitha. Denta Paramitha adalah badan semi-otonom yang menaungi pengembangan pendidikan dan research di Fakultas Kedokteran Gigi Universitas Gadjah Mada. Depa's Infection memiliki 2 sub-acara, yaitu, Olimpiade Kedokteran Gigi Dasar (OKGD) untuk Sekolah Menengah Atas (SMA) tingkat nasional dan University Dental School Research Competition (UDSRC) untuk mahasiswa sarjana pada tingkat internasional. UDSRC memiliki 2 cabang perlombaan; Lomba Poster dan 3 Minutes Oral Competition untuk mahasiswa pre-klinik dan klinik dari bidang yang berhubungan dengan kesehatan seperti kedokteran gigi, kedokteran, farmasi, kebidanan, keperawatan, dan kesehatan masyarakat."
+    },
+    "category": {
+      "title": "Apa Kategori ",
+      "titleDifferentFont": "anda?"
+    },
+    "dentalEvent": {
+      "content": "Depa's Infection #15 dengan bangga mempersembahkan tema tahun ini: “Multidisciplinary Role in Detection and Management of Head & Neck Diseases with Oral Cavity Involvement.” Dalam lingkup kedokteran gigi dan kedokteran yang berkembang pesat saat ini, pendekatan multidisiplin sangat penting untuk deteksi akurat dan penanganan penyakit kompleks yang efektif. Penyakit kepala dan leher yang melibatkan rongga mulut memerlukan kolaborasi lintas berbagai bidang, yang memadukan keahlian dari kedokteran, kedokteran gigi, radiologi, patologi, dan lainnya. Dengan terus mencari pengetahuan, merangkul inovasi, dan berjuang untuk perbaikan, kita dapat meningkatkan praktik kita ke tingkat yang lebih tinggi. Depa's Infection #15 menawarkan kesempatan unik untuk mengeksplorasi potensi ini melalui serangkaian kompetisi dan acara yang menarik. Tahun ini, kami dengan senang hati memperkenalkan sub-acara baru: Presentasi Lisan 3 Menit, bagian dari UGM Dental Student Research Competition. Inisiatif ini bertujuan untuk menginspirasi dan mendorong generasi muda untuk membuka potensi penuh mereka dan menyumbangkan perspektif baru dan ide-ide inovatif dalam penanganan multidisiplin penyakit kepala dan leher. Bergabunglah dengan kami dan nyalakan semangat Anda untuk maju bersama Depa's Infection #15. Kami berharap dapat menyaksikan ide-ide inovatif dan kontribusi inovatif Anda.",
+      "boldContent": "Panitia Penyelenggara Depa's Infection #15",
+      "name": "Aurelia Dyah Prasetia & Hannani 'Iffah Sabrina"
+    }
+  },
+  "Countdown": {
+    "days": "Hari",
+    "hours": "Jam",
+    "minutes": "Menit",
+    "seconds": "Detik"
+  },
+  "OKGDpage": {
+    "home": {
+      "title": "Olimpiade Kedokteran Gigi Dasar ",
+      "subTitle": "Untuk Sekolah Menengah Atas (SMA)",
+      "buttonText": "Daftar Sekarang"
+    },
+    "about": {
+      "title": "Tentang ",
+      "description": "Olimpiade Kedokteran Gigi Dasar (OKGD) merupakan salah satu bagian dari rangkaian Depa's Infection yang diselenggarakan oleh Denta Paramitha Fakultas Kedokteran Gigi Universitas Gadjah Mada. Terhitung sejak tahun 2017, Olimpiade Kedokteran Gigi Dasar telah diselenggarakan tingkat Nasional dari yang sebelumnya hanya menjangkau peserta tingkat regional Jawa dan Bali. Melalui olimpiade ini, peserta diberikan wadah untuk berkompetisi dengan materi seputar kedokteran gigi dasar sesuai dengan silabus yang telah diberikan. ",
+      "descriptionBold": "Babak penyisihan akan dilakukan secara daring melalui website depasinfection.com dan platform meeting online Zoom Meeting yang serentak dilakukan pada tanggal 2 Agustus 2025. Lima puluh tim terbaik akan melanjutkan kompetisi di babak perempat final pada 9 Agustus 2025 yang akan dilaksanakan secara daring melalui website depasinfection.com dan platform meeting online Zoom Meeting. Setelah itu, dua puluh tim terbaik akan melanjutkan kompetisi di babak semifinal pada tanggal 23 Agustus 2025. Enam tim terbaik akan melanjutkan ke babak final dan grand final pada 24 Agustus 2025. Babak semifinal, final, dan grand final akan dilaksanakan secara luring di Fakultas Kedokteran Gigi, Universitas Gadjah Mada."
+    }
+  },
+  "UDSRCpage": {
+    "home": {
+      "title": "University Dental School Research Competition",
+      "subTitle": "Untuk mahasiswa pre-klinik dan klinik dari bidang yang berhubungan dengan kesehatan seperti kedokteran gigi, kedokteran, farmasi, kebidanan, keperawatan, dan kesehatan masyarakat.",
+      "buttonText": "Daftar Sekarang"
+    },
+    "about": {
+      "title": "Tentang ",
+      "description": "UGM Dental Scientific Research Competition (UDSRC) merupakan acara bergengsi yang menampilkan presentasi poster dan segmen presentasi lisan tiga menit, yang akan diadakan untuk pertama kalinya di Depa's Infection. Kompetisi ini terbuka untuk mahasiswa pre-klinik dan klinik dari bidang yang berhubungan dengan kesehatan seperti kedokteran gigi, kedokteran, farmasi, kebidanan, keperawatan, dan kesehatan masyarakat, sebagai wadah luar biasa untuk memamerkan pengetahuan mendalam mereka tentang topik ilmu kesehatan.",
+      "descriptionBold": "Peserta akan terlibat dalam wacana ilmiah, bertukar ide-ide inovatif, dan memamerkan kecakapan penelitian mereka dalam lingkungan yang kompetitif. Selain mengakui keunggulan akademis dan mendorong pengembangan profesional, UDSRC bertujuan untuk mempromosikan kolaborasi interdisipliner dan kemajuan ilmu kedokteran gigi. Dengan mengintegrasikan kriteria evaluasi yang ketat dan kesempatan untuk umpan balik yang membangun, acara ini bercita-cita untuk menjadi ciri khas tahunan keunggulan dalam pendidikan dan penelitian kedokteran gigi dalam komunitas perguruan tinggi."
+    }
+  }
+}

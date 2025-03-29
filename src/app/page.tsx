@@ -6,8 +6,6 @@ import Timeline from "@/components/landing-page/Timeline";
 import Layout from "@/layouts/Layout";
 
 export default function Home() {
-  // const t = useTranslations('HomePage');
-
   return (
     <Layout withFooter withNavbar>
       <ScrollProvider>
@@ -22,7 +20,7 @@ export default function Home() {
               className="w-full h-full border-0"
               allowFullScreen
               loading="lazy"
-            ></iframe>
+            />
           </div>
         </main>
       </ScrollProvider>

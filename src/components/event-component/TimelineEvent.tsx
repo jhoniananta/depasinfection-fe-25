@@ -1,46 +1,9 @@
 import NextImage from "@/components/NextImage";
 import Typography from "@/components/Typography";
+import { TimelineEventProps } from "@/types/event-page";
 import { Fragment } from "react";
 
-const timelineContent = [
-  {
-    date: "July 31 - August 28",
-    title: "Register",
-    positionLarge: "top-4 left-12 xl:left-14",
-    positionSmall: "bottom-[480px] left-[120px]",
-  },
-  {
-    date: "August 31 - September 1",
-    title: "Register",
-    positionLarge: "top-[130px] left-[200px] xl:top-[150px] xl:left-[240px]",
-    positionSmall: "bottom-[380px] left-[120px]",
-  },
-  {
-    date: "July 31 - September 18",
-    title: "Register",
-    positionLarge: "top-4 left-[360px] xl:left-[415px]",
-    positionSmall: "bottom-[280px] left-[120px]",
-  },
-  {
-    date: "September 15 & 22",
-    title: "Register",
-    positionLarge: "top-[130px] left-[510px] xl:top-[150px] xl:left-[600px]",
-    positionSmall: "bottom-[190px] left-[120px]",
-  },
-  {
-    date: "September 29",
-    title: "Register",
-    positionLarge: "top-4 left-[670px] xl:left-[775px]",
-    positionSmall: "bottom-[90px] left-[120px]",
-  },
-  {
-    date: "October 26",
-    title: "Register",
-    positionLarge: "top-[130px] left-[820px] xl:top-[150px] xl:left-[960px]",
-    positionSmall: "bottom-[0px] left-[120px]",
-  },
-];
-export default function Timeline() {
+export default function TimelineEvent({ timelineContent }: TimelineEventProps) {
   return (
     <>
       <section className="relative flex min-h-full flex-col items-center justify-center w-full bg-gradient-to-br from-[#5C287F] to-[#37184B] py-16 lg:h-[558px] overflow-x-hidden">

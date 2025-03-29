@@ -2,12 +2,15 @@
 import NextImage from "@/components/NextImage";
 import Typography from "@/components/Typography";
 import { useScrollRef } from "@/components/custom-hooks/ScrollProvider";
+import { useTranslations } from "next-intl";
 
 export default function DentalEvent() {
   const { ref } = useScrollRef("dental-event");
+  const t = useTranslations("HomePage");
+
   return (
     <section
-      className="relative w-full min-h-screen bg-gradient-to-br from-purple-900 to-purple-700 text-white overflow-hidden flex items-center justify-center"
+      className="relative w-full min-h-screen bg-gradient-to-br from-purple-900 to-purple-700 text-white overflow-hidden flex items-center justify-center py-8 md:py-10"
       ref={ref}
     >
       {/* Background overlay */}
@@ -24,7 +27,7 @@ export default function DentalEvent() {
         quality={100}
       />
       <div className="relative z-10 max-w-7xl mx-auto container">
-        <div className="flex flex-col lg:flex-row gap-8 md:gap-12 items-start ">
+        <div className="flex flex-col lg:flex-row gap-8 md:gap-12 items-center">
           {/* Left side - Quote and description */}
           <div className="w-full lg:w-1/2 space-y-4">
             {/* Quote mark */}
@@ -35,33 +38,21 @@ export default function DentalEvent() {
             {/* Main text */}
             <div className="text-sm md:text-base space-y-4 text-justify">
               <Typography variant="p" className="text-white">
-                Depa's Infection #14 brings up the theme "Exploring Indonesian
-                Culture for Advanced Technology and Dental Medicine to Achieve
-                Overall Body Health" this year. An ever-evolving world of dental
-                science demands us to be adaptive with the latest advancements
-                in dentistry by always seeking for knowledge, new innovations
-                and also constantly improving ourselves to a bigger scale. We
-                can seek our ultimate potential through a series of competitions
-                and events in Depa's Infection #14. This year, we gladly
-                announce our new sub-event called UGM Dental Poster and Essay
-                Competition for dental students in Indonesia. We hope these
-                small steps can encourage younger generations to unleash their
-                potential and unlock new chapters in dentistry. Be ready to
-                ignite your spark with Depa's Infection #14
+                {t("dentalEvent.content")}
               </Typography>
             </div>
 
             {/* Organizing committee */}
             <div className="pt-4">
               <h3 className="font-bold text-lg md:text-xl">
-                Organizing Committees of Depa's Infection #14
+                {t("dentalEvent.boldContent")}
               </h3>
-              <p>Name</p>
+              <p>{t("dentalEvent.name")}</p>
             </div>
           </div>
 
           {/* Right side - Profile cards */}
-          <div className="w-full lg:w-1/2 grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+          <div className="w-full h-auto lg:w-1/2 grid grid-cols-1 md:grid-cols-2 gap-4">
             {/* Profile Card 1 */}
             <div className="bg-gradient-to-b from-white/20 to-white/5 rounded-3xl overflow-hidden shadow-lg">
               <div className="relative w-full h-64 md:h-80 lg:h-[480px]">
