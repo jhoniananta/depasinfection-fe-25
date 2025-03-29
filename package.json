@@ -13,10 +13,21 @@
     "format:write": "biome format --write .",
     "check": "biome check .",
     "check:write": "biome check --write .",
+    "format:tailwind": "prettier --write \"src/app/**/*.{js,jsx,ts,tsx}\"",
+    "typecheck": "tsc --noEmit",
     "validate": "pnpm check && pnpm typecheck",
     "prepare": "husky install",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "typecheck": "tsc --noEmit"
+    "check-all": "pnpm format:write && pnpm lint:write && pnpm format:tailwind && pnpm typecheck && pnpm check",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "biome lint --apply",
+      "prettier --write"
+    ],
+    "*.{json,md,css}": [
+      "prettier --write"
+    ]
   },
   "dependencies": {
     "@headlessui/react": "^2.2.0",
@@ -65,6 +76,8 @@
     "lint-staged": "^15.2.0",
     "lucide-react": "^0.483.0",
     "postcss": "^8",
+    "prettier": "^3.5.3",
+    "prettier-plugin-tailwindcss": "^0.6.11",
     "scheduler": "^0.23.0",
     "tailwindcss": "^3.3.0",
     "tailwindcss-animate": "^1.0.7",
