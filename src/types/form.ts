@@ -38,7 +38,7 @@ export type UDSRCFormData = {
   member3TwibbonProof: File;
 
   proofOfTransfer: File;
-  senderName: string;
+  bankName: string;
   senderEmail: string;
   dateOfTransfer: Date;
 };
@@ -78,7 +78,7 @@ export type OKGDFormData = {
   teacherWhatsApp: string;
 
   proofOfTransfer: File;
-  senderName: string;
+  bankName: string;
   senderEmail: string;
   dateOfTransfer: Date;
 };
