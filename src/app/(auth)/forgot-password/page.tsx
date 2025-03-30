@@ -18,22 +18,19 @@ import {
 import { Input } from "@/components/ui/input";
 import { toast } from "@/hooks/use-toast";
 import Title from "../../../components/Title";
-
-const FormSchema = z.object({
-  email: z.string().email({ message: "Invalid email address." }),
-});
+import { ForgotPasswordFormSchema } from "@/schemas/auth-schema";
 
 function ForgotPasswordPage() {
   const [sent, setSent] = useState(false);
 
-  const form = useForm<z.infer<typeof FormSchema>>({
-    resolver: zodResolver(FormSchema),
+  const form = useForm<z.infer<typeof ForgotPasswordFormSchema>>({
+    resolver: zodResolver(ForgotPasswordFormSchema),
     defaultValues: {
       email: "",
     },
   });
 
-  function onSubmit(data: z.infer<typeof FormSchema>) {
+  function onSubmit(data: z.infer<typeof ForgotPasswordFormSchema>) {
     toast({
       title: "Forgot password send successfully!",
       description: (

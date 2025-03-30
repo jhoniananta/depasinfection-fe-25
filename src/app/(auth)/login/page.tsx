@@ -20,26 +20,20 @@ import { EyeIcon, EyeOffIcon } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 import Title from "../../../components/Title";
-
-const FormSchema = z.object({
-  email: z.string().email({ message: "Invalid email address." }),
-  password: z.string().min(8, {
-    message: "Password must be at least 8 characters.",
-  }),
-});
+import { LoginFormSchema } from "@/schemas/auth-schema";
 
 function LoginPage() {
   const [show, setShow] = useState(false);
 
-  const form = useForm<z.infer<typeof FormSchema>>({
-    resolver: zodResolver(FormSchema),
+  const form = useForm<z.infer<typeof LoginFormSchema>>({
+    resolver: zodResolver(LoginFormSchema),
     defaultValues: {
       email: "",
       password: "",
     },
   });
 
-  function onSubmit(data: z.infer<typeof FormSchema>) {
+  function onSubmit(data: z.infer<typeof LoginFormSchema>) {
     toast({
       title: "You submitted the following values:",
       description: (
