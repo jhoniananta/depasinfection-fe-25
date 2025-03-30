@@ -17,8 +17,8 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { toast } from "@/hooks/use-toast";
-import Title from "../../../components/Title";
 import { ForgotPasswordFormSchema } from "@/schemas/auth-schema";
+import Title from "../../../components/Title";
 
 function ForgotPasswordPage() {
   const [sent, setSent] = useState(false);

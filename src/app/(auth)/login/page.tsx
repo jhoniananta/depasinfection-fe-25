@@ -16,11 +16,11 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { toast } from "@/hooks/use-toast";
+import { LoginFormSchema } from "@/schemas/auth-schema";
 import { EyeIcon, EyeOffIcon } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 import Title from "../../../components/Title";
-import { LoginFormSchema } from "@/schemas/auth-schema";
 
 function LoginPage() {
   const [show, setShow] = useState(false);
