@@ -1,12 +1,13 @@
-export const UDSRCsteps = [
+export const OKGDsteps = [
   { label: "Team Information", value: 0 },
-  { label: "Leader Information", value: 25 },
-  { label: "Members Information", value: 50 },
-  { label: "Payment", value: 75 },
+  { label: "Leader Information", value: 20 },
+  { label: "Members Information", value: 40 },
+  { label: "Accompanying Teacher", value: 60 },
+  { label: "Payment", value: 80 },
   { label: "Complete", value: 100 },
 ];
 
-export const LeaderUDSRCtextFields = [
+export const LeaderOKGDtextFields = [
   {
     name: "leaderName",
     label: "Name",
@@ -26,14 +27,29 @@ export const LeaderUDSRCtextFields = [
     type: "number",
   },
   {
-    name: "leaderNIM",
-    label: "NIM",
-    placeholder: "Enter your leader NIM",
+    name: "leaderNISN",
+    label: "NISN",
+    placeholder: "Enter your leader NISN",
     type: "number",
   },
 ];
 
-export const LeaderUDSRCfileFields = [
+export const TeacherOKGDtextFields = [
+  {
+    name: "teacherName",
+    label: "Name",
+    placeholder: "Enter your teacher name",
+    type: "text",
+  },
+  {
+    name: "teacherEmail",
+    label: "Email",
+    placeholder: "Enter your teacher email",
+    type: "email",
+  },
+];
+
+export const LeaderOKGDfileFields = [
   {
     name: "leaderStudentCard",
     label: "Student Card",

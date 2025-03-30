@@ -22,7 +22,7 @@ export default function UDSRCHome() {
           buttonText={t("home.buttonText")}
           title={t("home.title")}
           subtitle={t("home.subTitle")}
-          urlRegist="/udsrc-page/register"
+          urlRegist="/event-register/udsrc"
         />
         <AboutEvent
           poster="/udsrc-page/UDSRC-poster.png"
@@ -35,7 +35,7 @@ export default function UDSRCHome() {
         <CardSection images={imageCarousel} requirements={requirements} />
         <TimelineEvent timelineContent={timelineContent} />
         <RegistEvent
-          registUrl="/okgd-event/register"
+          registUrl="/event-register/okgd"
           guidebookUrl="/okgd-event/guidebook"
           endDate="2025-07-12T00:00:00"
           srcVideo="https://www.youtube.com/embed/8e3gT2vB8"

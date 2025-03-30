@@ -6,6 +6,14 @@ import Typography from "@/components/Typography";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
 import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import {
   FormControl,
   FormDescription,
   FormField,
@@ -33,7 +41,7 @@ import { useState } from "react";
 import { useFormContext } from "react-hook-form";
 
 interface StepPaymentProps {
-  onNext: () => void;
+  onSubmit: () => void;
   onBack: () => void;
 }
 
@@ -44,14 +52,22 @@ function formatSubCompetition(value: string) {
     .join(" ");
 }
 
-export default function StepPayment({ onNext, onBack }: StepPaymentProps) {
+export default function StepPayment({ onSubmit, onBack }: StepPaymentProps) {
   const { watch } = useFormContext();
+  const form = useFormContext();
+  const [openDialog, setOpenDialog] = useState(false);
   const rawSubCompetition = watch("subCompetition");
   const [selectedAccount, setSelectedAccount] = useState("");
 
   const subCompetition = rawSubCompetition
     ? formatSubCompetition(rawSubCompetition)
     : "error, please try again later/choose your competition corectly.";
+
+  const handleOpenDialog = async () => {
+    const isValid = await form.trigger();
+    if (!isValid) return;
+    setOpenDialog(true);
+  };
 
   return (
     <>
@@ -96,11 +112,11 @@ export default function StepPayment({ onNext, onBack }: StepPaymentProps) {
             <Select
               onValueChange={(val) => {
                 setSelectedAccount(
-                  val === "smbc" || val === "btpn"
+                  val === "btpn-smbc"
                     ? "90380505067"
                     : val === "paypal"
                       ? "@Nasywaalifaa"
-                      : "",
+                      : "error, please try again later.",
                 );
               }}
             >
@@ -108,11 +124,8 @@ export default function StepPayment({ onNext, onBack }: StepPaymentProps) {
                 <SelectValue placeholder="Select a payment method" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="smbc">
-                  90380505067 - Bank SMBC (Nasywa Alifa Jasmine)
-                </SelectItem>
-                <SelectItem value="btpn">
-                  90380505067 - BTPN / Jenius (Nasywa Alifa Jasmine)
+                <SelectItem value="btpn-smbc">
+                  90380505067 - BTPN / SMBC (Jenius) (Nasywa Alifa Jasmine)
                 </SelectItem>
                 <SelectItem value="paypal">PayPal - @Nasywaalifaa</SelectItem>
               </SelectContent>
@@ -231,12 +244,37 @@ export default function StepPayment({ onNext, onBack }: StepPaymentProps) {
           Back
         </Button>
         <Button
-          onClick={onNext}
-          className="text-olive-900 w-full bg-gradient-to-r from-amber-300 to-yellow-400 px-8 py-6 text-2xl font-bold text-[#a88a44] shadow-md hover:from-amber-400 hover:to-yellow-500 md:px-12 lg:px-14"
+          type="button"
+          onClick={handleOpenDialog}
+          className="w-full bg-gradient-to-r from-amber-300 to-yellow-400 px-8 py-6 text-2xl font-bold"
         >
-          Next
+          Submit
         </Button>
       </div>
+
+      <Dialog open={openDialog} onOpenChange={setOpenDialog}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Are you sure?</DialogTitle>
+            <DialogDescription>
+              Make sure all your data is filled in correctly before submitting.
+            </DialogDescription>
+          </DialogHeader>
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setOpenDialog(false)}>
+              Cancel
+            </Button>
+            <Button
+              onClick={() => {
+                setOpenDialog(false);
+                onSubmit(); // trigger actual parent submit
+              }}
+            >
+              Yes, submit
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </>
   );
 }

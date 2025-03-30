@@ -8,7 +8,6 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { PhoneInput } from "@/components/ui/phone-input";
-import { useFormContext } from "react-hook-form";
 import en from "react-phone-number-input/locale/en";
 
 interface MemberFieldsProps {
@@ -16,10 +15,7 @@ interface MemberFieldsProps {
 }
 
 export default function MemberFields({ prefix }: MemberFieldsProps) {
-  const { watch } = useFormContext();
-  const nationality = watch("nationality");
-
-  const membersUDSRCtextFields = [
+  const membersOKGDtextFields = [
     {
       name: `${prefix}Name`,
       label: "Name",
@@ -36,13 +32,20 @@ export default function MemberFields({ prefix }: MemberFieldsProps) {
       placeholder: "Enter your member NIK",
     },
     {
-      name: `${prefix}NIM`,
-      label: "NIM",
-      placeholder: "Enter your member NIM",
+      name: `${prefix}NISN`,
+      label: "NISN",
+      placeholder: "Enter your member NISN",
     },
   ];
 
-  const membersUDSRCfileFields = [
+  interface FileField {
+    name: string;
+    label: string;
+    placeholder: string;
+    accept: string;
+  }
+
+  const membersOKGDfileFields: FileField[] = [
     {
       name: `${prefix}StudentCard`,
       label: "Student Card",
@@ -59,14 +62,7 @@ export default function MemberFields({ prefix }: MemberFieldsProps) {
 
   return (
     <div className="w-full space-y-4">
-      {membersUDSRCtextFields.map((fieldData) => {
-        // Hide NIK and NIM fields if nationality is not "IDN"
-        if (
-          (fieldData.name.includes("NIK") || fieldData.name.includes("NIM")) &&
-          nationality !== "IDN"
-        ) {
-          return null;
-        }
+      {membersOKGDtextFields.map((fieldData) => {
         return (
           <FormField
             key={fieldData.name}
@@ -112,7 +108,7 @@ export default function MemberFields({ prefix }: MemberFieldsProps) {
         )}
       />
 
-      {membersUDSRCfileFields.map((fileField) => (
+      {membersOKGDfileFields.map((fileField) => (
         <FormField
           key={fileField.name}
           name={fileField.name}
