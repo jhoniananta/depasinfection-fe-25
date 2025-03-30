@@ -46,23 +46,11 @@ interface StepPaymentProps {
   onSubmit: () => void;
 }
 
-function formatSubCompetition(value: string) {
-  return value
-    .split("-")
-    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(" ");
-}
-
 export default function StepPayment({ onBack, onSubmit }: StepPaymentProps) {
-  const { watch } = useFormContext();
   const form = useFormContext();
   const [openDialog, setOpenDialog] = useState(false);
-  const rawSubCompetition = watch("subCompetition");
-  const [selectedAccount, setSelectedAccount] = useState("");
 
-  const subCompetition = rawSubCompetition
-    ? formatSubCompetition(rawSubCompetition)
-    : "error, please try again later/choose your competition corectly.";
+  const [selectedAccount, setSelectedAccount] = useState("");
 
   const handleOpenDialog = async () => {
     const isValid = await form.trigger();
@@ -87,7 +75,7 @@ export default function StepPayment({ onBack, onSubmit }: StepPaymentProps) {
             font="Rubik"
             className="rounded-md border bg-neutral-100 px-2.5 py-1 text-justify text-[16px] text-neutral-900 md:text-[16px] lg:text-[16px]"
           >
-            {subCompetition}
+            National Olympiad Competition (OKGD)
           </Typography>
         </div>
         <div>
@@ -161,13 +149,13 @@ export default function StepPayment({ onBack, onSubmit }: StepPaymentProps) {
         />
 
         <FormField
-          name="senderName"
+          name="bankName"
           render={({ field: { value, onChange, ...rest } }) => (
             <FormItem>
-              <FormLabel isRequired>Sender Name</FormLabel>
+              <FormLabel isRequired>Bank Name</FormLabel>
               <FormControl>
                 <Input
-                  placeholder="Enter sender name"
+                  placeholder="Enter bank name"
                   value={value || ""}
                   onChange={onChange}
                   {...rest}
@@ -269,7 +257,7 @@ export default function StepPayment({ onBack, onSubmit }: StepPaymentProps) {
             <Button
               onClick={() => {
                 setOpenDialog(false);
-                onSubmit(); // trigger actual parent submit
+                onSubmit();
               }}
             >
               Yes, submit

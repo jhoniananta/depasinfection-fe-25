@@ -54,6 +54,7 @@ function formatSubCompetition(value: string) {
 
 export default function StepPayment({ onSubmit, onBack }: StepPaymentProps) {
   const { watch } = useFormContext();
+  const nationality = watch("nationality");
   const form = useFormContext();
   const [openDialog, setOpenDialog] = useState(false);
   const rawSubCompetition = watch("subCompetition");
@@ -97,7 +98,7 @@ export default function StepPayment({ onSubmit, onBack }: StepPaymentProps) {
               font="Rubik"
               className="w-full rounded-md border bg-neutral-100 px-2.5 py-1 text-justify text-[16px] text-neutral-900 md:text-[16px] lg:text-[16px]"
             >
-              IDR 99.000,00
+              {nationality == "IDN" ? "IDR" : "$"}99.000,00
             </Typography>
             <CopyButton text="99000" />
           </div>
@@ -159,13 +160,13 @@ export default function StepPayment({ onSubmit, onBack }: StepPaymentProps) {
         />
 
         <FormField
-          name="senderName"
+          name="bankName"
           render={({ field: { value, onChange, ...rest } }) => (
             <FormItem>
-              <FormLabel isRequired>Sender Name</FormLabel>
+              <FormLabel isRequired>Bank Name</FormLabel>
               <FormControl>
                 <Input
-                  placeholder="Enter sender name"
+                  placeholder="Enter bank name"
                   value={value || ""}
                   onChange={onChange}
                   {...rest}

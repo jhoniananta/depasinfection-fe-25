@@ -4,7 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { EyeIcon, EyeOffIcon } from "lucide-react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { isValidPhoneNumber } from "react-phone-number-input";
+
 import en from "react-phone-number-input/locale/en";
 import { z } from "zod";
 
@@ -26,40 +26,20 @@ import { Separator } from "@/components/ui/separator";
 import { toast } from "@/hooks/use-toast";
 import Link from "next/link";
 import Title from "../../../components/Title";
+import { RegisterFormSchema } from "@/schemas/auth-schema";
 
 const steps = [
   { label: "Create Account", value: 0 },
   { label: "Confirmation", value: 50 },
 ];
 
-const FormSchema = z
-  .object({
-    fullname: z.string().min(2, {
-      message: "Full name must be at least 2 characters.",
-    }),
-    email: z.string().email({ message: "Invalid email address." }),
-    password: z.string().min(8, {
-      message: "Password must be at least 8 characters.",
-    }),
-    confirmPassword: z.string(),
-    phoneNumber: z
-      .string()
-      .refine((val) => val === "" || isValidPhoneNumber(val), {
-        message: "Invalid phone number.",
-      }),
-  })
-  .refine((data) => data.password === data.confirmPassword, {
-    message: "Passwords do not match.",
-    path: ["confirmPassword"],
-  });
-
 function RegisterPage() {
   const [step, setStep] = useState(1);
   const [show, setShow] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
 
-  const form = useForm<z.infer<typeof FormSchema>>({
-    resolver: zodResolver(FormSchema),
+  const form = useForm<z.infer<typeof RegisterFormSchema>>({
+    resolver: zodResolver(RegisterFormSchema),
     defaultValues: {
       fullname: "",
       email: "",
@@ -69,7 +49,7 @@ function RegisterPage() {
     },
   });
 
-  function onSubmit(data: z.infer<typeof FormSchema>) {
+  function onSubmit(data: z.infer<typeof RegisterFormSchema>) {
     toast({
       title: "Submitted! Moving to next step...",
       description: (

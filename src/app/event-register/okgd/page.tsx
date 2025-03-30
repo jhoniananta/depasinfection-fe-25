@@ -96,7 +96,10 @@ export default function OKGDRegisterPage() {
       case 4:
         return (
           <StepPayment
-            onSubmit={() => onSubmit(form.getValues())}
+            onSubmit={() => {
+              const { teacherAgreement, ...filteredValues } = form.getValues();
+              onSubmit(filteredValues);
+            }}
             onBack={handleBack}
           />
         );
