@@ -17,9 +17,9 @@ export default function Footer() {
     <footer className="bg-neutral-900">
       <div className="container mx-auto pb-20 pt-16">
         {/* Bagian Atas: Logo, Judul, dan Informasi Kontak */}
-        <div className="flex flex-col md:flex-row justify-between items-center gap-12">
+        <div className="flex flex-col items-center justify-between gap-12 md:flex-row">
           {/* Kolom Kiri: Logo dan Judul */}
-          <div className="flex flex-row md:flex-col gap-4 basis-1/2">
+          <div className="flex basis-1/2 flex-row gap-4 md:flex-col">
             <NextImage
               serverStaticImg
               width={100}
@@ -37,7 +37,7 @@ export default function Footer() {
           </div>
 
           {/* Kolom Kanan: Informasi Kontak dan Office */}
-          <div className="flex flex-col md:flex-row basis-1/2 gap-8">
+          <div className="flex basis-1/2 flex-col gap-8 md:flex-row">
             {/* Informasi Contact Person */}
             <div className="basis-1/2">
               <Typography
@@ -54,15 +54,15 @@ export default function Footer() {
                     weight="medium"
                     className="w-fit !text-[14px] text-neutral-50"
                   >
-                    Olimpiade KG Dasar
+                    National Olympiad Competition (OKGD)
                   </Typography>
                   <Typography
                     variant="p"
                     weight="thin"
                     className="w-fit !text-[14px] text-neutral-50"
                   >
-                    CP 1: +628179392365 (Izza) <br /> CP 2: +6281374015559
-                    (Hannani)
+                    CP 1 : +62 821-2373-6690 (Alifia) <br /> CP 2 : +62
+                    858-0271-2878 (Ninda)
                   </Typography>
                 </div>
                 <div>
@@ -71,15 +71,14 @@ export default function Footer() {
                     weight="medium"
                     className="w-fit !text-[14px] text-neutral-50"
                   >
-                    UDSRC
+                    University Dental Science Research Competition (UDSRC)
                   </Typography>
                   <Typography
                     variant="p"
                     weight="thin"
                     className="w-fit !text-[14px] text-neutral-50"
                   >
-                    Essay: +6288229791277 (Alma) <br /> Poster: +6285723933448
-                    (Junita)
+                    +62 8953-4128-9950 (Fatiya)
                   </Typography>
                 </div>
               </div>
@@ -107,13 +106,13 @@ export default function Footer() {
         </div>
 
         {/* Divider */}
-        <div className="border-t border-neutral-50 mt-8 mb-4"></div>
+        <div className="mb-4 mt-8 border-t border-neutral-50"></div>
 
         {/* Bagian Bawah: Copyright dan Social Links */}
-        <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+        <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
           <Typography
             variant="p"
-            className="!text-[12px] md:!text-[14px] text-center text-neutral-50"
+            className="text-center !text-[12px] text-neutral-50 md:!text-[14px]"
           >
             Copyright 2025. Depa&apos;s Infection FKG UGM
           </Typography>

@@ -4,40 +4,70 @@ import { Fragment } from "react";
 
 const timelineContent = [
   {
-    date: "July 31 - August 28",
-    title: "Register",
-    positionLarge: "top-4 left-12 xl:left-14",
-    positionSmall: "bottom-[480px] left-[120px]",
+    date: "14 Apr - 17 May 2025",
+    title: "Early Registration UDSRC & OKGD",
+    positionLarge: "-top-8 left-10 xl:left-12",
+    positionSmall: "bottom-[690px] left-[95px]",
   },
   {
-    date: "August 31 - September 1",
-    title: "Register",
-    positionLarge: "top-[130px] left-[200px] xl:top-[150px] xl:left-[240px]",
-    positionSmall: "bottom-[380px] left-[120px]",
+    date: "18 May - 12 Jul 2025",
+    title: "Regular Registration UDSRC & OKGD",
+    positionLarge: "top-[115px] left-[120px] xl:top-[130px] xl:left-[140px]",
+    positionSmall: "bottom-[620px] left-[95px]",
   },
   {
-    date: "July 31 - September 18",
-    title: "Register",
-    positionLarge: "top-4 left-[360px] xl:left-[415px]",
-    positionSmall: "bottom-[280px] left-[120px]",
+    date: "14 Apr - 29 Jul 2025",
+    title: "Submission UDSRC",
+    positionLarge: "-top-8 left-[195px] xl:left-[225px]",
+    positionSmall: "bottom-[570px] left-[95px]",
   },
   {
-    date: "September 15 & 22",
-    title: "Register",
-    positionLarge: "top-[130px] left-[510px] xl:top-[150px] xl:left-[600px]",
-    positionSmall: "bottom-[190px] left-[120px]",
+    date: "30 Jul 2025",
+    title: "Technical\n Meeting",
+    positionLarge: "top-[115px] left-[270px] xl:top-[130px] xl:left-[320px]",
+    positionSmall: "bottom-[490px] left-[95px]",
   },
   {
-    date: "September 29",
-    title: "Register",
-    positionLarge: "top-4 left-[670px] xl:left-[775px]",
-    positionSmall: "bottom-[90px] left-[120px]",
+    date: "30 Jul - 31 Jul 2025",
+    title: "Try Out OKGD",
+    positionLarge: "-top-3 left-[350px] xl:left-[410px]",
+    positionSmall: "bottom-[440px] left-[95px]",
   },
   {
-    date: "October 26",
-    title: "Register",
-    positionLarge: "top-[130px] left-[820px] xl:top-[150px] xl:left-[960px]",
-    positionSmall: "bottom-[0px] left-[120px]",
+    date: "02 Aug 2025",
+    title: "Preliminary\n Round OKGD",
+    positionLarge: "top-[115px] left-[425px] xl:top-[130px] xl:left-[500px]",
+    positionSmall: "bottom-[360px] left-[95px]",
+  },
+  {
+    date: "09 Aug 2025",
+    title: "Quarter-Finals Round OKGD",
+    positionLarge: "-top-4 left-[505px] xl:left-[595px]",
+    positionSmall: "bottom-[290px] left-[95px]",
+  },
+  {
+    date: "10 Aug 2025",
+    title: "Annouce Finalist UDSRC & Semifinalist OKGD",
+    positionLarge: "top-[115px] left-[580px] xl:top-[130px] xl:left-[680px]",
+    positionSmall: "bottom-[220px] left-[95px]",
+  },
+  {
+    date: "11 Aug 2025",
+    title: "TM Finalist UDSRC & Semifinalist OKGD",
+    positionLarge: "-top-8 left-[655px] xl:left-[775px]",
+    positionSmall: "bottom-[140px] left-[95px]",
+  },
+  {
+    date: "23 Aug 2025",
+    title: "Semifinal OKGD & Final Presentation UDSRC",
+    positionLarge: "top-[115px] left-[735px] xl:top-[130px] xl:left-[870px]",
+    positionSmall: "bottom-[65px] left-[95px]",
+  },
+  {
+    date: "24 Aug 2025",
+    title: "Final & Grand Final OKGD & Winner Announcement",
+    positionLarge: "-top-8 left-[810px] xl:left-[950px]",
+    positionSmall: "-bottom-2 left-[95px]",
   },
 ];
 export default function Timeline() {
@@ -58,7 +88,7 @@ export default function Timeline() {
           Save The <span className="font-bagnard">Dates!</span>
         </Typography>
         {/* Desktop Timeline */}
-        <div className="relative top-10 hidden w-full max-w-[1060px] pb-24 lg:ml-[80px] lg:flex xl:ml-0 xl:mr-[84px]">
+        <div className="relative top-10 hidden w-full max-w-[1080px] pb-24 lg:ml-[80px] lg:flex xl:ml-0 xl:mr-[84px]">
           <div className="relative h-[200px] w-full">
             <NextImage
               src="/landing-page/line-desktop.png"
@@ -70,9 +100,9 @@ export default function Timeline() {
             {timelineContent.map((event, index) => (
               <div
                 key={index}
-                className={`absolute ${event.positionLarge} flex flex-col items-start`}
+                className={`absolute ${event.positionLarge} flex flex-col items-start max-w-[142px]`}
               >
-                <Typography variant="p" className="font-semibold text-white">
+                <Typography variant="p" className="md:text-[16px] text-white">
                   {event.title.split("\n").map((line, i) => (
                     <Fragment key={i}>
                       {line}
@@ -80,7 +110,10 @@ export default function Timeline() {
                     </Fragment>
                   ))}
                 </Typography>
-                <Typography variant="p" className="font-semibold text-white">
+                <Typography
+                  variant="p"
+                  className="md:text-[16px] font-semibold text-white"
+                >
                   {event.date}
                 </Typography>
               </div>
@@ -88,19 +121,19 @@ export default function Timeline() {
           </div>
         </div>
         {/* Mobile Timeline */}
-        <div className="relative w-full lg:hidden">
+        <div className="relative w-full h-full lg:hidden">
           <NextImage
             src="/landing-page/line-mobile.png"
             alt="timeline"
-            width={110}
-            height={553}
-            className="justify-start pl-[32px]"
+            width={272}
+            height={828}
+            className="justify-start pl-[28px]"
           />
           <div className="relative flex flex-col items-center">
             {timelineContent.map((event, index) => (
               <div
                 key={index}
-                className={`absolute ${event.positionSmall} flex flex-col items-start`}
+                className={`absolute ${event.positionSmall} flex flex-col items-start max-w-[200px]`}
               >
                 <Typography variant="p" className="font-semibold text-white">
                   {event.date}

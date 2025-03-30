@@ -3,7 +3,13 @@ import Typography from "@/components/Typography";
 import { TimelineEventProps } from "@/types/event-page";
 import { Fragment } from "react";
 
-export default function TimelineEvent({ timelineContent }: TimelineEventProps) {
+export default function TimelineEvent({
+  timelineContent,
+  lineDesktopSrc,
+  lineMobileSrc,
+  widthlineMobile,
+  heightlineMobile,
+}: TimelineEventProps) {
   return (
     <>
       <section className="relative flex min-h-full flex-col items-center justify-center w-full bg-gradient-to-br from-[#5C287F] to-[#37184B] py-16 lg:h-[558px] overflow-x-hidden">
@@ -24,7 +30,7 @@ export default function TimelineEvent({ timelineContent }: TimelineEventProps) {
         <div className="relative top-10 hidden w-full max-w-[1060px] pb-24 lg:ml-[80px] lg:flex xl:ml-0 xl:mr-[84px]">
           <div className="relative h-[200px] w-full">
             <NextImage
-              src="/landing-page/line-desktop.png"
+              src={lineDesktopSrc}
               alt="timeline"
               width={953}
               height={126}
@@ -51,24 +57,27 @@ export default function TimelineEvent({ timelineContent }: TimelineEventProps) {
           </div>
         </div>
         {/* Mobile Timeline */}
-        <div className="relative w-full lg:hidden">
+        <div className="relative w-full h-full lg:hidden">
           <NextImage
-            src="/landing-page/line-mobile.png"
+            src={lineMobileSrc}
             alt="timeline"
-            width={110}
-            height={553}
+            width={widthlineMobile}
+            height={heightlineMobile}
             className="justify-start pl-[32px]"
           />
           <div className="relative flex flex-col items-center">
             {timelineContent.map((event, index) => (
               <div
                 key={index}
-                className={`absolute ${event.positionSmall} flex flex-col items-start`}
+                className={`absolute ${event.positionSmall} flex flex-col items-start max-w-[200px]`}
               >
-                <Typography variant="p" className="font-semibold text-white">
+                <Typography variant="p" className="md:text-[16px] text-white">
                   {event.date}
                 </Typography>
-                <Typography variant="p" className="font-semibold text-white">
+                <Typography
+                  variant="p"
+                  className="md:text-[16px] font-semibold text-white"
+                >
                   {event.title.split("\n").map((line, i) => (
                     <Fragment key={i}>
                       {line}

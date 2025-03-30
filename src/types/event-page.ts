@@ -7,6 +7,10 @@ export interface TimelineItem {
 
 export interface TimelineEventProps {
   timelineContent: TimelineItem[];
+  lineDesktopSrc: string;
+  lineMobileSrc: string;
+  widthlineMobile: number;
+  heightlineMobile: number;
 }
 
 export interface AboutEventProps {
@@ -19,8 +23,13 @@ export interface AboutEventProps {
 }
 
 export interface cardSectionProps {
+  title: {
+    main: string;
+    sub: string;
+  };
   images: string[];
   requirements: string[];
+  showButton?: boolean;
 }
 
 export interface HeroEventProps {

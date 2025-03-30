@@ -54,53 +54,62 @@ export default function DentalEvent() {
           {/* Right side - Profile cards */}
           <div className="w-full h-auto lg:w-1/2 grid grid-cols-1 md:grid-cols-2 gap-4">
             {/* Profile Card 1 */}
-            <div className="bg-gradient-to-b from-white/20 to-white/5 rounded-3xl overflow-hidden shadow-lg">
-              <div className="relative w-full h-64 md:h-80 lg:h-[480px]">
+            <div className="relative bg-gradient-to-b from-white/20 to-white/5 rounded-3xl overflow-hidden shadow-lg h-64 md:h-80 lg:h-[480px]">
+              <div className="absolute w-full h-64 md:h-80 lg:h-[480px]">
                 <NextImage
-                  src="/placeholder.svg?height=320&width=320"
-                  alt="Committee member"
+                  src="/landing-page/aurelia-oc.png"
+                  alt="Aurelia Picture"
+                  sizes="100vw"
+                  quality={100}
+                  priority
                   fill
-                  className="object-cover grayscale"
+                  className="object-cover inset-0 w-full"
+                  imgClassName="object-cover w-full h-full"
                 />
               </div>
-              <div className="p-6">
+              <div className="p-6 lg:p-4 z-10 absolute bottom-0 left-0 right-0">
                 <Typography
                   variant="h2"
-                  className="text-4xl md:text-5xl font-bold text-purple-300"
+                  className="text-4xl md:text-5xl font-bold text-purple-500"
                 >
-                  Name
+                  Aurelia
                 </Typography>
                 <Typography
                   variant="p"
                   className="text-xl md:text-2xl text-purple-400"
                 >
-                  Division
+                  General OC
                 </Typography>
               </div>
             </div>
 
             {/* Profile Card 2 */}
-            <div className="bg-gradient-to-b from-white/20 to-white/5 rounded-3xl overflow-hidden shadow-lg">
-              <div className="relative w-full h-64 md:h-80 lg:h-[480px]">
+            <div className="relative bg-gradient-to-b from-white/20 to-white/5 rounded-3xl overflow-hidden shadow-lg h-64 md:h-80 lg:h-[480px]">
+              <div className="absolute w-full h-64 md:h-80 lg:h-[480px]">
                 <NextImage
-                  src="/placeholder.svg?height=320&width=320"
+                  src="/landing-page/hannani-koor.png"
                   alt="Committee member"
+                  sizes="100vw"
+                  quality={100}
+                  priority
                   fill
-                  className="object-cover grayscale"
+                  className="object-cover inset-0 w-full"
+                  imgClassName="object-cover w-full h-full"
                 />
               </div>
-              <div className="p-6">
+
+              <div className="p-6 lg:p-4 z-10 absolute bottom-0 left-0 right-0">
                 <Typography
                   variant="h2"
-                  className="text-4xl md:text-5xl font-bold text-purple-300"
+                  className="text-4xl md:text-5xl font-bold text-purple-500"
                 >
-                  Name
+                  Hannnani
                 </Typography>
                 <Typography
                   variant="p"
                   className="text-xl md:text-2xl text-purple-400"
                 >
-                  Division
+                  General Sub-Coor
                 </Typography>
               </div>
             </div>

@@ -14,9 +14,9 @@ export default function RegistEvent({
   registUrl,
 }: RegistEventProps) {
   return (
-    <section className="min-h-full w-full relative">
+    <section className="relative min-h-full w-full">
       {/* Background Image */}
-      <div className="absolute inset-0 w-full h-full z-0">
+      <div className="absolute inset-0 z-0 h-full w-full">
         <NextImage
           src="/landing-page/bg-banner-section.png"
           alt="Hero background"
@@ -24,34 +24,31 @@ export default function RegistEvent({
           sizes="100vw"
           quality={100}
           priority
-          className="object-cover inset-0 w-full"
+          className="inset-0 w-full object-cover"
           imgClassName="object-cover w-full h-full opacity-60 pointer-events-none select-none"
         />
       </div>
-      <div className="container mx-auto flex flex-col lg:flex-row gap-[5vw] lg:gap-[8vw] items-center justify-center w-full min-h-screen my-[5vh]">
+      <div className="container mx-auto my-[5vh] flex min-h-screen w-full flex-col items-center justify-center gap-[5vw] lg:flex-row lg:gap-[8vw]">
         <div className="z-10 md:w-1/2">
           <NextVideo
             src={srcVideo}
-            className="w-full h-[400px] rounded-xl overflow-hidden shadow-lg"
+            className="h-[400px] w-full overflow-hidden rounded-xl shadow-lg"
           />
         </div>
-        <div className="flex flex-col gap-4 md:gap-8 z-10 md:w-1/2">
+        <div className="z-10 flex flex-col gap-4 md:w-1/2 md:gap-8">
           <Typography
             variant="h3"
             weight="bold"
-            className="text-black text-5xl text-center"
+            className="text-balance text-center text-5xl text-black"
           >
             Registration Close In
           </Typography>
           <Countdown endDate={endDate} />
-          <div className="flex flex-col md:flex-row item-center justify-center md:justify-between gap-2 w-full mt-[2vw]">
-            <Button
-              variant="outline"
-              className="bg-transparent hover:bg-[#f5f0dd] text-[#a88a44] font-bold text-2xl py-6 px-8 md:px-12 lg:px-14 border-2 border-[#c9a955] shadow-sm"
-            >
+          <div className="item-center mt-[2vw] flex w-full flex-col justify-center gap-2 p-4 min-[374px]:p-0 md:flex-row md:justify-between">
+            <Button variant="outlineSecondary">
               <Link href={guidebookUrl}>Guidebook</Link>
             </Button>
-            <Button className="bg-gradient-to-r from-amber-300 to-yellow-400 hover:from-amber-400 hover:to-yellow-500 text-olive-900 font-bold text-2xl py-6 px-8 md:px-12 lg:px-14 shadow-md text-[#a88a44]">
+            <Button variant="primary">
               <Link href={registUrl}>Regist Now</Link>
             </Button>
           </div>

@@ -16,7 +16,7 @@ export default function FormSandbox() {
           variant="h3"
           font="Bagnard"
           weight="bold"
-          className="text-gray-900 text-bagnard"
+          className="text-bagnard text-gray-900"
         >
           Form Sandbox
         </Typography>

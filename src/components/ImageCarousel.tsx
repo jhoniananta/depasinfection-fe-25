@@ -1,5 +1,6 @@
 "use client";
 
+import { Skeleton } from "@/components/ui/skeleton";
 import { UseEmblaCarouselType } from "embla-carousel-react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import Image from "next/image";
@@ -26,6 +27,7 @@ export default function ImageCarousel({
   const [api, setApi] = useState<UseEmblaCarouselType[1]>();
   const [current, setCurrent] = useState(0);
   const [count, setCount] = useState(0);
+  const [loading, setLoading] = useState<{ [key: number]: boolean }>({});
 
   useEffect(() => {
     if (!api) {
@@ -62,12 +64,21 @@ export default function ImageCarousel({
           {images.map((src, index) => (
             <CarouselItem key={index}>
               <div className="relative h-[400px] md:h-[500px] w-full overflow-hidden rounded-lg">
+                {loading[index] && (
+                  <Skeleton className="absolute inset-0 w-full h-full bg-gray-200" />
+                )}
                 <Image
                   src={src || "/placeholder.svg"}
                   alt={`Carousel image ${index + 1}`}
                   fill
                   className="object-cover"
                   priority={index === 0}
+                  onLoadStart={() => {
+                    setLoading((prev) => ({ ...prev, [index]: true }));
+                  }}
+                  onLoad={() => {
+                    setLoading((prev) => ({ ...prev, [index]: false }));
+                  }}
                 />
               </div>
             </CarouselItem>

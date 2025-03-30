@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Loader2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import Title from "../_components/Title";
+import Title from "../../../components/Title";
 
 type Props = {
   token?: string;
@@ -29,8 +29,8 @@ function VerifyEmailPage({ token }: Props) {
 
   if (loading) {
     return (
-      <div className="flex py-8 flex-col justify-center items-center w-full h-full gap-4">
-        <Loader2 className="animate-spin size-6 text-muted-foreground" />
+      <div className="flex h-full w-full flex-col items-center justify-center gap-4 py-8">
+        <Loader2 className="size-6 animate-spin text-muted-foreground" />
         <Typography
           variant="p"
           font="Rubik"
@@ -43,7 +43,7 @@ function VerifyEmailPage({ token }: Props) {
   }
 
   return (
-    <div className="flex py-8 flex-col justify-center items-center w-full h-full gap-6">
+    <>
       <Title
         title="Success!"
         desc="Your account has been successfully verified!"
@@ -51,7 +51,7 @@ function VerifyEmailPage({ token }: Props) {
       <Typography
         variant="p"
         font="Rubik"
-        className="text-neutral-900 text-justify text-[12px]"
+        className="text-justify text-[12px] text-neutral-900"
       >
         You now have full access to the competition platform, where you can
         register for challenges, track your progress, and stay updated with the
@@ -60,7 +60,7 @@ function VerifyEmailPage({ token }: Props) {
       <Button onClick={() => router.push("/dashboard")} className="w-full">
         Go to dashboard
       </Button>
-    </div>
+    </>
   );
 }
 

@@ -17,7 +17,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { toast } from "@/hooks/use-toast";
-import Title from "../_components/Title";
+import Title from "../../../components/Title";
 
 const FormSchema = z.object({
   email: z.string().email({ message: "Invalid email address." }),
@@ -48,7 +48,7 @@ function ForgotPasswordPage() {
   const email = form.watch("email");
 
   return (
-    <div className="flex flex-col py-8 justify-center items-center w-full h-full gap-4">
+    <>
       {!sent ? (
         <>
           <Title
@@ -65,7 +65,7 @@ function ForgotPasswordPage() {
                 name="email"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Email</FormLabel>
+                    <FormLabel isRequired>Email</FormLabel>
                     <FormControl>
                       <Input
                         type="email"
@@ -93,7 +93,7 @@ function ForgotPasswordPage() {
           <Typography
             variant="p"
             font="Rubik"
-            className="text-neutral-900 text-justify text-[12px]"
+            className="text-justify text-[12px] text-neutral-900"
           >
             You will receive a link in the email you provided. Use this link to
             update your password. <b>{email}</b>. If you don't see the email,
@@ -103,7 +103,7 @@ function ForgotPasswordPage() {
           <Typography
             variant="p"
             font="Rubik"
-            className="text-neutral-900 text-justify text-[12px] w-fit flex"
+            className="flex w-fit text-justify text-[12px] text-neutral-900"
           >
             Didn't receive the email? Click below to resend.
           </Typography>
@@ -119,7 +119,7 @@ function ForgotPasswordPage() {
           </Button>
         </div>
       )}
-    </div>
+    </>
   );
 }
 
