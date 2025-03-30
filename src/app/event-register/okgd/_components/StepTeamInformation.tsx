@@ -24,7 +24,7 @@ export default function StepTeamInformation({
     <>
       <Title
         title="Team Information"
-        desc="Please fill this form to regist the competition"
+        desc="Please fill this form to register the competition"
       />
 
       <div className="w-full space-y-4">

@@ -6,7 +6,7 @@ export default function StepDone() {
   return (
     <>
       <Title
-        title="Registration Successfull"
+        title="Registration Successful"
         desc="Thank you for registering!"
       />
       <Typography

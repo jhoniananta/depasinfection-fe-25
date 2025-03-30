@@ -23,7 +23,7 @@ export default function StepTeacher({ onNext, onBack }: StepTeacherProps) {
     <>
       <Title
         title="Accompanying Teacher"
-        desc="Please fill this form to regist the competition"
+        desc="Please fill this form to register the competition"
       />
 
       <div className="space-y-4">

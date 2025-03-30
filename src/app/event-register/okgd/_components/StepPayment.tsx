@@ -153,7 +153,7 @@ export default function StepPayment({ onBack, onSubmit }: StepPaymentProps) {
                 />
               </FormControl>
               <FormDescription>
-                Upload on format .pdf, .png, jpg, or .jpeg
+                Please upload a file in .pdf, .png, .jpg, or .jpeg format.
               </FormDescription>
               <FormMessage />
             </FormItem>

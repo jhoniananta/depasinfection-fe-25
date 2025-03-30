@@ -18,7 +18,7 @@ export default function StepMembers({ onNext, onBack }: StepMembersProps) {
     <>
       <Title
         title="Members"
-        desc="Please fill this form to regist the competition"
+        desc="Please fill this form to register the competition"
       />
 
       <Accordion type="single" collapsible className="w-full">
