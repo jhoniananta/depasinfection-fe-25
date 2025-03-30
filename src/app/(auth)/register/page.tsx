@@ -25,7 +25,7 @@ import { Progress } from "@/components/ui/progress";
 import { Separator } from "@/components/ui/separator";
 import { toast } from "@/hooks/use-toast";
 import Link from "next/link";
-import Title from "../_components/Title";
+import Title from "../../../components/Title";
 
 const steps = [
   { label: "Create Account", value: 0 },
@@ -84,31 +84,31 @@ function RegisterPage() {
   const email = form.watch("email");
 
   return (
-    <div className="flex flex-col items-center w-full lg:min-h-screen gap-4 py-8 justify-center">
-      <div className="w-full flex flex-col">
+    <>
+      <div className="flex w-full flex-col">
         <Typography
           variant="p"
           font="Rubik"
-          className=" text-neutral-500 text-[12px] w-fit flex font-semibold"
+          className="flex w-fit text-[12px] font-semibold text-neutral-500"
         >
           Step: {step} of {steps.length}
         </Typography>
 
-        <div className="flex flex-row w-full gap-2">
+        <div className="flex w-full flex-row gap-2">
           <Typography
             variant="p"
             font="Rubik"
             weight="bold"
-            className=" text-neutral-900 text-[12px] w-full flex"
+            className="flex w-full text-[12px] text-neutral-900"
           >
             {steps[step - 1].label}
           </Typography>
-          <div className="flex flex-row w-full gap-2 items-center justify-center">
+          <div className="flex w-full flex-row items-center justify-center gap-2">
             <Progress value={steps[step - 1].value} className="w-full" />
             <Typography
               variant="p"
               font="Rubik"
-              className=" text-neutral-500 text-[12px] w-fit font-medium flex"
+              className="flex w-fit text-[12px] font-medium text-neutral-500"
             >
               {steps[step - 1].value}%
             </Typography>
@@ -135,7 +135,7 @@ function RegisterPage() {
                 name="fullname"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Full Name</FormLabel>
+                    <FormLabel isRequired>Full Name</FormLabel>
                     <FormControl>
                       <Input placeholder="Enter your full name" {...field} />
                     </FormControl>
@@ -149,7 +149,7 @@ function RegisterPage() {
                 name="email"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Email</FormLabel>
+                    <FormLabel isRequired>Email</FormLabel>
                     <FormControl>
                       <Input placeholder="Enter your email" {...field} />
                     </FormControl>
@@ -163,7 +163,7 @@ function RegisterPage() {
                 name="password"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Password</FormLabel>
+                    <FormLabel isRequired>Password</FormLabel>
                     <FormControl>
                       <div className="relative">
                         <Input
@@ -197,7 +197,7 @@ function RegisterPage() {
                 name="confirmPassword"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Confirm Password</FormLabel>
+                    <FormLabel isRequired>Confirm Password</FormLabel>
                     <FormControl>
                       <div className="relative">
                         <Input
@@ -231,7 +231,7 @@ function RegisterPage() {
                 name="phoneNumber"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Phone Number</FormLabel>
+                    <FormLabel isRequired>Phone Number</FormLabel>
                     <FormControl>
                       <PhoneInput
                         {...field}
@@ -258,12 +258,12 @@ function RegisterPage() {
           <Typography
             variant="p"
             font="Rubik"
-            className="text-center text-[12px] sm:text-sm md:text-base lg:text-base text-neutral-900"
+            className="text-center text-[12px] text-neutral-900 sm:text-sm md:text-base lg:text-base"
           >
             Already have an account?{" "}
             <Link
               href="/login"
-              className="text-cream-600 font-bold hover:underline hover:underline-offset-4"
+              className="font-bold text-cream-600 hover:underline hover:underline-offset-4"
             >
               Login
             </Link>
@@ -275,7 +275,7 @@ function RegisterPage() {
           <Typography
             variant="p"
             font="Rubik"
-            className=" text-neutral-900 text-justify text-[12px]"
+            className="text-justify text-[12px] text-neutral-900"
           >
             We've sent a confirmation email to <b>{email}</b>. Please check your
             inbox and follow the instructions to verify your account. If you
@@ -285,7 +285,7 @@ function RegisterPage() {
           <Typography
             variant="p"
             font="Rubik"
-            className=" text-neutral-900 text-justify text-[12px] w-fit flex"
+            className="flex w-fit text-justify text-[12px] text-neutral-900"
           >
             Didn't receive the email? Click below to resend.
           </Typography>
@@ -301,7 +301,7 @@ function RegisterPage() {
           </Button>
         </div>
       )}
-    </div>
+    </>
   );
 }
 

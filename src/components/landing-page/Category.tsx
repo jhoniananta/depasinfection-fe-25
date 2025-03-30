@@ -14,10 +14,10 @@ export default function Category() {
   return (
     <section
       ref={ref}
-      className="bg-neutral-50 relative min-h-screen md:min-h-[1120px] w-full flex justify-end items-center flex-col pb-[10vh] overflow-hidden gap-0 px-8 md:px-12 lg:px-14"
+      className="relative flex min-h-screen w-full flex-col items-center justify-end gap-0 overflow-hidden bg-neutral-50 px-8 pb-[10vh] md:min-h-[1120px] md:px-12 lg:px-14"
     >
       {/* Background Image */}
-      <div className="absolute inset-0 w-full h-full">
+      <div className="absolute inset-0 h-full w-full">
         <NextImage
           src="/landing-page/bg-banner-section.png"
           alt="Hero background"
@@ -25,34 +25,34 @@ export default function Category() {
           sizes="100vw"
           quality={100}
           priority
-          className="object-cover inset-0 w-full"
+          className="inset-0 w-full object-cover"
           imgClassName="object-cover w-full h-full"
         />
       </div>
 
       {/* Decorative top-right background */}
-      <div className="absolute top-0 right-0 h-auto z-10">
+      <div className="absolute right-0 top-0 z-10 h-auto">
         <NextImage
           src="/landing-page/tr-bg.png"
           alt="top right"
           width={1116}
           height={613}
-          className="w-full h-full"
+          className="h-full w-full"
         />
       </div>
 
       {/* About Banner */}
-      <div className="w-full z-20 flex items-center justify-center">
+      <div className="z-20 flex w-full items-center justify-center">
         <AboutBanner handleScroll={() => scrollToSection("dental-event")} />
       </div>
 
       {/* Content Section */}
-      <div className="flex flex-col items-center justify-center w-full h-full z-30 mt-6 md:mt-8 lg:mt-10">
+      <div className="z-30 mt-6 flex h-full w-full flex-col items-center justify-center md:mt-8 lg:mt-10">
         {/* Title section */}
         <Typography
           variant="h1"
           font="Rubik"
-          className="text-[48px] md:text-[64px] text-black text-center lg:text-left leading-none"
+          className="text-center text-[48px] leading-none text-black md:text-[64px] lg:text-left"
           weight="extrabold"
         >
           {t("category.title")}{" "}
@@ -61,7 +61,7 @@ export default function Category() {
           </span>
         </Typography>
         {/* Card section */}
-        <div className="h-full w-full mt-10 flex flex-col lg:flex-row justify-center items-center lg:items-end relative gap-12 md:gap-14 lg:gap-18">
+        <div className="lg:gap-18 relative mt-10 flex h-full w-full flex-col items-center justify-center gap-12 md:gap-14 lg:flex-row lg:items-end">
           {/* OKGD Card */}
           <CardEvent
             src="/landing-page/bg-card-okgd.png"
@@ -73,7 +73,7 @@ export default function Category() {
           <CardEvent
             src="/landing-page/bg-card-udsrc.png"
             title="UDSRC"
-            subtitle="UGM Dental Student Poster and Essay Competition"
+            subtitle="UGM Dental Student Research Competition"
             urlLink="/udsrc-event"
           />
         </div>

@@ -41,12 +41,12 @@ export default function MerchandisePage() {
   return (
     <Layout withFooter withNavbar>
       {/* Hero Section */}
-      <section className="bg-neutral-50 min-h-screen w-screen bg-gradient-to-t py-52 lg:pb-32 lg:pt-60 flex flex-col items-center justify-center from-purple-900 to-purple-700">
-        <div className="flex flex-col container items-center justify-center px-6 text-center gap-6">
+      <section className="flex min-h-screen w-screen flex-col items-center justify-center bg-neutral-50 bg-gradient-to-t from-purple-900 to-purple-700 py-52 lg:pb-32 lg:pt-60">
+        <div className="container flex flex-col items-center justify-center gap-6 px-6 text-center">
           <Typography
             variant="h3"
             font="Bagnard"
-            className="text-neutral-50 text-4xl"
+            className="text-4xl text-neutral-50"
           >
             Wear the Vibe, Own the Style!
           </Typography>
@@ -56,7 +56,7 @@ export default function MerchandisePage() {
           </Typography>
           <Button
             variant="outline"
-            className="text-neutral-50 hover:bg-purple-600 w-fit"
+            className="w-fit text-neutral-50 hover:bg-purple-600"
           >
             Grab yours Now !
           </Button>
@@ -66,27 +66,27 @@ export default function MerchandisePage() {
           serverStaticImg
           height={360}
           width={1460}
-          className="w-screen items-center justify-center flex"
+          className="flex w-screen items-center justify-center"
           imgClassName="lg:container h-auto "
           src="/images/hero-merch.png"
         />
       </section>
 
       {/* Merchandise Section */}
-      <section className="bg-neutral-50 w-screen mx-auto py-36 flex flex-col gap-12">
-        <div className="flex flex-col items-center px-6 gap-6">
+      <section className="mx-auto flex w-screen flex-col gap-12 bg-neutral-50 py-36">
+        <div className="flex flex-col items-center gap-6 px-6">
           <div className="flex flex-col items-center justify-center gap-2">
             <Typography
               variant="h3"
               font="Rubik"
-              className="text-neutral-900 text-5xl font-semibold"
+              className="text-5xl font-semibold text-neutral-900"
             >
               Official
             </Typography>
             <Typography
               variant="h3"
               font="Bagnard"
-              className="text-purple-500 text-5xl"
+              className="text-5xl text-purple-500"
             >
               Merchandise
             </Typography>
@@ -95,18 +95,18 @@ export default function MerchandisePage() {
             variant="p"
             font="Rubik"
             weight="regular"
-            className="text-neutral-900 text-center"
+            className="text-center text-neutral-900"
           >
             Exclusive gear made just for true fans—authentic, stylish, and
             limited edition!
           </Typography>
         </div>
 
-        <div className=" px-6 flex flex-wrap gap-6 md:gap-8 justify-center items-center">
+        <div className="flex flex-wrap items-center justify-center gap-6 px-6 md:gap-8">
           {merchandiseItems.map((item) => (
             <div
               key={item.id}
-              className="border flex flex-col gap-4 p-4 border-neutral-200 rounded-2xl"
+              className="flex flex-col gap-4 rounded-2xl border border-neutral-200 p-4"
             >
               <NextImage
                 alt="dummy-card"
@@ -121,7 +121,7 @@ export default function MerchandisePage() {
                   variant="h6"
                   weight="medium"
                   font="Rubik"
-                  className="text-neutral-900 text-sm"
+                  className="text-sm text-neutral-900"
                 >
                   {item.title}
                 </Typography>
@@ -129,7 +129,7 @@ export default function MerchandisePage() {
                   variant="h6"
                   weight="medium"
                   font="Rubik"
-                  className="text-purple-500 text-base"
+                  className="text-base text-purple-500"
                 >
                   {item.price}
                 </Typography>

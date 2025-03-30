@@ -16,13 +16,13 @@ export default function OKGDHome() {
   const t = useTranslations("OKGDpage");
   return (
     <Layout withFooter withNavbar>
-      <main className="flex min-h-screen flex-col items-center justify-between w-full relative overflow-hidden">
+      <main className="relative flex min-h-screen w-full flex-col items-center justify-between overflow-hidden">
         <HeroEvent
           bgImage="/okgd-page/bg-event-okgd.png"
           buttonText={t("home.buttonText")}
           title={t("home.title")}
           subtitle={t("home.subTitle")}
-          urlRegist="/okgd-event/register"
+          urlRegist="/event-register/okgd"
         />
         <AboutEvent
           poster="/okgd-page/OKGD-poster.png"
@@ -35,7 +35,7 @@ export default function OKGDHome() {
         <CardSection images={imageCarousel} requirements={requirements} />
         <TimelineEvent timelineContent={timelineContent} />
         <RegistEvent
-          registUrl="/okgd-event/register"
+          registUrl="/event-register/okgd"
           guidebookUrl="/okgd-event/guidebook"
           endDate="2025-07-12T00:00:00"
           srcVideo="https://www.youtube.com/embed/8e3gT2vB8"

@@ -19,7 +19,7 @@ import { toast } from "@/hooks/use-toast";
 import { EyeIcon, EyeOffIcon } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
-import Title from "../_components/Title";
+import Title from "../../../components/Title";
 
 const FormSchema = z.object({
   email: z.string().email({ message: "Invalid email address." }),
@@ -51,7 +51,7 @@ function LoginPage() {
   }
 
   return (
-    <div className="flex py-8 flex-col justify-center items-center w-full h-full gap-4">
+    <>
       <Title
         title="Log In"
         desc="Please fill this form to access your account"
@@ -66,7 +66,7 @@ function LoginPage() {
             name="email"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Email</FormLabel>
+                <FormLabel isRequired>Email</FormLabel>
                 <FormControl>
                   <Input
                     type="email"
@@ -84,7 +84,7 @@ function LoginPage() {
             name="password"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Password</FormLabel>
+                <FormLabel isRequired>Password</FormLabel>
                 <FormControl>
                   <div className="relative">
                     <Input
@@ -116,11 +116,11 @@ function LoginPage() {
           <Typography
             variant="p"
             font="Rubik"
-            className="text-end text-[12px] sm:text-sm md:text-base lg:text-base text-neutral-900"
+            className="text-end text-[12px] text-neutral-900 sm:text-sm md:text-base lg:text-base"
           >
             <Link
               href="/forgot-password"
-              className="text-cream-600 font-bold hover:underline hover:underline-offset-4"
+              className="font-bold text-cream-600 hover:underline hover:underline-offset-4"
             >
               Forgot password?
             </Link>
@@ -134,17 +134,17 @@ function LoginPage() {
       <Typography
         variant="p"
         font="Rubik"
-        className="text-center text-[12px] sm:text-sm md:text-base lg:text-base text-neutral-900"
+        className="text-center text-[12px] text-neutral-900 sm:text-sm md:text-base lg:text-base"
       >
         Don't have an account?{" "}
         <Link
           href="/register"
-          className="text-cream-600 font-bold hover:underline hover:underline-offset-4"
+          className="font-bold text-cream-600 hover:underline hover:underline-offset-4"
         >
           Register Now
         </Link>
       </Typography>
-    </div>
+    </>
   );
 }
 

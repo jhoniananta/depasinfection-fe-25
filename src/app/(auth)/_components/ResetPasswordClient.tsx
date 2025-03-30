@@ -16,7 +16,7 @@ import { EyeIcon, EyeOffIcon } from "lucide-react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import Title from "../_components/Title";
+import Title from "../../../components/Title";
 
 const FormSchema = z
   .object({
@@ -61,7 +61,7 @@ export default function ResetPasswordPage({ searchParams }: Props) {
   }
 
   return (
-    <div className="flex py-8 flex-col justify-center items-center w-full h-full gap-4">
+    <>
       <Title title="Reset Password" desc="Enter your new password below." />
 
       <Form {...form}>
@@ -75,7 +75,7 @@ export default function ResetPasswordPage({ searchParams }: Props) {
             name="password"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>New Password</FormLabel>
+                <FormLabel isRequired>New Password</FormLabel>
                 <FormControl>
                   <div className="relative">
                     <Input
@@ -110,7 +110,7 @@ export default function ResetPasswordPage({ searchParams }: Props) {
             name="confirmPassword"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Confirm Password</FormLabel>
+                <FormLabel isRequired>Confirm Password</FormLabel>
                 <FormControl>
                   <div className="relative">
                     <Input
@@ -144,6 +144,6 @@ export default function ResetPasswordPage({ searchParams }: Props) {
           </Button>
         </form>
       </Form>
-    </div>
+    </>
   );
 }
