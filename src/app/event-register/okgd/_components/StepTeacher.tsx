@@ -1,5 +1,6 @@
 import Title from "@/components/Title";
 import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
 import {
   FormControl,
   FormDescription,
@@ -70,6 +71,28 @@ export default function StepTeacher({ onNext, onBack }: StepTeacherProps) {
                 Use international format (e.g., +62 812 xxxx xxxx)
               </FormDescription>
               <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          name="teacherAgreement"
+          render={({ field }) => (
+            <FormItem className="flex flex-row items-start space-x-2 space-y-0 rounded-md border p-4">
+              <FormControl>
+                <Checkbox
+                  checked={field.value}
+                  onCheckedChange={field.onChange}
+                  className="mt-1"
+                />
+              </FormControl>
+              <div className="space-y-1">
+                <FormLabel>
+                  By this, the accompanying teacher declares their willingness
+                  to attend the competition.
+                </FormLabel>
+                <FormMessage />
+              </div>
             </FormItem>
           )}
         />

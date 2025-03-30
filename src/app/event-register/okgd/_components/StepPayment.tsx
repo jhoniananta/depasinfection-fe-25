@@ -257,7 +257,7 @@ export default function StepPayment({ onBack, onSubmit }: StepPaymentProps) {
             <Button
               onClick={() => {
                 setOpenDialog(false);
-                onSubmit(); // trigger actual parent submit
+                onSubmit();
               }}
             >
               Yes, submit

@@ -134,6 +134,9 @@ export const stepTeacherSchema = z.object({
     .refine((val) => isValidPhoneNumber(val), {
       message: "Invalid WhatsApp number",
     }),
+  teacherAgreement: z.boolean().refine((val) => val === true, {
+    message: "You must agree to proceed",
+  }),
 });
 
 export const stepPaymentSchema = z.object({

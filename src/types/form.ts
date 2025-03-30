@@ -76,6 +76,7 @@ export type OKGDFormData = {
   teacherName: string;
   teacherEmail: string;
   teacherWhatsApp: string;
+  teacherAgreement: boolean;
 
   proofOfTransfer: File;
   bankName: string;
