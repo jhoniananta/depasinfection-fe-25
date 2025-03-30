@@ -5,8 +5,8 @@ import {
   nimRegex,
   zDateFromString,
 } from "@/lib/zod-helpers";
-import { z } from "zod";
 import { isValidPhoneNumber } from "react-phone-number-input";
+import { z } from "zod";
 
 export const stepTeamSchema = z.object({
   teamName: z.string().min(1).max(60, { message: "Team name is required" }),

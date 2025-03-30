@@ -24,9 +24,9 @@ import { PhoneInput } from "@/components/ui/phone-input";
 import { Progress } from "@/components/ui/progress";
 import { Separator } from "@/components/ui/separator";
 import { toast } from "@/hooks/use-toast";
+import { RegisterFormSchema } from "@/schemas/auth-schema";
 import Link from "next/link";
 import Title from "../../../components/Title";
-import { RegisterFormSchema } from "@/schemas/auth-schema";
 
 const steps = [
   { label: "Create Account", value: 0 },

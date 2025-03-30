@@ -5,8 +5,8 @@ import {
   nisnRegex,
   zDateFromString,
 } from "@/lib/zod-helpers";
-import { z } from "zod";
 import { isValidPhoneNumber } from "react-phone-number-input";
+import { z } from "zod";
 
 // Step 1: Team Information
 export const stepTeamSchema = z.object({
