@@ -52,8 +52,8 @@ export default function AboutEvent({
             alt={title}
             width={424}
             height={524}
-            className="h-full w-full flex justify-center items-center z-0"
-            imgClassName="rounded-3xl"
+            className="w-full h-full flex justify-center items-center z-0"
+            imgClassName="rounded-3xl object-cover w-full h-full lg:h-[832px] lg:max-w-[424px]"
           />
           <div className="absolute top-0 left-0 size-full opacity-40 bg-gradient-to-b from-neutral-100 to-[#B20000] h-full z-10 rounded-3xl" />
         </div>
