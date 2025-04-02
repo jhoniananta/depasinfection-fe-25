@@ -1,3 +1,11 @@
+import Sidebar from "@/layouts/SidebarUser";
+
 export default function DashboardUserPage() {
-  return <div>DashboardUserPage</div>;
+  return (
+    <>
+      <Sidebar title="Dashboard">
+        <section className="min-h-screen w-full">Test</section>
+      </Sidebar>
+    </>
+  );
 }
