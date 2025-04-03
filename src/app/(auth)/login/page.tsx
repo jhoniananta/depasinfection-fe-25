@@ -15,15 +15,20 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { toast } from "@/hooks/use-toast";
+
 import { LoginFormSchema } from "@/schemas/auth-schema";
 import { EyeIcon, EyeOffIcon } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 import Title from "../../../components/Title";
+import { useLoginMutation } from "../_hooks/@post/useLogin";
+import { useRouter } from "next/navigation";
 
 function LoginPage() {
+  const router = useRouter();
+
   const [show, setShow] = useState(false);
+  const { handleLogin, isPending, isSuccess } = useLoginMutation();
 
   const form = useForm<z.infer<typeof LoginFormSchema>>({
     resolver: zodResolver(LoginFormSchema),
@@ -34,14 +39,14 @@ function LoginPage() {
   });
 
   function onSubmit(data: z.infer<typeof LoginFormSchema>) {
-    toast({
-      title: "You submitted the following values:",
-      description: (
-        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-          <code className="text-white">{JSON.stringify(data, null, 2)}</code>
-        </pre>
-      ),
+    handleLogin({
+      email: data.email,
+      password: data.password,
     });
+  }
+
+  if (isSuccess) {
+    router.push("/dashboard");
   }
 
   return (
@@ -120,8 +125,8 @@ function LoginPage() {
             </Link>
           </Typography>
 
-          <Button type="submit" className="w-full">
-            Submit
+          <Button type="submit" className="w-full" disabled={isPending}>
+            {isPending ? "Submitting..." : "Submit"}
           </Button>
         </form>
       </Form>

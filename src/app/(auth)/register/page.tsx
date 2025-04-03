@@ -2,7 +2,7 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { EyeIcon, EyeOffIcon } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 
 import en from "react-phone-number-input/locale/en";
@@ -27,6 +27,7 @@ import { toast } from "@/hooks/use-toast";
 import { RegisterFormSchema } from "@/schemas/auth-schema";
 import Link from "next/link";
 import Title from "../../../components/Title";
+import { useRegistMutation } from "../_hooks/@post/useRegister";
 
 const steps = [
   { label: "Create Account", value: 0 },
@@ -37,6 +38,8 @@ function RegisterPage() {
   const [step, setStep] = useState(1);
   const [show, setShow] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
+
+  const { handleRegist, isPending, isSuccess } = useRegistMutation();
 
   const form = useForm<z.infer<typeof RegisterFormSchema>>({
     resolver: zodResolver(RegisterFormSchema),
@@ -50,16 +53,19 @@ function RegisterPage() {
   });
 
   function onSubmit(data: z.infer<typeof RegisterFormSchema>) {
-    toast({
-      title: "Submitted! Moving to next step...",
-      description: (
-        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-          <code className="text-white">{JSON.stringify(data, null, 2)}</code>
-        </pre>
-      ),
+    handleRegist({
+      email: data.email,
+      password: data.password,
+      full_name: data.fullname,
+      phone_number: data.phoneNumber,
     });
-    setStep(2);
   }
+
+  useEffect(() => {
+    if (isSuccess) {
+      setStep(2);
+    }
+  }, [isSuccess]);
 
   const email = form.watch("email");
 
@@ -230,8 +236,8 @@ function RegisterPage() {
                 )}
               />
 
-              <Button type="submit" className="w-full">
-                Submit
+              <Button type="submit" className="w-full" disabled={isPending}>
+                {isPending ? "Submitting..." : "Submit"}
               </Button>
             </form>
           </Form>
