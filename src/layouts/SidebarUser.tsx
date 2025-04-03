@@ -23,7 +23,7 @@ function Sidebar({ children }: SidebarProps) {
       <div
         className={`fixed z-30 lg:h-full lg:overflow-y-auto ${
           isMenuOpen ? "h-full" : "h-fit p-4"
-        } w-full bg-neutral-50 lg:bg-transparent lg:p-0 lg:shadow-2xl`}
+        } w-full bg-neutral-50 lg:bg-transparent lg:p-0 lg:drop-shadow-2xl z-20`}
       >
         <div className={`flex justify-between !bg-transparent lg:hidden`}>
           <Link
@@ -75,7 +75,7 @@ function Sidebar({ children }: SidebarProps) {
         </div>
 
         {/* Desktop Version */}
-        <div className="hidden min-h-screen lg:flex lg:bg-neutral-50 lg:shadow-xl">
+        <div className="hidden min-h-screen lg:flex lg:bg-neutral-50 lg:drop-shadow-xl lg:relative">
           <div
             className={`hidden h-fit w-[325px] flex-col overflow-y-auto px-6 py-4 pb-12 duration-500 ease-in-out lg:sticky lg:top-0 lg:flex`}
           >
