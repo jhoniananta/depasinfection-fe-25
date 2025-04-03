@@ -1,3 +1,8 @@
+import Sidebar from "@/layouts/SidebarUser";
 export default function DashboardProfilePage() {
-  return <div>DashboardProfilePage</div>;
+  return (
+    <>
+      <Sidebar title="Dashboard">Test</Sidebar>
+    </>
+  );
 }
