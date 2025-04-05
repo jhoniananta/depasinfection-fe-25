@@ -1,11 +1,11 @@
 import { useMutation } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 
-import api from "@/lib/api";
-import { ApiError, ApiResponse } from "@/types/api";
-import { UserLoginResponse, LoginRequest } from "@/types/auth";
 import { toast } from "@/hooks/use-toast";
+import api from "@/lib/api";
 import { setToken } from "@/lib/cookies";
+import { ApiError, ApiResponse } from "@/types/api";
+import { LoginRequest, UserLoginResponse } from "@/types/auth";
 
 export const useUserLoginMutation = () => {
   const {
@@ -24,7 +24,7 @@ export const useUserLoginMutation = () => {
 
     onSuccess: (data) => {
       toast({
-        title: "Login successful",
+        title: "Login successful!",
         description: "Please wait, redirect to your dashboard.",
         variant: "default",
       });

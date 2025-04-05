@@ -3,41 +3,38 @@ import { AxiosError } from "axios";
 
 import { toast } from "@/hooks/use-toast";
 import api from "@/lib/api";
-import { ApiError } from "@/types/api";
-import { UserRegisterRequest, UserRegisterResponse } from "@/types/auth";
+import { ApiError, ApiResponse } from "@/types/api";
+import { EmailRequest, ForgotEmailResponse } from "@/types/auth";
 
-export const useRegistMutation = () => {
+export const useForgotPasswordMutation = () => {
   const {
-    mutate: handleRegist,
+    mutate: handleForgotPassword,
     isSuccess,
     isPending,
-  } = useMutation<
-    UserRegisterResponse,
-    AxiosError<ApiError>,
-    UserRegisterRequest
-  >({
+  } = useMutation<ForgotEmailResponse, AxiosError<ApiError>, EmailRequest>({
     mutationFn: async (data) => {
-      const res = await api.post<UserRegisterResponse>(
-        "/user/auth/register",
+      const res = await api.post<ApiResponse<ForgotEmailResponse>>(
+        "/mailer/forgot-password",
         data,
       );
 
-      return res.data;
+      return res.data.data;
     },
 
     onSuccess: () => {
       toast({
-        title: "Registration successful!",
-        description: "Please check your email for verification.",
+        title: "Send forgot password email successful!",
+        description:
+          "Please check all your email inbox include junk, spam, or social folder.",
         variant: "default",
       });
     },
     onError: (error: AxiosError<ApiError>) => {
-      const code = error.response?.data?.code || "";
-
       if (error.response?.data?.message) {
+        const code = error.response?.data?.code || "";
+
         toast({
-          title: `Registration failed - ${code}`,
+          title: `Send forgot password email failed - ${code}`,
           description: error.response.data.message,
           variant: "destructive",
         });
@@ -51,5 +48,5 @@ export const useRegistMutation = () => {
     },
   });
 
-  return { handleRegist, isPending, isSuccess };
+  return { handleForgotPassword, isPending, isSuccess };
 };

@@ -19,10 +19,10 @@ import { Input } from "@/components/ui/input";
 import { LoginFormSchema } from "@/schemas/auth-schema";
 import { EyeIcon, EyeOffIcon } from "lucide-react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import Title from "../../../components/Title";
 import { useUserLoginMutation } from "../_hooks/@post/useLogin";
-import { useRouter } from "next/navigation";
 
 function LoginPage() {
   const router = useRouter();

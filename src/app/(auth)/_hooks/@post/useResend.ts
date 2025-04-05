@@ -3,41 +3,38 @@ import { AxiosError } from "axios";
 
 import { toast } from "@/hooks/use-toast";
 import api from "@/lib/api";
-import { ApiError } from "@/types/api";
-import { UserRegisterRequest, UserRegisterResponse } from "@/types/auth";
+import { ApiError, ApiResponse } from "@/types/api";
+import { EmailRequest } from "@/types/auth";
 
-export const useRegistMutation = () => {
+export const useResendEmailMutation = () => {
   const {
-    mutate: handleRegist,
+    mutate: handleResend,
     isSuccess,
     isPending,
-  } = useMutation<
-    UserRegisterResponse,
-    AxiosError<ApiError>,
-    UserRegisterRequest
-  >({
+  } = useMutation<null, AxiosError<ApiError>, EmailRequest>({
     mutationFn: async (data) => {
-      const res = await api.post<UserRegisterResponse>(
-        "/user/auth/register",
+      const res = await api.post<ApiResponse<null>>(
+        "/mailer/resend-verify-email",
         data,
       );
 
-      return res.data;
+      return res.data.data;
     },
 
     onSuccess: () => {
       toast({
-        title: "Registration successful!",
-        description: "Please check your email for verification.",
+        title: "Resend email successful!",
+        description:
+          "Please check all your email inbox include junk, spam, or social folder.",
         variant: "default",
       });
     },
     onError: (error: AxiosError<ApiError>) => {
-      const code = error.response?.data?.code || "";
-
       if (error.response?.data?.message) {
+        const code = error.response?.data?.code || "";
+
         toast({
-          title: `Registration failed - ${code}`,
+          title: `Resend email failed - ${code}`,
           description: error.response.data.message,
           variant: "destructive",
         });
@@ -51,5 +48,5 @@ export const useRegistMutation = () => {
     },
   });
 
-  return { handleRegist, isPending, isSuccess };
+  return { handleResend, isPending, isSuccess };
 };

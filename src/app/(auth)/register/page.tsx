@@ -23,11 +23,12 @@ import { Input } from "@/components/ui/input";
 import { PhoneInput } from "@/components/ui/phone-input";
 import { Progress } from "@/components/ui/progress";
 import { Separator } from "@/components/ui/separator";
-import { toast } from "@/hooks/use-toast";
+
 import { RegisterFormSchema } from "@/schemas/auth-schema";
 import Link from "next/link";
 import Title from "../../../components/Title";
 import { useRegistMutation } from "../_hooks/@post/useRegister";
+import { useResendEmailMutation } from "../_hooks/@post/useResend";
 
 const steps = [
   { label: "Create Account", value: 0 },
@@ -38,8 +39,10 @@ function RegisterPage() {
   const [step, setStep] = useState(1);
   const [show, setShow] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
+  const [resendTimer, setResendTimer] = useState(0);
 
   const { handleRegist, isPending, isSuccess } = useRegistMutation();
+  const { handleResend, isPending: isResendPending } = useResendEmailMutation();
 
   const form = useForm<z.infer<typeof RegisterFormSchema>>({
     resolver: zodResolver(RegisterFormSchema),
@@ -67,7 +70,25 @@ function RegisterPage() {
     }
   }, [isSuccess]);
 
+  // Countdown effect untuk disable tombol resend selama 2 menit
+  useEffect(() => {
+    let interval: NodeJS.Timeout;
+    if (resendTimer > 0) {
+      interval = setInterval(() => {
+        setResendTimer((prev) => prev - 1);
+      }, 1000);
+    }
+    return () => {
+      if (interval) clearInterval(interval);
+    };
+  }, [resendTimer]);
+
   const email = form.watch("email");
+
+  const onResend = () => {
+    handleResend({ email });
+    setResendTimer(150); // disable selama 150 detik (2 menit 30 detik)
+  };
 
   return (
     <>
@@ -265,8 +286,8 @@ function RegisterPage() {
           >
             We've sent a confirmation email to <b>{email}</b>. Please check your
             inbox and follow the instructions to verify your account. If you
-            don't see the email, check other places it might be, such as your
-            junk, spam, social, or other folders.
+            don't see the email, check other folders like your junk, spam, or
+            social.
           </Typography>
           <Typography
             variant="p"
@@ -276,14 +297,14 @@ function RegisterPage() {
             Didn't receive the email? Click below to resend.
           </Typography>
           <Button
-            type="submit"
+            type="button"
             className="w-full"
-            onClick={() => {
-              // fake resend behavior
-              toast({ title: "Email verification resent." });
-            }}
+            onClick={onResend}
+            disabled={resendTimer > 0 || isResendPending}
           >
-            Resend email verification
+            {resendTimer > 0
+              ? `Resend email verification (${resendTimer}s)`
+              : "Resend email verification"}
           </Button>
         </div>
       )}

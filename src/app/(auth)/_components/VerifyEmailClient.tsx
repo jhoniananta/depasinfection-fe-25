@@ -2,32 +2,26 @@
 
 import Typography from "@/components/Typography";
 import { Button } from "@/components/ui/button";
+
+import { Progress } from "@/components/ui/progress";
+import { Separator } from "@/components/ui/separator";
+import { toast } from "@/hooks/use-toast";
 import { Loader2 } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
 import Title from "../../../components/Title";
+import { useVerifyEmailQuery } from "../_hooks/@get/useVerify";
 
 type Props = {
   token?: string;
 };
 
 function VerifyEmailPage({ token }: Props) {
-  const [loading, setLoading] = useState(true);
   const router = useRouter();
 
-  useEffect(() => {
-    if (!token) return;
+  // useVerifyEmailQuery automatically fires if token is provided.
+  const { isSuccess, isLoading } = useVerifyEmailQuery(token || "");
 
-    // Simulasi verifikasi pakai token
-    const timer = setTimeout(() => {
-      setLoading(false);
-      // TODO: panggil API untuk verifikasi pakai token
-    }, 2000);
-
-    return () => clearTimeout(timer);
-  }, [token]);
-
-  if (loading) {
+  if (isLoading) {
     return (
       <div className="flex h-full w-full flex-col items-center justify-center gap-4 py-8">
         <Loader2 className="size-6 animate-spin text-muted-foreground" />
@@ -42,26 +36,72 @@ function VerifyEmailPage({ token }: Props) {
     );
   }
 
-  return (
-    <>
-      <Title
-        title="Success!"
-        desc="Your account has been successfully verified!"
-      />
-      <Typography
-        variant="p"
-        font="Rubik"
-        className="text-justify text-[12px] text-neutral-900"
-      >
-        You now have full access to the competition platform, where you can
-        register for challenges, track your progress, and stay updated with the
-        latest announcements.
-      </Typography>
-      <Button onClick={() => router.push("/dashboard")} className="w-full">
-        Go to dashboard
-      </Button>
-    </>
-  );
+  if (!token) {
+    router.push("/register");
+    toast({
+      title: "Token not found",
+      description: "Please register to get a verification email.",
+      variant: "destructive",
+    });
+  }
+
+  if (isSuccess) {
+    return (
+      <>
+        <div className="flex w-full flex-col">
+          <Typography
+            variant="p"
+            font="Rubik"
+            className="flex w-fit text-[12px] font-semibold text-neutral-500"
+          >
+            Step: Done
+          </Typography>
+
+          <div className="flex w-full flex-row gap-2">
+            <Typography
+              variant="p"
+              font="Rubik"
+              weight="bold"
+              className="flex w-full text-[12px] text-neutral-900"
+            >
+              Completed
+            </Typography>
+            <div className="flex w-full flex-row items-center justify-center gap-2">
+              <Progress value={100} className="w-full" />
+              <Typography
+                variant="p"
+                font="Rubik"
+                className="flex w-fit text-[12px] font-medium text-neutral-500"
+              >
+                100%
+              </Typography>
+            </div>
+          </div>
+        </div>
+
+        <Separator />
+
+        <Title
+          title="Success!"
+          desc="Your account has been successfully verified!"
+        />
+        <Typography
+          variant="p"
+          font="Rubik"
+          className="text-justify text-[12px] text-neutral-900"
+        >
+          You now have full access to the competition platform, where you can
+          register for challenges, track your progress, and stay updated with
+          the latest announcements.
+        </Typography>
+        <Button onClick={() => router.push("/dashboard")} className="w-full">
+          Go to dashboard
+        </Button>
+      </>
+    );
+  }
+
+  return null;
 }
 
 export default VerifyEmailPage;

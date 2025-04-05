@@ -39,3 +39,24 @@ export type getMeUserResponse = {
   role: Role;
   events: Array<Event>;
 };
+
+export type EmailRequest = {
+  email: string;
+};
+
+export type VerifyEmailRequest = {
+  token: string;
+};
+
+export type ForgotEmailResponse = {
+  message: string;
+  email: string;
+};
+
+export type ResetPasswordRequest = {
+  password: string;
+};
+
+export type ResetPasswordResponse = {
+  message: string;
+};

@@ -1,7 +1,7 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
@@ -16,12 +16,16 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { toast } from "@/hooks/use-toast";
 import { ForgotPasswordFormSchema } from "@/schemas/auth-schema";
 import Title from "../../../components/Title";
+import { useForgotPasswordMutation } from "../_hooks/@post/useForgotPassword";
 
 function ForgotPasswordPage() {
   const [sent, setSent] = useState(false);
+  const [resendTimer, setResendTimer] = useState(0);
+
+  const { handleForgotPassword, isSuccess, isPending } =
+    useForgotPasswordMutation();
 
   const form = useForm<z.infer<typeof ForgotPasswordFormSchema>>({
     resolver: zodResolver(ForgotPasswordFormSchema),
@@ -31,16 +35,27 @@ function ForgotPasswordPage() {
   });
 
   function onSubmit(data: z.infer<typeof ForgotPasswordFormSchema>) {
-    toast({
-      title: "Forgot password send successfully!",
-      description: (
-        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-          <code className="text-white">{JSON.stringify(data, null, 2)}</code>
-        </pre>
-      ),
-    });
-    setSent(true);
+    handleForgotPassword({ email: data.email });
   }
+
+  useEffect(() => {
+    if (isSuccess) {
+      setSent(true);
+    }
+  }, [isSuccess]);
+
+  // Efek untuk countdown tombol resend
+  useEffect(() => {
+    let timer: NodeJS.Timeout;
+    if (resendTimer > 0) {
+      timer = setInterval(() => {
+        setResendTimer((prev) => prev - 1);
+      }, 1000);
+    }
+    return () => {
+      if (timer) clearInterval(timer);
+    };
+  }, [resendTimer]);
 
   const email = form.watch("email");
 
@@ -74,9 +89,8 @@ function ForgotPasswordPage() {
                   </FormItem>
                 )}
               />
-
-              <Button type="submit" className="w-full">
-                Send Reset Link
+              <Button disabled={isPending} type="submit" className="w-full">
+                {isPending ? "Sending..." : "Send Reset Link"}
               </Button>
             </form>
           </Form>
@@ -85,7 +99,7 @@ function ForgotPasswordPage() {
         <div className="w-full space-y-4">
           <Title
             title="Check your Email"
-            desc="Please check information below!"
+            desc="Please check your email for the reset link."
           />
           <Typography
             variant="p"
@@ -94,8 +108,7 @@ function ForgotPasswordPage() {
           >
             You will receive a link in the email you provided. Use this link to
             update your password. <b>{email}</b>. If you don't see the email,
-            check other places it might be, such as your junk, spam, social, or
-            other folders.
+            check your junk, spam, or other folders.
           </Typography>
           <Typography
             variant="p"
@@ -107,12 +120,16 @@ function ForgotPasswordPage() {
           <Button
             type="button"
             className="w-full"
+            disabled={resendTimer > 0 || isPending}
             onClick={() => {
-              // fake resend behavior
-              toast({ title: "Reset password link resent." });
+              // Kirim ulang reset password link dengan email yang sama
+              handleForgotPassword({ email });
+              setResendTimer(120); // disable tombol selama 120 detik (2 menit)
             }}
           >
-            Resend reset password link
+            {resendTimer > 0
+              ? `Resend reset password link (${resendTimer}s)`
+              : "Resend reset password link"}
           </Button>
         </div>
       )}
