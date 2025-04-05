@@ -4,7 +4,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
-import Typography from "@/components/Typography";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -18,17 +17,18 @@ import { Input } from "@/components/ui/input";
 
 import { LoginFormSchema } from "@/schemas/auth-schema";
 import { EyeIcon, EyeOffIcon } from "lucide-react";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
+
 import { useState } from "react";
-import Title from "../../../components/Title";
-import { useUserLoginMutation } from "../_hooks/@post/useLogin";
+import Title from "../../../../components/Title";
+import { useAdminLoginMutation } from "../../../(auth)/_hooks/@post/useLogin";
+import { useRouter } from "next/navigation";
+import FormLayout from "@/layouts/FormLayout";
 
 function LoginPage() {
   const router = useRouter();
 
   const [show, setShow] = useState(false);
-  const { handleLogin, isPending, isSuccess } = useUserLoginMutation();
+  const { handleLogin, isPending, isSuccess } = useAdminLoginMutation();
 
   const form = useForm<z.infer<typeof LoginFormSchema>>({
     resolver: zodResolver(LoginFormSchema),
@@ -46,11 +46,20 @@ function LoginPage() {
   }
 
   if (isSuccess) {
-    router.push("/dashboard");
+    router.push("/admin");
   }
 
   return (
-    <>
+    <FormLayout
+      heroImage={{
+        src: "/auth-hero.png",
+        alt: "Auth Hero",
+        width: 1280,
+        height: 1096,
+      }}
+      title="Depa's Infection"
+      subtitle="Denta Paramitha's Science Festival and Competition FKG Universitas Gadjah Mada"
+    >
       <Title
         title="Log In"
         desc="Please fill this form to access your account"
@@ -112,38 +121,12 @@ function LoginPage() {
             )}
           />
 
-          <Typography
-            variant="p"
-            font="Rubik"
-            className="text-end text-[12px] text-neutral-900 sm:text-sm md:text-base lg:text-base"
-          >
-            <Link
-              href="/forgot-password"
-              className="font-bold text-cream-600 hover:underline hover:underline-offset-4"
-            >
-              Forgot password?
-            </Link>
-          </Typography>
-
           <Button type="submit" className="w-full" disabled={isPending}>
             {isPending ? "Submitting..." : "Submit"}
           </Button>
         </form>
       </Form>
-      <Typography
-        variant="p"
-        font="Rubik"
-        className="text-center text-[12px] text-neutral-900 sm:text-sm md:text-base lg:text-base"
-      >
-        Don't have an account?{" "}
-        <Link
-          href="/register"
-          className="font-bold text-cream-600 hover:underline hover:underline-offset-4"
-        >
-          Register Now
-        </Link>
-      </Typography>
-    </>
+    </FormLayout>
   );
 }
 
