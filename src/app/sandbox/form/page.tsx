@@ -49,7 +49,7 @@ export default function FormSandbox() {
                         sessionIdName="statementLetter"
                         {...field}
                         uploadType="/upload-file/"
-                        accept={{ "application/pdf": [] }}
+                        accept={{ "application/pdf": [] }} //! there is 2 validation for this parameter, at component and zod
                         maxSizeInBytes={10000000} //! there is 2 validation for this parameter, at component and zod
                         onChange={(file) => onChange(file)}
                       />
