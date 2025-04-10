@@ -1,9 +1,9 @@
 import Title from "@/components/Title";
+import UploadFile from "@/components/UploadFile";
 import { Button } from "@/components/ui/button";
 import { CountryDropdown } from "@/components/ui/country-dropdown";
 import {
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -107,22 +107,22 @@ export default function StepTeamInformation({
             </FormItem>
           )}
         />
+
         <FormField
           name="statementLetter"
-          render={({ field: { onChange, value, ...fieldProps } }) => (
+          render={({ field: { onChange, ...field } }) => (
             <FormItem>
-              <FormLabel isRequired>Statement Letter </FormLabel>
+              <FormLabel isRequired>Statement Letter</FormLabel>
               <FormControl>
-                <Input
-                  {...fieldProps}
-                  type="file"
-                  accept="application/pdf"
-                  onChange={(event) =>
-                    onChange(event.target.files && event.target.files[0])
-                  }
+                <UploadFile
+                  sessionIdName="statementLetter"
+                  {...field}
+                  uploadType="/upload-file/"
+                  accept={{ "application/pdf": [] }}
+                  maxSizeInBytes={10000000} //! there is 2 validation for this parameter, at component and zod
+                  onChange={(file) => onChange(file)}
                 />
               </FormControl>
-              <FormDescription>Upload on format .pdf</FormDescription>
               <FormMessage />
             </FormItem>
           )}

@@ -1,32 +1,26 @@
 "use client";
 
 import { useMutation } from "@tanstack/react-query";
-import React, { ReactNode, useCallback, useState } from "react";
+import React, { useCallback, useState } from "react";
 import { Accept, FileRejection, useDropzone } from "react-dropzone";
 import { useFormContext } from "react-hook-form";
 import { BsFileEarmarkRichtext } from "react-icons/bs";
 import { MdOutlineFileUpload } from "react-icons/md";
 import { twMerge } from "tailwind-merge";
 
-import Typography from "@/components/Typography";
+import { useFormField } from "@/components/ui/form";
 import { toast } from "@/hooks/use-toast";
 import api from "@/lib/api";
 import { ApiResponse } from "@/types/api";
 
-type UploadFileProps = {
-  id: string;
+export type UploadFileProps = {
+  sessionIdName: string;
   accept?: Accept;
-  className?: string;
-  title: string;
-  description?: string | ReactNode;
-  isRequired?: boolean;
-  variant: "md" | "lg";
   maxSizeInBytes?: number;
-  children?: React.ReactNode;
-  uploadType?: string;
+  uploadType: string;
+  onChange?: (file: File) => void;
 };
 
-// Fungsi pembantu untuk menyimpan dan mengambil data ke/dari sessionStorage
 const setSessionStorage = (key: string, value: object) =>
   sessionStorage.setItem(key, JSON.stringify(value));
 const getSessionStorage = (key: string) => {
@@ -34,258 +28,170 @@ const getSessionStorage = (key: string) => {
   return item ? JSON.parse(item) : null;
 };
 
-// Tipe untuk parameter mutation: kita akan mengirim objek yang mengemas FormData dan nama file asli.
 type UploadParams = {
   formData: FormData;
   originalFileName: string;
 };
 
-export default function UploadFile({
-  id,
+const UploadFile = React.forwardRef<HTMLDivElement, UploadFileProps>(
+  (
+    { sessionIdName, accept = {}, maxSizeInBytes, uploadType, onChange },
+    ref,
+  ) => {
+    const [uploading, setUploading] = useState(false);
+    const { setValue, clearErrors } = useFormContext();
+    const { error: formError } = useFormField();
 
-  accept = {},
-  className,
-  title,
-  description,
-  isRequired,
-  variant,
-  maxSizeInBytes,
-  children,
-  uploadType = "/upload-image",
-}: UploadFileProps) {
-  const [error, setError] = useState("");
-  const [uploading, setUploading] = useState(false);
-
-  const { setValue, clearErrors } = useFormContext();
-
-  const { mutateAsync } = useMutation({
-    mutationFn: async ({ formData, originalFileName }: UploadParams) => {
-      setUploading(true);
-      const response = await api.post<ApiResponse<{ path_file: string }>>(
-        uploadType,
-        formData,
-        { headers: { "Content-Type": "multipart/form-data" }, timeout: 60000 },
-      );
-      setUploading(false);
-      if (!response.data?.data?.path_file) {
-        throw new Error("Invalid response structure");
-      }
-      const filePath = response.data.data.path_file;
-      setValue(id, filePath, { shouldValidate: true });
-      clearErrors(id);
-
-      setSessionStorage(id, {
-        name: filePath.split("/").pop() || "",
-        link: filePath,
-        user_file_name: originalFileName,
-      });
-      return response;
-    },
-    onSuccess: () => {
-      toast({
-        title: "Upload successful",
-      });
-    },
-    onError: (error: Error | unknown) => {
-      const errorMsg =
-        error instanceof Error ? error.message : "Unknown error occurred";
-      toast({
-        title: "Upload failed",
-        description: errorMsg,
-        variant: "destructive",
-      });
-      setError(errorMsg);
-      setUploading(false);
-    },
-  });
-
-  // onDrop: menangani file yang diterima atau ditolak
-  const onDrop = useCallback(
-    async (acceptedFiles: File[], fileRejections: FileRejection[]) => {
-      if (fileRejections.length > 0) {
-        const { code, message } = fileRejections[0].errors[0];
-        let errorMessage = "";
-        if (code === "file-too-large") {
-          errorMessage = "Filesize is too big. Please click here to re-upload";
-        } else if (code === "file-invalid-type") {
-          errorMessage = "Invalid filetype. Please click here to re-upload";
-        } else {
-          errorMessage = message;
+    const { mutateAsync } = useMutation({
+      mutationFn: async ({ formData, originalFileName }: UploadParams) => {
+        setUploading(true);
+        const response = await api.post<ApiResponse<{ path_file: string }>>(
+          uploadType,
+          formData,
+          {
+            headers: { "Content-Type": "multipart/form-data" },
+            timeout: 60000,
+          },
+        );
+        setUploading(false);
+        if (!response.data?.data?.path_file) {
+          throw new Error("Invalid response structure");
         }
-        setError(errorMessage);
-      } else if (acceptedFiles.length > 0) {
-        setError("");
-        const file = acceptedFiles[0];
-        const originalFileName = file.name;
-        const formData = new FormData();
-        formData.append("file", file);
-        // Panggil mutation dengan mengirim formData dan nama file asli
-        await mutateAsync({ formData, originalFileName });
-      }
-    },
-    [mutateAsync],
-  );
-
-  // Konfigurasi Dropzone: hanya menerima satu file dengan ukuran maksimal sesuai properti.
-  const { acceptedFiles, getRootProps, getInputProps } = useDropzone({
-    onDrop,
-    maxFiles: 1,
-    maxSize: maxSizeInBytes,
-    accept,
-    multiple: false,
-  });
-
-  // Jika sudah ada file tersimpan (dari sessionStorage) atau file baru yang diterima
-  const storedFile = getSessionStorage(id);
-  const uploadedFileName =
-    storedFile?.user_file_name || acceptedFiles[0]?.name || "";
-
-  function formatAcceptList(accept?: Accept): string | null {
-    if (!accept) return null;
-    const exts = Object.keys(accept).map((type) => {
-      const parts = type.split("/");
-      return parts.length === 2 ? `.${parts[1]}` : type;
+        const filePath = response.data.data.path_file;
+        setValue(sessionIdName, filePath, { shouldValidate: true });
+        clearErrors(sessionIdName);
+        setSessionStorage(sessionIdName, {
+          name: filePath.split("/").pop() || "",
+          link: filePath,
+          user_file_name: originalFileName,
+        });
+        return response;
+      },
+      onSuccess: () => {
+        toast({ title: "Upload successful" });
+      },
+      onError: (error: Error | unknown) => {
+        const errorMsg =
+          error instanceof Error ? error.message : "Unknown error occurred";
+        toast({
+          title: "Upload failed",
+          description: errorMsg,
+          variant: "destructive",
+        });
+        setUploading(false);
+      },
     });
-    return exts.join(", ");
-  }
 
-  return (
-    <section className={twMerge(className, "flex w-full flex-col")}>
-      <div className="mb-[6px]">
-        <Typography
-          className={twMerge(
-            "text-[16px] md:text-[18px]",
-            isRequired
-              ? "after:text-danger after:ml-0.5 after:content-['*']"
-              : "",
-          )}
-          weight="semibold"
-        >
-          {title}
-        </Typography>
-      </div>
-      {children && (
-        <div className="mb-2 flex flex-col gap-1">
-          <Typography className="ml-1.5 mt-0.5 text-[12px] text-neutral-400 md:text-[12px] lg:text-[12px]">
-            File yang telah kamu upload sebelumnya (klik untuk lihat lebih
-            detail)
-          </Typography>
-          <div>{children}</div>
-        </div>
-      )}
-      <div>
-        {uploadedFileName || uploading ? (
-          <div
-            {...getRootProps()}
-            className={twMerge(
-              "relative flex cursor-pointer flex-row items-center justify-center rounded-2xl bg-[#F4F4F5] hover:bg-neutral-100 max-md:py-[18px]",
-            )}
-          >
-            <input {...getInputProps()} />
-            <div className="flex flex-col items-center justify-center gap-2 px-4 text-center">
-              <BsFileEarmarkRichtext
-                className={twMerge("text-xl text-neutral-900 lg:text-2xl")}
-              />
-              <div className="flex flex-col gap-1">
-                {uploading ? (
-                  <Typography
-                    className={twMerge(
-                      "px-4 font-medium text-neutral-900 max-md:text-sm",
-                      variant === "md" ? "text-[12px]" : "text-lg",
-                    )}
-                  >
-                    Uploading your file, please wait...
-                  </Typography>
-                ) : (
+    const onDrop = useCallback(
+      async (acceptedFiles: File[], fileRejections: FileRejection[]) => {
+        if (fileRejections.length > 0) {
+          const firstError = fileRejections[0].errors[0];
+          let errorMessage = "";
+
+          if (firstError.code === "file-too-large") {
+            const sizeInMB = (maxSizeInBytes || 0) / 1000000;
+            errorMessage = `File is larger than ${sizeInMB}MB`;
+          } else if (firstError.code === "file-invalid-type") {
+            errorMessage = "Invalid filetype. Please upload a valid file.";
+          } else {
+            errorMessage = firstError.message || "Upload error";
+          }
+
+          toast({
+            title: "Upload failed",
+            description: errorMessage,
+            variant: "destructive",
+          });
+
+          return;
+        }
+
+        if (acceptedFiles.length > 0) {
+          const file = acceptedFiles[0];
+          const originalFileName = file.name;
+          const formData = new FormData();
+          formData.append("file", file);
+          await mutateAsync({ formData, originalFileName });
+
+          if (typeof onChange === "function") {
+            onChange(file);
+          }
+        }
+      },
+      [mutateAsync, onChange, maxSizeInBytes],
+    );
+
+    const { acceptedFiles, getRootProps, getInputProps } = useDropzone({
+      onDrop,
+      maxFiles: 1,
+      maxSize: maxSizeInBytes,
+      accept,
+      multiple: false,
+    });
+
+    const storedFile = getSessionStorage(sessionIdName);
+    const uploadedFileName =
+      storedFile?.user_file_name || acceptedFiles[0]?.name || "";
+
+    const formatAcceptList = (accept?: Accept): string | null => {
+      if (!accept) return null;
+      const exts = Object.keys(accept).map((type) => {
+        const parts = type.split("/");
+        return parts.length === 2 ? `.${parts[1]}` : type;
+      });
+      return exts.join(", ");
+    };
+
+    return (
+      <div
+        ref={ref}
+        {...getRootProps()}
+        className={twMerge(
+          "relative flex cursor-pointer flex-col items-center justify-center rounded-md border border-input bg-background px-4 py-6 text-center text-sm transition-colors hover:bg-muted",
+          formError && "border-destructive bg-destructive/10",
+        )}
+      >
+        <input {...getInputProps()} />
+        {uploading ? (
+          <p className="text-sm font-medium text-foreground">
+            Uploading your file, please wait...
+          </p>
+        ) : uploadedFileName ? (
+          <>
+            <BsFileEarmarkRichtext className="mb-1 text-2xl text-muted-foreground" />
+            <p className="text-sm font-medium text-foreground">
+              {uploadedFileName}
+            </p>
+            <p className="text-xs text-muted-foreground">
+              Click or drag & drop to change file
+            </p>
+          </>
+        ) : (
+          <>
+            <MdOutlineFileUpload className="mb-1 text-2xl text-muted-foreground" />
+            <p className="text-sm font-medium text-foreground">
+              Click or drag & drop to upload
+            </p>
+
+            {(accept || maxSizeInBytes) && (
+              <p className="pt-2 text-xs text-muted-foreground">
+                {accept && (
                   <>
-                    <Typography
-                      className={twMerge(
-                        "px-4 font-medium text-neutral-900 max-md:text-sm",
-                        variant === "md" ? "text-[12px]" : "text-lg",
-                      )}
-                    >
-                      {uploadedFileName}
-                    </Typography>
-                    <Typography
-                      className={twMerge(
-                        "text-[12px] text-neutral-400 md:text-[12px] lg:text-[12px]",
-                      )}
-                    >
-                      Click or drag & drop to change file
-                    </Typography>
+                    Supported files: {formatAcceptList(accept)}
+                    {maxSizeInBytes ? " and " : ""}
                   </>
                 )}
-              </div>
-            </div>
-          </div>
-        ) : (
-          <div
-            {...getRootProps()}
-            className={twMerge(
-              "relative flex cursor-pointer flex-col items-center justify-center rounded-2xl border-0 max-md:py-[18px]",
-              error
-                ? "bg-red-200 hover:bg-red-50"
-                : "bg-[#F4F4F5] hover:bg-neutral-100",
-              variant === "md" ? "py-6" : "py-[18px]",
+                {maxSizeInBytes && (
+                  <>Max size: {(maxSizeInBytes / 1_000_000).toFixed(1)}MB</>
+                )}
+              </p>
             )}
-          >
-            <input {...getInputProps()} />
-            <div className="flex flex-col items-center justify-center gap-2 text-center">
-              <MdOutlineFileUpload
-                className={twMerge(
-                  `text-xl ${error ? "text-red-700" : "text-neutral-600"} max-md:text-3xl md:text-3xl`,
-                )}
-              />
-              <div className="flex flex-col gap-1">
-                <Typography
-                  className={twMerge(
-                    `px-4 ${error ? "text-red-700" : "text-neutral-600"} max-md:text-sm`,
-                    variant === "md" ? "text-[12px]" : "text-lg",
-                  )}
-                >
-                  Click or drag & drop to upload
-                </Typography>
-
-                {!error && (
-                  <Typography
-                    className={twMerge(
-                      `px-4 text-[12px] text-neutral-400 md:text-[12px] lg:text-[12px]`,
-                    )}
-                  >
-                    {description}
-                  </Typography>
-                )}
-
-                {(accept || maxSizeInBytes) && (
-                  <Typography
-                    className={`px-4 pt-4 text-[12px] ${error ? "text-red-700" : "text-neutral-400"} md:text-[12px] lg:text-[12px]`}
-                  >
-                    {accept && (
-                      <>
-                        *Supported files: {formatAcceptList(accept)}
-                        {maxSizeInBytes ? " and " : ""}
-                      </>
-                    )}
-                    {maxSizeInBytes && (
-                      <>Max size: {(maxSizeInBytes / 1000000).toFixed(1)}MB</>
-                    )}
-                  </Typography>
-                )}
-
-                {error && (
-                  <Typography
-                    className={twMerge(
-                      "px-4 text-[12px] text-red-700 md:text-[12px] lg:text-[12px]",
-                    )}
-                  >
-                    {error}
-                  </Typography>
-                )}
-              </div>
-            </div>
-          </div>
+          </>
         )}
       </div>
-    </section>
-  );
-}
+    );
+  },
+);
+
+UploadFile.displayName = "UploadFile";
+export default UploadFile;
