@@ -3,6 +3,7 @@
 import { FormProvider, useForm } from "react-hook-form";
 
 import Typography from "@/components/Typography";
+import ImageUpload from "@/components/UploadFile";
 import Input from "@/components/form/Input";
 
 export default function FormSandbox() {
@@ -20,12 +21,29 @@ export default function FormSandbox() {
         >
           Form Sandbox
         </Typography>
+
         <FormProvider {...methods}>
-          <form className="w-[600px]">
+          <form className="w-[600px] space-y-4">
             <Typography variant="h2" font="Rubik">
               Test
             </Typography>
+
             <Input id="Test" label="Haloo" placeholder="Ini placeholder" />
+
+            <div>
+              <h1 className="text-lg font-medium">Upload your image (file)</h1>
+              <ImageUpload
+                id="image-upload"
+                title="Upload Image"
+                variant="md"
+                accept={{
+                  "image/jpeg": [],
+                  "image/png": [],
+                }}
+                description="Upload your image file here"
+                maxSizeInBytes={1000000}
+              />
+            </div>
           </form>
         </FormProvider>
       </div>
