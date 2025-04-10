@@ -1,6 +1,7 @@
 import Title from "@/components/Title";
 import Typography from "@/components/Typography";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 export default function StepDone() {
   return (
@@ -19,10 +20,10 @@ export default function StepDone() {
         view your registration status.
       </Typography>
       <Button
-        type="submit"
+        asChild
         className="text-olive-900 w-full bg-gradient-to-r from-amber-300 to-yellow-400 px-8 py-6 text-2xl font-bold text-[#a88a44] shadow-md hover:from-amber-400 hover:to-yellow-500 md:px-12 lg:px-14"
       >
-        Done
+        <Link href="/dashboard/udsrc">Go to dashboard</Link>
       </Button>
     </>
   );

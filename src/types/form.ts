@@ -7,39 +7,33 @@ export type UDSRCFormData = {
 
   leaderName: string;
   leaderEmail: string;
-  leaderNIK: string;
-  leaderNIM: string;
+  leaderNIK: string | null;
+  leaderNIM: string | null;
   leaderWhatsApp: string;
   leaderStudentCard: File;
   leaderTwibbonProof: File;
 
   member1Name: string;
   member1Email: string;
-  member1NIK: string;
-  member1NIM: string;
+  member1NIK: string | null;
+  member1NIM: string | null;
   member1WhatsApp: string;
   member1StudentCard: File;
   member1TwibbonProof: File;
 
   member2Name: string;
   member2Email: string;
-  member2NIK: string;
-  member2NIM: string;
+  member2NIK: string | null;
+  member2NIM: string | null;
   member2WhatsApp: string;
   member2StudentCard: File;
   member2TwibbonProof: File;
 
-  member3Name: string;
-  member3Email: string;
-  member3NIK: string;
-  member3NIM: string;
-  member3WhatsApp: string;
-  member3StudentCard: File;
-  member3TwibbonProof: File;
-
+  amount: number;
+  bankId: number;
   proofOfTransfer: File;
   bankName: string;
-  senderEmail: string;
+  senderName: string;
   dateOfTransfer: Date;
 };
 
@@ -78,8 +72,10 @@ export type OKGDFormData = {
   teacherWhatsApp: string;
   teacherAgreement: boolean;
 
+  amount: number;
+  bankId: number;
   proofOfTransfer: File;
   bankName: string;
-  senderEmail: string;
+  senderName: string;
   dateOfTransfer: Date;
 };

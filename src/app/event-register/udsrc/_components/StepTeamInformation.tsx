@@ -118,8 +118,8 @@ export default function StepTeamInformation({
                   sessionIdName="statementLetter"
                   {...field}
                   uploadType="/upload-file/"
-                  accept={{ "application/pdf": [] }}
-                  maxSizeInBytes={10000000} //! there is 2 validation for this parameter, at component and zod
+                  accept={{ "application/pdf": [] }} //! there is 2 validation for this parameter, at component and zod
+                  maxSizeInBytes={5000000} //! there is 2 validation for this parameter, at component and zod
                   onChange={(file) => onChange(file)}
                 />
               </FormControl>

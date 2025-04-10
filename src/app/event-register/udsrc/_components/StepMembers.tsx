@@ -38,14 +38,6 @@ export default function StepMembers({ onNext, onBack }: StepMembersProps) {
             <MemberFields prefix="member2" />
           </AccordionContent>
         </AccordionItem>
-        <AccordionItem value="member3">
-          <AccordionTrigger className="text-[14px] font-medium lg:text-[20px]">
-            Third Member
-          </AccordionTrigger>
-          <AccordionContent>
-            <MemberFields prefix="member3" />
-          </AccordionContent>
-        </AccordionItem>
       </Accordion>
 
       <div className="flex gap-2 pt-2">
