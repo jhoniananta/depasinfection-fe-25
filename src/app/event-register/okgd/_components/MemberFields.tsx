@@ -1,3 +1,4 @@
+import UploadFile from "@/components/UploadFile";
 import {
   FormControl,
   FormDescription,
@@ -39,24 +40,22 @@ export default function MemberFields({ prefix }: MemberFieldsProps) {
   ];
 
   interface FileField {
+    [x: string]: string;
     name: string;
     label: string;
-    placeholder: string;
-    accept: string;
+    sessionKey: string;
   }
 
   const membersOKGDfileFields: FileField[] = [
     {
       name: `${prefix}StudentCard`,
       label: "Student Card",
-      placeholder: "Upload your member student card",
-      accept: "application/pdf",
+      sessionKey: `${prefix}StudentCard`,
     },
     {
       name: `${prefix}TwibbonProof`,
       label: "Proof of Twibbon Posting",
-      placeholder: "Upload your member twibbon proof",
-      accept: "application/pdf",
+      sessionKey: `${prefix}TwibbonProof`,
     },
   ];
 
@@ -112,21 +111,23 @@ export default function MemberFields({ prefix }: MemberFieldsProps) {
         <FormField
           key={fileField.name}
           name={fileField.name}
-          render={({ field: { onChange, value, ...fieldProps } }) => (
+          render={({ field: { onChange, ...field } }) => (
             <FormItem>
               <FormLabel isRequired>{fileField.label}</FormLabel>
               <FormControl>
-                <Input
-                  {...fieldProps}
-                  placeholder={fileField.placeholder}
-                  type="file"
-                  accept={fileField.accept}
-                  onChange={(event) =>
-                    onChange(event.target.files && event.target.files[0])
-                  }
+                <UploadFile
+                  sessionIdName={fileField.sessionKey}
+                  {...field}
+                  uploadType="/upload-image/"
+                  accept={{
+                    "image/jpeg": [],
+                    "image/png": [],
+                    "image/jpg": [],
+                  }} //! there is 2 validation for this parameter, at component and zod
+                  maxSizeInBytes={5000000} // 5MB //! there is 2 validation for this parameter, at component and zod
+                  onChange={(file) => onChange(file)}
                 />
               </FormControl>
-              <FormDescription>Upload on format .pdf</FormDescription>
               <FormMessage />
             </FormItem>
           )}

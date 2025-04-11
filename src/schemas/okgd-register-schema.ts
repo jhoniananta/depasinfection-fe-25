@@ -30,7 +30,7 @@ export const stepTeamSchema = z.object({
     .max(120, { message: "School address must be at most 120 characters" }),
   integrityPact: maxFileUploadTypeSize({
     allowedTypes: ["application/pdf"],
-    maxSizeInMB: 10,
+    maxSizeInMB: 5,
   }),
 });
 
@@ -55,23 +55,37 @@ export const stepLeaderSchema = z.object({
       message: "Invalid WhatsApp number",
     }),
   leaderStudentCard: maxFileUploadTypeSize({
-    allowedTypes: ["application/pdf"],
-    maxSizeInMB: 10,
+    allowedTypes: [
+      "image/jpeg",
+      "image/png",
+      "image/jpg",
+      "jpg",
+      "jpeg",
+      "png",
+    ],
+    maxSizeInMB: 5,
   }),
   leaderTwibbonProof: maxFileUploadTypeSize({
-    allowedTypes: ["application/pdf"],
-    maxSizeInMB: 10,
+    allowedTypes: [
+      "image/jpeg",
+      "image/png",
+      "image/jpg",
+      "jpg",
+      "jpeg",
+      "png",
+    ],
+    maxSizeInMB: 5,
   }),
 });
 
 export const stepMembersSchema = z.object({
   member1Name: z
     .string()
-    .min(1)
-    .max(60, { message: "Member 1 name is required" }),
+    .min(1, { message: "Member 1 name is required" })
+    .max(60, { message: "Member 1 name must be at most 60 characters" }),
   member1Email: z
     .string()
-    .min(1)
+    .min(1, { message: "Member 1 email is required" })
     .max(100, { message: "Member 1 email must be at most 100 characters" })
     .email({ message: "Invalid email" }),
   member1NIK: z.string().regex(nikRegex, { message: "NIK must be 16 digits" }),
@@ -80,26 +94,40 @@ export const stepMembersSchema = z.object({
     .regex(nisnRegex, { message: "NISN must be 10 digits" }),
   member1WhatsApp: z
     .string()
-    .min(1)
+    .min(1, { message: "Member 1 WhatsApp is required" })
     .refine((val) => isValidPhoneNumber(val), {
       message: "Invalid WhatsApp number",
     }),
   member1StudentCard: maxFileUploadTypeSize({
-    allowedTypes: ["application/pdf"],
-    maxSizeInMB: 10,
+    allowedTypes: [
+      "image/jpeg",
+      "image/png",
+      "image/jpg",
+      "jpg",
+      "jpeg",
+      "png",
+    ],
+    maxSizeInMB: 5,
   }),
   member1TwibbonProof: maxFileUploadTypeSize({
-    allowedTypes: ["application/pdf"],
-    maxSizeInMB: 10,
+    allowedTypes: [
+      "image/jpeg",
+      "image/png",
+      "image/jpg",
+      "jpg",
+      "jpeg",
+      "png",
+    ],
+    maxSizeInMB: 5,
   }),
 
   member2Name: z
     .string()
-    .min(1)
+    .min(1, { message: "Member 2 name is required" })
     .max(60, { message: "Member 2 name is required" }),
   member2Email: z
     .string()
-    .min(1)
+    .min(1, { message: "Member 2 email is required" })
     .max(100, { message: "Member 2 email must be at most 100 characters" })
     .email({ message: "Invalid email" }),
   member2NIK: z.string().regex(nikRegex, { message: "NIK must be 16 digits" }),
@@ -108,29 +136,46 @@ export const stepMembersSchema = z.object({
     .regex(nisnRegex, { message: "NISN must be 10 digits" }),
   member2WhatsApp: z
     .string()
-    .min(1)
+    .min(1, { message: "Member 2 WhatsApp is required" })
     .refine((val) => isValidPhoneNumber(val), {
       message: "Invalid WhatsApp number",
     }),
   member2StudentCard: maxFileUploadTypeSize({
-    allowedTypes: ["application/pdf"],
-    maxSizeInMB: 10,
+    allowedTypes: [
+      "image/jpeg",
+      "image/png",
+      "image/jpg",
+      "jpg",
+      "jpeg",
+      "png",
+    ],
+    maxSizeInMB: 5,
   }),
   member2TwibbonProof: maxFileUploadTypeSize({
-    allowedTypes: ["application/pdf"],
-    maxSizeInMB: 10,
+    allowedTypes: [
+      "image/jpeg",
+      "image/png",
+      "image/jpg",
+      "jpg",
+      "jpeg",
+      "png",
+    ],
+    maxSizeInMB: 5,
   }),
 });
 
 export const stepTeacherSchema = z.object({
   teacherName: z
     .string()
-    .min(1)
-    .max(60, { message: "Teacher name is required" }),
-  teacherEmail: z.string().min(1).email({ message: "Invalid email" }),
+    .min(1, { message: "Teacher name is required" })
+    .max(60, { message: "Teacher name must be at most 60 characters" }),
+  teacherEmail: z
+    .string()
+    .min(1, { message: "Teacher email is required" })
+    .email({ message: "Invalid email" }),
   teacherWhatsApp: z
     .string()
-    .min(1)
+    .min(1, { message: "Teacher WhatsApp is required" })
     .refine((val) => isValidPhoneNumber(val), {
       message: "Invalid WhatsApp number",
     }),
@@ -140,23 +185,26 @@ export const stepTeacherSchema = z.object({
 });
 
 export const stepPaymentSchema = z.object({
+  amount: z.number({ message: "Amount is required" }),
   proofOfTransfer: maxFileUploadTypeSize({
     allowedTypes: [
-      "application/pdf",
       "image/jpeg",
       "image/png",
+      "image/jpg",
       "jpg",
       "jpeg",
       "png",
-      "pdf",
     ],
     maxSizeInMB: 5,
   }),
-  bankName: z.string().min(1).max(60, { message: "Bank name is required" }),
-  senderEmail: z
+  bankName: z
     .string()
-    .min(1)
-    .max(100, { message: "Sender email must be at most 100 characters" })
-    .email({ message: "Invalid email" }),
+    .min(1, { message: "Bank name is required" })
+    .max(60, { message: "Bank name must be at most 60 characters" }),
+  senderName: z
+    .string()
+    .min(1, { message: "Sender name is required" })
+    .max(60, { message: "Sender name must be at most 60 characters" }),
   dateOfTransfer: zDateFromString(),
+  bankId: z.number({ message: "Payment method is required" }),
 });

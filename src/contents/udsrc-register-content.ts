@@ -3,7 +3,7 @@ export const UDSRCsteps = [
   { label: "Leader Information", value: 25 },
   { label: "Members Information", value: 50 },
   { label: "Payment", value: 75 },
-  { label: "Complete", value: 100 },
+  { label: "Completed", value: 100 },
 ];
 
 export const LeaderUDSRCtextFields = [

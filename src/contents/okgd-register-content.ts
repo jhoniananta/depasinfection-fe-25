@@ -4,7 +4,7 @@ export const OKGDsteps = [
   { label: "Members Information", value: 40 },
   { label: "Accompanying Teacher", value: 60 },
   { label: "Payment", value: 80 },
-  { label: "Complete", value: 100 },
+  { label: "Completed", value: 100 },
 ];
 
 export const LeaderOKGDtextFields = [
