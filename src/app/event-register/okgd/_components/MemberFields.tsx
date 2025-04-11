@@ -1,3 +1,5 @@
+"use client";
+
 import UploadFile from "@/components/UploadFile";
 import {
   FormControl,

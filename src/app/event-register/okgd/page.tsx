@@ -42,6 +42,7 @@ const totalSteps = stepSchemas.length;
 export default function OKGDRegisterPage() {
   const [activeStep, setActiveStep] = useState(0);
   const [data, setData] = useState<Partial<OKGDFormData>>({});
+
   const currentSchema = stepSchemas[activeStep];
 
   const form = useForm<Partial<OKGDFormData>>({
@@ -50,7 +51,12 @@ export default function OKGDRegisterPage() {
       currentSchema as unknown as ZodType<Partial<OKGDFormData>>,
     ),
     shouldUnregister: false,
-    defaultValues: {
+  });
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    form.reset({
       ...data,
       integrityPact: getSessionDefault("integrityPact"),
       leaderStudentCard: getSessionDefault("leaderStudentCard"),
@@ -60,8 +66,8 @@ export default function OKGDRegisterPage() {
       member2StudentCard: getSessionDefault("member2StudentCard"),
       member2TwibbonProof: getSessionDefault("member2TwibbonProof"),
       proofOfTransfer: getSessionDefault("proofOfTransfer"),
-    },
-  });
+    });
+  }, []);
 
   const { mutate, isPending } = useOKGDRegisterMutation();
 
@@ -71,13 +77,24 @@ export default function OKGDRegisterPage() {
       ...finalStepData,
     } as OKGDFormData;
 
-    const payload = transformFormDataToPayloadOKGD(finalData);
+    const uploads = {
+      integrityPact: getSessionDefault("integrityPact"),
+      leaderStudentCard: getSessionDefault("leaderStudentCard"),
+      leaderTwibbonProof: getSessionDefault("leaderTwibbonProof"),
+      member1StudentCard: getSessionDefault("member1StudentCard"),
+      member1TwibbonProof: getSessionDefault("member1TwibbonProof"),
+      member2StudentCard: getSessionDefault("member2StudentCard"),
+      member2TwibbonProof: getSessionDefault("member2TwibbonProof"),
+      proofOfTransfer: getSessionDefault("proofOfTransfer"),
+    };
+
+    const payload = transformFormDataToPayloadOKGD(finalData, uploads);
     mutate(payload as OKGDRegisterRequest, {
       onSuccess: () => setActiveStep(totalSteps),
     });
 
-    setData(finalData); // final merge
-    setActiveStep((prev) => prev + 1); // go to done
+    setData(finalData);
+    setActiveStep((prev) => prev + 1);
   };
 
   const handleNext = async () => {

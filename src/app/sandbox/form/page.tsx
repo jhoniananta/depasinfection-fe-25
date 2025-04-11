@@ -3,15 +3,8 @@
 import { FormProvider, useForm } from "react-hook-form";
 
 import Typography from "@/components/Typography";
-import UploadFile from "@/components/UploadFile";
+
 import Input from "@/components/form/Input";
-import {
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
 
 export default function FormSandbox() {
   const methods = useForm();
@@ -39,25 +32,27 @@ export default function FormSandbox() {
 
             <div>
               <h1 className="text-lg font-medium">Upload your image (file)</h1>
-              <FormField
-                name="statementLetter"
-                render={({ field: { onChange, ...field } }) => (
-                  <FormItem>
-                    <FormLabel isRequired>Statement Letter</FormLabel>
-                    <FormControl>
-                      <UploadFile
-                        sessionIdName="statementLetter"
-                        {...field}
-                        uploadType="/upload-file/"
-                        accept={{ "application/pdf": [] }} //! there is 2 validation for this parameter, at component and zod
-                        maxSizeInBytes={10000000} //! there is 2 validation for this parameter, at component and zod
-                        onChange={(file) => onChange(file)}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+              {/* {isClient && (
+                <FormField
+                  name="statementLetter"
+                  render={({ field: { onChange, ...field } }) => (
+                    <FormItem>
+                      <FormLabel isRequired>Statement Letter</FormLabel>
+                      <FormControl>
+                        <UploadFile
+                          sessionIdName="statementLetter"
+                          {...field}
+                          uploadType="/upload-file/"
+                          accept={{ "application/pdf": [] }}
+                          maxSizeInBytes={10_000_000}
+                          onChange={(file) => onChange(file)}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              )} */}
             </div>
           </form>
         </FormProvider>

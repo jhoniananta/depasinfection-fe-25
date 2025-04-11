@@ -50,7 +50,12 @@ export default function UDSRCRegisterPage() {
       currentSchema as unknown as ZodType<Partial<UDSRCFormData>>,
     ),
     shouldUnregister: false,
-    defaultValues: {
+  });
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    form.reset({
       ...data,
       statementLetter: getSessionDefault("statementLetter"),
       leaderStudentCard: getSessionDefault("leaderStudentCard"),
@@ -60,14 +65,27 @@ export default function UDSRCRegisterPage() {
       member2StudentCard: getSessionDefault("member2StudentCard"),
       member2TwibbonProof: getSessionDefault("member2TwibbonProof"),
       proofOfTransfer: getSessionDefault("proofOfTransfer"),
-    },
-  });
+    });
+  }, []);
 
   const { mutate, isPending } = useUDSRCRegisterMutation();
 
   const handleSubmitFinal = (finalStepData: Partial<UDSRCFormData>) => {
     const finalData = { ...data, ...finalStepData } as UDSRCFormData;
-    const payload = transformFormDataToPayloadUDSRC(finalData);
+
+    const uploads = {
+      statementLetter: getSessionDefault("statementLetter"),
+      leaderStudentCard: getSessionDefault("leaderStudentCard"),
+      leaderTwibbonProof: getSessionDefault("leaderTwibbonProof"),
+      member1StudentCard: getSessionDefault("member1StudentCard"),
+      member1TwibbonProof: getSessionDefault("member1TwibbonProof"),
+      member2StudentCard: getSessionDefault("member2StudentCard"),
+      member2TwibbonProof: getSessionDefault("member2TwibbonProof"),
+      proofOfTransfer: getSessionDefault("proofOfTransfer"),
+    };
+
+    const payload = transformFormDataToPayloadUDSRC(finalData, uploads);
+
     mutate(payload as UDSRCRegisterRequest, {
       onSuccess: () => setActiveStep(totalSteps),
     });

@@ -1,3 +1,5 @@
+"use client";
+
 import { OKGDFormData, UDSRCFormData } from "@/types/form";
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
@@ -78,7 +80,10 @@ export const getFeeInfoOKGD = () => {
   return { label: "Invalid fee", value: "error" };
 };
 
-export function transformFormDataToPayloadUDSRC(data: UDSRCFormData) {
+export function transformFormDataToPayloadUDSRC(
+  data: UDSRCFormData,
+  uploads: Record<string, string | undefined>,
+) {
   return {
     participants_data: {
       team_identity: {
@@ -91,7 +96,7 @@ export function transformFormDataToPayloadUDSRC(data: UDSRCFormData) {
             : data.subCompetition === "3-minutes-oral-competition"
               ? "THREE_MOP"
               : "",
-        statement_letter: getSessionDefault("statementLetter"),
+        statement_letter: uploads.statementLetter,
       },
       leader_identity: {
         name: data.leaderName,
@@ -99,8 +104,8 @@ export function transformFormDataToPayloadUDSRC(data: UDSRCFormData) {
         nik: data.leaderNIK || null,
         nim: data.leaderNIM || null,
         phone_number: data.leaderWhatsApp,
-        student_card: getSessionDefault("leaderStudentCard"),
-        twibbon: getSessionDefault("leaderTwibbonProof"),
+        student_card: uploads.leaderStudentCard,
+        twibbon: uploads.leaderTwibbonProof,
         role: "LEADER",
       },
       member_identity: [
@@ -110,8 +115,8 @@ export function transformFormDataToPayloadUDSRC(data: UDSRCFormData) {
           nik: data.member1NIK || null,
           nim: data.member1NIM || null,
           phone_number: data.member1WhatsApp,
-          student_card: getSessionDefault("member1StudentCard"),
-          twibbon: getSessionDefault("member1TwibbonProof"),
+          student_card: uploads.member1StudentCard,
+          twibbon: uploads.member1TwibbonProof,
           role: "MEMBER",
         },
         {
@@ -120,8 +125,8 @@ export function transformFormDataToPayloadUDSRC(data: UDSRCFormData) {
           nik: data.member2NIK || null,
           nim: data.member2NIM || null,
           phone_number: data.member2WhatsApp,
-          student_card: getSessionDefault("member2StudentCard"),
-          twibbon: getSessionDefault("member2TwibbonProof"),
+          student_card: uploads.member2StudentCard,
+          twibbon: uploads.member2TwibbonProof,
           role: "MEMBER",
         },
       ],
@@ -131,20 +136,23 @@ export function transformFormDataToPayloadUDSRC(data: UDSRCFormData) {
       sender_bank_name: data.bankName,
       sender_name: data.senderName,
       date_of_transfer: data.dateOfTransfer.toISOString(),
-      proof: getSessionDefault("proofOfTransfer"),
+      proof: uploads.proofOfTransfer,
       bank_id: data.bankId,
     },
   };
 }
 
-export function transformFormDataToPayloadOKGD(data: OKGDFormData) {
+export function transformFormDataToPayloadOKGD(
+  data: OKGDFormData,
+  uploads: Record<string, string | undefined>,
+) {
   return {
     participants_data: {
       team_identity: {
         team_name: data.teamName,
         school: data.schoolName,
         school_address: data.schoolAddress,
-        integrity_pact: getSessionDefault("integrityPact"),
+        integrity_pact: uploads.integrityPact,
         event_id: 3,
       },
       leader_identity: {
@@ -153,8 +161,8 @@ export function transformFormDataToPayloadOKGD(data: OKGDFormData) {
         nik: data.leaderNIK,
         nisn: data.leaderNISN,
         phone_number: data.leaderWhatsApp,
-        student_card: getSessionDefault("leaderStudentCard"),
-        twibbon: getSessionDefault("leaderTwibbonProof"),
+        student_card: uploads.leaderStudentCard,
+        twibbon: uploads.leaderTwibbonProof,
         role: "LEADER",
       },
       member_identity: [
@@ -164,8 +172,8 @@ export function transformFormDataToPayloadOKGD(data: OKGDFormData) {
           nik: data.member1NIK,
           nisn: data.member1NISN,
           phone_number: data.member1WhatsApp,
-          student_card: getSessionDefault("member1StudentCard"),
-          twibbon: getSessionDefault("member1TwibbonProof"),
+          student_card: uploads.member1StudentCard,
+          twibbon: uploads.member1TwibbonProof,
           role: "MEMBER",
         },
         {
@@ -174,8 +182,8 @@ export function transformFormDataToPayloadOKGD(data: OKGDFormData) {
           nik: data.member2NIK,
           nisn: data.member2NISN,
           phone_number: data.member2WhatsApp,
-          student_card: getSessionDefault("member2StudentCard"),
-          twibbon: getSessionDefault("member2TwibbonProof"),
+          student_card: uploads.member2StudentCard,
+          twibbon: uploads.member2TwibbonProof,
           role: "MEMBER",
         },
       ],
@@ -190,7 +198,7 @@ export function transformFormDataToPayloadOKGD(data: OKGDFormData) {
       sender_bank_name: data.bankName,
       sender_name: data.senderName,
       date_of_transfer: data.dateOfTransfer.toISOString(),
-      proof: getSessionDefault("proofOfTransfer"),
+      proof: uploads.proofOfTransfer,
       bank_id: data.bankId,
     },
   };

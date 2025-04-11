@@ -1,3 +1,5 @@
+"use client";
+
 import Title from "@/components/Title";
 import UploadFile from "@/components/UploadFile";
 import { Button } from "@/components/ui/button";

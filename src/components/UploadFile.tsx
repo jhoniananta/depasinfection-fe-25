@@ -21,9 +21,14 @@ export type UploadFileProps = {
   onChange?: (file: File) => void;
 };
 
-const setSessionStorage = (key: string, value: object) =>
-  sessionStorage.setItem(key, JSON.stringify(value));
+const isClient = typeof window !== "undefined";
+
+const setSessionStorage = (key: string, value: object) => {
+  if (isClient) sessionStorage.setItem(key, JSON.stringify(value));
+};
+
 const getSessionStorage = (key: string) => {
+  if (!isClient) return null;
   const item = sessionStorage.getItem(key);
   return item ? JSON.parse(item) : null;
 };
