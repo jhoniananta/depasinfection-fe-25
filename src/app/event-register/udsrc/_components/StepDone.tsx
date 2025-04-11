@@ -16,8 +16,8 @@ export default function StepDone() {
         className="text-justify text-[14px] text-neutral-900"
       >
         We have received your registration and further information will be sent
-        via email within one week. You can also refer to the USDRC Dashboard to
-        view your registration status.
+        via email / WA group. You can also refer to UDSRC Dashboard to view your
+        registration status.
       </Typography>
       <Button
         asChild

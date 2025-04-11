@@ -27,7 +27,7 @@ import StepMembers from "./_components/StepMembers";
 import StepPayment from "./_components/StepPayment";
 import StepTeacher from "./_components/StepTeacher";
 import StepTeamInformation from "./_components/StepTeamInformation";
-import { useOKGDRegisterMutation } from "./_hooks/@post/useUDSRCRegister";
+import { useOKGDRegisterMutation } from "./_hooks/@post/useOKGDRegister";
 
 const stepSchemas = [
   stepTeamSchema,
