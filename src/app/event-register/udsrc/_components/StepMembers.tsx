@@ -1,3 +1,5 @@
+"use client";
+
 import Title from "@/components/Title";
 import {
   Accordion,
@@ -36,14 +38,6 @@ export default function StepMembers({ onNext, onBack }: StepMembersProps) {
           </AccordionTrigger>
           <AccordionContent>
             <MemberFields prefix="member2" />
-          </AccordionContent>
-        </AccordionItem>
-        <AccordionItem value="member3">
-          <AccordionTrigger className="text-[14px] font-medium lg:text-[20px]">
-            Third Member
-          </AccordionTrigger>
-          <AccordionContent>
-            <MemberFields prefix="member3" />
           </AccordionContent>
         </AccordionItem>
       </Accordion>

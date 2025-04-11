@@ -3,7 +3,17 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
+import { ZodType } from "zod";
 
+import Typography from "@/components/Typography";
+import { Progress } from "@/components/ui/progress";
+import { Separator } from "@/components/ui/separator";
+import { UDSRCsteps } from "@/contents/udsrc-register-content";
+import FormLayout from "@/layouts/FormLayout";
+import {
+  getSessionDefault,
+  transformFormDataToPayloadUDSRC,
+} from "@/lib/utils";
 import {
   stepLeaderSchema,
   stepMembersSchema,
@@ -12,19 +22,13 @@ import {
 } from "@/schemas/udsrc-register-schema";
 import { UDSRCFormData } from "@/types/form";
 
-import Typography from "@/components/Typography";
-import { Progress } from "@/components/ui/progress";
-import { Separator } from "@/components/ui/separator";
-import { UDSRCsteps } from "@/contents/udsrc-register-content";
-import { toast } from "@/hooks/use-toast";
-import FormLayout from "@/layouts/FormLayout";
-import { ZodType } from "zod";
-
+import { UDSRCRegisterRequest } from "@/types/event-register";
 import StepDone from "./_components/StepDone";
 import StepLeader from "./_components/StepLeader";
 import StepMembers from "./_components/StepMembers";
 import StepPayment from "./_components/StepPayment";
 import StepTeamInformation from "./_components/StepTeamInformation";
+import { useUDSRCRegisterMutation } from "./_hooks/@post/useUDSRCRegister";
 
 const stepSchemas = [
   stepTeamSchema,
@@ -46,28 +50,45 @@ export default function UDSRCRegisterPage() {
       currentSchema as unknown as ZodType<Partial<UDSRCFormData>>,
     ),
     shouldUnregister: false,
-    defaultValues: data,
   });
 
-  const onSubmit = (finalStepData: Partial<UDSRCFormData>) => {
-    const finalData = {
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    form.reset({
       ...data,
-      ...finalStepData,
-    } as UDSRCFormData;
-
-    toast({
-      title: "Submitted!",
-      description: (
-        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-          <code className="text-white">
-            {JSON.stringify(finalData, null, 2)}
-          </code>
-        </pre>
-      ),
+      statementLetter: getSessionDefault("statementLetter"),
+      leaderStudentCard: getSessionDefault("leaderStudentCard"),
+      leaderTwibbonProof: getSessionDefault("leaderTwibbonProof"),
+      member1StudentCard: getSessionDefault("member1StudentCard"),
+      member1TwibbonProof: getSessionDefault("member1TwibbonProof"),
+      member2StudentCard: getSessionDefault("member2StudentCard"),
+      member2TwibbonProof: getSessionDefault("member2TwibbonProof"),
+      proofOfTransfer: getSessionDefault("proofOfTransfer"),
     });
+  }, []);
 
-    setData(finalData); // final merge
-    setActiveStep((prev) => prev + 1); // go to done
+  const { mutate, isPending } = useUDSRCRegisterMutation();
+
+  const handleSubmitFinal = (finalStepData: Partial<UDSRCFormData>) => {
+    const finalData = { ...data, ...finalStepData } as UDSRCFormData;
+
+    const uploads = {
+      statementLetter: getSessionDefault("statementLetter"),
+      leaderStudentCard: getSessionDefault("leaderStudentCard"),
+      leaderTwibbonProof: getSessionDefault("leaderTwibbonProof"),
+      member1StudentCard: getSessionDefault("member1StudentCard"),
+      member1TwibbonProof: getSessionDefault("member1TwibbonProof"),
+      member2StudentCard: getSessionDefault("member2StudentCard"),
+      member2TwibbonProof: getSessionDefault("member2TwibbonProof"),
+      proofOfTransfer: getSessionDefault("proofOfTransfer"),
+    };
+
+    const payload = transformFormDataToPayloadUDSRC(finalData, uploads);
+
+    mutate(payload as UDSRCRegisterRequest, {
+      onSuccess: () => setActiveStep(totalSteps),
+    });
   };
 
   const handleNext = async () => {
@@ -92,8 +113,9 @@ export default function UDSRCRegisterPage() {
       case 3:
         return (
           <StepPayment
-            onSubmit={() => onSubmit(form.getValues())}
+            onSubmit={() => handleSubmitFinal(form.getValues())}
             onBack={handleBack}
+            isLoading={isPending}
           />
         );
       case 4:
@@ -161,7 +183,7 @@ export default function UDSRCRegisterPage() {
 
       <FormProvider key={activeStep} {...form}>
         <form
-          onSubmit={form.handleSubmit(onSubmit)}
+          onSubmit={form.handleSubmit(handleSubmitFinal)}
           className="w-full space-y-4"
         >
           {renderStep()}

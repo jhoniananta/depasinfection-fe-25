@@ -1,4 +1,7 @@
+"use client";
+
 import Title from "@/components/Title";
+import UploadFile from "@/components/UploadFile";
 import { Button } from "@/components/ui/button";
 import {
   FormControl,
@@ -93,21 +96,23 @@ export default function StepLeader({ onNext, onBack }: StepLeaderProps) {
           <FormField
             key={fileField.name}
             name={fileField.name}
-            render={({ field: { onChange, value, ...fieldProps } }) => (
+            render={({ field: { onChange, ...fieldProps } }) => (
               <FormItem>
                 <FormLabel isRequired>{fileField.label}</FormLabel>
                 <FormControl>
-                  <Input
+                  <UploadFile
+                    sessionIdName={fileField.name}
                     {...fieldProps}
-                    placeholder={fileField.placeholder}
-                    type="file"
-                    accept={fileField.accept}
-                    onChange={(event) =>
-                      onChange(event.target.files && event.target.files[0])
-                    }
+                    uploadType="/upload-image/"
+                    accept={{
+                      "image/jpeg": [],
+                      "image/png": [],
+                      "image/jpg": [],
+                    }} //! there is 2 validation for this parameter, at component and zod
+                    maxSizeInBytes={5000000} // 5MB //! there is 2 validation for this parameter, at component and zod
+                    onChange={(file) => onChange(file)}
                   />
                 </FormControl>
-                <FormDescription>Upload on format .pdf</FormDescription>
                 <FormMessage />
               </FormItem>
             )}
