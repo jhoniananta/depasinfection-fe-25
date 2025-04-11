@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 
+import UploadFile from "@/components/UploadFile";
 import { Textarea } from "@/components/ui/textarea";
 
 interface StepTeamInformationProps {
@@ -79,7 +80,8 @@ export default function StepTeamInformation({
                 />
               </FormControl>
               <FormDescription>
-                Ex : Jln. Mawar, Gg X, No.4, Sukolilo, Surabaya
+                Ex : Jln. Mawar, Gg X, No.4, Sukolilo, Surabaya, Jawa Timur
+                60119
               </FormDescription>
               <FormMessage />
             </FormItem>
@@ -88,20 +90,19 @@ export default function StepTeamInformation({
 
         <FormField
           name="integrityPact"
-          render={({ field: { onChange, value, ...fieldProps } }) => (
+          render={({ field: { onChange, ...field } }) => (
             <FormItem>
               <FormLabel isRequired>Integrity Pact</FormLabel>
               <FormControl>
-                <Input
-                  {...fieldProps}
-                  type="file"
-                  accept="application/pdf"
-                  onChange={(event) =>
-                    onChange(event.target.files && event.target.files[0])
-                  }
+                <UploadFile
+                  sessionIdName="integrityPact"
+                  {...field}
+                  uploadType="/upload-file/"
+                  accept={{ "application/pdf": [] }} //! there is 2 validation for this parameter, at component and zod
+                  maxSizeInBytes={5000000} //! there is 2 validation for this parameter, at component and zod
+                  onChange={(file) => onChange(file)}
                 />
               </FormControl>
-              <FormDescription>Upload on format .pdf</FormDescription>
               <FormMessage />
             </FormItem>
           )}

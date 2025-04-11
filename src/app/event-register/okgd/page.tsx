@@ -15,10 +15,11 @@ import { FormProvider, useForm } from "react-hook-form";
 import Typography from "@/components/Typography";
 import { Progress } from "@/components/ui/progress";
 import { Separator } from "@/components/ui/separator";
-import { toast } from "@/hooks/use-toast";
 import FormLayout from "@/layouts/FormLayout";
 
 import { OKGDsteps } from "@/contents/okgd-register-content";
+import { getSessionDefault, transformFormDataToPayloadOKGD } from "@/lib/utils";
+import { OKGDRegisterRequest } from "@/types/event-register";
 import { ZodType } from "zod";
 import StepDone from "./_components/StepDone";
 import StepLeader from "./_components/StepLeader";
@@ -26,6 +27,7 @@ import StepMembers from "./_components/StepMembers";
 import StepPayment from "./_components/StepPayment";
 import StepTeacher from "./_components/StepTeacher";
 import StepTeamInformation from "./_components/StepTeamInformation";
+import { useOKGDRegisterMutation } from "./_hooks/@post/useUDSRCRegister";
 
 const stepSchemas = [
   stepTeamSchema,
@@ -48,8 +50,20 @@ export default function OKGDRegisterPage() {
       currentSchema as unknown as ZodType<Partial<OKGDFormData>>,
     ),
     shouldUnregister: false,
-    defaultValues: data,
+    defaultValues: {
+      ...data,
+      integrityPact: getSessionDefault("integrityPact"),
+      leaderStudentCard: getSessionDefault("leaderStudentCard"),
+      leaderTwibbonProof: getSessionDefault("leaderTwibbonProof"),
+      member1StudentCard: getSessionDefault("member1StudentCard"),
+      member1TwibbonProof: getSessionDefault("member1TwibbonProof"),
+      member2StudentCard: getSessionDefault("member2StudentCard"),
+      member2TwibbonProof: getSessionDefault("member2TwibbonProof"),
+      proofOfTransfer: getSessionDefault("proofOfTransfer"),
+    },
   });
+
+  const { mutate, isPending } = useOKGDRegisterMutation();
 
   const onSubmit = (finalStepData: Partial<OKGDFormData>) => {
     const finalData = {
@@ -57,15 +71,9 @@ export default function OKGDRegisterPage() {
       ...finalStepData,
     } as OKGDFormData;
 
-    toast({
-      title: "Submitted!",
-      description: (
-        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-          <code className="text-white">
-            {JSON.stringify(finalData, null, 2)}
-          </code>
-        </pre>
-      ),
+    const payload = transformFormDataToPayloadOKGD(finalData);
+    mutate(payload as OKGDRegisterRequest, {
+      onSuccess: () => setActiveStep(totalSteps),
     });
 
     setData(finalData); // final merge
@@ -101,6 +109,7 @@ export default function OKGDRegisterPage() {
               onSubmit(filteredValues);
             }}
             onBack={handleBack}
+            isLoading={isPending}
           />
         );
 
