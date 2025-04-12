@@ -19,6 +19,9 @@ const buttonVariants = cva(
           "bg-gradient-to-r from-amber-300 to-yellow-400 hover:from-amber-400 hover:to-yellow-500 text-olive-900 font-bold text-2xl py-6 px-8 md:px-12 lg:px-14 shadow-md text-[#a88a44]",
         outlineSecondary:
           "bg-transparent hover:bg-[#f5f0dd] text-[#a88a44] font-bold text-2xl py-6 px-8 md:px-12 lg:px-14 border-2 border-[#c9a955] shadow-sm",
+        purple: "bg-purple-500 text-white shadow-sm hover:bg-purple-600",
+        outlinePurple:
+          "border border-purple-500 bg-transparent text-purple-500 shadow-sm hover:bg-purple-600 hover:text-white",
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
       },

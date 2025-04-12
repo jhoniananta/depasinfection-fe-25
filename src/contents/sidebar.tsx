@@ -31,7 +31,7 @@ export const SidebarUser = [
       },
       {
         title: "My Profile",
-        href: "/dashboard/my-profile",
+        href: "/dashboard/profile",
         icon: <CgProfile className="text-[#a88a44]" size="24" />,
       },
     ],

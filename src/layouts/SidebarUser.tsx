@@ -18,12 +18,19 @@ function Sidebar({ children }: SidebarProps) {
 
   const router = useRouter();
 
+  const [eventName, setEventName] = React.useState<string | null>(null);
+
+  React.useEffect(() => {
+    const event = localStorage.getItem("registered_event");
+    setEventName(event);
+  }, []);
+
   return (
     <>
       <div
         className={`fixed z-30 lg:h-full lg:overflow-y-auto ${
           isMenuOpen ? "h-full" : "h-fit p-4"
-        } w-full bg-neutral-50 lg:bg-transparent lg:p-0 lg:shadow-2xl`}
+        } z-20 w-full bg-neutral-50 lg:bg-transparent lg:p-0 lg:drop-shadow-2xl`}
       >
         <div className={`flex justify-between !bg-transparent lg:hidden`}>
           <Link
@@ -75,7 +82,7 @@ function Sidebar({ children }: SidebarProps) {
         </div>
 
         {/* Desktop Version */}
-        <div className="hidden min-h-screen lg:flex lg:bg-neutral-50 lg:shadow-xl">
+        <div className="hidden min-h-screen lg:relative lg:flex lg:bg-neutral-50 lg:drop-shadow-xl">
           <div
             className={`hidden h-fit w-[325px] flex-col overflow-y-auto px-6 py-4 pb-12 duration-500 ease-in-out lg:sticky lg:top-0 lg:flex`}
           >
@@ -112,34 +119,72 @@ function Sidebar({ children }: SidebarProps) {
                       {item.section}
                     </Typography>
                     <div className="flex flex-col space-y-2">
-                      {item.props.map(
-                        (
-                          link: {
-                            href: string;
-                            icon: React.ReactNode;
-                            title: string;
-                          },
-                          linkIndex: React.Key | null | undefined,
-                        ) => (
-                          <Button
-                            className="w-full rounded bg-transparent px-2 py-1 shadow-none hover:bg-amber-300"
-                            key={linkIndex}
-                          >
-                            <Link
-                              href={link.href}
-                              className="flex w-full flex-row items-center gap-2"
-                            >
-                              {link.icon}
-                              <Typography
-                                variant="p"
-                                className="flex w-full items-center justify-between rounded py-1 text-[16px] font-semibold text-neutral-900 md:text-[16px]"
+                      {item.section === "My Competition"
+                        ? item.props
+                            .filter((_, propIndex) =>
+                              eventName === "Olimpiade Kedokteran Gigi Dasar"
+                                ? propIndex === 0
+                                : eventName ===
+                                    "UGM Dental Research Competition"
+                                  ? propIndex === 1
+                                  : false,
+                            )
+                            .map(
+                              (
+                                link: {
+                                  href: string;
+                                  icon: React.ReactNode;
+                                  title: string;
+                                },
+                                linkIndex: React.Key | null | undefined,
+                              ) => (
+                                <Button
+                                  className="w-full rounded bg-transparent px-2 py-1 shadow-none hover:bg-amber-300"
+                                  key={linkIndex}
+                                >
+                                  <Link
+                                    href={link.href}
+                                    className="flex w-full flex-row items-center gap-2"
+                                  >
+                                    {link.icon}
+                                    <Typography
+                                      variant="p"
+                                      className="flex w-full items-center justify-between rounded py-1 text-[16px] font-semibold text-neutral-900 md:text-[16px]"
+                                    >
+                                      {link.title}
+                                    </Typography>
+                                  </Link>
+                                </Button>
+                              ),
+                            )
+                        : item.props.map(
+                            (
+                              link: {
+                                href: string;
+                                icon: React.ReactNode;
+                                title: string;
+                              },
+                              linkIndex: React.Key | null | undefined,
+                            ) => (
+                              <Button
+                                className="w-full rounded bg-transparent px-2 py-1 shadow-none hover:bg-amber-300"
+                                key={linkIndex}
                               >
-                                {link.title}
-                              </Typography>
-                            </Link>
-                          </Button>
-                        ),
-                      )}
+                                <Link
+                                  href={link.href}
+                                  className="flex w-full flex-row items-center gap-2"
+                                >
+                                  {link.icon}
+                                  <Typography
+                                    variant="p"
+                                    className="flex w-full items-center justify-between rounded py-1 text-[16px] font-semibold text-neutral-900 md:text-[16px]"
+                                  >
+                                    {link.title}
+                                  </Typography>
+                                </Link>
+                              </Button>
+                            ),
+                          )}
                     </div>
                     <hr className="border-grey-400 border-t-2" />
                   </div>
@@ -232,34 +277,71 @@ function Sidebar({ children }: SidebarProps) {
                     {item.section}
                   </Typography>
                   <div className="flex flex-col space-y-2">
-                    {item.props.map(
-                      (
-                        link: {
-                          href: string;
-                          icon: React.ReactNode;
-                          title: string;
-                        },
-                        linkIndex: React.Key | null | undefined,
-                      ) => (
-                        <Button
-                          className="w-full rounded bg-transparent px-2 py-1 shadow-none hover:bg-amber-300"
-                          key={linkIndex}
-                        >
-                          <Link
-                            href={link.href}
-                            className="flex w-full flex-row items-center gap-2"
-                          >
-                            {link.icon}
-                            <Typography
-                              variant="p"
-                              className="flex w-full items-center justify-between rounded py-1 text-[16px] font-semibold text-neutral-900 md:text-[16px]"
+                    {item.section === "My Competition"
+                      ? item.props
+                          .filter((_, propIndex) =>
+                            eventName === "Olimpiade Kedokteran Gigi Dasar"
+                              ? propIndex === 0
+                              : eventName === "UGM Dental Research Competition"
+                                ? propIndex === 1
+                                : false,
+                          )
+                          .map(
+                            (
+                              link: {
+                                href: string;
+                                icon: React.ReactNode;
+                                title: string;
+                              },
+                              linkIndex: React.Key | null | undefined,
+                            ) => (
+                              <Button
+                                className="w-full rounded bg-transparent px-2 py-1 shadow-none hover:bg-amber-300"
+                                key={linkIndex}
+                              >
+                                <Link
+                                  href={link.href}
+                                  className="flex w-full flex-row items-center gap-2"
+                                >
+                                  {link.icon}
+                                  <Typography
+                                    variant="p"
+                                    className="flex w-full items-center justify-between rounded py-1 text-[16px] font-semibold text-neutral-900 md:text-[16px]"
+                                  >
+                                    {link.title}
+                                  </Typography>
+                                </Link>
+                              </Button>
+                            ),
+                          )
+                      : item.props.map(
+                          (
+                            link: {
+                              href: string;
+                              icon: React.ReactNode;
+                              title: string;
+                            },
+                            linkIndex: React.Key | null | undefined,
+                          ) => (
+                            <Button
+                              className="w-full rounded bg-transparent px-2 py-1 shadow-none hover:bg-amber-300"
+                              key={linkIndex}
                             >
-                              {link.title}
-                            </Typography>
-                          </Link>
-                        </Button>
-                      ),
-                    )}
+                              <Link
+                                href={link.href}
+                                className="flex w-full flex-row items-center gap-2"
+                              >
+                                {link.icon}
+                                <Typography
+                                  variant="p"
+                                  className="flex w-full items-center justify-between rounded py-1 text-[16px] font-semibold text-neutral-900 md:text-[16px]"
+                                >
+                                  {link.title}
+                                </Typography>
+                              </Link>
+                            </Button>
+                          ),
+                        )}
                   </div>
                   <hr className="border-grey-300 border-t" />
                 </div>
