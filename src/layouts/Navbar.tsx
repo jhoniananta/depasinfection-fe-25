@@ -46,11 +46,16 @@ export default function Navbar() {
   );
 
   // Menu links
-  const menuLinks = ["Home", "About", "Contact"];
+  const menuLinks = [
+    { label: "Home", href: "/" },
+    { label: "OKGD", href: "/okgd-event" },
+    { label: "UDSRC", href: "/udsrc-event" },
+    { label: "Merchandise", href: "/coming-soon" },
+  ];
 
   // Kelas untuk bagian tengah dan kanan saat belum discrolled
   const middleSectionClasses = clsx(
-    "hidden lg:flex items-center justify-center space-x-4 h-full",
+    "hidden gap-4 lg:flex items-center justify-center h-full",
     scrolled ? "bg-neutral-50" : "bg-purple-700",
   );
 
@@ -95,13 +100,13 @@ export default function Navbar() {
 
         {/* BAGIAN TENGAH: background kondisional */}
         <div className={middleSectionClasses}>
-          {menuLinks.map((label) => (
+          {menuLinks.map((data, index) => (
             <UnstyledLink
-              key={label}
-              href="/"
+              key={index}
+              href={data.href}
               className="font-bold uppercase hover:underline"
             >
-              {label}
+              {data.label}
             </UnstyledLink>
           ))}
         </div>
@@ -169,13 +174,13 @@ export default function Navbar() {
             />
           </div>
           <div className="flex flex-col items-center space-y-4">
-            {menuLinks.map((label) => (
+            {menuLinks.map((data, index) => (
               <UnstyledLink
-                key={label}
-                href="/"
+                key={index}
+                href={data.href}
                 className="font-bold uppercase hover:underline"
               >
-                {label}
+                {data.label}
               </UnstyledLink>
             ))}
             <Select>
