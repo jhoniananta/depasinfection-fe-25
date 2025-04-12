@@ -16,19 +16,28 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 
+import { useLoginCallback } from "@/hooks/useLoginCallback";
 import { LoginFormSchema } from "@/schemas/auth-schema";
 import { EyeIcon, EyeOffIcon } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Title from "../../../components/Title";
 import { useUserLoginMutation } from "../_hooks/@post/useLogin";
 
 function LoginPage() {
-  const router = useRouter();
-
   const [show, setShow] = useState(false);
+
+  const router = useRouter();
+  const callback = useLoginCallback("/dashboard");
+
   const { handleLogin, isPending, isSuccess } = useUserLoginMutation();
+
+  useEffect(() => {
+    if (isSuccess) {
+      router.replace(callback);
+    }
+  }, [isSuccess, callback]);
 
   const form = useForm<z.infer<typeof LoginFormSchema>>({
     resolver: zodResolver(LoginFormSchema),

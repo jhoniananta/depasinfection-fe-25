@@ -25,7 +25,7 @@ export const useUserLoginMutation = () => {
     onSuccess: (data) => {
       toast({
         title: "Login successful!",
-        description: "Please wait, redirect to your dashboard.",
+        description: "Please wait, redirect to your request page.",
         variant: "default",
       });
       setToken(data.token);
