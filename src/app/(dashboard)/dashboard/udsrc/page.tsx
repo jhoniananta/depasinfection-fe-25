@@ -1,13 +1,12 @@
 "use client";
 
-import withAuth from "@/components/WithAuth";
-import NextImage from "@/components/NextImage";
-import Typography from "@/components/Typography";
-import Sidebar from "@/layouts/SidebarUser";
-
 import LoadingGlobalPage from "@/app/loading";
 import Countdown from "@/components/Countdown";
+import NextImage from "@/components/NextImage";
+import Typography from "@/components/Typography";
+import withAuth from "@/components/WithAuth";
 import { Button } from "@/components/ui/button";
+import Sidebar from "@/layouts/SidebarUser";
 import Link from "next/link";
 import { FiDownload } from "react-icons/fi";
 import BioInformationSection from "../_components/BioInformation";

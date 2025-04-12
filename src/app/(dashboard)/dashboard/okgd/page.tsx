@@ -8,6 +8,7 @@ import Sidebar from "@/layouts/SidebarUser";
 
 import LoadingGlobalPage from "@/app/loading";
 import Countdown from "@/components/Countdown";
+import withAuth from "@/components/WithAuth";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { FiDownload } from "react-icons/fi";

@@ -24,6 +24,8 @@ function Sidebar({ children }: SidebarProps) {
     setEventName(event);
   }, []);
 
+  const router = useRouter();
+
   return (
     <>
       <div

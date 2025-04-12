@@ -1,11 +1,11 @@
 "use client";
 
-import withAuth from "@/components/WithAuth";
-
 import LoadingGlobalPage from "@/app/loading";
 
 import NextImage from "@/components/NextImage";
 import Typography from "@/components/Typography";
+
+import withAuth from "@/components/WithAuth";
 
 import Sidebar from "@/layouts/SidebarUser";
 import RegisterCard from "./_components/RegisterCard";
