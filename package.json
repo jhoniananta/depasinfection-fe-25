@@ -71,8 +71,8 @@
     "tailwind-merge": "^2.2.2",
     "turndown": "^7.2.0",
     "universal-cookie": "^7.1.4",
-    "zod": "^3.24.2",
-    "zustand": "^5.0.3"
+    "yet-another-react-lightbox": "^3.22.0",
+    "zod": "^3.24.2"
   },
   "devDependencies": {
     "@biomejs/biome": "1.8.3",

@@ -54,7 +54,7 @@ export default function Countdown({ endDate }: CountdownProps) {
   const isOver = timeLeft.days < 0;
 
   return (
-    <div className="flex justify-center gap-2 lg:gap-4">
+    <div className="flex justify-center gap-2 max-w-[460px]">
       <TimeDisplay
         time={isOver ? 0 : timeLeft.days}
         label={t("days")}
