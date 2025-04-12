@@ -6,7 +6,9 @@ import { ImSpinner8 } from "react-icons/im";
 
 import { useToast } from "@/hooks/use-toast";
 import { useLoginCallback } from "@/hooks/useLoginCallback";
-import { getToken, removeToken } from "@/lib/cookies";
+import { baseURL } from "@/lib/api";
+import { clearDepasAuth } from "@/lib/auth";
+import { getToken } from "@/lib/cookies";
 import useAuthStore from "@/store/useAuthStore";
 
 type RouteRole = "auth" | "optional" | "all";
@@ -38,12 +40,12 @@ export default function withAuth<T>(
 
       try {
         // ⛔ Cek apakah token expired via endpoint
-        const checkRes = await fetch(`/check?token=${token}`);
+        const checkRes = await fetch(`${baseURL}/check?token=${token}`);
         const checkText = await checkRes.text();
         if (checkText !== "valid") throw new Error("Token expired");
 
         // ✅ Fetch /me kalau token valid
-        const res = await fetch("/user/auth/me", {
+        const res = await fetch(`${baseURL}/user/auth/me`, {
           headers: { Authorization: `Bearer ${token}` },
         });
 
@@ -52,7 +54,7 @@ export default function withAuth<T>(
 
         login({ ...json.data, token });
       } catch {
-        removeToken();
+        clearDepasAuth();
         logout();
         toast({ title: "Session expired", description: "Please login again." });
       } finally {

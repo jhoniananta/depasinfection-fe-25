@@ -2,7 +2,7 @@ import { baseURL } from "@/lib/api";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: NextRequest) {
-  const token = req.nextUrl.searchParams.get("depas25_token");
+  const token = req.nextUrl.searchParams.get("token");
 
   if (!token) {
     return NextResponse.json({ valid: false }, { status: 400 });

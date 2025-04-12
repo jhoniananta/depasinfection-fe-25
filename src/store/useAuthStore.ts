@@ -2,6 +2,7 @@ import { createSelectorHooks } from "auto-zustand-selectors-hook";
 import { produce } from "immer";
 import { create } from "zustand";
 
+import { clearDepasAuth } from "@/lib/auth";
 import { User } from "@/types/auth";
 
 type AuthStoreType = {
@@ -42,7 +43,7 @@ const useAuthStoreBase = create<AuthStoreType>((set) => ({
   },
 
   logout: () => {
-    localStorage.removeItem("depas25_token");
+    clearDepasAuth();
     set(
       produce<AuthStoreType>((state) => {
         state.isAuthenticated = false;
