@@ -73,7 +73,7 @@ export default function Category() {
           <CardEvent
             src="/landing-page/bg-card-udsrc.png"
             title="UDSRC"
-            subtitle="UGM Dental Student Research Competition"
+            subtitle="UGM Dental Scientific Research Competition"
             urlLink="/udsrc-event"
           />
         </div>

@@ -66,7 +66,7 @@ export default function OKGDPosterSubmissionPage() {
         width: 1280,
         height: 1096,
       }}
-      title="UGM Dental Student Research Competition"
+      title="UGM Dental Scientific Research Competition"
       subtitle="Denta Paramitha's Science Festival and Competition FKG Universitas Gadjah Mada"
     >
       <Title
