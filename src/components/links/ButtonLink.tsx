@@ -13,6 +13,7 @@ const ButtonLinkVariant = [
   "red",
   "outline",
   "ghost",
+  "gradient-yellow",
 ] as const;
 const ButtonLinkSize = ["sm", "base", "lg"] as const;
 
@@ -108,6 +109,14 @@ const ButtonLink = React.forwardRef<HTMLAnchorElement, ButtonLinkProps>(
               "text-neutral-500",
               "shadow-none",
               "hover:bg-neutral-50 focus-visible:ring-neutral-400 active:bg-neutral-100 disabled:bg-neutral-100",
+            ],
+
+            variant === "gradient-yellow" && [
+              "bg-gradient-to-r from-[#f0d078] to-[#d4af37] text-[#5A4811]",
+              "hover:from-[#f5d688] hover:to-[#dab545] hover:text-[#5A4811]",
+              "active:bg-yellow-700",
+              "disabled:bg-yellow-700",
+              "focus-visible:ring-yellow-400",
             ],
           ],
           //#endregion  //*======== Variants ===========
