@@ -5,6 +5,7 @@ import NextImage from "@/components/NextImage";
 import IconButton from "@/components/buttons/IconButton";
 import UnstyledLink from "@/components/links/UnstyledLink";
 import { Button } from "@/components/ui/button";
+import { usePathname } from "next/navigation";
 
 import {
   Select,
@@ -22,6 +23,8 @@ import { HiOutlineLogout, HiOutlineMenuAlt3, HiX } from "react-icons/hi";
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
+
+  const pathname = usePathname();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -100,15 +103,23 @@ export default function Navbar() {
 
         {/* BAGIAN TENGAH: background kondisional */}
         <div className={middleSectionClasses}>
-          {menuLinks.map((data, index) => (
-            <UnstyledLink
-              key={index}
-              href={data.href}
-              className="font-bold uppercase hover:underline"
-            >
-              {data.label}
-            </UnstyledLink>
-          ))}
+          {menuLinks.map(({ label, href }) => {
+            const isActive = pathname === href;
+            return (
+              <UnstyledLink
+                key={label}
+                href={href}
+                className={clsx(
+                  "font-bold uppercase transition-all duration-200",
+                  isActive
+                    ? "text-cream-400 underline"
+                    : "text-inherit hover:underline",
+                )}
+              >
+                {label}
+              </UnstyledLink>
+            );
+          })}
         </div>
 
         {/* BAGIAN KANAN: background kondisional */}
@@ -174,15 +185,24 @@ export default function Navbar() {
             />
           </div>
           <div className="flex flex-col items-center space-y-4">
-            {menuLinks.map((data, index) => (
-              <UnstyledLink
-                key={index}
-                href={data.href}
-                className="font-bold uppercase hover:underline"
-              >
-                {data.label}
-              </UnstyledLink>
-            ))}
+            {menuLinks.map(({ label, href }) => {
+              const isActive = pathname === href;
+              return (
+                <UnstyledLink
+                  key={label}
+                  href={href}
+                  className={clsx(
+                    "font-bold uppercase transition-all duration-200",
+                    isActive
+                      ? "text-cream-400 underline"
+                      : "text-inherit hover:underline",
+                  )}
+                >
+                  {label}
+                </UnstyledLink>
+              );
+            })}
+
             <Select>
               <SelectTrigger className="border-0 shadow-none focus:outline-none">
                 <SelectValue placeholder="Theme" />
