@@ -17,14 +17,13 @@ function Sidebar({ children }: SidebarProps) {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 
   const router = useRouter();
+
   const [eventName, setEventName] = React.useState<string | null>(null);
 
   React.useEffect(() => {
     const event = localStorage.getItem("registered_event");
     setEventName(event);
   }, []);
-
-  const router = useRouter();
 
   return (
     <>

@@ -1,7 +1,5 @@
 "use client";
 
-import withAuth from "@/components/WithAuth";
-
 import NextImage from "@/components/NextImage";
 import Typography from "@/components/Typography";
 import Sidebar from "@/layouts/SidebarUser";
