@@ -1,6 +1,9 @@
+"use client";
+
+import withAuth from "@/components/WithAuth";
 import Sidebar from "@/layouts/SidebarAdmin";
 
-export default function AdminDashboardPage() {
+function AdminDashboardPage() {
   return (
     <>
       <Sidebar title="Dashboard">
@@ -9,3 +12,5 @@ export default function AdminDashboardPage() {
     </>
   );
 }
+
+export default withAuth(AdminDashboardPage, "all");

@@ -1,11 +1,31 @@
+"use client";
+
+import LoadingComponent from "@/components/Loading";
+import withAuth from "@/components/WithAuth";
 import { ScrollProvider } from "@/components/custom-hooks/ScrollProvider";
 import Category from "@/components/landing-page/Category";
 import DentalEvent from "@/components/landing-page/DentalEvent";
 import Hero from "@/components/landing-page/Hero";
 import Timeline from "@/components/landing-page/Timeline";
 import Layout from "@/layouts/Layout";
+import { useEffect, useState } from "react";
 
-export default function Home() {
+function Homepage() {
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  useEffect(() => {
+    const handleLoad = () => setIsLoaded(true);
+
+    if (document.readyState === "complete") {
+      setIsLoaded(true);
+    } else {
+      window.addEventListener("load", handleLoad);
+      return () => window.removeEventListener("load", handleLoad);
+    }
+  }, []);
+
+  if (!isLoaded) return <LoadingComponent />;
+
   return (
     <Layout withFooter withNavbar>
       <ScrollProvider>
@@ -27,3 +47,5 @@ export default function Home() {
     </Layout>
   );
 }
+
+export default withAuth(Homepage, "optional");

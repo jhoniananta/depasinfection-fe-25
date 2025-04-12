@@ -16,10 +16,12 @@ const bagnard = localFont({
 
 export const metadata: Metadata = {
   title: {
-    default: "Depass Infection",
-    template: "%s | Nextjs Starter Template",
+    default:
+      "Depa's Infection 2025 | Denta Paramitha's Science Festival and Competition",
+    template: "%s | Depa's Infection 2025",
   },
-  description: "Depass Infection",
+  description:
+    "Depa's Infection or Denta Paramitha's Science Festival and Competition is one of the biggest events held by Denta Paramitha. Denta Paramitha is an semi-autonomous body that oversees educational and research development from the Faculty of Dentistry, Universitas Gadjah Mada. Depa's Infection consists of 2 sub-events, namely National Dentistry Olympiad (OKGD) for Senior High School (SHS) students at the national level and University Dental School Research Competition (UDSRC) for undergraduate students at the international level. UDSRC has 2 branches; Poster Competition and 3 Minutes Oral Competition for pre-clinical (S-1) and clinical students from health-related fields such as dentistry, medicine, pharmacy, midwifery, nursing, and public health.",
 };
 
 export default async function RootLayout({

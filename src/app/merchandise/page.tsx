@@ -1,5 +1,8 @@
+"use client";
+
 import NextImage from "@/components/NextImage";
 import Typography from "@/components/Typography";
+import withAuth from "@/components/WithAuth";
 import Button from "@/components/buttons/Button";
 import Layout from "@/layouts/Layout";
 
@@ -37,7 +40,7 @@ const merchandiseItems = [
   },
 ];
 
-export default function MerchandisePage() {
+function MerchandisePage() {
   return (
     <Layout withFooter withNavbar>
       {/* Hero Section */}
@@ -141,3 +144,5 @@ export default function MerchandisePage() {
     </Layout>
   );
 }
+
+export default withAuth(MerchandisePage, "optional");

@@ -24,7 +24,9 @@ export default function Navbar() {
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 50);
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50);
+    };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -59,14 +61,14 @@ export default function Navbar() {
 
   return (
     <header className={headerClasses}>
-      <nav className="container py-4 lg:py-0 grid grid-cols-2 lg:grid-cols-3 items-center h-full w-screen">
+      <nav className="container grid h-full w-screen grid-cols-2 items-center py-4 lg:grid-cols-3 lg:py-0">
         {/* BAGIAN KIRI: Tetap transparan */}
         {scrolled ? (
           <NextImage
             serverStaticImg
             width={446}
             height={112}
-            className=" h-[92px] hidden lg:flex"
+            className="hidden h-[92px] lg:flex"
             imgClassName="h-[112px] w-auto"
             src="/images/left-logo-desktop-navbar-scrolled.png"
             alt="logo-navbar"
@@ -76,7 +78,7 @@ export default function Navbar() {
             serverStaticImg
             width={446}
             height={80}
-            className="w-full h-full object-cover hidden lg:flex"
+            className="hidden h-full w-full object-cover lg:flex"
             src="/images/left-logo-desktop-navbar.png"
             alt="logo-navbar"
           />
@@ -86,7 +88,7 @@ export default function Navbar() {
           serverStaticImg
           width={56}
           height={50}
-          className="w-full h-auto block lg:hidden"
+          className="block h-auto w-full lg:hidden"
           src="/images/left-logo-mobile-navbar.png"
           alt="logo-navbar"
         />
@@ -97,7 +99,7 @@ export default function Navbar() {
             <UnstyledLink
               key={label}
               href="/"
-              className="uppercase font-bold hover:underline"
+              className="font-bold uppercase hover:underline"
             >
               {label}
             </UnstyledLink>
@@ -107,7 +109,7 @@ export default function Navbar() {
         {/* BAGIAN KANAN: background kondisional */}
         <div className={rightSectionClasses}>
           <Select>
-            <SelectTrigger className="border-0 w-fit flex shadow-none focus:outline-none focus:border-0 focus:ring-0">
+            <SelectTrigger className="flex w-fit border-0 shadow-none focus:border-0 focus:outline-none focus:ring-0">
               <SelectValue placeholder="Pilih Bahasa" />
             </SelectTrigger>
             <SelectContent className="border-0">
@@ -118,7 +120,7 @@ export default function Navbar() {
           <Button variant="outline" className={buttonClasses}>
             <Link
               href="/login"
-              className="flex-row flex gap-2 items-center justify-center"
+              className="flex flex-row items-center justify-center gap-2"
             >
               <HiOutlineLogout />
               Login
@@ -127,11 +129,11 @@ export default function Navbar() {
         </div>
 
         {/* Mobile Hamburger Button */}
-        <div className="lg:hidden flex justify-end items-center">
+        <div className="flex items-center justify-end lg:hidden">
           <IconButton
             variant="ghost"
             onClick={() => setMobileNavOpen(true)}
-            className={`focus:outline-none text-purple-700`}
+            className={`text-purple-700 focus:outline-none`}
             iconClassName="text-2xl"
             icon={HiOutlineMenuAlt3}
           />
@@ -148,8 +150,8 @@ export default function Navbar() {
         leaveFrom="translate-y-0"
         leaveTo="-translate-y-full"
       >
-        <div className="lg:hidden fixed inset-0 bg-neutral-50 p-4 z-50 overflow-y-auto">
-          <div className="flex items-center justify-between mb-4">
+        <div className="fixed inset-0 z-50 overflow-y-auto bg-neutral-50 p-4 lg:hidden">
+          <div className="mb-4 flex items-center justify-between">
             <NextImage
               serverStaticImg
               width={56}
@@ -161,7 +163,7 @@ export default function Navbar() {
             <IconButton
               variant="ghost"
               onClick={() => setMobileNavOpen(false)}
-              className="focus:outline-none text-purple-700"
+              className="text-purple-700 focus:outline-none"
               iconClassName="text-2xl"
               icon={HiX}
             />
@@ -171,7 +173,7 @@ export default function Navbar() {
               <UnstyledLink
                 key={label}
                 href="/"
-                className="uppercase font-bold hover:underline"
+                className="font-bold uppercase hover:underline"
               >
                 {label}
               </UnstyledLink>
@@ -188,7 +190,7 @@ export default function Navbar() {
             <Button variant="outline" className={buttonClasses}>
               <Link
                 href="/login"
-                className="flex-row flex gap-2 items-center justify-center"
+                className="flex flex-row items-center justify-center gap-2"
               >
                 <HiOutlineLogout />
                 Login

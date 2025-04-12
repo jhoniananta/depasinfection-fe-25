@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 
 import Typography from "@/components/Typography";
-import { Button } from "@/components/ui/button";
+
 import {
   Form,
   FormControl,
@@ -16,19 +16,31 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 
+import withAuth from "@/components/WithAuth";
+import Button from "@/components/buttons/Button";
+import { Button as ShadCnButton } from "@/components/ui/button";
+import { useLoginCallback } from "@/hooks/useLoginCallback";
 import { LoginFormSchema } from "@/schemas/auth-schema";
 import { EyeIcon, EyeOffIcon } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Title from "../../../components/Title";
 import { useUserLoginMutation } from "../_hooks/@post/useLogin";
 
 function LoginPage() {
-  const router = useRouter();
-
   const [show, setShow] = useState(false);
+
+  const router = useRouter();
+  const callback = useLoginCallback("/dashboard");
+
   const { handleLogin, isPending, isSuccess } = useUserLoginMutation();
+
+  useEffect(() => {
+    if (isSuccess) {
+      router.replace(callback);
+    }
+  }, [isSuccess, callback]);
 
   const form = useForm<z.infer<typeof LoginFormSchema>>({
     resolver: zodResolver(LoginFormSchema),
@@ -45,9 +57,11 @@ function LoginPage() {
     });
   }
 
-  if (isSuccess) {
-    router.push("/dashboard");
-  }
+  useEffect(() => {
+    if (isSuccess) {
+      router.replace(callback);
+    }
+  }, [isSuccess, callback]);
 
   return (
     <>
@@ -91,7 +105,7 @@ function LoginPage() {
                       placeholder="••••••••"
                       {...field}
                     />
-                    <Button
+                    <ShadCnButton
                       type="button"
                       variant="ghost"
                       size="icon"
@@ -104,7 +118,7 @@ function LoginPage() {
                       ) : (
                         <EyeIcon className="size-4" />
                       )}
-                    </Button>
+                    </ShadCnButton>
                   </div>
                 </FormControl>
                 <FormMessage />
@@ -125,7 +139,12 @@ function LoginPage() {
             </Link>
           </Typography>
 
-          <Button type="submit" className="w-full" disabled={isPending}>
+          <Button
+            type="submit"
+            className="w-full"
+            variant="gradient-yellow"
+            disabled={isPending}
+          >
             {isPending ? "Submitting..." : "Submit"}
           </Button>
         </form>
@@ -147,4 +166,4 @@ function LoginPage() {
   );
 }
 
-export default LoginPage;
+export default withAuth(LoginPage, "auth");

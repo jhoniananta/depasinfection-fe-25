@@ -4,10 +4,13 @@ import { AxiosError } from "axios";
 import { toast } from "@/hooks/use-toast";
 import api from "@/lib/api";
 import { setToken } from "@/lib/cookies";
+import useAuthStore from "@/store/useAuthStore";
 import { ApiError, ApiResponse } from "@/types/api";
 import { LoginRequest, UserLoginResponse } from "@/types/auth";
 
 export const useUserLoginMutation = () => {
+  const login = useAuthStore.useLogin();
+
   const {
     mutate: handleLogin,
     isSuccess,
@@ -23,13 +26,16 @@ export const useUserLoginMutation = () => {
     },
 
     onSuccess: (data) => {
+      setToken(data.token);
+      login({ ...data, full_name: data.nama, token: data.token }); // ⬅️ inject ke Zustand
+
       toast({
         title: "Login successful!",
-        description: "Please wait, redirect to your dashboard.",
+        description: "Please wait, redirect to your request page.",
         variant: "default",
       });
-      setToken(data.token);
     },
+
     onError: (error: AxiosError<ApiError>) => {
       if (error.response?.data?.message) {
         const code = error.response?.data?.code || "";
@@ -53,6 +59,8 @@ export const useUserLoginMutation = () => {
 };
 
 export const useAdminLoginMutation = () => {
+  const login = useAuthStore.useLogin();
+
   const {
     mutate: handleLogin,
     isSuccess,
@@ -68,12 +76,14 @@ export const useAdminLoginMutation = () => {
     },
 
     onSuccess: (data) => {
+      setToken(data.token);
+      login({ ...data, full_name: data.nama, token: data.token }); // ⬅️ inject ke Zustand
+
       toast({
         title: "Login successful",
         description: "Please wait, redirect to your admin dashboard.",
         variant: "default",
       });
-      setToken(data.token);
     },
     onError: (error: AxiosError<ApiError>) => {
       if (error.response?.data?.message) {

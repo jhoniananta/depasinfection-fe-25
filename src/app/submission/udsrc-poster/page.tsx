@@ -21,6 +21,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 
+import withAuth from "@/components/WithAuth";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "@/hooks/use-toast";
 import FormLayout from "@/layouts/FormLayout";
@@ -32,7 +33,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 
-export default function OKGDPosterSubmissionPage() {
+function UDSRCPosterSubmissionPage() {
   const [openDialog, setOpenDialog] = useState(false);
   // const [data, setData] = useState<UDSRCPosterSubmissionData>();
 
@@ -179,3 +180,5 @@ export default function OKGDPosterSubmissionPage() {
     </FormLayout>
   );
 }
+
+export default withAuth(UDSRCPosterSubmissionPage, "all");

@@ -1,11 +1,14 @@
+" use client";
+
 import { BiPlus } from "react-icons/bi";
 import { BsArrowRight } from "react-icons/bs";
 
 import Typography from "@/components/Typography";
+import withAuth from "@/components/WithAuth";
 import Button from "@/components/buttons/Button";
 import ButtonLink from "@/components/links/ButtonLink";
 
-export default function ButtonPage() {
+function SanboxButtonPage() {
   return (
     <main className="min-h-screen items-center justify-center bg-slate-200 py-20">
       <section className="flex flex-col gap-8 px-24">
@@ -721,3 +724,5 @@ export default function ButtonPage() {
     </main>
   );
 }
+
+export default withAuth(SanboxButtonPage, "all");

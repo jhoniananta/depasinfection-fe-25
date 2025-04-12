@@ -3,15 +3,20 @@
 import React from "react";
 import { IoExitOutline } from "react-icons/io5";
 
+import LogoutDialog from "@/components/LogOutDialog";
 import NextImage from "@/components/NextImage";
 import Typography from "@/components/Typography";
 import { Button } from "@/components/ui/button";
 import { SidebarUser } from "@/contents/sidebar";
+import { clearDepasAuth } from "@/lib/auth";
 import { SidebarProps } from "@/types/sidebar";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 function Sidebar({ children }: SidebarProps) {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+
+  const router = useRouter();
 
   return (
     <>
@@ -143,20 +148,32 @@ function Sidebar({ children }: SidebarProps) {
             </div>
 
             <div className={`flex flex-col items-center justify-center`}>
-              <Button
-                className="mb-0 mt-4 flex w-full"
-                size="lg"
-                variant="primary"
-              >
-                <IoExitOutline
-                  className="text-[16px] font-bold md:text-[20px]"
-                  color="#a88a44"
-                  strokeWidth={3.5}
-                />
-                <Typography variant="p" className="text-[16px] md:text-[16px]">
-                  Log Out
-                </Typography>
-              </Button>
+              <LogoutDialog
+                onConfirm={() => {
+                  clearDepasAuth();
+                  router.push("/login");
+                }}
+                trigger={(open) => (
+                  <Button
+                    className="mb-0 mt-4 flex w-full"
+                    size="lg"
+                    variant="primary"
+                    onClick={open}
+                  >
+                    <IoExitOutline
+                      className="text-[16px] font-bold md:text-[20px]"
+                      color="#a88a44"
+                      strokeWidth={3.5}
+                    />
+                    <Typography
+                      variant="p"
+                      className="text-[16px] md:text-[16px]"
+                    >
+                      Log Out
+                    </Typography>
+                  </Button>
+                )}
+              />
             </div>
           </div>
 
@@ -254,20 +271,32 @@ function Sidebar({ children }: SidebarProps) {
               isMenuOpen ? "flex" : "hidden"
             }`}
           >
-            <Button
-              className="mb-16 mt-4 flex w-full"
-              size="lg"
-              variant="primary"
-            >
-              <IoExitOutline
-                className="text-[16px] font-bold md:text-[20px]"
-                color="#a88a44"
-                strokeWidth={2.5}
-              />
-              <Typography variant="p" className="text-[16px] md:text-[16px]">
-                Log Out
-              </Typography>
-            </Button>
+            <LogoutDialog
+              onConfirm={() => {
+                clearDepasAuth();
+                router.push("/login");
+              }}
+              trigger={(open) => (
+                <Button
+                  className="mb-16 mt-4 flex w-full"
+                  size="lg"
+                  variant="primary"
+                  onClick={open}
+                >
+                  <IoExitOutline
+                    className="text-[16px] font-bold md:text-[20px]"
+                    color="#a88a44"
+                    strokeWidth={2.5}
+                  />
+                  <Typography
+                    variant="p"
+                    className="text-[16px] md:text-[16px]"
+                  >
+                    Log Out
+                  </Typography>
+                </Button>
+              )}
+            />
           </div>
         </div>
       </div>

@@ -22,6 +22,7 @@ import {
 } from "@/schemas/udsrc-register-schema";
 import { UDSRCFormData } from "@/types/form";
 
+import withAuth from "@/components/WithAuth";
 import { UDSRCRegisterRequest } from "@/types/event-register";
 import StepDone from "./_components/StepDone";
 import StepLeader from "./_components/StepLeader";
@@ -39,7 +40,7 @@ const stepSchemas = [
 
 const totalSteps = stepSchemas.length;
 
-export default function UDSRCRegisterPage() {
+function UDSRCRegisterPage() {
   const [activeStep, setActiveStep] = useState(0);
   const [data, setData] = useState<Partial<UDSRCFormData>>({});
   const currentSchema = stepSchemas[activeStep];
@@ -192,3 +193,5 @@ export default function UDSRCRegisterPage() {
     </FormLayout>
   );
 }
+
+export default withAuth(UDSRCRegisterPage, "all");

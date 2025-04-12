@@ -1,7 +1,9 @@
 "use client";
 
 import Typography from "@/components/Typography";
-import { Button } from "@/components/ui/button";
+
+import Button from "@/components/buttons/Button";
+import { Button as ShadCnButton } from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -101,7 +103,7 @@ export default function ResetPasswordPage({ token }: Props) {
                           placeholder="••••••••"
                           {...field}
                         />
-                        <Button
+                        <ShadCnButton
                           type="button"
                           variant="ghost"
                           size="icon"
@@ -114,7 +116,7 @@ export default function ResetPasswordPage({ token }: Props) {
                           ) : (
                             <EyeIcon className="size-4" />
                           )}
-                        </Button>
+                        </ShadCnButton>
                       </div>
                     </FormControl>
                     <FormMessage />
@@ -136,7 +138,7 @@ export default function ResetPasswordPage({ token }: Props) {
                           placeholder="Repeat your password"
                           {...field}
                         />
-                        <Button
+                        <ShadCnButton
                           type="button"
                           variant="ghost"
                           size="icon"
@@ -149,7 +151,7 @@ export default function ResetPasswordPage({ token }: Props) {
                           ) : (
                             <EyeIcon className="size-4" />
                           )}
-                        </Button>
+                        </ShadCnButton>
                       </div>
                     </FormControl>
                     <FormMessage />
@@ -157,7 +159,11 @@ export default function ResetPasswordPage({ token }: Props) {
                 )}
               />
 
-              <Button type="submit" className="w-full">
+              <Button
+                variant="gradient-yellow"
+                type="submit"
+                className="w-full"
+              >
                 {isPending ? "Submitting..." : "Reset Password"}
               </Button>
             </form>
