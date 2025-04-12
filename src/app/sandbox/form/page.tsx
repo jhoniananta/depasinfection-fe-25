@@ -4,9 +4,10 @@ import { FormProvider, useForm } from "react-hook-form";
 
 import Typography from "@/components/Typography";
 
+import withAuth from "@/components/WithAuth";
 import Input from "@/components/form/Input";
 
-export default function FormSandbox() {
+function FormSandbox() {
   const methods = useForm();
 
   return (
@@ -60,3 +61,5 @@ export default function FormSandbox() {
     </main>
   );
 }
+
+export default withAuth(FormSandbox, "all");

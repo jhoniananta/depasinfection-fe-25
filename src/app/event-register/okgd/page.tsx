@@ -17,6 +17,7 @@ import { Progress } from "@/components/ui/progress";
 import { Separator } from "@/components/ui/separator";
 import FormLayout from "@/layouts/FormLayout";
 
+import withAuth from "@/components/WithAuth";
 import { OKGDsteps } from "@/contents/okgd-register-content";
 import { getSessionDefault, transformFormDataToPayloadOKGD } from "@/lib/utils";
 import { OKGDRegisterRequest } from "@/types/event-register";
@@ -39,7 +40,7 @@ const stepSchemas = [
 
 const totalSteps = stepSchemas.length;
 
-export default function OKGDRegisterPage() {
+function OKGDRegisterPage() {
   const [activeStep, setActiveStep] = useState(0);
   const [data, setData] = useState<Partial<OKGDFormData>>({});
 
@@ -204,3 +205,5 @@ export default function OKGDRegisterPage() {
     </FormLayout>
   );
 }
+
+export default withAuth(OKGDRegisterPage, "all");

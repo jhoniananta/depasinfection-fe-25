@@ -20,7 +20,7 @@ import { EyeIcon, EyeOffIcon } from "lucide-react";
 
 import FormLayout from "@/layouts/FormLayout";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useAdminLoginMutation } from "../../../(auth)/_hooks/@post/useLogin";
 import Title from "../../../../components/Title";
 
@@ -45,9 +45,11 @@ function LoginPage() {
     });
   }
 
-  if (isSuccess) {
-    router.push("/admin");
-  }
+  useEffect(() => {
+    if (isSuccess) {
+      router.replace("/admin"); // bisa pakai replace supaya gak bisa balik ke /login
+    }
+  }, [isSuccess, router]);
 
   return (
     <FormLayout

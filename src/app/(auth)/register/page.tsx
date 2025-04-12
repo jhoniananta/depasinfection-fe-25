@@ -9,7 +9,7 @@ import en from "react-phone-number-input/locale/en";
 import { z } from "zod";
 
 import Typography from "@/components/Typography";
-import { Button } from "@/components/ui/button";
+import { Button as ShadCnButton } from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -24,6 +24,8 @@ import { PhoneInput } from "@/components/ui/phone-input";
 import { Progress } from "@/components/ui/progress";
 import { Separator } from "@/components/ui/separator";
 
+import withAuth from "@/components/WithAuth";
+import Button from "@/components/buttons/Button";
 import { RegisterFormSchema } from "@/schemas/auth-schema";
 import Link from "next/link";
 import Title from "../../../components/Title";
@@ -178,7 +180,7 @@ function RegisterPage() {
                           placeholder="••••••••"
                           {...field}
                         />
-                        <Button
+                        <ShadCnButton
                           type="button"
                           variant="ghost"
                           size="icon"
@@ -191,7 +193,7 @@ function RegisterPage() {
                           ) : (
                             <EyeIcon className="size-4" />
                           )}
-                        </Button>
+                        </ShadCnButton>
                       </div>
                     </FormControl>
                     <FormMessage />
@@ -212,7 +214,7 @@ function RegisterPage() {
                           placeholder="Repeat password"
                           {...field}
                         />
-                        <Button
+                        <ShadCnButton
                           type="button"
                           variant="ghost"
                           size="icon"
@@ -225,7 +227,7 @@ function RegisterPage() {
                           ) : (
                             <EyeIcon className="size-4" />
                           )}
-                        </Button>
+                        </ShadCnButton>
                       </div>
                     </FormControl>
                     <FormMessage />
@@ -257,7 +259,12 @@ function RegisterPage() {
                 )}
               />
 
-              <Button type="submit" className="w-full" disabled={isPending}>
+              <Button
+                variant="gradient-yellow"
+                type="submit"
+                className="w-full"
+                disabled={isPending}
+              >
                 {isPending ? "Submitting..." : "Submit"}
               </Button>
             </form>
@@ -312,4 +319,4 @@ function RegisterPage() {
   );
 }
 
-export default RegisterPage;
+export default withAuth(RegisterPage, "auth");

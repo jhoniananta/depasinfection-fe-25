@@ -1,8 +1,8 @@
 "use client";
 
 import Typography from "@/components/Typography";
-import { Button } from "@/components/ui/button";
 
+import Button from "@/components/buttons/Button";
 import { Progress } from "@/components/ui/progress";
 import { Separator } from "@/components/ui/separator";
 import { toast } from "@/hooks/use-toast";
@@ -94,7 +94,11 @@ function VerifyEmailPage({ token }: Props) {
           register for challenges, track your progress, and stay updated with
           the latest announcements.
         </Typography>
-        <Button onClick={() => router.push("/dashboard")} className="w-full">
+        <Button
+          variant="gradient-yellow"
+          onClick={() => router.push("/dashboard")}
+          className="w-full"
+        >
           Go to dashboard
         </Button>
       </>

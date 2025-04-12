@@ -1,6 +1,9 @@
+"use client";
+
+import withAuth from "@/components/WithAuth";
 import Sidebar from "@/layouts/SidebarUser";
 
-export default function DashboardUserPage() {
+function DashboardUserPage() {
   return (
     <>
       <Sidebar title="Dashboard">
@@ -9,3 +12,5 @@ export default function DashboardUserPage() {
     </>
   );
 }
+
+export default withAuth(DashboardUserPage, "all");

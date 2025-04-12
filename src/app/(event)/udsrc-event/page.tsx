@@ -1,3 +1,6 @@
+"use client";
+
+import withAuth from "@/components/WithAuth";
 import AboutEvent from "@/components/event-component/AboutEvent";
 import CardSectionUdsrc from "@/components/event-component/CardSectionUdsrc";
 import HeroEvent from "@/components/event-component/HeroEvent";
@@ -52,7 +55,7 @@ const timelineContentUdsrc = [
   },
 ];
 
-export default function UDSRCHome() {
+function UDSRCHome() {
   const t = useTranslations("UDSRCpage");
   return (
     <Layout withFooter withNavbar>
@@ -95,3 +98,5 @@ export default function UDSRCHome() {
     </Layout>
   );
 }
+
+export default withAuth(UDSRCHome, "optional");

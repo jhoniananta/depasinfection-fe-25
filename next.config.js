@@ -1,17 +1,67 @@
 const createNextIntlPlugin = require("next-intl/plugin");
+const { withSentryConfig } = require("@sentry/nextjs");
 
 const withNextIntl = createNextIntlPlugin();
 
 /** @type {import('next').NextConfig} */
-const nextConfig = {};
+const nextConfig = {
+  async headers() {
+    return [
+      {
+        source: "/(.*)", // Semua route
+        headers: [
+          {
+            key: "X-Frame-Options",
+            value: "SAMEORIGIN",
+          },
+          {
+            key: "Strict-Transport-Security",
+            value: "max-age=63072000; includeSubDomains; preload",
+          },
+          {
+            key: "X-Content-Type-Options",
+            value: "nosniff",
+          },
+          process.env.NODE_ENV === "development"
+            ? {
+                key: "Content-Security-Policy",
+                value: `
+                default-src 'self';
+                script-src 'self' 'unsafe-inline' 'unsafe-eval' blob:;
+                style-src 'self' 'unsafe-inline';
+                connect-src *;
+                img-src * data:;
+                frame-src https://www.google.com;
+                worker-src 'self' blob:;
+                frame-ancestors 'self';
+              `
+                  .replace(/\n/g, "")
+                  .trim(),
+              }
+            : {
+                key: "Content-Security-Policy",
+                value: `
+                default-src 'self';
+                script-src 'self' https://www.googletagmanager.com https://www.google-analytics.com https://maps.googleapis.com;
+                style-src 'self' https://fonts.googleapis.com;
+                font-src 'self' https://fonts.gstatic.com;
+                connect-src 'self' https://sentry.io https://www.google-analytics.com https://maps.googleapis.com;
+                img-src 'self' data: https://maps.gstatic.com https://maps.googleapis.com;
+                frame-src https://www.google.com;
+                frame-ancestors 'self';
+              `
+                  .replace(/\n/g, "")
+                  .trim(),
+              },
+        ],
+      },
+    ];
+  },
+};
 
-module.exports = withNextIntl(nextConfig);
+const intlAndCustomConfig = withNextIntl(nextConfig);
 
-// Injected content via Sentry wizard below
-
-const { withSentryConfig } = require("@sentry/nextjs");
-
-module.exports = withSentryConfig(module.exports, {
+module.exports = withSentryConfig(intlAndCustomConfig, {
   // For all available options, see:
   // https://www.npmjs.com/package/@sentry/webpack-plugin#options
 

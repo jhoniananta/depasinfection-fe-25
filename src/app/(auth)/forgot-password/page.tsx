@@ -6,7 +6,9 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 
 import Typography from "@/components/Typography";
-import { Button } from "@/components/ui/button";
+import withAuth from "@/components/WithAuth";
+
+import Button from "@/components/buttons/Button";
 import {
   Form,
   FormControl,
@@ -118,7 +120,7 @@ function ForgotPasswordPage() {
             Didn't receive the email? Click below to resend.
           </Typography>
           <Button
-            type="button"
+            variant="gradient-yellow"
             className="w-full"
             disabled={resendTimer > 0 || isPending}
             onClick={() => {
@@ -137,4 +139,4 @@ function ForgotPasswordPage() {
   );
 }
 
-export default ForgotPasswordPage;
+export default withAuth(ForgotPasswordPage, "auth");

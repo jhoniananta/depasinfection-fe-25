@@ -1,3 +1,6 @@
+"use client";
+
+import withAuth from "@/components/WithAuth";
 import AboutEvent from "@/components/event-component/AboutEvent";
 import CardSectionOkgd from "@/components/event-component/CardSectionOkgd";
 import HeroEvent from "@/components/event-component/HeroEvent";
@@ -64,7 +67,7 @@ const timelineContentOkgd = [
   },
 ];
 
-export default function OKGDHome() {
+function OKGDHome() {
   const t = useTranslations("OKGDpage");
   return (
     <Layout withFooter withNavbar>
@@ -107,3 +110,5 @@ export default function OKGDHome() {
     </Layout>
   );
 }
+
+export default withAuth(OKGDHome, "optional");

@@ -1,6 +1,15 @@
 import { Event } from "./event-register";
 import { Role } from "./role";
 
+export type User = {
+  token: string;
+  account_id: string;
+  email: string;
+  full_name: string;
+  phone_number: string;
+  role: string;
+};
+
 export type UserRegisterRequest = {
   email: string;
   password: string;
