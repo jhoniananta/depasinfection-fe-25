@@ -305,6 +305,7 @@ function RegisterPage() {
             Didn't receive the email? Click below to resend.
           </Typography>
           <Button
+            variant="gradient-yellow"
             type="button"
             className="w-full"
             onClick={onResend}

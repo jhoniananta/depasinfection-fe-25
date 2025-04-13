@@ -31,7 +31,7 @@ const useAuthStoreBase = create<AuthStoreType>((set) => ({
         new Date(expMs).toISOString(),
       );
     } catch {
-      localStorage.removeItem("depas25_oken_expiry");
+      localStorage.removeItem("depas25_token_expiry");
     }
 
     set(
