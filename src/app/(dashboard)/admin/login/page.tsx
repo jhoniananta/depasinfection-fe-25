@@ -23,8 +23,10 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useAdminLoginMutation } from "../../../(auth)/_hooks/@post/useLogin";
 import Title from "../../../../components/Title";
+import withAuth from "@/components/WithAuth";
 
-function LoginPage() {
+export default withAuth(AdminLoginPage, "auth");
+function AdminLoginPage() {
   const router = useRouter();
 
   const [show, setShow] = useState(false);
@@ -131,5 +133,3 @@ function LoginPage() {
     </FormLayout>
   );
 }
-
-export default LoginPage;

@@ -17,6 +17,7 @@ import { useEffect, useState } from "react";
 import { HiPencilSquare } from "react-icons/hi2";
 import { useGetProfileQuery } from "../_hooks/@get/useGetProfile";
 
+export default withAuth(DashboardProfilePage, "all");
 function DashboardProfilePage() {
   const [isEditing, setIsEditing] = useState(false);
   const queryClient = useQueryClient();
@@ -227,5 +228,3 @@ function DashboardProfilePage() {
     </>
   );
 }
-
-export default withAuth(DashboardProfilePage, "all");

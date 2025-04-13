@@ -13,6 +13,7 @@ import BioInformationSection from "../_components/BioInformation";
 import PaymentInformationSection from "../_components/PaymentInformation";
 import { useGetDetailsEventQuery } from "../_hooks/@get/useGetDetailsEvent";
 
+export default withAuth(OKGDDashboardUserPage, "all");
 function OKGDDashboardUserPage() {
   // Data Fetching Details Event Query
   const { data: eventDetails, isLoading, isError } = useGetDetailsEventQuery();
@@ -285,5 +286,3 @@ function OKGDDashboardUserPage() {
     </>
   );
 }
-
-export default withAuth(OKGDDashboardUserPage, "all");

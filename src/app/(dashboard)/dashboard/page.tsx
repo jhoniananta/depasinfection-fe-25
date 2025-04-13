@@ -9,6 +9,7 @@ import Sidebar from "@/layouts/SidebarUser";
 import RegisterCard from "./_components/RegisterCard";
 import { useGetProfileQuery } from "./_hooks/@get/useGetProfile";
 
+export default withAuth(DashboardUserPage, "all");
 function DashboardUserPage() {
   const { data: profile } = useGetProfileQuery();
 
@@ -106,5 +107,3 @@ function DashboardUserPage() {
     </>
   );
 }
-
-export default withAuth(DashboardUserPage, "all");

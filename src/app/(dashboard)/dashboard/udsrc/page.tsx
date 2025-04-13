@@ -12,6 +12,7 @@ import BioInformationSection from "../_components/BioInformation";
 import PaymentInformationSection from "../_components/PaymentInformation";
 import { useGetDetailsEventQuery } from "../_hooks/@get/useGetDetailsEvent";
 
+export default withAuth(UDSRCDashboardUserPage, "all");
 function UDSRCDashboardUserPage() {
   // Data Fetching Details Event Query
   const { data: eventDetails, isLoading, isError } = useGetDetailsEventQuery();
@@ -275,5 +276,3 @@ function UDSRCDashboardUserPage() {
     </>
   );
 }
-
-export default withAuth(UDSRCDashboardUserPage, "all");

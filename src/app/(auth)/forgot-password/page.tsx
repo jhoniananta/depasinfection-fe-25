@@ -22,6 +22,7 @@ import { ForgotPasswordFormSchema } from "@/schemas/auth-schema";
 import Title from "../../../components/Title";
 import { useForgotPasswordMutation } from "../_hooks/@post/useForgotPassword";
 
+export default withAuth(ForgotPasswordPage, "auth");
 function ForgotPasswordPage() {
   const [sent, setSent] = useState(false);
   const [resendTimer, setResendTimer] = useState(0);
@@ -138,5 +139,3 @@ function ForgotPasswordPage() {
     </>
   );
 }
-
-export default withAuth(ForgotPasswordPage, "auth");

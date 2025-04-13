@@ -1,4 +1,4 @@
-" use client";
+"use client";
 
 import { BiPlus } from "react-icons/bi";
 import { BsArrowRight } from "react-icons/bs";
@@ -8,6 +8,7 @@ import withAuth from "@/components/WithAuth";
 import Button from "@/components/buttons/Button";
 import ButtonLink from "@/components/links/ButtonLink";
 
+export default withAuth(SanboxButtonPage, "all");
 function SanboxButtonPage() {
   return (
     <main className="min-h-screen items-center justify-center bg-slate-200 py-20">
@@ -724,5 +725,3 @@ function SanboxButtonPage() {
     </main>
   );
 }
-
-export default withAuth(SanboxButtonPage, "all");

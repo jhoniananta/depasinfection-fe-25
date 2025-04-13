@@ -40,6 +40,7 @@ const stepSchemas = [
 
 const totalSteps = stepSchemas.length;
 
+export default withAuth(OKGDRegisterPage, "all");
 function OKGDRegisterPage() {
   const [activeStep, setActiveStep] = useState(0);
   const [data, setData] = useState<Partial<OKGDFormData>>({});
@@ -205,5 +206,3 @@ function OKGDRegisterPage() {
     </FormLayout>
   );
 }
-
-export default withAuth(OKGDRegisterPage, "all");

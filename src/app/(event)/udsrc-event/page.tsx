@@ -55,6 +55,7 @@ const timelineContentUdsrc = [
   },
 ];
 
+export default withAuth(UDSRCHome, "optional");
 function UDSRCHome() {
   const t = useTranslations("UDSRCpage");
   return (
@@ -98,5 +99,3 @@ function UDSRCHome() {
     </Layout>
   );
 }
-
-export default withAuth(UDSRCHome, "optional");

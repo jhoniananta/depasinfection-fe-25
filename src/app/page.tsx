@@ -10,6 +10,7 @@ import Timeline from "@/components/landing-page/Timeline";
 import Layout from "@/layouts/Layout";
 import { useEffect, useState } from "react";
 
+export default withAuth(Homepage, "optional");
 function Homepage() {
   const [isLoaded, setIsLoaded] = useState(false);
 
@@ -47,5 +48,3 @@ function Homepage() {
     </Layout>
   );
 }
-
-export default withAuth(Homepage, "optional");

@@ -37,6 +37,7 @@ const steps = [
   { label: "Confirmation", value: 50 },
 ];
 
+export default withAuth(RegisterPage, "auth");
 function RegisterPage() {
   const [step, setStep] = useState(1);
   const [show, setShow] = useState(false);
@@ -318,5 +319,3 @@ function RegisterPage() {
     </>
   );
 }
-
-export default withAuth(RegisterPage, "auth");

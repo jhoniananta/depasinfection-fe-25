@@ -22,25 +22,10 @@ const nextConfig = {
             key: "X-Content-Type-Options",
             value: "nosniff",
           },
-          process.env.NODE_ENV === "development"
-            ? {
-                key: "Content-Security-Policy",
-                value: `
-                default-src 'self';
-                script-src 'self' 'unsafe-inline' 'unsafe-eval' blob:;
-                style-src 'self' 'unsafe-inline';
-                connect-src *;
-                img-src * data:;
-                frame-src https://www.google.com;
-                worker-src 'self' blob:;
-                frame-ancestors 'self';
-              `
-                  .replace(/\n/g, "")
-                  .trim(),
-              }
-            : {
-                key: "Content-Security-Policy",
-                value: `
+
+          {
+            key: "Content-Security-Policy",
+            value: `
                 default-src 'self';
                 script-src 'self' https://www.googletagmanager.com https://www.google-analytics.com https://maps.googleapis.com;
                 style-src 'self' https://fonts.googleapis.com;
@@ -50,9 +35,9 @@ const nextConfig = {
                 frame-src https://www.google.com;
                 frame-ancestors 'self';
               `
-                  .replace(/\n/g, "")
-                  .trim(),
-              },
+              .replace(/\n/g, "")
+              .trim(),
+          },
         ],
       },
     ];

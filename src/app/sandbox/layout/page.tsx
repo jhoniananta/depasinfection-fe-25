@@ -3,6 +3,7 @@
 import withAuth from "@/components/WithAuth";
 import Layout from "@/layouts/Layout";
 
+export default withAuth(LayoutSandbox, "all");
 function LayoutSandbox() {
   return (
     <Layout withFooter withNavbar>
@@ -15,5 +16,3 @@ function LayoutSandbox() {
     </Layout>
   );
 }
-
-export default withAuth(LayoutSandbox, "all");

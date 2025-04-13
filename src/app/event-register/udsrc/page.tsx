@@ -40,6 +40,7 @@ const stepSchemas = [
 
 const totalSteps = stepSchemas.length;
 
+export default withAuth(UDSRCRegisterPage, "all");
 function UDSRCRegisterPage() {
   const [activeStep, setActiveStep] = useState(0);
   const [data, setData] = useState<Partial<UDSRCFormData>>({});
@@ -193,5 +194,3 @@ function UDSRCRegisterPage() {
     </FormLayout>
   );
 }
-
-export default withAuth(UDSRCRegisterPage, "all");
