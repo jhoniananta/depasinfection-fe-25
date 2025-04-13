@@ -8,7 +8,7 @@ const nextConfig = {
   async headers() {
     return [
       {
-        source: "/(.*)", // Semua route
+        source: "/(.*)",
         headers: [
           {
             key: "X-Frame-Options",
@@ -21,22 +21,6 @@ const nextConfig = {
           {
             key: "X-Content-Type-Options",
             value: "nosniff",
-          },
-
-          {
-            key: "Content-Security-Policy",
-            value: `
-                default-src 'self';
-                script-src 'self' https://www.googletagmanager.com https://www.google-analytics.com https://maps.googleapis.com;
-                style-src 'self' https://fonts.googleapis.com;
-                font-src 'self' https://fonts.gstatic.com;
-                connect-src 'self' https://sentry.io https://www.google-analytics.com https://maps.googleapis.com;
-                img-src 'self' data: https://maps.gstatic.com https://maps.googleapis.com;
-                frame-src https://www.google.com;
-                frame-ancestors 'self';
-              `
-              .replace(/\n/g, "")
-              .trim(),
           },
         ],
       },
