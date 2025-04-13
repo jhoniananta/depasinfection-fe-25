@@ -8,15 +8,12 @@ import NextImage from "@/components/NextImage";
 import Typography from "@/components/Typography";
 import { Button } from "@/components/ui/button";
 import { SidebarAdmin } from "@/contents/sidebar";
-import { clearDepasAuth } from "@/lib/auth";
+
 import { SidebarProps } from "@/types/sidebar";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 
-function Sidebar({ children }: SidebarProps) {
+function AdminSidebar({ children }: SidebarProps) {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
-
-  const router = useRouter();
 
   return (
     <>
@@ -149,10 +146,8 @@ function Sidebar({ children }: SidebarProps) {
 
             <div className={`flex flex-col items-center justify-center`}>
               <LogoutDialog
-                onConfirm={() => {
-                  clearDepasAuth();
-                  router.push("/login");
-                }}
+                // biome-ignore lint/suspicious/noEmptyBlockStatements: <explanation>
+                onConfirm={() => {}}
                 trigger={(open) => (
                   <Button
                     className="mb-0 mt-4 flex w-full"
@@ -272,10 +267,8 @@ function Sidebar({ children }: SidebarProps) {
             }`}
           >
             <LogoutDialog
-              onConfirm={() => {
-                clearDepasAuth();
-                router.push("/login");
-              }}
+              // biome-ignore lint/suspicious/noEmptyBlockStatements: <explanation>
+              onConfirm={() => {}}
               trigger={(open) => (
                 <Button
                   className="mb-16 mt-4 flex w-full"
@@ -309,4 +302,4 @@ function Sidebar({ children }: SidebarProps) {
   );
 }
 
-export default Sidebar;
+export default AdminSidebar;
