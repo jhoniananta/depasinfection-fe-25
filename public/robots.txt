@@ -1,9 +1,14 @@
 # *
 User-agent: *
 Allow: /
+Disallow: /admin
+Disallow: /admin/*
+Disallow: /sandbox
+Disallow: /sandbox/*
 
 # Host
-Host: https://example.com
+Host: 'https://depasinfection.com/' # Site URL
 
 # Sitemaps
-Sitemap: https://example.com/sitemap.xml
+Sitemap: 'https://depasinfection.com/' # Site URL/sitemap.xml
+Sitemap: https://depasinfection.com/sitemap-0.xml

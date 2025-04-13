@@ -18,12 +18,12 @@ import { Input } from "@/components/ui/input";
 import { LoginFormSchema } from "@/schemas/auth-schema";
 import { EyeIcon, EyeOffIcon } from "lucide-react";
 
+import withAuth from "@/components/WithAuth";
 import FormLayout from "@/layouts/FormLayout";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useAdminLoginMutation } from "../../../(auth)/_hooks/@post/useLogin";
 import Title from "../../../../components/Title";
-import withAuth from "@/components/WithAuth";
 
 export default withAuth(AdminLoginPage, "auth");
 function AdminLoginPage() {

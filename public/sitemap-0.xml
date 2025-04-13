@@ -1,11 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:mobile="http://www.google.com/schemas/sitemap-mobile/1.0" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
-<url><loc>https://example.com/forgot-password</loc><lastmod>2025-03-25T13:01:27.999Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://example.com</loc><lastmod>2025-03-25T13:01:28.004Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://example.com/sandbox/form</loc><lastmod>2025-03-25T13:01:28.004Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://example.com/sandbox/button</loc><lastmod>2025-03-25T13:01:28.004Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://example.com/login</loc><lastmod>2025-03-25T13:01:28.004Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://example.com/sandbox/layout</loc><lastmod>2025-03-25T13:01:28.004Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://example.com/register</loc><lastmod>2025-03-25T13:01:28.004Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://example.com/merchandise</loc><lastmod>2025-03-25T13:01:28.004Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>&apos;https://depasinfection.com/&apos; # Site URL/login</loc><lastmod>2025-04-13T12:53:28.067Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>&apos;https://depasinfection.com/&apos; # Site URL/dashboard/okgd</loc><lastmod>2025-04-13T12:53:28.071Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>&apos;https://depasinfection.com/&apos; # Site URL/dashboard/udsrc</loc><lastmod>2025-04-13T12:53:28.071Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>&apos;https://depasinfection.com/&apos; # Site URL/udsrc-event</loc><lastmod>2025-04-13T12:53:28.071Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>&apos;https://depasinfection.com/&apos; # Site URL/okgd-event</loc><lastmod>2025-04-13T12:53:28.071Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>&apos;https://depasinfection.com/&apos; # Site URL/register</loc><lastmod>2025-04-13T12:53:28.071Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>&apos;https://depasinfection.com/&apos; # Site URL/coming-soon</loc><lastmod>2025-04-13T12:53:28.071Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>&apos;https://depasinfection.com/&apos; # Site URL/dashboard/profile</loc><lastmod>2025-04-13T12:53:28.071Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>'https://depasinfection.com/' # Site URL</loc><lastmod>2025-04-13T12:53:28.071Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>&apos;https://depasinfection.com/&apos; # Site URL/event-register/okgd</loc><lastmod>2025-04-13T12:53:28.071Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>&apos;https://depasinfection.com/&apos; # Site URL/submission/udsrc-3-mop</loc><lastmod>2025-04-13T12:53:28.071Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>&apos;https://depasinfection.com/&apos; # Site URL/submission/udsrc-poster</loc><lastmod>2025-04-13T12:53:28.071Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>&apos;https://depasinfection.com/&apos; # Site URL/dashboard</loc><lastmod>2025-04-13T12:53:28.071Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>&apos;https://depasinfection.com/&apos; # Site URL/merchandise</loc><lastmod>2025-04-13T12:53:28.071Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>&apos;https://depasinfection.com/&apos; # Site URL/event-register/udsrc</loc><lastmod>2025-04-13T12:53:28.071Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>&apos;https://depasinfection.com/&apos; # Site URL/forgot-password</loc><lastmod>2025-04-13T12:53:28.071Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
 </urlset>
