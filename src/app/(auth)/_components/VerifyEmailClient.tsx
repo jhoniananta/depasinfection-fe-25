@@ -96,10 +96,10 @@ function VerifyEmailPage({ token }: Props) {
         </Typography>
         <Button
           variant="gradient-yellow"
-          onClick={() => router.push("/dashboard")}
+          onClick={() => router.push("/login")}
           className="w-full"
         >
-          Go to dashboard
+          Go to login
         </Button>
       </>
     );

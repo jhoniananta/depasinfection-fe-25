@@ -11,6 +11,10 @@ const nextConfig = {
         source: "/(.*)",
         headers: [
           {
+            key: "Referrer-Policy",
+            value: "no-referrer",
+          },
+          {
             key: "X-Frame-Options",
             value: "SAMEORIGIN",
           },

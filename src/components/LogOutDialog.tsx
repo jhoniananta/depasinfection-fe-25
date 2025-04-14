@@ -9,6 +9,8 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import { useClientLogout } from "@/lib/clientLogout";
+
 import { useState } from "react";
 
 type LogoutDialogProps = {
@@ -16,11 +18,10 @@ type LogoutDialogProps = {
   onConfirm: () => void;
 };
 
-export default function LogoutDialog({
-  trigger,
-  onConfirm,
-}: LogoutDialogProps) {
+export default function LogoutDialog({ trigger }: LogoutDialogProps) {
   const [open, setOpen] = useState(false);
+
+  const logout = useClientLogout();
 
   return (
     <>
@@ -31,7 +32,7 @@ export default function LogoutDialog({
           <DialogHeader>
             <DialogTitle>Are you sure you want to log out?</DialogTitle>
             <DialogDescription>
-              Your session will be terminated and you’ll be redirected to login.
+              Your session will be terminated and you'll be redirected to login.
             </DialogDescription>
           </DialogHeader>
           <DialogFooter>
@@ -42,7 +43,7 @@ export default function LogoutDialog({
               variant="destructive"
               onClick={() => {
                 setOpen(false);
-                onConfirm();
+                logout(false);
               }}
             >
               Log Out

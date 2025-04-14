@@ -8,6 +8,7 @@ import { useToast } from "@/hooks/use-toast";
 import { useLoginCallback } from "@/hooks/useLoginCallback";
 import { baseURL } from "@/lib/api";
 import { clearDepasAuth } from "@/lib/auth";
+import { useClientLogout } from "@/lib/clientLogout";
 import { getToken } from "@/lib/cookies";
 import useAuthStore from "@/store/useAuthStore";
 
@@ -29,6 +30,8 @@ export default function withAuth<T>(
     const user = useAuthStore.useUser();
 
     const callback = useLoginCallback("/dashboard");
+
+    const clientLogout = useClientLogout();
 
     const checkAuth = React.useCallback(async () => {
       const token = getToken();
@@ -55,8 +58,11 @@ export default function withAuth<T>(
         login({ ...json.data, token });
       } catch {
         clearDepasAuth();
-        logout();
-        toast({ title: "Session expired", description: "Please login again." });
+        clientLogout(true, location.pathname);
+        toast({
+          title: "Session failed or expired",
+          description: "Please login again.",
+        });
       } finally {
         stopLoading();
       }
@@ -69,18 +75,17 @@ export default function withAuth<T>(
 
       const timeout = new Date(expiry).getTime() - Date.now();
       if (timeout <= 0) {
-        logout();
-        router.replace("/login?callback=" + location.pathname);
+        clientLogout(true, location.pathname);
         return;
       }
 
       const timer = setTimeout(() => {
-        logout();
-        router.replace("/login?callback=" + location.pathname);
+        clientLogout(true, location.pathname);
+        // ⬅️ forced logout
       }, timeout);
 
       return () => clearTimeout(timer);
-    }, [logout, router]);
+    }, [clientLogout]);
 
     // 🧠 Initial load + tab refocus
     React.useEffect(() => {
@@ -104,7 +109,7 @@ export default function withAuth<T>(
 
         // ⛔ Redirect kalau belum login dan page butuh auth
         if (routeRole === "all" && !isAuthenticated) {
-          router.replace("/login?callback=" + location.pathname);
+          router.replace("/login");
         }
 
         // ✅ Cek otorisasi role vs. route

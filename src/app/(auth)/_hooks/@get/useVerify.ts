@@ -24,7 +24,7 @@ export const useVerifyEmailQuery = (token: string) => {
   if (result.isSuccess) {
     toast({
       title: "Verify email successful!",
-      description: "Let's go to your dashboard!",
+      description: "Let's go to login!",
       variant: "default",
     });
   }

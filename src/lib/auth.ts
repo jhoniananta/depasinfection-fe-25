@@ -5,6 +5,6 @@ export function clearDepasAuth() {
   removeToken();
 
   // Hapus semua localStorage terkait depas25 auth
-  localStorage.removeItem("depas25_token");
+  localStorage.removeItem("depas25_data");
   localStorage.removeItem("depas25_token_expiry");
 }

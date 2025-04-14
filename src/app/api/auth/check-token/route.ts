@@ -11,10 +11,6 @@ export async function GET(req: NextRequest) {
   try {
     const backendRes = await fetch(`${baseURL}/check?token=${token}`, {
       method: "GET",
-      headers: {
-        // 🔒 make safer
-        "Referrer-Policy": "no-referrer",
-      },
     });
 
     const result = await backendRes.text();
@@ -24,10 +20,6 @@ export async function GET(req: NextRequest) {
         { valid: true },
         {
           status: 200,
-          headers: {
-            // 🔒 make safer
-            "Referrer-Policy": "no-referrer",
-          },
         },
       );
     } else {
@@ -35,10 +27,6 @@ export async function GET(req: NextRequest) {
         { valid: false },
         {
           status: 401,
-          headers: {
-            // 🔒 make safer
-            "Referrer-Policy": "no-referrer",
-          },
         },
       );
     }
