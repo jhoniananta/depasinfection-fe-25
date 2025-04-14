@@ -1,9 +1,9 @@
 import { TimelineItem } from "@/types/event-page";
 
 export const imageCarouselOkgd = [
-  "/images/okgd-page/carousel-image-1.png",
-  "/images/okgd-page/carousel-image-1.png",
-  "/images/okgd-page/carousel-image-1.png",
+  "/images/okgd-page/carousel-image-1.jpg",
+  "/images/okgd-page/carousel-image-2.jpg",
+  "/images/okgd-page/carousel-image-3.jpg",
 ];
 
 export const requirementsOkgd = [
@@ -80,9 +80,19 @@ export const lineSourceOkgd = {
 };
 
 export const imageCarouselUdsrc = [
-  "/images/okgd-page/carousel-image-1.png",
-  "/images/okgd-page/carousel-image-1.png",
-  "/images/okgd-page/carousel-image-1.png",
+  "/images/udsrc-page/carousel-image-1.jpg",
+  "/images/udsrc-page/carousel-image-2.jpg",
+  "/images/udsrc-page/carousel-image-3.jpg",
+];
+
+export const imageCarouselOkgdFacultyTour = [
+  "/images/okgd-page/faculty-tour-1.jpg",
+  "/images/okgd-page/faculty-tour-2.jpg",
+  "/images/okgd-page/faculty-tour-3.jpg",
+];
+
+export const requirementsOkgdFacultyTour = [
+  "Faculty Tour of the Faculty of Dentistry UGM is an activity exclusively offered to participants of the OKGD competition. This event provides an opportunity for participants to become acquainted with the environment and facilities at the Faculty of Dentistry UGM. Participants will be invited to tour the Faculty's surroundings, including not only the buildings but also the laboratories that support the lectures for the Faculty's students. The activity aims not only to broaden participants' knowledge and insights into the field of dentistry but also to motivate them to develop their interests and talents in the health sector. With this comprehensive experience, it is hoped that the participants will be inspired and better prepared to take the next step toward a career in dentistry.",
 ];
 
 export const requirementsUdsrc = [

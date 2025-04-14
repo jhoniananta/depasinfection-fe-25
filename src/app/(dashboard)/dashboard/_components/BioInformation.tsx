@@ -10,6 +10,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { EventDetails, ParticipantDetails } from "@/types/dashboard-user";
+import { countries } from "country-data-list";
 
 interface BioInformationSectionProps {
   eventDetails?: EventDetails;
@@ -51,7 +52,7 @@ export default function BioInformationSection({
           {/* School or University Name */}
           <div className="flex flex-col md:ml-8">
             <Typography variant="p" weight="medium" className="text-gray-600">
-              {eventName === "UGM Dental Research Competition"
+              {eventName === "UGM Dental Scientific Research Competition"
                 ? "School"
                 : "University"}
             </Typography>
@@ -60,13 +61,15 @@ export default function BioInformationSection({
             </Typography>
           </div>
 
-          {eventName === "UGM Dental Research Competition" && (
+          {eventName === "UGM Dental Scientific Research Competition" && (
             <div className="flex flex-col md:ml-8">
               <Typography variant="p" weight="medium" className="text-gray-600">
                 Nationality
               </Typography>
               <Typography variant="p" weight="bold">
-                {data.nationality === "IDN" ? "Indonesia" : data.nationality}
+                {countries.all.find(
+                  (country) => country.alpha3 === data.nationality,
+                )?.name || data.nationality}
               </Typography>
             </div>
           )}
@@ -74,7 +77,7 @@ export default function BioInformationSection({
 
         {/* Integrity Pact - outside the accordion */}
         <div className="mt-4">
-          {eventName === "UGM Dental Research Competition" ? (
+          {eventName === "UGM Dental Scientific Research Competition" ? (
             <PdfPreview
               title="Statement Letter (click for detail)"
               src={data.statement_letter || ""}

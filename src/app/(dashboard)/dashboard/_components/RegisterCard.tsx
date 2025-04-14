@@ -7,7 +7,7 @@ type CardProps = {
   src: string;
   title: string;
   subtitle: string;
-  urlLink: string;
+  urlLink?: string;
 };
 
 export default function RegisterCard({
@@ -31,19 +31,28 @@ export default function RegisterCard({
           <Typography
             variant="h1"
             weight="extrabold"
-            className="relative text-center text-[64px] text-white"
+            className="relative text-center text-[64px] uppercase text-white"
           >
             {title}
             <span className="block text-[24px] font-medium leading-tight">
               {subtitle}
             </span>
           </Typography>
-          <Link
-            href={urlLink}
-            className="mt-4 w-full rounded-xl border-2 border-solid border-white bg-transparent p-2 text-center text-[18px] text-white hover:bg-white hover:text-black md:text-[24px]"
-          >
-            Register
-          </Link>{" "}
+          {urlLink ? (
+            <Link
+              href={urlLink}
+              className="mt-4 w-full rounded-xl border-2 border-solid border-white bg-transparent p-2 text-center text-[18px] text-white hover:bg-white hover:text-black md:text-[24px]"
+            >
+              Register
+            </Link>
+          ) : (
+            <Link
+              href={`/dashboard/${title}`}
+              className="mt-4 w-full rounded-xl border-2 border-solid border-white bg-transparent p-2 text-center text-[18px] text-white hover:bg-white hover:text-black md:text-[24px]"
+            >
+              Go to dashboard
+            </Link>
+          )}
         </div>
       </div>
     </>

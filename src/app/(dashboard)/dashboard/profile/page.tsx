@@ -3,7 +3,6 @@
 import withAuth from "@/components/WithAuth";
 
 import NextImage from "@/components/NextImage";
-import { Spinner } from "@/components/Spinner";
 import Typography from "@/components/Typography";
 
 import { Button } from "@/components/ui/button";
@@ -21,7 +20,7 @@ export default withAuth(DashboardProfilePage, "all");
 function DashboardProfilePage() {
   const [isEditing, setIsEditing] = useState(false);
   const queryClient = useQueryClient();
-  const { data, isLoading } = useGetProfileQuery();
+  const { data } = useGetProfileQuery();
 
   // State to check if it in mobile or desktop view on 1024px
   const [isMobile, setIsMobile] = useState(false);
@@ -123,106 +122,102 @@ function DashboardProfilePage() {
             </div>
           </div>
           {/* Content Section */}
-          {isLoading ? (
-            <Spinner className="itme-center flex w-full justify-center" />
-          ) : (
-            <div className="mx-4 sm:mx-8">
-              <Card className="container mx-auto w-full max-w-4xl bg-purple-50 p-4 sm:p-6">
-                <CardContent>
-                  <div className="flex items-start justify-between">
-                    <Typography variant="h6" className="text-lg font-bold">
-                      Personal{" "}
-                      <span className="font-bagnard text-purple-500">
-                        Informations
-                      </span>
-                    </Typography>
-                    {!isEditing && (
-                      <Button
-                        variant="purple"
-                        onClick={handleEditClick}
-                        className="bg-purple-500 text-white"
-                      >
-                        <HiPencilSquare className="h-4 w-4 lg:mr-2" />
-                        {!isMobile && "Edit Profile"}
-                      </Button>
-                    )}
-                  </div>
+          <div className="mx-4 sm:mx-8">
+            <Card className="container mx-auto w-full max-w-4xl bg-purple-50 p-4 sm:p-6">
+              <CardContent>
+                <div className="flex items-start justify-between">
+                  <Typography variant="h6" className="text-lg font-bold">
+                    Personal{" "}
+                    <span className="font-bagnard text-purple-500">
+                      Informations
+                    </span>
+                  </Typography>
+                  {!isEditing && (
+                    <Button
+                      variant="purple"
+                      onClick={handleEditClick}
+                      className="bg-purple-500 text-white"
+                    >
+                      <HiPencilSquare className="h-4 w-4 lg:mr-2" />
+                      {!isMobile && "Edit Profile"}
+                    </Button>
+                  )}
+                </div>
 
-                  {isEditing ? (
-                    <form onSubmit={handleSubmit} className="mt-6 space-y-4">
-                      <div>
-                        <Typography variant="p" className="font-semibold">
-                          Full Name
-                        </Typography>
-                        <Input
-                          name="full_name"
-                          value={formData.full_name}
-                          onChange={handleChange}
-                          className="bg-purple-200"
-                        />
-                      </div>
-                      <div>
-                        <Typography variant="p" className="font-semibold">
-                          Email
-                        </Typography>
-                        <Input
-                          name="email"
-                          value={formData.email}
-                          onChange={handleChange}
-                          className="bg-purple-200"
-                        />
-                      </div>
-                      <div>
-                        <Typography variant="p" className="font-semibold">
-                          WhatsApp
-                        </Typography>
-                        <Input
-                          name="phone_number"
-                          value={formData.phone_number}
-                          onChange={handleChange}
-                          className="bg-purple-200"
-                        />
-                      </div>
-                      <Button
-                        type="submit"
-                        className="w-full bg-purple-500"
-                        variant="purple"
-                      >
-                        Save Changes
-                      </Button>
-                    </form>
-                  ) : (
-                    <div className="mt-6 space-y-4">
-                      <div>
-                        <Typography variant="p" className="font-semibold">
-                          Full Name
-                        </Typography>
-                        <div className="rounded-lg bg-purple-200 px-4 py-2">
-                          {data?.full_name}
-                        </div>
-                      </div>
-                      <div>
-                        <Typography variant="p" className="font-semibold">
-                          Email
-                        </Typography>
-                        <div className="rounded-lg bg-purple-200 px-4 py-2">
-                          {data?.email}
-                        </div>
-                      </div>
-                      <div>
-                        <Typography variant="p" className="font-semibold">
-                          WhatsApp
-                        </Typography>
-                        <div className="rounded-lg bg-purple-200 px-4 py-2">
-                          {data?.phone_number}
-                        </div>
+                {isEditing ? (
+                  <form onSubmit={handleSubmit} className="mt-6 space-y-4">
+                    <div>
+                      <Typography variant="p" className="font-semibold">
+                        Full Name
+                      </Typography>
+                      <Input
+                        name="full_name"
+                        value={formData.full_name}
+                        onChange={handleChange}
+                        className="bg-purple-200"
+                      />
+                    </div>
+                    <div>
+                      <Typography variant="p" className="font-semibold">
+                        Email
+                      </Typography>
+                      <Input
+                        name="email"
+                        value={formData.email}
+                        onChange={handleChange}
+                        className="bg-purple-200"
+                      />
+                    </div>
+                    <div>
+                      <Typography variant="p" className="font-semibold">
+                        WhatsApp
+                      </Typography>
+                      <Input
+                        name="phone_number"
+                        value={formData.phone_number}
+                        onChange={handleChange}
+                        className="bg-purple-200"
+                      />
+                    </div>
+                    <Button
+                      type="submit"
+                      className="w-full bg-purple-500"
+                      variant="purple"
+                    >
+                      Save Changes
+                    </Button>
+                  </form>
+                ) : (
+                  <div className="mt-6 space-y-4">
+                    <div>
+                      <Typography variant="p" className="font-semibold">
+                        Full Name
+                      </Typography>
+                      <div className="rounded-lg bg-purple-200 px-4 py-2">
+                        {data?.full_name}
                       </div>
                     </div>
-                  )}
-                </CardContent>
-              </Card>
-            </div>
-          )}
+                    <div>
+                      <Typography variant="p" className="font-semibold">
+                        Email
+                      </Typography>
+                      <div className="rounded-lg bg-purple-200 px-4 py-2">
+                        {data?.email}
+                      </div>
+                    </div>
+                    <div>
+                      <Typography variant="p" className="font-semibold">
+                        WhatsApp
+                      </Typography>
+                      <div className="rounded-lg bg-purple-200 px-4 py-2">
+                        {data?.phone_number}
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </CardContent>
+            </Card>
+          </div>
         </section>
       </Sidebar>
     </>

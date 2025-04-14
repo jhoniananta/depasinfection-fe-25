@@ -125,7 +125,7 @@ function Sidebar({ children }: SidebarProps) {
                               eventName === "Olimpiade Kedokteran Gigi Dasar"
                                 ? propIndex === 0
                                 : eventName ===
-                                    "UGM Dental Research Competition"
+                                    "UGM Dental Scientific Research Competition"
                                   ? propIndex === 1
                                   : false,
                             )

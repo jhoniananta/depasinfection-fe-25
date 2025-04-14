@@ -18,13 +18,13 @@ import { useTranslations } from "next-intl";
 
 const timelineContentUdsrc = [
   {
-    date: "14 Apr - 17 May 2025",
+    date: "14 Apr - 18 May 2025",
     title: "Early Registration",
     positionLarge: "top-4 left-12 xl:left-14",
     positionSmall: "bottom-[480px] left-[110px]",
   },
   {
-    date: "18 May - 12 Jul 2025",
+    date: "19 May - 12 Jul 2025",
     title: "Regular Registration",
     positionLarge: "top-[130px] left-[200px] xl:top-[150px] xl:left-[240px]",
     positionSmall: "bottom-[380px] left-[110px]",
@@ -72,7 +72,7 @@ function UDSRCHome() {
           poster="/udsrc-page/UDSRC-poster.png"
           title="UDSRC"
           aboutTitle={t("about.title")}
-          buttonText={t("home.buttonText")}
+          buttonText={"Download Poster"}
           normalContent={t("about.description")}
           boldContent={t("about.descriptionBold")}
         />
@@ -91,8 +91,8 @@ function UDSRCHome() {
         <RegistEvent
           registUrl="/event-register/udsrc"
           guidebookUrl="/okgd-event/guidebook"
-          endDate="2025-07-12T00:00:00"
-          srcVideo="https://www.youtube.com/embed/8e3gT2vB8"
+          endDate="2025-07-13T00:00:00"
+          srcVideo="https://www.youtube.com/cALir1YkkyI?si=aiogOd-DXC91TQik"
         />
       </main>
       <MapEvent />

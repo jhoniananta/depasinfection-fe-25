@@ -7,22 +7,26 @@ import ImageCarousel from "../ImageCarousel";
 export default function CardComponent({
   title,
   images,
+  buttonText1,
+  buttonText2,
+  linkButton1,
+  linkButton2,
   requirements,
   showButton = true,
 }: cardSectionProps) {
   return (
-    <div className="max-w-6xl lg:h-full rounded-3xl bg-purple-600 p-8 md:p-12 text-white container my-8 md:my-12 mx-4 md:mx-8 z-10">
+    <div className="container z-10 mx-4 my-8 max-w-6xl rounded-3xl bg-purple-600 p-8 text-white md:mx-8 md:my-12 md:p-12 lg:h-full">
       <div className="mx-auto max-w-7xl">
         {/* Carousel section */}
         <ImageCarousel images={images} className="mb-12 rounded-3xl" />
 
         {/* Content section */}
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
+        <div className="grid grid-cols-1 gap-8 md:gap-2 md:grid-cols-2">
           {/* Left column - Title */}
           <div>
             <Typography
               variant={"h4"}
-              className="text-4xl lg:text-[64px] leading-tight md:leading-none text-white text-center md:text-left"
+              className="text-center text-4xl leading-tight text-white md:text-left md:leading-none lg:text-[64px]"
             >
               <strong>{title.main}</strong>
               <br />
@@ -30,22 +34,28 @@ export default function CardComponent({
             </Typography>
 
             {showButton && (
-              <div className="mt-8 flex flex-col md:flex-row gap-2 justify-center md:justify-start items-center md:gap-4">
-                <Link
-                  href="/guidebook"
-                  className="flex items-center gap-2 rounded-lg bg-amber-300 p-2 md:px-6 md:py-3 text-black transition hover:bg-amber-400 w-full md:w-auto justify-center text-sm md:text-2xl"
-                >
-                  <IoDocumentTextOutline />
-                  Guidebook
-                </Link>
+              <div className="mt-8 flex flex-wrap items-center justify-center gap-2 md:justify-start">
+                {linkButton1 && (
+                  <Link
+                    href={linkButton1}
+                    target="_blank"
+                    className="flex w-full items-center justify-center gap-2 rounded-lg bg-amber-300 p-2 text-sm text-black transition hover:bg-amber-400 md:w-auto md:px-6 md:py-3 md:text-2xl"
+                  >
+                    <IoDocumentTextOutline />
+                    {buttonText1}
+                  </Link>
+                )}
 
-                <Link
-                  href="/syllabus"
-                  className="flex items-center gap-2 rounded-lg bg-amber-300 p-2 md:px-6 md:py-3 text-black transition hover:bg-amber-400 w-full md:w-auto text-center justify-center text-sm md:text-2xl"
-                >
-                  <IoDocumentTextOutline />
-                  Syllabus
-                </Link>
+                {linkButton2 && (
+                  <Link
+                    href={linkButton2}
+                    target="_blank"
+                    className="flex w-full items-center justify-center gap-2 rounded-lg bg-amber-300 p-2 text-sm text-black transition hover:bg-amber-400 md:w-auto md:px-6 md:py-3 md:text-2xl"
+                  >
+                    <IoDocumentTextOutline />
+                    {buttonText2}
+                  </Link>
+                )}
               </div>
             )}
           </div>
@@ -56,7 +66,7 @@ export default function CardComponent({
               {requirements.map((requirement, index) => (
                 <li key={index} className="flex items-start">
                   <span className="mr-2 text-xl">•</span>
-                  <span>{requirement}</span>
+                  <span className="text-justify">{requirement}</span>
                 </li>
               ))}
             </ul>

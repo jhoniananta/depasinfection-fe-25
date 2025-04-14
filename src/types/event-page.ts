@@ -27,6 +27,10 @@ export interface cardSectionProps {
     main: string;
     sub: string;
   };
+  linkButton1?: string;
+  linkButton2?: string;
+  buttonText1?: string;
+  buttonText2?: string;
   images: string[];
   requirements: string[];
   showButton?: boolean;

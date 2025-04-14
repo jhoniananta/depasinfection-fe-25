@@ -4,13 +4,13 @@ import { Fragment } from "react";
 
 const timelineContent = [
   {
-    date: "14 Apr - 17 May 2025",
+    date: "14 Apr - 18 May 2025",
     title: "Early Registration UDSRC & OKGD",
     positionLarge: "-top-8 left-10 xl:left-12",
     positionSmall: "bottom-[690px] left-[95px]",
   },
   {
-    date: "18 May - 12 Jul 2025",
+    date: "19 May - 12 Jul 2025",
     title: "Regular Registration UDSRC & OKGD",
     positionLarge: "top-[115px] left-[120px] xl:top-[130px] xl:left-[140px]",
     positionSmall: "bottom-[620px] left-[95px]",
