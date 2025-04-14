@@ -133,7 +133,11 @@ function OKGDDashboardUserPage() {
                     <div className="mt-2 flex flex-col items-center justify-center gap-4">
                       <Countdown endDate="2025-07-13T00:00:00" />
                       <div className="flex w-full items-center justify-center gap-4 md:mt-4">
-                        <Link href="/Guidebook" className="flex-1">
+                        <Link
+                          href="https://drive.google.com/drive/folders/1Uj_JL8vU0F2hVwvT7PZdEKk5GB3e11Nq"
+                          target="_blank"
+                          className="flex-1"
+                        >
                           <Button
                             className="w-full"
                             disabled={isError}
@@ -142,7 +146,11 @@ function OKGDDashboardUserPage() {
                             Guidebook
                           </Button>
                         </Link>
-                        <Link href="/silabus" className="flex-1">
+                        <Link
+                          href="https://drive.google.com/drive/folders/1qxpS75ie9fiSRHUtTlkSbKMX3v6SqCNP"
+                          target="_blank"
+                          className="flex-1"
+                        >
                           <Button
                             className="w-full"
                             disabled={isError}

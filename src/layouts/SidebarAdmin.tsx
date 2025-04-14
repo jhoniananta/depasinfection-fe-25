@@ -10,6 +10,7 @@ import { Button } from "@/components/ui/button";
 import { SidebarAdmin } from "@/contents/sidebar";
 
 import { SidebarProps } from "@/types/sidebar";
+import clsx from "clsx";
 import Link from "next/link";
 
 function AdminSidebar({ children }: SidebarProps) {
@@ -117,25 +118,32 @@ function AdminSidebar({ children }: SidebarProps) {
                             title: string;
                           },
                           linkIndex: React.Key | null | undefined,
-                        ) => (
-                          <Button
-                            className="w-full rounded bg-transparent px-2 py-1 shadow-none hover:bg-amber-300"
-                            key={linkIndex}
-                          >
-                            <Link
-                              href={link.href}
-                              className="flex w-full flex-row items-center gap-2"
+                        ) => {
+                          const isActive =
+                            link.href === window.location.pathname;
+                          return (
+                            <Button
+                              className={clsx(
+                                "w-full rounded px-2 py-1 shadow-none hover:bg-amber-300",
+                                isActive ? "bg-amber-300" : "bg-transparent",
+                              )}
+                              key={linkIndex}
                             >
-                              {link.icon}
-                              <Typography
-                                variant="p"
-                                className="flex w-full items-center justify-between rounded py-1 text-[16px] font-semibold text-neutral-900 md:text-[16px]"
+                              <Link
+                                href={link.href}
+                                className="flex w-full flex-row items-center gap-2"
                               >
-                                {link.title}
-                              </Typography>
-                            </Link>
-                          </Button>
-                        ),
+                                {link.icon}
+                                <Typography
+                                  variant="p"
+                                  className="flex w-full items-center justify-between rounded py-1 text-[16px] font-semibold text-neutral-900 md:text-[16px]"
+                                >
+                                  {link.title}
+                                </Typography>
+                              </Link>
+                            </Button>
+                          );
+                        },
                       )}
                     </div>
                     <hr className="border-grey-400 border-t-2" />
@@ -235,25 +243,31 @@ function AdminSidebar({ children }: SidebarProps) {
                           title: string;
                         },
                         linkIndex: React.Key | null | undefined,
-                      ) => (
-                        <Button
-                          className="w-full rounded bg-transparent px-2 py-1 shadow-none hover:bg-amber-300"
-                          key={linkIndex}
-                        >
-                          <Link
-                            href={link.href}
-                            className="flex w-full flex-row items-center gap-2"
+                      ) => {
+                        const isActive = link.href === window.location.pathname;
+                        return (
+                          <Button
+                            className={clsx(
+                              "w-full rounded px-2 py-1 shadow-none hover:bg-amber-300",
+                              isActive ? "bg-amber-300" : "bg-transparent",
+                            )}
+                            key={linkIndex}
                           >
-                            {link.icon}
-                            <Typography
-                              variant="p"
-                              className="flex w-full items-center justify-between rounded py-1 text-[16px] font-semibold text-neutral-900 md:text-[16px]"
+                            <Link
+                              href={link.href}
+                              className="flex w-full flex-row items-center gap-2"
                             >
-                              {link.title}
-                            </Typography>
-                          </Link>
-                        </Button>
-                      ),
+                              {link.icon}
+                              <Typography
+                                variant="p"
+                                className="flex w-full items-center justify-between rounded py-1 text-[16px] font-semibold text-neutral-900 md:text-[16px]"
+                              >
+                                {link.title}
+                              </Typography>
+                            </Link>
+                          </Button>
+                        );
+                      },
                     )}
                   </div>
                   <hr className="border-grey-300 border-t" />

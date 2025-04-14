@@ -14,6 +14,7 @@ import { useGetDetailsEventQuery } from "../_hooks/@get/useGetDetailsEvent";
 export default withAuth(UDSRCDashboardUserPage, "all");
 function UDSRCDashboardUserPage() {
   const { data: eventDetails, isLoading, isError } = useGetDetailsEventQuery();
+  const isPoster = eventDetails?.[0].sub_competition === "POSTER";
   return (
     <>
       <Sidebar title="Dashboard UDSRC">
@@ -130,7 +131,15 @@ function UDSRCDashboardUserPage() {
                     <div className="mt-2 flex flex-col items-center justify-center gap-4">
                       <Countdown endDate="2025-07-13T00:00:00" />
                       <div className="flex w-full items-center justify-center gap-4 md:mt-4">
-                        <Link href="/Guidebook" className="flex-1">
+                        <Link
+                          href={
+                            isPoster
+                              ? "https://drive.google.com/drive/folders/1K0LoTdkeqtd7NX0LfeynBsNaAz0y55RE"
+                              : "https://drive.google.com/drive/folders/1vyLG-cnmp-Ht1GluDEVVg0uTnxQ0U3Hu"
+                          }
+                          target="_blank"
+                          className="flex-1"
+                        >
                           <Button
                             className="w-full"
                             disabled={isError}

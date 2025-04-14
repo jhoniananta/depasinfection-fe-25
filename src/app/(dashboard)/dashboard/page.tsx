@@ -114,8 +114,8 @@ function DashboardUserPage() {
                     You have registered to
                   </Typography>
                 </div>
-                <div className="flex h-auto w-full flex-col items-center justify-center gap-3 md:gap-5">
-                  <div className="lg:gap-18 relative flex h-full w-full flex-col items-center justify-center gap-6 lg:flex-row lg:items-end">
+                <div className="flex h-auto w-full items-center justify-center">
+                  <div className="relative flex h-full w-full items-center justify-center lg:items-end">
                     {profile?.events?.[0]?.event_code === "OKGD" ? (
                       <RegisterCard
                         src="/landing-page/bg-card-okgd.png"

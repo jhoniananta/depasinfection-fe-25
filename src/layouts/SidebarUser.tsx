@@ -10,6 +10,7 @@ import { Button } from "@/components/ui/button";
 import { SidebarUser } from "@/contents/sidebar";
 
 import { SidebarProps } from "@/types/sidebar";
+import clsx from "clsx";
 import Link from "next/link";
 
 function UserSidebar({ children }: SidebarProps) {
@@ -137,9 +138,54 @@ function UserSidebar({ children }: SidebarProps) {
                                   title: string;
                                 },
                                 linkIndex: React.Key | null | undefined,
-                              ) => (
+                              ) => {
+                                const isActive =
+                                  link.href === window.location.pathname;
+                                return (
+                                  <Button
+                                    className={clsx(
+                                      "w-full rounded bg-transparent px-2 py-1 shadow-none hover:bg-amber-300",
+                                      isActive
+                                        ? "bg-amber-300"
+                                        : "bg-transparent",
+                                    )}
+                                    key={linkIndex}
+                                  >
+                                    <Link
+                                      href={link.href}
+                                      className="flex w-full flex-row items-center gap-2"
+                                    >
+                                      {link.icon}
+                                      <Typography
+                                        variant="p"
+                                        className="flex w-full items-center justify-between rounded py-1 text-[16px] font-semibold text-neutral-900 md:text-[16px]"
+                                      >
+                                        {link.title}
+                                      </Typography>
+                                    </Link>
+                                  </Button>
+                                );
+                              },
+                            )
+                        : item.props.map(
+                            (
+                              link: {
+                                href: string;
+                                icon: React.ReactNode;
+                                title: string;
+                              },
+                              linkIndex: React.Key | null | undefined,
+                            ) => {
+                              const isActive =
+                                link.href === window.location.pathname;
+                              return (
                                 <Button
-                                  className="w-full rounded bg-transparent px-2 py-1 shadow-none hover:bg-amber-300"
+                                  className={clsx(
+                                    "w-full rounded bg-transparent px-2 py-1 shadow-none hover:bg-amber-300",
+                                    isActive
+                                      ? "bg-amber-300"
+                                      : "bg-transparent",
+                                  )}
                                   key={linkIndex}
                                 >
                                   <Link
@@ -155,35 +201,8 @@ function UserSidebar({ children }: SidebarProps) {
                                     </Typography>
                                   </Link>
                                 </Button>
-                              ),
-                            )
-                        : item.props.map(
-                            (
-                              link: {
-                                href: string;
-                                icon: React.ReactNode;
-                                title: string;
-                              },
-                              linkIndex: React.Key | null | undefined,
-                            ) => (
-                              <Button
-                                className="w-full rounded bg-transparent px-2 py-1 shadow-none hover:bg-amber-300"
-                                key={linkIndex}
-                              >
-                                <Link
-                                  href={link.href}
-                                  className="flex w-full flex-row items-center gap-2"
-                                >
-                                  {link.icon}
-                                  <Typography
-                                    variant="p"
-                                    className="flex w-full items-center justify-between rounded py-1 text-[16px] font-semibold text-neutral-900 md:text-[16px]"
-                                  >
-                                    {link.title}
-                                  </Typography>
-                                </Link>
-                              </Button>
-                            ),
+                              );
+                            },
                           )}
                     </div>
                     <hr className="border-grey-400 border-t-2" />
@@ -292,9 +311,52 @@ function UserSidebar({ children }: SidebarProps) {
                                 title: string;
                               },
                               linkIndex: React.Key | null | undefined,
-                            ) => (
+                            ) => {
+                              const isActive =
+                                link.href === window.location.pathname;
+                              return (
+                                <Button
+                                  className={clsx(
+                                    "w-full rounded bg-transparent px-2 py-1 shadow-none hover:bg-amber-300",
+                                    isActive
+                                      ? "bg-amber-300"
+                                      : "bg-transparent",
+                                  )}
+                                  key={linkIndex}
+                                >
+                                  <Link
+                                    href={link.href}
+                                    className="flex w-full flex-row items-center gap-2"
+                                  >
+                                    {link.icon}
+                                    <Typography
+                                      variant="p"
+                                      className="flex w-full items-center justify-between rounded py-1 text-[16px] font-semibold text-neutral-900 md:text-[16px]"
+                                    >
+                                      {link.title}
+                                    </Typography>
+                                  </Link>
+                                </Button>
+                              );
+                            },
+                          )
+                      : item.props.map(
+                          (
+                            link: {
+                              href: string;
+                              icon: React.ReactNode;
+                              title: string;
+                            },
+                            linkIndex: React.Key | null | undefined,
+                          ) => {
+                            const isActive =
+                              link.href === window.location.pathname;
+                            return (
                               <Button
-                                className="w-full rounded bg-transparent px-2 py-1 shadow-none hover:bg-amber-300"
+                                className={clsx(
+                                  "w-full rounded bg-transparent px-2 py-1 shadow-none hover:bg-amber-300",
+                                  isActive ? "bg-amber-300" : "bg-transparent",
+                                )}
                                 key={linkIndex}
                               >
                                 <Link
@@ -310,35 +372,8 @@ function UserSidebar({ children }: SidebarProps) {
                                   </Typography>
                                 </Link>
                               </Button>
-                            ),
-                          )
-                      : item.props.map(
-                          (
-                            link: {
-                              href: string;
-                              icon: React.ReactNode;
-                              title: string;
-                            },
-                            linkIndex: React.Key | null | undefined,
-                          ) => (
-                            <Button
-                              className="w-full rounded bg-transparent px-2 py-1 shadow-none hover:bg-amber-300"
-                              key={linkIndex}
-                            >
-                              <Link
-                                href={link.href}
-                                className="flex w-full flex-row items-center gap-2"
-                              >
-                                {link.icon}
-                                <Typography
-                                  variant="p"
-                                  className="flex w-full items-center justify-between rounded py-1 text-[16px] font-semibold text-neutral-900 md:text-[16px]"
-                                >
-                                  {link.title}
-                                </Typography>
-                              </Link>
-                            </Button>
-                          ),
+                            );
+                          },
                         )}
                   </div>
                   <hr className="border-grey-300 border-t" />
