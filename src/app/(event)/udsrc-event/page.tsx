@@ -90,9 +90,9 @@ function UDSRCHome() {
         />
         <RegistEvent
           registUrl="/event-register/udsrc"
-          guidebookUrl="/okgd-event/guidebook"
+          guidebookUrl="https://drive.google.com/drive/folders/1K0LoTdkeqtd7NX0LfeynBsNaAz0y55RE"
           endDate="2025-07-13T00:00:00"
-          srcVideo="https://www.youtube.com/cALir1YkkyI?si=aiogOd-DXC91TQik"
+          srcVideo="https://drive.google.com/file/d/1AN-ZJpra7_sInNFR8SO7Ub_nLlHYJULj/preview"
         />
       </main>
       <MapEvent />

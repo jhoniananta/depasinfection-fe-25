@@ -102,7 +102,7 @@ function OKGDHome() {
         />
         <RegistEvent
           registUrl="/event-register/okgd"
-          guidebookUrl="/okgd-event/guidebook"
+          guidebookUrl="https://drive.google.com/drive/folders/1Uj_JL8vU0F2hVwvT7PZdEKk5GB3e11Nq?usp=drive_link"
           endDate="2025-07-13T00:00:00"
           srcVideo="https://drive.google.com/file/d/1AN-ZJpra7_sInNFR8SO7Ub_nLlHYJULj/preview"
         />

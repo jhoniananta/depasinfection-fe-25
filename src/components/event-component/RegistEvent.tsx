@@ -47,7 +47,9 @@ export default function RegistEvent({
           <Countdown endDate={endDate} />
           <div className="item-center mt-[2vw] flex w-full flex-col justify-center gap-2 p-4 min-[374px]:p-0 md:flex-row md:justify-between">
             <Button variant="outlineSecondary">
-              <Link href={guidebookUrl}>Guidebook</Link>
+              <Link href={guidebookUrl} target="_blank">
+                Guidebook
+              </Link>
             </Button>
             <Button variant="primary">
               <Link href={registUrl}>Regist Now</Link>
