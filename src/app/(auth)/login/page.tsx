@@ -28,7 +28,7 @@ import { useEffect, useState } from "react";
 import Title from "../../../components/Title";
 import { useUserLoginMutation } from "../_hooks/@post/useLogin";
 
-export default withAuth(LoginPage, "auth");
+export default withAuth(LoginPage, "GUEST");
 function LoginPage() {
   const [show, setShow] = useState(false);
 

@@ -67,7 +67,7 @@ const timelineContentOkgd = [
   },
 ];
 
-export default withAuth(OKGDHome, "optional");
+export default withAuth(OKGDHome, "OPTIONAL");
 function OKGDHome() {
   const t = useTranslations("OKGDpage");
   return (

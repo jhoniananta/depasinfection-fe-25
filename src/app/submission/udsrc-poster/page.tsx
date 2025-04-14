@@ -33,7 +33,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 
-export default withAuth(UDSRCPosterSubmissionPage, "all");
+export default withAuth(UDSRCPosterSubmissionPage, "USER");
 function UDSRCPosterSubmissionPage() {
   const [openDialog, setOpenDialog] = useState(false);
   // const [data, setData] = useState<UDSRCPosterSubmissionData>();

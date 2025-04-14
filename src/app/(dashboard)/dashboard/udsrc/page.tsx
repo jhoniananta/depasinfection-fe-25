@@ -11,7 +11,7 @@ import BioInformationSection from "../_components/BioInformation";
 import PaymentInformationSection from "../_components/PaymentInformation";
 import { useGetDetailsEventQuery } from "../_hooks/@get/useGetDetailsEvent";
 
-export default withAuth(UDSRCDashboardUserPage, "all");
+export default withAuth(UDSRCDashboardUserPage, "USER");
 function UDSRCDashboardUserPage() {
   const { data: eventDetails, isLoading, isError } = useGetDetailsEventQuery();
   const isPoster = eventDetails?.[0].sub_competition === "POSTER";

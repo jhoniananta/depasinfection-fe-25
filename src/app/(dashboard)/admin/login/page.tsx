@@ -25,12 +25,19 @@ import { useEffect, useState } from "react";
 import { useAdminLoginMutation } from "../../../(auth)/_hooks/@post/useLogin";
 import Title from "../../../../components/Title";
 
-export default withAuth(AdminLoginPage, "auth");
+export default withAuth(AdminLoginPage, "GUEST");
 function AdminLoginPage() {
   const router = useRouter();
-
   const [show, setShow] = useState(false);
   const { handleLogin, isPending, isSuccess } = useAdminLoginMutation();
+
+  useEffect(() => {
+    if (isSuccess) {
+      setTimeout(() => {
+        router.replace("/admin");
+      }, 100); // ⏳ kasih delay supaya Zustand & cookie stabil dulu
+    }
+  }, [isSuccess, router]);
 
   const form = useForm<z.infer<typeof LoginFormSchema>>({
     resolver: zodResolver(LoginFormSchema),

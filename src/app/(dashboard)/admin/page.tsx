@@ -3,7 +3,7 @@
 import withAuth from "@/components/WithAuth";
 import Sidebar from "@/layouts/SidebarAdmin";
 
-export default withAuth(AdminDashboardPage, "all");
+export default withAuth(AdminDashboardPage, "ADMIN");
 function AdminDashboardPage() {
   return (
     <>

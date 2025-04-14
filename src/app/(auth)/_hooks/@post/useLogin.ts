@@ -60,6 +60,7 @@ export const useUserLoginMutation = () => {
 
 export const useAdminLoginMutation = () => {
   const login = useAuthStore.useLogin();
+  const setLoggingIn = useAuthStore.useSetLoggingIn(); // ✅
 
   const {
     mutate: handleLogin,
@@ -67,25 +68,26 @@ export const useAdminLoginMutation = () => {
     isPending,
   } = useMutation<UserLoginResponse, AxiosError<ApiError>, LoginRequest>({
     mutationFn: async (data) => {
+      setLoggingIn(true); // ✅ start login
       const res = await api.post<ApiResponse<UserLoginResponse>>(
         "/admin/auth/login",
         data,
       );
-
       return res.data.data;
     },
 
     onSuccess: (data) => {
       setToken(data.token);
-      login({ ...data, full_name: data.nama, token: data.token }); // ⬅️ inject ke Zustand
-
+      login({ ...data, full_name: data.nama, token: data.token }); // ✅ reset isLoggingIn here
       toast({
         title: "Login successful",
         description: "Please wait, redirect to your admin dashboard.",
         variant: "default",
       });
     },
+
     onError: (error: AxiosError<ApiError>) => {
+      useAuthStore.getState().setLoggingIn(false); // ✅ reset on error
       if (error.response?.data?.message) {
         const code = error.response?.data?.code || "";
 

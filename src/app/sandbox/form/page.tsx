@@ -7,7 +7,7 @@ import Typography from "@/components/Typography";
 import withAuth from "@/components/WithAuth";
 import Input from "@/components/form/Input";
 
-export default withAuth(FormSandbox, "all");
+export default withAuth(FormSandbox, "ADMIN");
 function FormSandbox() {
   const methods = useForm();
 

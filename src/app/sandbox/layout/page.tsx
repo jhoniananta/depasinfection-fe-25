@@ -3,7 +3,7 @@
 import withAuth from "@/components/WithAuth";
 import Layout from "@/layouts/Layout";
 
-export default withAuth(LayoutSandbox, "all");
+export default withAuth(LayoutSandbox, "ADMIN");
 function LayoutSandbox() {
   return (
     <Layout withFooter withNavbar>

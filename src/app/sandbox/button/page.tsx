@@ -8,7 +8,7 @@ import withAuth from "@/components/WithAuth";
 import Button from "@/components/buttons/Button";
 import ButtonLink from "@/components/links/ButtonLink";
 
-export default withAuth(SanboxButtonPage, "all");
+export default withAuth(SanboxButtonPage, "ADMIN");
 function SanboxButtonPage() {
   return (
     <main className="min-h-screen items-center justify-center bg-slate-200 py-20">

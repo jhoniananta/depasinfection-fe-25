@@ -40,7 +40,7 @@ const merchandiseItems = [
   },
 ];
 
-export default withAuth(MerchandisePage, "optional");
+export default withAuth(MerchandisePage, "OPTIONAL");
 function MerchandisePage() {
   return (
     <Layout withFooter withNavbar>

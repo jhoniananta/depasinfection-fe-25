@@ -9,7 +9,7 @@ import Sidebar from "@/layouts/SidebarUser";
 import RegisterCard from "./_components/RegisterCard";
 import { useGetProfileQuery } from "./_hooks/@get/useGetProfile";
 
-export default withAuth(DashboardUserPage, "all");
+export default withAuth(DashboardUserPage, "USER");
 function DashboardUserPage() {
   const { data: profile } = useGetProfileQuery();
 

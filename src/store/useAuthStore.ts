@@ -9,22 +9,23 @@ type AuthStoreType = {
   user: User | null;
   isAuthenticated: boolean;
   isLoading: boolean;
+  isLoggingIn: boolean; // ✅ NEW
   login: (user: User) => void;
   logout: () => void;
   stopLoading: () => void;
+  setLoggingIn: (v: boolean) => void; // ✅ NEW
 };
 
 const useAuthStoreBase = create<AuthStoreType>((set) => ({
   user: null,
   isAuthenticated: false,
   isLoading: true,
+  isLoggingIn: false, // ✅ NEW
 
   login: (user) => {
     const { role, account_id, phone_number, email, token, ...spreadData } =
       user;
     localStorage.setItem("depas25_data", JSON.stringify(spreadData));
-
-    // Ambil expiry dari JWT (manual decode)
     try {
       const payload = JSON.parse(atob(user.token.split(".")[1]));
       const expMs = payload.exp * 1000;
@@ -40,6 +41,7 @@ const useAuthStoreBase = create<AuthStoreType>((set) => ({
       produce<AuthStoreType>((state) => {
         state.isAuthenticated = true;
         state.user = user;
+        state.isLoggingIn = false; // ✅ reset login flag
       }),
     );
   },
@@ -50,13 +52,23 @@ const useAuthStoreBase = create<AuthStoreType>((set) => ({
       produce<AuthStoreType>((state) => {
         state.isAuthenticated = false;
         state.user = null;
+        state.isLoggingIn = false;
       }),
     );
   },
+
   stopLoading: () => {
     set(
       produce<AuthStoreType>((state) => {
         state.isLoading = false;
+      }),
+    );
+  },
+
+  setLoggingIn: (v) => {
+    set(
+      produce<AuthStoreType>((state) => {
+        state.isLoggingIn = v;
       }),
     );
   },
