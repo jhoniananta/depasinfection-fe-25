@@ -58,7 +58,7 @@ function DashboardUserPage() {
           {/* Content Section */}
           <div className="container my-6 flex w-full max-w-3xl flex-col items-center justify-center gap-[60px] md:my-9 xl:max-w-5xl">
             {/* Not registered to other event */}
-            {(!profile?.events || profile.events.length === 0) && (
+            {!profile?.events || profile.events.length === 0 ? (
               <>
                 <div className="flex h-[198px] w-[276px] flex-col justify-center gap-4 md:h-[216px]">
                   <Typography
@@ -102,37 +102,37 @@ function DashboardUserPage() {
                   </div>
                 </div>
               </>
-            )}
-
-            {/* Integrasi setelah ada event di Home */}
-            <>
-              <div className="flex h-full w-[276px] flex-col justify-center gap-4">
-                <Typography
-                  variant="p"
-                  weight="bold"
-                  className="text-center text-[18px] text-gray-500 md:text-[22px]"
-                >
-                  You have registered to
-                </Typography>
-              </div>
-              <div className="flex h-auto w-full flex-col items-center justify-center gap-3 md:gap-5">
-                <div className="lg:gap-18 relative flex h-full w-full flex-col items-center justify-center gap-6 lg:flex-row lg:items-end">
-                  {profile?.events?.[0]?.event_code === "OKGD" ? (
-                    <RegisterCard
-                      src="/landing-page/bg-card-okgd.png"
-                      title="okgd"
-                      subtitle="Olimpiade Kedokteran Gigi Dasar"
-                    />
-                  ) : (
-                    <RegisterCard
-                      src="/landing-page/bg-card-udsrc.png"
-                      title="udsrc"
-                      subtitle="UGM Dental Student Research Competition"
-                    />
-                  )}
+            ) : (
+              //Integrasi setelah ada event di Home *
+              <>
+                <div className="flex h-full w-[276px] flex-col justify-center gap-4">
+                  <Typography
+                    variant="p"
+                    weight="bold"
+                    className="text-center text-[18px] text-gray-500 md:text-[22px]"
+                  >
+                    You have registered to
+                  </Typography>
                 </div>
-              </div>
-            </>
+                <div className="flex h-auto w-full flex-col items-center justify-center gap-3 md:gap-5">
+                  <div className="lg:gap-18 relative flex h-full w-full flex-col items-center justify-center gap-6 lg:flex-row lg:items-end">
+                    {profile?.events?.[0]?.event_code === "OKGD" ? (
+                      <RegisterCard
+                        src="/landing-page/bg-card-okgd.png"
+                        title="okgd"
+                        subtitle="Olimpiade Kedokteran Gigi Dasar"
+                      />
+                    ) : (
+                      <RegisterCard
+                        src="/landing-page/bg-card-udsrc.png"
+                        title="udsrc"
+                        subtitle="UGM Dental Student Research Competition"
+                      />
+                    )}
+                  </div>
+                </div>
+              </>
+            )}
           </div>
         </section>
       </Sidebar>

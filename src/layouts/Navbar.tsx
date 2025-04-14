@@ -127,7 +127,7 @@ export default function Navbar() {
 
         {/* BAGIAN KANAN: background kondisional */}
         <div className={rightSectionClasses}>
-          <Select>
+          {/* <Select>
             <SelectTrigger className="flex w-fit border-0 shadow-none focus:border-0 focus:outline-none focus:ring-0">
               <SelectValue placeholder="Pilih Bahasa" />
             </SelectTrigger>
@@ -135,11 +135,11 @@ export default function Navbar() {
               <SelectItem value="en">EN</SelectItem>
               <SelectItem value="id">ID</SelectItem>
             </SelectContent>
-          </Select>
+          </Select> */}
           {user ? (
             <>
               <span className="text-[12px] font-semibold">
-                Hello, {user.full_name}
+                Hello, {user.full_name.split(" ")[0]}
               </span>
               <Button variant="outline" className={buttonClasses}>
                 <Link
