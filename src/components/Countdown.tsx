@@ -22,7 +22,10 @@ function TimeDisplay({
 }: timeDisplayProps) {
   return (
     <div className="flex flex-col items-center">
-      <Typography variant="h1" className={`font-semibold ${classNameTime}`}>
+      <Typography
+        variant="h1"
+        className={`font-semibold ${classNameTime} md:w-[108px] text-center`}
+      >
         {time}
       </Typography>
       <Typography variant="p" weight="bold" className={`${classNameCaption}`}>
@@ -54,7 +57,7 @@ export default function Countdown({ endDate }: CountdownProps) {
   const isOver = timeLeft.days < 0;
 
   return (
-    <div className="flex justify-center gap-2 max-w-[460px]">
+    <div className="flex justify-center gap-0 md:gap-1 max-w-[460px]">
       <TimeDisplay
         time={isOver ? 0 : timeLeft.days}
         label={t("days")}

@@ -32,6 +32,10 @@ export default function CardSectionUdsrc({
         images={images}
         requirements={requirements}
         showButton={showButton}
+        buttonText1="Guidebook Poster"
+        buttonText2="Guidebook 3 Minutes Competition"
+        linkButton1="https://drive.google.com/drive/folders/1K0LoTdkeqtd7NX0LfeynBsNaAz0y55RE"
+        linkButton2="https://drive.google.com/drive/folders/1vyLG-cnmp-Ht1GluDEVVg0uTnxQ0U3Hu"
       />
       <CardComponent
         title={{ main: "Special", sub: "City Tour" }}

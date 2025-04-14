@@ -23,7 +23,7 @@ export default function StepDone() {
         asChild
         className="text-olive-900 w-full bg-gradient-to-r from-amber-300 to-yellow-400 px-8 py-6 text-2xl font-bold text-[#a88a44] shadow-md hover:from-amber-400 hover:to-yellow-500 md:px-12 lg:px-14"
       >
-        <Link href="/dashboard/udsrc">Go to dashboard</Link>
+        <Link href="/dashboard">Go to dashboard</Link>
       </Button>
     </>
   );

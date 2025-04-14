@@ -14,7 +14,7 @@ export const useGetProfileQuery = () => {
       const profile = res.data.data;
 
       // Save registered event to localStorage
-      if (profile?.events[0]?.event_name) {
+      if (profile?.events?.[0]?.event_name) {
         localStorage.setItem(
           "registered_event",
           profile?.events[0]?.event_name,

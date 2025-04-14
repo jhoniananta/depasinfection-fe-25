@@ -4,7 +4,7 @@ export type UserProfile = {
   full_name: string;
   phone_number: string;
   role: string;
-  events: eventType[];
+  events?: eventType[] | null; // array of events that the user registered to
 };
 
 export type eventType = {

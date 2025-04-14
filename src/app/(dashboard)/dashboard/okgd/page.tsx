@@ -131,7 +131,7 @@ function OKGDDashboardUserPage() {
                       </Typography>
                     </div>
                     <div className="mt-2 flex flex-col items-center justify-center gap-4">
-                      <Countdown endDate="2025-07-14T23:59:59" />
+                      <Countdown endDate="2025-07-13T00:00:00" />
                       <div className="flex w-full items-center justify-center gap-4 md:mt-4">
                         <Link href="/Guidebook" className="flex-1">
                           <Button
@@ -148,7 +148,7 @@ function OKGDDashboardUserPage() {
                             disabled={isError}
                             variant="outlinePurple"
                           >
-                            Silabus
+                            Syllabus
                           </Button>
                         </Link>
                       </div>
@@ -226,13 +226,16 @@ function OKGDDashboardUserPage() {
                           </Typography>
                         </div>
                       </div>
-                      <Button
-                        variant="outlinePurple"
-                        className="flex items-center justify-center gap-4 text-xs lg:ml-auto lg:text-lg"
-                      >
-                        <FiDownload className="text-xs lg:text-lg" />
-                        Download Student Card
-                      </Button>
+                      {/* Download Student card after status === verified*/}
+                      {eventDetails?.[0].status === "VERIFIED" && (
+                        <Button
+                          variant="outlinePurple"
+                          className="flex items-center justify-center gap-4 text-xs lg:ml-auto lg:text-lg"
+                        >
+                          <FiDownload className="text-xs lg:text-lg" />
+                          Download Student Card
+                        </Button>
+                      )}
                     </div>
                     {/* Button download student card */}
 

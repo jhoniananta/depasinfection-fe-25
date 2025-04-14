@@ -7,14 +7,12 @@ import withAuth from "@/components/WithAuth";
 import { Button } from "@/components/ui/button";
 import Sidebar from "@/layouts/SidebarUser";
 import Link from "next/link";
-import { FiDownload } from "react-icons/fi";
 import BioInformationSection from "../_components/BioInformation";
 import PaymentInformationSection from "../_components/PaymentInformation";
 import { useGetDetailsEventQuery } from "../_hooks/@get/useGetDetailsEvent";
 
 export default withAuth(UDSRCDashboardUserPage, "all");
 function UDSRCDashboardUserPage() {
-  // Data Fetching Details Event Query
   const { data: eventDetails, isLoading, isError } = useGetDetailsEventQuery();
   return (
     <>
@@ -130,7 +128,7 @@ function UDSRCDashboardUserPage() {
                       </Typography>
                     </div>
                     <div className="mt-2 flex flex-col items-center justify-center gap-4">
-                      <Countdown endDate="2025-07-14T23:59:59" />
+                      <Countdown endDate="2025-07-13T00:00:00" />
                       <div className="flex w-full items-center justify-center gap-4 md:mt-4">
                         <Link href="/Guidebook" className="flex-1">
                           <Button
@@ -216,15 +214,17 @@ function UDSRCDashboardUserPage() {
                           </Typography>
                         </div>
                       </div>
-                      <Button
-                        variant="outlinePurple"
-                        className="flex items-center justify-center gap-4 text-xs lg:ml-auto lg:text-lg"
-                      >
-                        <FiDownload className="text-xs lg:text-lg" />
-                        Download Student Card
-                      </Button>
+                      {/* Submit Button after status === verified*/}
+                      {eventDetails?.[0].status === "VERIFIED" && (
+                        <Button
+                          variant="outlinePurple"
+                          className="flex items-center justify-center gap-4 text-xs lg:ml-auto lg:text-lg"
+                        >
+                          Submit
+                        </Button>
+                      )}
                     </div>
-                    {/* Button download student card */}
+                    {/* Button Submit */}
 
                     {(eventDetails?.[0].revision_status ||
                       eventDetails?.[0].status === "REJECTED") && (
