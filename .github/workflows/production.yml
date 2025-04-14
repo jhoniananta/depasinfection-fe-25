@@ -27,9 +27,9 @@ jobs:
             git pull origin main
             export NVM_DIR=~/.nvm
             source ~/.nvm/nvm.sh
-            bun install
+            pnpm install
             rm -rf .next  
-            bun run build
+            pnpm run build
             pm2 restart depasinfection-fe-25
 
       - name: Notify Success
