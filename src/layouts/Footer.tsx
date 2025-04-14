@@ -1,15 +1,19 @@
 import NextImage from "@/components/NextImage";
 import Typography from "@/components/Typography";
 import IconLink from "@/components/links/IconLink";
-import { FaFacebookF, FaXTwitter } from "react-icons/fa6";
+import { FaFacebookF, FaTiktok, FaXTwitter } from "react-icons/fa6";
 import { SiInstagram, SiShopee } from "react-icons/si";
 
 // Deklarasi social links agar tidak didefinisikan ulang setiap render
 const socialLinks = [
-  { icon: SiInstagram, href: "/" },
-  { icon: FaXTwitter, href: "/" },
-  { icon: FaFacebookF, href: "/" },
-  { icon: SiShopee, href: "/" },
+  { icon: SiInstagram, href: "https://www.instagram.com/depasinfection" },
+  { icon: FaXTwitter, href: "https://twitter.com/depasinfection" },
+  { icon: FaFacebookF, href: "https://www.facebook.com/depasinfection" },
+  { icon: SiShopee, href: "/" }, // Placeholder, belum ada data Shopee
+  {
+    icon: FaTiktok,
+    href: "https://www.tiktok.com/@depasinfection",
+  },
 ];
 
 export default function Footer() {

@@ -18,8 +18,11 @@ function UserSidebar({ children }: SidebarProps) {
   const [eventName, setEventName] = React.useState<string | null>(null);
 
   React.useEffect(() => {
-    const event = localStorage.getItem("registered_event");
-    setEventName(event);
+    const raw = localStorage.getItem("depas25_data");
+    const user = raw ? JSON.parse(raw) : null;
+    const eventName = user?.events?.[0]?.event_name;
+
+    setEventName(eventName);
   }, []);
 
   return (

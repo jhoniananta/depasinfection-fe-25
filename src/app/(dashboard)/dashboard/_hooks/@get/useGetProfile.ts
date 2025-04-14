@@ -10,16 +10,7 @@ export const useGetProfileQuery = () => {
     queryKey: ["/user/auth/me"],
     queryFn: async () => {
       const res = await api.get<ApiResponse<UserProfile>>("/user/auth/me");
-      // Assume only one profile (first index)
-      const profile = res.data.data;
 
-      // Save registered event to localStorage
-      if (profile?.events?.[0]?.event_name) {
-        localStorage.setItem(
-          "registered_event",
-          profile?.events[0]?.event_name,
-        );
-      }
       return res.data.data;
     },
   });

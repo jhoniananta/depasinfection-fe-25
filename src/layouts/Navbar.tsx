@@ -14,6 +14,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import useAuthStore from "@/store/useAuthStore";
 import { Transition } from "@headlessui/react";
 import clsx from "clsx";
 import Link from "next/link";
@@ -25,6 +26,8 @@ export default function Navbar() {
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
 
   const pathname = usePathname();
+
+  const user = useAuthStore.useUser();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -133,15 +136,39 @@ export default function Navbar() {
               <SelectItem value="id">ID</SelectItem>
             </SelectContent>
           </Select>
-          <Button variant="outline" className={buttonClasses}>
-            <Link
-              href="/login"
-              className="flex flex-row items-center justify-center gap-2"
-            >
-              <HiOutlineLogout />
-              Login
-            </Link>
-          </Button>
+          {user ? (
+            <>
+              <span className="text-[12px] font-semibold">
+                Hello, {user.full_name}
+              </span>
+              <Button variant="outline" className={buttonClasses}>
+                <Link
+                  href={
+                    user.role === "USER"
+                      ? "/dashboard"
+                      : ["SUPERADMIN", "OKGD_ADMIN", "UDSRC_ADMIN"].includes(
+                            user.role,
+                          )
+                        ? "/admin"
+                        : "/"
+                  }
+                  className="flex flex-row items-center justify-center gap-2"
+                >
+                  Dashboard
+                </Link>
+              </Button>
+            </>
+          ) : (
+            <Button variant="outline" className={buttonClasses}>
+              <Link
+                href="/login"
+                className="flex flex-row items-center justify-center gap-2"
+              >
+                <HiOutlineLogout />
+                Login
+              </Link>
+            </Button>
+          )}
         </div>
 
         {/* Mobile Hamburger Button */}
@@ -212,15 +239,37 @@ export default function Navbar() {
                 <SelectItem value="id">ID</SelectItem>
               </SelectContent>
             </Select>
-            <Button variant="outline" className={buttonClasses}>
-              <Link
-                href="/login"
-                className="flex flex-row items-center justify-center gap-2"
-              >
-                <HiOutlineLogout />
-                Login
-              </Link>
-            </Button>
+            {user ? (
+              <>
+                <span className="font-semibold">{user.full_name}</span>
+                <Button variant="outline" className={buttonClasses}>
+                  <Link
+                    href={
+                      user.role === "USER"
+                        ? "/dashboard"
+                        : ["SUPERADMIN", "OKGD_ADMIN", "UDSRC_ADMIN"].includes(
+                              user.role,
+                            )
+                          ? "/admin"
+                          : "/"
+                    }
+                    className="flex flex-row items-center justify-center gap-2"
+                  >
+                    Dashboard
+                  </Link>
+                </Button>
+              </>
+            ) : (
+              <Button variant="outline" className={buttonClasses}>
+                <Link
+                  href="/login"
+                  className="flex flex-row items-center justify-center gap-2"
+                >
+                  <HiOutlineLogout />
+                  Login
+                </Link>
+              </Button>
+            )}
           </div>
         </div>
       </Transition>
