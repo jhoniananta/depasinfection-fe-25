@@ -36,7 +36,7 @@ export const getFeeInfoUDSRC = (
     if (subCompetition === "poster-competition") {
       return nationality === "IDN"
         ? { label: "IDR150.000,00", value: 150000 }
-        : { label: "$24.00", value: 24 };
+        : { label: "$25.00", value: 25 };
     }
     if (subCompetition === "3-minutes-oral-competition") {
       return nationality === "IDN"
@@ -49,12 +49,12 @@ export const getFeeInfoUDSRC = (
     if (subCompetition === "poster-competition") {
       return nationality === "IDN"
         ? { label: "IDR200.000,00", value: 200000 }
-        : { label: "$28.00", value: 28 };
+        : { label: "$30.00", value: 30 };
     }
     if (subCompetition === "3-minutes-oral-competition") {
       return nationality === "IDN"
         ? { label: "IDR250.000,00", value: 250000 }
-        : { label: "$34.00", value: 34 };
+        : { label: "$35.00", value: 35 };
     }
   }
 
