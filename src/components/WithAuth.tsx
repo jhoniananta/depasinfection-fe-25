@@ -45,38 +45,40 @@ function isAdminRole(role: string) {
 
 export default function withAuth<T extends object>(
   WrappedComponent: React.ComponentType<T>,
-  routeRole: RouteRole = "ANY", // default is "ANY" = must be logged in
+  routeRole: RouteRole = "ANY",
 ) {
   const ComponentWithAuth = (props: T) => {
     const router = useRouter();
     const { toast } = useToast();
+    const clientLogout = useClientLogout();
 
     const isAuthenticated = useAuthStore.useIsAuthenticated();
     const isLoading = useAuthStore.useIsLoading();
+    const isLoggingIn = useAuthStore.useIsLoggingIn();
     const login = useAuthStore.useLogin();
     const logout = useAuthStore.useLogout();
     const stopLoading = useAuthStore.useStopLoading();
     const user = useAuthStore.useUser();
-    const isLoggingIn = useAuthStore.useIsLoggingIn();
 
-    // Callback for where to go after successful login
-    const clientLogout = useClientLogout();
+    const isCheckingRef = React.useRef(false);
 
     const checkAuth = React.useCallback(async () => {
+      if (isCheckingRef.current) return;
+      isCheckingRef.current = true;
+
       const token = getToken();
       if (!token) {
-        // no token? definitely logged out
         logout();
         stopLoading();
+        isCheckingRef.current = false;
         return;
       }
+
       try {
-        // 1) Validate token with a quick endpoint
         const checkRes = await fetch(`${baseURL}/check?token=${token}`);
         const checkText = await checkRes.text();
         if (checkText !== "valid") throw new Error("Token invalid");
 
-        // 2) If valid, fetch user info
         const isAdminPage = location.pathname.startsWith("/admin");
         const meEndpoint = isAdminPage
           ? `${baseURL}/admin/auth/me`
@@ -89,10 +91,7 @@ export default function withAuth<T extends object>(
         const json = await meRes.json();
         if (!meRes.ok || !json?.status) throw new Error("Unauthorized");
 
-        login({
-          ...json.data,
-          token,
-        });
+        login({ ...json.data, token });
       } catch {
         clearDepasAuth();
         clientLogout(true, location.pathname);
@@ -102,10 +101,10 @@ export default function withAuth<T extends object>(
         });
       } finally {
         stopLoading();
+        isCheckingRef.current = false;
       }
     }, [login, logout, stopLoading, toast, clientLogout]);
 
-    // Passive auto logout (based on localStorage expiry)
     React.useEffect(() => {
       const expiry = localStorage.getItem("depas25_token_expiry");
       if (!expiry) return;
@@ -122,31 +121,34 @@ export default function withAuth<T extends object>(
       return () => clearTimeout(timer);
     }, [clientLogout]);
 
-    // Check token on mount + whenever user refocuses or localStorage changes
     React.useEffect(() => {
       checkAuth();
-      window.addEventListener("focus", checkAuth);
-      window.addEventListener("storage", checkAuth);
+
+      let debounceTimeout: NodeJS.Timeout;
+      const handleFocus = () => {
+        clearTimeout(debounceTimeout);
+        debounceTimeout = setTimeout(checkAuth, 300);
+      };
+      const handleStorage = () => {
+        clearTimeout(debounceTimeout);
+        debounceTimeout = setTimeout(checkAuth, 300);
+      };
+
+      window.addEventListener("focus", handleFocus);
+      window.addEventListener("storage", handleStorage);
       return () => {
-        window.removeEventListener("focus", checkAuth);
-        window.removeEventListener("storage", checkAuth);
+        window.removeEventListener("focus", handleFocus);
+        window.removeEventListener("storage", handleStorage);
       };
     }, [checkAuth]);
 
-    // Route-based redirect logic
     React.useEffect(() => {
       if (!isLoading && !isLoggingIn) {
         if (!isAuthenticated) {
-          switch (routeRole) {
-            case "ANY":
-            case "USER":
-            case "ADMIN":
-              router.replace(
-                `/login?callback=${encodeURIComponent(location.pathname)}`,
-              );
-              break;
-            default:
-              break;
+          if (["ANY", "USER", "ADMIN"].includes(routeRole)) {
+            router.replace(
+              `/login?callback=${encodeURIComponent(location.pathname)}`,
+            );
           }
         } else {
           const userIsAdmin = user ? isAdminRole(user.role) : false;
@@ -165,7 +167,6 @@ export default function withAuth<T extends object>(
       }
     }, [isAuthenticated, isLoading, isLoggingIn, routeRole, router, user]);
 
-    // Show spinner if we’re waiting for token check on a protected route
     const isProtected = ["ANY", "USER", "ADMIN"].includes(routeRole);
     if ((isLoading || isLoggingIn || !isAuthenticated) && isProtected) {
       return (
@@ -175,7 +176,6 @@ export default function withAuth<T extends object>(
       );
     }
 
-    // Everything is good; render the page
     return <WrappedComponent {...props} />;
   };
 
