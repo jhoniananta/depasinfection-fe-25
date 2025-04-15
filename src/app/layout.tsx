@@ -92,15 +92,18 @@ export default async function RootLayout({
   return (
     <html suppressHydrationWarning lang={locale} className="scroll-smooth">
       <body className={`${rubik.variable} ${bagnard.variable} bg-neutral-50`}>
-        {/* Google Tag Manager */}
-        <Script id="gtm-init" strategy="beforeInteractive">
+        {/* Google Analytics 4 via gtag.js */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-2JXJ4TJPVJ"
+          strategy="afterInteractive"
+        />
+        <Script id="ga4-init" strategy="afterInteractive">
           {`
-          (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-          new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-          j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-          'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-          })(window,document,'script','dataLayer','GTM-W4LFDH7X');
-        `}
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-2JXJ4TJPVJ');
+    `}
         </Script>
 
         {/* Umami Analytics */}
@@ -111,11 +114,6 @@ export default async function RootLayout({
           strategy="afterInteractive"
         />
 
-        <noscript
-          dangerouslySetInnerHTML={{
-            __html: `<iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W4LFDH7X" height="0" width="0" style="display:none;visibility:hidden"></iframe>`,
-          }}
-        />
         <NextIntlClientProvider>
           <Providers>{children}</Providers>
         </NextIntlClientProvider>
