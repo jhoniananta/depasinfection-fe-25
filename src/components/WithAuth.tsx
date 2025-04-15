@@ -63,7 +63,7 @@ export default function withAuth<T extends object>(
     const isCheckingRef = React.useRef(false);
 
     const checkAuth = React.useCallback(async () => {
-      if (isCheckingRef.current) return;
+      if (isCheckingRef.current || isLoggingIn) return;
       isCheckingRef.current = true;
 
       const token = getToken();
