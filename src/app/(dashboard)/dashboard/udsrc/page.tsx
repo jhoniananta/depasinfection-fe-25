@@ -217,20 +217,28 @@ function UDSRCDashboardUserPage() {
                                 ? "Please Revised"
                                 : eventDetails?.[0].status === "REJECTED"
                                   ? "Rejected"
-                                  : eventDetails?.[0].status === "VERIFIED"
+                                  : eventDetails?.[0].status === "APPROVED"
                                     ? "Verified"
                                     : ""}
                           </Typography>
                         </div>
                       </div>
                       {/* Submit Button after status === verified*/}
-                      {eventDetails?.[0].status === "VERIFIED" && (
-                        <Button
-                          variant="outlinePurple"
-                          className="flex items-center justify-center gap-4 text-xs lg:ml-auto lg:text-lg"
+                      {eventDetails?.[0].status === "APPROVED" && (
+                        <Link
+                          href={
+                            isPoster
+                              ? "/submission/udsrc-poster"
+                              : "/submission/udsrc-3-mop"
+                          }
                         >
-                          Submit
-                        </Button>
+                          <Button
+                            variant="purple"
+                            className="flex items-center justify-center gap-4 text-xs lg:ml-auto lg:text-lg"
+                          >
+                            Submit
+                          </Button>
+                        </Link>
                       )}
                     </div>
                     {/* Button Submit */}

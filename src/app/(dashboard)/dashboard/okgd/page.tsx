@@ -228,14 +228,14 @@ function OKGDDashboardUserPage() {
                                 ? "Please Revised"
                                 : eventDetails?.[0].status === "REJECTED"
                                   ? "Rejected"
-                                  : eventDetails?.[0].status === "VERIFIED"
+                                  : eventDetails?.[0].status === "APPROVED"
                                     ? "Verified"
                                     : ""}
                           </Typography>
                         </div>
                       </div>
                       {/* Download Student card after status === verified*/}
-                      {eventDetails?.[0].status === "VERIFIED" && (
+                      {eventDetails?.[0].status === "APPROVED" && (
                         <Button
                           variant="outlinePurple"
                           className="flex items-center justify-center gap-4 text-xs lg:ml-auto lg:text-lg"

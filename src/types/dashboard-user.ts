@@ -22,7 +22,7 @@ export type EventDetails = [
     school_address: string;
     integrity_pact: string;
     nationality: string;
-    status: "PENDING" | "VERIFIED" | "REJECTED" | "REVISION"; // asumsi status hanya 3 ini, bisa ditambah jika ada lagi
+    status: "PENDING" | "APPROVED" | "REJECTED" | "REVISION"; // asumsi status hanya 3 ini, bisa ditambah jika ada lagi
     event: string;
     sub_competition?: string;
     revision_message?: string | null;
