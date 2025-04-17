@@ -34,7 +34,7 @@ function AdminLoginPage() {
   useEffect(() => {
     if (isSuccess) {
       setTimeout(() => {
-        router.replace("/admin");
+        router.replace("/admin/okgd");
       }, 100); // ⏳ kasih delay supaya Zustand & cookie stabil dulu
     }
   }, [isSuccess, router]);
@@ -56,7 +56,7 @@ function AdminLoginPage() {
 
   useEffect(() => {
     if (isSuccess) {
-      router.replace("/admin"); // bisa pakai replace supaya gak bisa balik ke /login
+      router.replace("/admin/okgd"); // bisa pakai replace supaya gak bisa balik ke /login
     }
   }, [isSuccess, router]);
 

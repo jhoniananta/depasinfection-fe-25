@@ -17,6 +17,7 @@ export default withAuth(OKGDDashboardUserPage, "USER");
 function OKGDDashboardUserPage() {
   // Data Fetching Details Event Query
   const { data: eventDetails, isLoading, isError } = useGetDetailsEventQuery();
+
   return (
     <>
       <Sidebar title="Dashboard OKGD">
@@ -95,7 +96,7 @@ function OKGDDashboardUserPage() {
                       >
                         {eventDetails?.[0].status === "PENDING" ? (
                           "Congratulations! You are now registered for OKGD. Our admin team is currently verifying your account. Stay tuned!"
-                        ) : (
+                        ) : eventDetails?.[0].status === "APPROVED" ? (
                           <>
                             <span className="text-purple-600">
                               Congratulations!
@@ -103,6 +104,14 @@ function OKGDDashboardUserPage() {
                             {
                               " ✨ Congratulations! You have successfully become a participant of the Dentistry Olympiad. Please make sure to read the Guidebook and Syllabus that will be  provided."
                             }
+                          </>
+                        ) : (
+                          <>
+                            <span className="text-red-600">
+                              Check this message !
+                            </span>
+                            <br />
+                            {eventDetails?.[0].revision_message}
                           </>
                         )}
                       </Typography>
@@ -213,7 +222,7 @@ function OKGDDashboardUserPage() {
                             className={`text-[20px] font-bold leading-[24px] ${
                               eventDetails?.[0].status === "PENDING"
                                 ? "text-purple-900"
-                                : eventDetails?.[0].revision_status
+                                : eventDetails?.[0].status === "REVISION"
                                   ? "text-yellow-900"
                                   : eventDetails?.[0].status === "REJECTED"
                                     ? "text-red-900"
@@ -224,7 +233,7 @@ function OKGDDashboardUserPage() {
                             {isLoading && "loading..."}
                             {eventDetails?.[0].status === "PENDING"
                               ? "Not Verified"
-                              : eventDetails?.[0].revision_status
+                              : eventDetails?.[0].status === "REVISION"
                                 ? "Please Revised"
                                 : eventDetails?.[0].status === "REJECTED"
                                   ? "Rejected"
@@ -247,7 +256,7 @@ function OKGDDashboardUserPage() {
                     </div>
                     {/* Button download student card */}
 
-                    {(eventDetails?.[0].revision_status ||
+                    {(eventDetails?.[0].status === "REVISION" ||
                       eventDetails?.[0].status === "REJECTED") && (
                       <div className="my-[4px]">
                         <Typography
@@ -257,8 +266,8 @@ function OKGDDashboardUserPage() {
                           Alasan
                         </Typography>
                         <Typography
-                          className={`mt-[9px] text-[20px] font-bold leading-[24px] ${
-                            eventDetails?.[0].revision_status
+                          className={`text-[20px] font-bold leading-[24px] ${
+                            eventDetails?.[0].status === "REVISION"
                               ? "text-yellow-900"
                               : "text-red-900"
                           }`}
@@ -269,7 +278,7 @@ function OKGDDashboardUserPage() {
                         </Typography>
                       </div>
                     )}
-                    {eventDetails?.[0].revision_status && (
+                    {eventDetails?.[0].status === "REVISION" && (
                       <div className="my-[4px] flex flex-col gap-2">
                         <Typography
                           className="text-[16px] font-medium leading-[16px] text-[#A8A9AC]"

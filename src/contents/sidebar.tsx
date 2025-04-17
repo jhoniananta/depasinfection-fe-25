@@ -8,12 +8,12 @@ export const SidebarAdmin = [
     props: [
       {
         title: "OKGD",
-        href: "/dashboard/okgd",
+        href: "/admin/okgd",
         icon: <IoBookSharp className="text-[#a88a44]" size="24" />,
       },
       {
         title: "UDSRC",
-        href: "/dashboard/udsrc",
+        href: "/admin/udsrc",
         icon: <FaMedal className="text-[#a88a44]" size="24" />,
       },
     ],
