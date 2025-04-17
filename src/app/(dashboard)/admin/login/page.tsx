@@ -4,7 +4,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
-import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -19,6 +18,8 @@ import { LoginFormSchema } from "@/schemas/auth-schema";
 import { EyeIcon, EyeOffIcon } from "lucide-react";
 
 import withAuth from "@/components/WithAuth";
+import Button from "@/components/buttons/Button";
+import { Button as ShadCnButton } from "@/components/ui/button";
 import FormLayout from "@/layouts/FormLayout";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -111,7 +112,7 @@ function AdminLoginPage() {
                       placeholder="••••••••"
                       {...field}
                     />
-                    <Button
+                    <ShadCnButton
                       type="button"
                       variant="ghost"
                       size="icon"
@@ -124,7 +125,7 @@ function AdminLoginPage() {
                       ) : (
                         <EyeIcon className="size-4" />
                       )}
-                    </Button>
+                    </ShadCnButton>
                   </div>
                 </FormControl>
                 <FormMessage />
@@ -132,7 +133,12 @@ function AdminLoginPage() {
             )}
           />
 
-          <Button type="submit" className="w-full" disabled={isPending}>
+          <Button
+            type="submit"
+            className="w-full"
+            disabled={isPending}
+            variant="gradient-yellow"
+          >
             {isPending ? "Submitting..." : "Submit"}
           </Button>
         </form>

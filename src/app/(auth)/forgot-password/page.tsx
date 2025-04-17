@@ -92,7 +92,12 @@ function ForgotPasswordPage() {
                   </FormItem>
                 )}
               />
-              <Button disabled={isPending} type="submit" className="w-full">
+              <Button
+                disabled={isPending}
+                type="submit"
+                className="w-full"
+                variant="gradient-yellow"
+              >
                 {isPending ? "Sending..." : "Send Reset Link"}
               </Button>
             </form>

@@ -1,9 +1,14 @@
 import FormLayout from "@/layouts/FormLayout";
+import { Metadata } from "next";
 import { ReactNode } from "react";
 
 interface AuthLayoutProps {
   children: ReactNode;
 }
+
+export const metadata: Metadata = {
+  title: "Authentication",
+};
 
 export default function AuthLayout({ children }: AuthLayoutProps) {
   return (
