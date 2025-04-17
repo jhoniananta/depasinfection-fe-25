@@ -15,6 +15,7 @@ export default withAuth(UDSRCDashboardUserPage, "USER");
 function UDSRCDashboardUserPage() {
   const { data: eventDetails, isLoading, isError } = useGetDetailsEventQuery();
   const isPoster = eventDetails?.[0].sub_competition === "POSTER";
+
   return (
     <>
       <Sidebar title="Dashboard UDSRC">
@@ -93,7 +94,7 @@ function UDSRCDashboardUserPage() {
                       >
                         {eventDetails?.[0].status === "PENDING" ? (
                           "Congratulations! You are now registered for UDSRC. Our admin team is currently verifying your account. Stay tuned!"
-                        ) : (
+                        ) : eventDetails?.[0].status === "APPROVED" ? (
                           <>
                             <span className="text-purple-600">
                               Congratulations!
@@ -101,6 +102,14 @@ function UDSRCDashboardUserPage() {
                             {
                               " ✨ Congratulations! You have successfully become a participant of the Dentistry Olympiad. Please make sure to read the Guidebook and Syllabus that will be  provided."
                             }
+                          </>
+                        ) : (
+                          <>
+                            <span className="text-red-600">
+                              Check this message !
+                            </span>
+                            <br />
+                            {eventDetails?.[0].revision_message}
                           </>
                         )}
                       </Typography>
@@ -202,7 +211,7 @@ function UDSRCDashboardUserPage() {
                             className={`text-[20px] font-bold leading-[24px] ${
                               eventDetails?.[0].status === "PENDING"
                                 ? "text-purple-900"
-                                : eventDetails?.[0].revision_status
+                                : eventDetails?.[0].status === "REVISION"
                                   ? "text-yellow-900"
                                   : eventDetails?.[0].status === "REJECTED"
                                     ? "text-red-900"
@@ -213,7 +222,7 @@ function UDSRCDashboardUserPage() {
                             {isLoading && "loading..."}
                             {eventDetails?.[0].status === "PENDING"
                               ? "Not Verified"
-                              : eventDetails?.[0].revision_status
+                              : eventDetails?.[0].status === "REVISION"
                                 ? "Please Revised"
                                 : eventDetails?.[0].status === "REJECTED"
                                   ? "Rejected"
@@ -243,7 +252,7 @@ function UDSRCDashboardUserPage() {
                     </div>
                     {/* Button Submit */}
 
-                    {(eventDetails?.[0].revision_status ||
+                    {(eventDetails?.[0].status === "REVISION" ||
                       eventDetails?.[0].status === "REJECTED") && (
                       <div className="my-[4px]">
                         <Typography
@@ -254,7 +263,7 @@ function UDSRCDashboardUserPage() {
                         </Typography>
                         <Typography
                           className={`mt-[9px] text-[20px] font-bold leading-[24px] ${
-                            eventDetails?.[0].revision_status
+                            eventDetails?.[0].status === "REVISION"
                               ? "text-yellow-900"
                               : "text-red-900"
                           }`}
@@ -265,7 +274,7 @@ function UDSRCDashboardUserPage() {
                         </Typography>
                       </div>
                     )}
-                    {eventDetails?.[0].revision_status && (
+                    {eventDetails?.[0].status === "REVISION" && (
                       <div className="my-[4px] flex flex-col gap-2">
                         <Typography
                           className="text-[16px] font-medium leading-[16px] text-[#A8A9AC]"

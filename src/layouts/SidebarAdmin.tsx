@@ -119,12 +119,13 @@ function AdminSidebar({ children }: SidebarProps) {
                           },
                           linkIndex: React.Key | null | undefined,
                         ) => {
-                          const isActive =
-                            link.href === window.location.pathname;
+                          const isActive = window.location.pathname.startsWith(
+                            link.href,
+                          );
                           return (
                             <Button
                               className={clsx(
-                                "w-full rounded px-2 py-1 shadow-none hover:bg-amber-300",
+                                "w-full rounded px-2 py-1 shadow-none hover:bg-amber-300 bg-transparent",
                                 isActive ? "bg-amber-300" : "bg-transparent",
                               )}
                               key={linkIndex}
@@ -244,11 +245,13 @@ function AdminSidebar({ children }: SidebarProps) {
                         },
                         linkIndex: React.Key | null | undefined,
                       ) => {
-                        const isActive = link.href === window.location.pathname;
+                        const isActive = window.location.pathname.startsWith(
+                          link.href,
+                        );
                         return (
                           <Button
                             className={clsx(
-                              "w-full rounded px-2 py-1 shadow-none hover:bg-amber-300",
+                              "w-full rounded px-2 py-1 shadow-none hover:bg-amber-300 bg-transparent",
                               isActive ? "bg-amber-300" : "bg-transparent",
                             )}
                             key={linkIndex}

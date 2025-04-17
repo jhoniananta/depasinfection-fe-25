@@ -43,10 +43,10 @@ export type ParticipantDetails = {
   role: "LEADER" | "MEMBER";
   name: string;
   email: string;
-  nik: string;
+  nik: string | null;
   phone_number: string;
   nim: string | null;
-  nisn: string;
+  nisn: string | null;
   student_card: string;
   twibbon: string;
   created_at: string;
