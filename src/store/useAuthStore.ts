@@ -10,10 +10,12 @@ type AuthStoreType = {
   isAuthenticated: boolean;
   isLoading: boolean;
   isLoggingIn: boolean; // ✅ NEW
+  hasChecked: boolean; // ✅ NEW
   login: (user: User) => void;
   logout: () => void;
   stopLoading: () => void;
   setLoggingIn: (v: boolean) => void; // ✅ NEW
+  setHasChecked: (v: boolean) => void; // ✅ NEW
 };
 
 const useAuthStoreBase = create<AuthStoreType>((set) => ({
@@ -21,6 +23,7 @@ const useAuthStoreBase = create<AuthStoreType>((set) => ({
   isAuthenticated: false,
   isLoading: true,
   isLoggingIn: false, // ✅ NEW
+  hasChecked: false, // ✅ NEW
 
   login: (user) => {
     const { role, account_id, phone_number, email, token, ...spreadData } =
@@ -53,6 +56,7 @@ const useAuthStoreBase = create<AuthStoreType>((set) => ({
         state.isAuthenticated = false;
         state.user = null;
         state.isLoggingIn = false;
+        state.hasChecked = false; // ✅ reset flag saat logout
       }),
     );
   },
@@ -69,6 +73,14 @@ const useAuthStoreBase = create<AuthStoreType>((set) => ({
     set(
       produce<AuthStoreType>((state) => {
         state.isLoggingIn = v;
+      }),
+    );
+  },
+
+  setHasChecked: (v) => {
+    set(
+      produce<AuthStoreType>((state) => {
+        state.hasChecked = v;
       }),
     );
   },

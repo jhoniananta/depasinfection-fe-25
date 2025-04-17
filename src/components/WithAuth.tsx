@@ -59,11 +59,14 @@ export default function withAuth<T extends object>(
     const logout = useAuthStore.useLogout();
     const stopLoading = useAuthStore.useStopLoading();
     const user = useAuthStore.useUser();
+    const hasChecked = useAuthStore.useHasChecked(); // ✅ NEW
+    const setHasChecked = useAuthStore.useSetHasChecked(); // ✅ NEW
 
     const isCheckingRef = React.useRef(false);
 
     const checkAuth = React.useCallback(async () => {
-      if (isCheckingRef.current || isLoggingIn) return;
+      // Jangan lanjut kalau sedang ngecek / login / atau sudah pernah dicek
+      if (isCheckingRef.current || isLoggingIn || hasChecked) return;
       isCheckingRef.current = true;
 
       const token = getToken();
@@ -92,6 +95,7 @@ export default function withAuth<T extends object>(
         if (!meRes.ok || !json?.status) throw new Error("Unauthorized");
 
         login({ ...json.data, token });
+        setHasChecked(true); // ✅ Tandai sudah pernah validasi token
       } catch {
         clearDepasAuth();
         clientLogout(true, location.pathname);
@@ -103,7 +107,16 @@ export default function withAuth<T extends object>(
         stopLoading();
         isCheckingRef.current = false;
       }
-    }, [login, logout, stopLoading, toast, clientLogout]);
+    }, [
+      login,
+      logout,
+      stopLoading,
+      toast,
+      clientLogout,
+      isLoggingIn,
+      hasChecked,
+      setHasChecked,
+    ]);
 
     React.useEffect(() => {
       const expiry = localStorage.getItem("depas25_token_expiry");
@@ -114,6 +127,7 @@ export default function withAuth<T extends object>(
         clientLogout(true, location.pathname);
         return;
       }
+
       const timer = setTimeout(() => {
         clientLogout(true, location.pathname);
       }, timeLeft);
