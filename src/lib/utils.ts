@@ -35,12 +35,12 @@ export const getFeeInfoUDSRC = (
   if (inRange("2025-04-11T00:00:00+07:00", "2025-05-18T23:59:59+07:00")) {
     if (subCompetition === "poster-competition") {
       return nationality === "IDN"
-        ? { label: "IDR150.000,00", value: 150000 }
+        ? { label: "IDR150.002,00", value: 150002 }
         : { label: "$25.00", value: 25 };
     }
     if (subCompetition === "3-minutes-oral-competition") {
       return nationality === "IDN"
-        ? { label: "IDR200.000,00", value: 200000 }
+        ? { label: "IDR200.003,00", value: 200003 }
         : { label: "$30.00", value: 30 };
     }
   }
@@ -48,12 +48,12 @@ export const getFeeInfoUDSRC = (
   if (inRange("2025-05-19T00:00:00+07:00", "2025-07-12T23:59:59+07:00")) {
     if (subCompetition === "poster-competition") {
       return nationality === "IDN"
-        ? { label: "IDR200.000,00", value: 200000 }
+        ? { label: "IDR200.002,00", value: 200002 }
         : { label: "$30.00", value: 30 };
     }
     if (subCompetition === "3-minutes-oral-competition") {
       return nationality === "IDN"
-        ? { label: "IDR250.000,00", value: 250000 }
+        ? { label: "IDR250.003,00", value: 250003 }
         : { label: "$35.00", value: 35 };
     }
   }
@@ -71,10 +71,10 @@ export const getFeeInfoOKGD = () => {
 
   //!GANTI DIBAWAH INI
   if (inRange("2025-04-11T00:00:00+07:00", "2025-05-18T23:59:59+07:00")) {
-    return { label: "IDR180.000,00", value: 180000 };
+    return { label: "IDR180.001,00", value: 180001 };
   }
   if (inRange("2025-05-19T00:00:00+07:00", "2025-07-12T23:59:59+07:00")) {
-    return { label: "IDR200.000,00", value: 200000 };
+    return { label: "IDR200.001,00", value: 200001 };
   }
   // fallback
   return { label: "Invalid fee", value: "error" };
