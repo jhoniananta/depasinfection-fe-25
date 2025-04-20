@@ -94,4 +94,11 @@ export type EventDetails = {
     leader_details: ParticipantDetails;
     members_details: ParticipantDetails[];
   };
+  teacher_details?: teacherDetails;
+};
+
+export type teacherDetails = {
+  teacher_email: string;
+  teacher_name: string;
+  teacher_phone: string;
 };

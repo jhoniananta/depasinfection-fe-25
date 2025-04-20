@@ -7,6 +7,18 @@ export type UserProfile = {
   events?: eventType[] | null; // array of events that the user registered to
 };
 
+export type EditProfileResponse = {
+  message: string;
+  account: {
+    account_id: string;
+    full_name: string;
+    phone_number: string;
+    created_at: string;
+    updated_at: string;
+    deleted_at: string | null;
+  };
+};
+
 export type eventType = {
   event_code: string;
   event_name: string;
@@ -34,8 +46,15 @@ export type EventDetails = [
       leader_details: ParticipantDetails;
       members_details: ParticipantDetails[];
     };
+    teacher_details?: teacherDetails;
   },
 ];
+
+export type teacherDetails = {
+  teacher_email: string;
+  teacher_name: string;
+  teacher_phone: string;
+};
 
 export type ParticipantDetails = {
   participant_details_id: string;

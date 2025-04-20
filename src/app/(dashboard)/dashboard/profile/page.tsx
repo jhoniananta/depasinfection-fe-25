@@ -7,20 +7,51 @@ import Typography from "@/components/Typography";
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import Sidebar from "@/layouts/SidebarUser";
-import api from "@/lib/api";
+import { userProfileSchema } from "@/schemas/dashboard-user-schema";
 import { UserProfile } from "@/types/dashboard-user";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useQueryClient } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
 import { HiPencilSquare } from "react-icons/hi2";
+import { z } from "zod";
 import { useGetProfileQuery } from "../_hooks/@get/useGetProfile";
+import { useEditProfileMutation } from "../_hooks/@put/useProfile";
+
+type UserProfileType = z.infer<typeof userProfileSchema>;
 
 export default withAuth(DashboardProfilePage, "USER");
 function DashboardProfilePage() {
   const [isEditing, setIsEditing] = useState(false);
   const queryClient = useQueryClient();
   const { data } = useGetProfileQuery();
+
+  const form = useForm<UserProfileType>({
+    resolver: zodResolver(userProfileSchema),
+    defaultValues: {
+      full_name: "",
+      phone_number: "",
+    },
+  });
+
+  const editMutation = useEditProfileMutation();
+  // useEffect for defaultValues Form
+  useEffect(() => {
+    if (data) {
+      setFormData(data);
+      form.reset(data);
+    }
+  }, [data]);
 
   // State to check if it in mobile or desktop view on 1024px
   const [isMobile, setIsMobile] = useState(false);
@@ -52,30 +83,24 @@ function DashboardProfilePage() {
     if (data) setFormData(data);
   }, [data]);
 
-  const updateProfile = async (data: UserProfile): Promise<UserProfile> => {
-    const res = await api.put("/user/auth/me", data); // Adjust this endpoint if needed
-    return res.data.data;
-  };
-
-  const mutation = useMutation({
-    mutationFn: updateProfile,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["/user/auth/me"] });
-      setIsEditing(false);
-    },
-  });
-
   const handleEditClick = () => {
     setIsEditing(true);
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+  const onSubmit = (values: UserProfileType) => {
+    if (!data?.email) return;
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    mutation.mutate(formData);
+    const mergedData = {
+      ...values,
+      email: data.email,
+    };
+
+    editMutation.mutate(mergedData, {
+      onSuccess: () => {
+        setIsEditing(false);
+        queryClient.invalidateQueries({ queryKey: ["/user/auth/me"] });
+      },
+    });
   };
 
   return (
@@ -145,48 +170,69 @@ function DashboardProfilePage() {
                 </div>
 
                 {isEditing ? (
-                  <form onSubmit={handleSubmit} className="mt-6 space-y-4">
-                    <div>
-                      <Typography variant="p" className="font-semibold">
-                        Full Name
-                      </Typography>
-                      <Input
-                        name="full_name"
-                        value={formData.full_name}
-                        onChange={handleChange}
-                        className="bg-purple-200"
-                      />
-                    </div>
-                    <div>
-                      <Typography variant="p" className="font-semibold">
-                        Email
-                      </Typography>
-                      <Input
-                        name="email"
-                        value={formData.email}
-                        onChange={handleChange}
-                        className="bg-purple-200"
-                      />
-                    </div>
-                    <div>
-                      <Typography variant="p" className="font-semibold">
-                        WhatsApp
-                      </Typography>
-                      <Input
-                        name="phone_number"
-                        value={formData.phone_number}
-                        onChange={handleChange}
-                        className="bg-purple-200"
-                      />
-                    </div>
-                    <Button
-                      type="submit"
-                      className="w-full bg-purple-500"
-                      variant="purple"
+                  <Form {...form}>
+                    <form
+                      onSubmit={form.handleSubmit(onSubmit)}
+                      className="mt-6 space-y-4"
                     >
-                      Save Changes
-                    </Button>
-                  </form>
+                      <FormField
+                        control={form.control}
+                        name="full_name"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>
+                              <Typography variant="p" className="font-semibold">
+                                Full Name
+                              </Typography>
+                            </FormLabel>
+                            <FormControl>
+                              <Input {...field} className="bg-purple-200" />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+
+                      <FormItem>
+                        <FormLabel>
+                          <Typography variant="p" className="font-semibold">
+                            Email
+                          </Typography>
+                        </FormLabel>
+                        <Input
+                          value={data?.email || ""}
+                          disabled
+                          className="bg-purple-200"
+                        />
+                      </FormItem>
+
+                      <FormField
+                        control={form.control}
+                        name="phone_number"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>
+                              <Typography variant="p" className="font-semibold">
+                                WhatsApp
+                              </Typography>
+                            </FormLabel>
+                            <FormControl>
+                              <Input {...field} className="bg-purple-200" />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+
+                      <Button
+                        type="submit"
+                        className="w-full bg-purple-500"
+                        variant="purple"
+                      >
+                        Save Changes
+                      </Button>
+                    </form>
+                  </Form>
                 ) : (
                   <div className="mt-6 space-y-4">
                     <div>

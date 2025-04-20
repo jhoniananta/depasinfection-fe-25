@@ -99,7 +99,7 @@ function UserSidebar({ children }: SidebarProps) {
               </Link>
             </div>
 
-            <div className={`flex flex-col space-y-6 pt-8`}>
+            <div className="flex flex-col space-y-6 pt-8">
               {SidebarUser.map(
                 (
                   item: {
@@ -111,45 +111,49 @@ function UserSidebar({ children }: SidebarProps) {
                     }[];
                   },
                   index: React.Key | null | undefined,
-                ) => (
-                  <div className="flex flex-col" key={index}>
-                    <Typography
-                      variant="p"
-                      className={`flex w-full items-center pb-2 text-[16px] font-semibold text-gray-500 md:text-[16px]`}
-                    >
-                      {item.section}
-                    </Typography>
-                    <div className="flex flex-col space-y-2">
-                      {item.section === "My Competition"
-                        ? item.props
-                            .filter((_, propIndex) =>
-                              eventName === "Olimpiade Kedokteran Gigi Dasar"
-                                ? propIndex === 0
-                                : eventName ===
-                                    "UGM Dental Scientific Research Competition"
-                                  ? propIndex === 1
-                                  : false,
-                            )
-                            .map(
-                              (
-                                link: {
-                                  href: string;
-                                  icon: React.ReactNode;
-                                  title: string;
-                                },
-                                linkIndex: React.Key | null | undefined,
-                              ) => {
+                ) => {
+                  // Skip render for "My Competition" if eventName not in the allowed list
+                  if (
+                    item.section === "My Competition" &&
+                    ![
+                      "Olimpiade Kedokteran Gigi Dasar",
+                      "UGM Dental Scientific Research Competition",
+                    ].includes(eventName ?? "")
+                  ) {
+                    return null;
+                  }
+
+                  return (
+                    <div className="flex flex-col" key={index}>
+                      <Typography
+                        variant="p"
+                        className="flex w-full items-center pb-2 text-[16px] font-semibold text-gray-500 md:text-[16px]"
+                      >
+                        {item.section}
+                      </Typography>
+                      <div className="flex flex-col space-y-2">
+                        {item.section === "My Competition"
+                          ? item.props
+                              .filter((_, propIndex) =>
+                                eventName === "Olimpiade Kedokteran Gigi Dasar"
+                                  ? propIndex === 0
+                                  : eventName ===
+                                      "UGM Dental Scientific Research Competition"
+                                    ? propIndex === 1
+                                    : false,
+                              )
+                              .map((link, linkIndex) => {
                                 const isActive =
                                   link.href === window.location.pathname;
                                 return (
                                   <Button
+                                    key={linkIndex}
                                     className={clsx(
                                       "w-full rounded bg-transparent px-2 py-1 shadow-none hover:bg-amber-300",
                                       isActive
                                         ? "bg-amber-300"
                                         : "bg-transparent",
                                     )}
-                                    key={linkIndex}
                                   >
                                     <Link
                                       href={link.href}
@@ -165,28 +169,19 @@ function UserSidebar({ children }: SidebarProps) {
                                     </Link>
                                   </Button>
                                 );
-                              },
-                            )
-                        : item.props.map(
-                            (
-                              link: {
-                                href: string;
-                                icon: React.ReactNode;
-                                title: string;
-                              },
-                              linkIndex: React.Key | null | undefined,
-                            ) => {
+                              })
+                          : item.props.map((link, linkIndex) => {
                               const isActive =
                                 link.href === window.location.pathname;
                               return (
                                 <Button
+                                  key={linkIndex}
                                   className={clsx(
                                     "w-full rounded bg-transparent px-2 py-1 shadow-none hover:bg-amber-300",
                                     isActive
                                       ? "bg-amber-300"
                                       : "bg-transparent",
                                   )}
-                                  key={linkIndex}
                                 >
                                   <Link
                                     href={link.href}
@@ -202,12 +197,12 @@ function UserSidebar({ children }: SidebarProps) {
                                   </Link>
                                 </Button>
                               );
-                            },
-                          )}
+                            })}
+                      </div>
+                      <hr className="border-grey-400 border-t-2" />
                     </div>
-                    <hr className="border-grey-400 border-t-2" />
-                  </div>
-                ),
+                  );
+                },
               )}
             </div>
 

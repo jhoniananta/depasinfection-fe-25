@@ -27,16 +27,16 @@ export default function RegistEvent({
           imgClassName="object-cover w-full h-full opacity-60 pointer-events-none select-none"
         />
       </div>
-      <div className="container mx-auto my-[5vh] flex min-h-screen w-full flex-col items-center justify-center gap-[5vw] lg:flex-row lg:gap-[8vw]">
+      <div className="mx-auto lg:container my-[5vh] flex min-h-screen w-full flex-col items-center justify-center gap-[5vw] lg:flex-row lg:gap-[8vw]">
         <div className="z-10 md:w-1/2">
           <iframe
             src={srcVideo}
             allow="autoplay"
             allowFullScreen
-            className="h-[400px] w-full overflow-hidden rounded-xl shadow-lg"
+            className="h-[320px] w-full overflow-hidden rounded-xl shadow-lg md:h-[400px]"
           />
         </div>
-        <div className="z-10 flex flex-col items-center justify-center gap-4 md:w-1/2 md:gap-8">
+        <div className="container z-10 flex flex-col items-center justify-center gap-4 md:w-1/2 md:gap-8">
           <Typography
             variant="h3"
             weight="bold"

@@ -9,7 +9,11 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { EventDetails, ParticipantDetails } from "@/types/dashboard-user";
+import {
+  EventDetails,
+  ParticipantDetails,
+  teacherDetails,
+} from "@/types/dashboard-user";
 import { countries } from "country-data-list";
 
 interface BioInformationSectionProps {
@@ -24,7 +28,10 @@ export default function BioInformationSection({
   const data = eventDetails[0];
   const leader = data.team_details?.leader_details;
   const members = data.team_details?.members_details || [];
+  const teacher = data.teacher_details ? [data.teacher_details] : [];
   const eventName = data.event;
+
+  const isUDSRC = eventName === "UGM Dental Scientific Research Competition";
 
   return (
     <section className="mx-auto mt-4 w-full max-w-5xl p-6 sm:px-16 xl:p-0">
@@ -52,16 +59,14 @@ export default function BioInformationSection({
           {/* School or University Name */}
           <div className="flex flex-col md:ml-8">
             <Typography variant="p" weight="medium" className="text-gray-600">
-              {eventName === "UGM Dental Scientific Research Competition"
-                ? "School"
-                : "University"}
+              {isUDSRC ? "School" : "University"}
             </Typography>
             <Typography variant="p" weight="bold">
               {data.university}
             </Typography>
           </div>
 
-          {eventName === "UGM Dental Scientific Research Competition" && (
+          {isUDSRC && (
             <div className="flex flex-col md:ml-8">
               <Typography variant="p" weight="medium" className="text-gray-600">
                 Nationality
@@ -77,7 +82,7 @@ export default function BioInformationSection({
 
         {/* Integrity Pact - outside the accordion */}
         <div className="mt-4">
-          {eventName === "UGM Dental Scientific Research Competition" ? (
+          {isUDSRC ? (
             <PdfPreview
               title="Statement Letter (click for detail)"
               src={data.statement_letter || ""}
@@ -237,6 +242,68 @@ export default function BioInformationSection({
               </AccordionItem>
             );
           })}
+
+          {/* Teacher Accordions */}
+          {!isUDSRC &&
+            teacher.map((teacher: teacherDetails, idx: number) => {
+              const label = `Teacher Identity`;
+              return (
+                <AccordionItem value={`teacher-${idx}`}>
+                  <AccordionTrigger className="text-xl font-bold">
+                    {label}
+                  </AccordionTrigger>
+                  <AccordionContent>
+                    {/* Teacher Identity */}
+                    <div className="flex flex-col gap-2">
+                      <div className="mt-2 flex flex-col gap-2 sm:flex-row sm:items-start sm:gap-10">
+                        <div className="flex flex-col">
+                          <Typography
+                            className="text-sm text-gray-600"
+                            weight="medium"
+                          >
+                            Name
+                          </Typography>
+                          <Typography
+                            className="text-base font-bold text-black"
+                            weight="bold"
+                          >
+                            {teacher.teacher_name}
+                          </Typography>
+                        </div>
+                        <div className="flex flex-col">
+                          <Typography
+                            className="text-sm text-gray-600"
+                            weight="medium"
+                          >
+                            Email
+                          </Typography>
+                          <Typography
+                            className="text-base font-bold text-black"
+                            weight="bold"
+                          >
+                            {teacher.teacher_email}
+                          </Typography>
+                        </div>
+                      </div>
+                      <div className="flex flex-col">
+                        <Typography
+                          className="text-sm text-gray-600"
+                          weight="medium"
+                        >
+                          WhatsApp
+                        </Typography>
+                        <Typography
+                          className="border-b border-gray-500 text-base font-bold text-black"
+                          weight="bold"
+                        >
+                          {teacher.teacher_phone}
+                        </Typography>
+                      </div>
+                    </div>
+                  </AccordionContent>
+                </AccordionItem>
+              );
+            })}
         </Accordion>
       </div>
     </section>
