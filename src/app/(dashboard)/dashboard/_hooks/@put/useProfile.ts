@@ -28,7 +28,7 @@ export const useEditProfileMutation = () => {
       toast({
         title: "Update profile successful!",
         description: "Your profile has been updated.",
-        variant: "destructive",
+        variant: "default",
       });
     },
     onError: (error: AxiosError<ApiError>) => {

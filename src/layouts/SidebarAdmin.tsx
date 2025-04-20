@@ -9,12 +9,31 @@ import Typography from "@/components/Typography";
 import { Button } from "@/components/ui/button";
 import { SidebarAdmin } from "@/contents/sidebar";
 
+import { getToken } from "@/lib/cookies";
 import { SidebarProps } from "@/types/sidebar";
 import clsx from "clsx";
+import jwtDecode from "jsonwebtoken";
 import Link from "next/link";
 
 function AdminSidebar({ children }: SidebarProps) {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+  const [role, setRole] = React.useState<string | null>(null);
+
+  React.useEffect(() => {
+    const token = getToken();
+    if (token) {
+      try {
+        // Decode token menggunkan jsonwebtoken
+        const decoded = jwtDecode.decode(token) as { role?: string };
+        setRole(decoded?.role || null);
+      } catch (error) {
+        console.error("Error decoding token:", error);
+      }
+    }
+  }, []);
+
+  const isOKGDAdmin = role === "OKGD_ADMIN";
+  const isUDSRCAdmin = role === "UDSRC_ADMIN";
 
   return (
     <>
@@ -101,55 +120,66 @@ function AdminSidebar({ children }: SidebarProps) {
                     }[];
                   },
                   index: React.Key | null | undefined,
-                ) => (
-                  <div className="flex flex-col" key={index}>
-                    <Typography
-                      variant="p"
-                      className={`flex w-full items-center pb-2 text-[16px] font-semibold text-gray-500 md:text-[16px]`}
-                    >
-                      {item.section}
-                    </Typography>
-                    <div className="flex flex-col space-y-2">
-                      {item.props.map(
-                        (
-                          link: {
-                            href: string;
-                            icon: React.ReactNode;
-                            title: string;
-                          },
-                          linkIndex: React.Key | null | undefined,
-                        ) => {
-                          const isActive = window.location.pathname.startsWith(
-                            link.href,
-                          );
-                          return (
-                            <Button
-                              className={clsx(
-                                "w-full rounded px-2 py-1 shadow-none hover:bg-amber-300 bg-transparent",
-                                isActive ? "bg-amber-300" : "bg-transparent",
-                              )}
-                              key={linkIndex}
-                            >
-                              <Link
-                                href={link.href}
-                                className="flex w-full flex-row items-center gap-2"
+                ) => {
+                  // Filter props berdasarkan role
+                  const filteredProps = item.props.filter((link) => {
+                    if (isOKGDAdmin) return link.title === "OKGD";
+                    if (isUDSRCAdmin) return link.title === "UDSRC";
+                    return true; // Tampilkan semua jika role bukan OKGD atau UDSRC
+                  });
+
+                  // Jika tidak ada props yang sesuai, jangan render section
+                  if (filteredProps.length === 0) return null;
+
+                  return (
+                    <div className="flex flex-col" key={index}>
+                      <Typography
+                        variant="p"
+                        className={`flex w-full items-center pb-2 text-[16px] font-semibold text-gray-500 md:text-[16px]`}
+                      >
+                        {item.section}
+                      </Typography>
+                      <div className="flex flex-col space-y-2">
+                        {filteredProps.map(
+                          (
+                            link: {
+                              href: string;
+                              icon: React.ReactNode;
+                              title: string;
+                            },
+                            linkIndex: React.Key | null | undefined,
+                          ) => {
+                            const isActive =
+                              window.location.pathname.startsWith(link.href);
+                            return (
+                              <Button
+                                className={clsx(
+                                  "w-full rounded bg-transparent px-2 py-1 shadow-none hover:bg-amber-300",
+                                  isActive ? "bg-amber-300" : "bg-transparent",
+                                )}
+                                key={linkIndex}
                               >
-                                {link.icon}
-                                <Typography
-                                  variant="p"
-                                  className="flex w-full items-center justify-between rounded py-1 text-[16px] font-semibold text-neutral-900 md:text-[16px]"
+                                <Link
+                                  href={link.href}
+                                  className="flex w-full flex-row items-center gap-2"
                                 >
-                                  {link.title}
-                                </Typography>
-                              </Link>
-                            </Button>
-                          );
-                        },
-                      )}
+                                  {link.icon}
+                                  <Typography
+                                    variant="p"
+                                    className="flex w-full items-center justify-between rounded py-1 text-[16px] font-semibold text-neutral-900 md:text-[16px]"
+                                  >
+                                    {link.title}
+                                  </Typography>
+                                </Link>
+                              </Button>
+                            );
+                          },
+                        )}
+                      </div>
+                      <hr className="border-grey-400 border-t-2" />
                     </div>
-                    <hr className="border-grey-400 border-t-2" />
-                  </div>
-                ),
+                  );
+                },
               )}
             </div>
 
@@ -227,55 +257,67 @@ function AdminSidebar({ children }: SidebarProps) {
                   }[];
                 },
                 index: React.Key | null | undefined,
-              ) => (
-                <div className="flex flex-col" key={index}>
-                  <Typography
-                    variant="p"
-                    className={`flex w-full items-center pb-2 text-[16px] font-semibold text-gray-500 md:text-[16px]`}
-                  >
-                    {item.section}
-                  </Typography>
-                  <div className="flex flex-col space-y-2">
-                    {item.props.map(
-                      (
-                        link: {
-                          href: string;
-                          icon: React.ReactNode;
-                          title: string;
-                        },
-                        linkIndex: React.Key | null | undefined,
-                      ) => {
-                        const isActive = window.location.pathname.startsWith(
-                          link.href,
-                        );
-                        return (
-                          <Button
-                            className={clsx(
-                              "w-full rounded px-2 py-1 shadow-none hover:bg-amber-300 bg-transparent",
-                              isActive ? "bg-amber-300" : "bg-transparent",
-                            )}
-                            key={linkIndex}
-                          >
-                            <Link
-                              href={link.href}
-                              className="flex w-full flex-row items-center gap-2"
+              ) => {
+                // Filter props berdasarkan role
+                const filteredProps = item.props.filter((link) => {
+                  if (isOKGDAdmin) return link.title === "OKGD";
+                  if (isUDSRCAdmin) return link.title === "UDSRC";
+                  return true; // Tampilkan semua jika role bukan OKGD atau UDSRC
+                });
+
+                // Jika tidak ada props yang sesuai, jangan render section
+                if (filteredProps.length === 0) return null;
+
+                return (
+                  <div className="flex flex-col" key={index}>
+                    <Typography
+                      variant="p"
+                      className={`flex w-full items-center pb-2 text-[16px] font-semibold text-gray-500 md:text-[16px]`}
+                    >
+                      {item.section}
+                    </Typography>
+                    <div className="flex flex-col space-y-2">
+                      {filteredProps.map(
+                        (
+                          link: {
+                            href: string;
+                            icon: React.ReactNode;
+                            title: string;
+                          },
+                          linkIndex: React.Key | null | undefined,
+                        ) => {
+                          const isActive = window.location.pathname.startsWith(
+                            link.href,
+                          );
+                          return (
+                            <Button
+                              className={clsx(
+                                "w-full rounded bg-transparent px-2 py-1 shadow-none hover:bg-amber-300",
+                                isActive ? "bg-amber-300" : "bg-transparent",
+                              )}
+                              key={linkIndex}
                             >
-                              {link.icon}
-                              <Typography
-                                variant="p"
-                                className="flex w-full items-center justify-between rounded py-1 text-[16px] font-semibold text-neutral-900 md:text-[16px]"
+                              <Link
+                                href={link.href}
+                                className="flex w-full flex-row items-center gap-2"
                               >
-                                {link.title}
-                              </Typography>
-                            </Link>
-                          </Button>
-                        );
-                      },
-                    )}
+                                {link.icon}
+                                <Typography
+                                  variant="p"
+                                  className="flex w-full items-center justify-between rounded py-1 text-[16px] font-semibold text-neutral-900 md:text-[16px]"
+                                >
+                                  {link.title}
+                                </Typography>
+                              </Link>
+                            </Button>
+                          );
+                        },
+                      )}
+                    </div>
+                    <hr className="border-grey-400 border-t-2" />
                   </div>
-                  <hr className="border-grey-300 border-t" />
-                </div>
-              ),
+                );
+              },
             )}
           </div>
           <div

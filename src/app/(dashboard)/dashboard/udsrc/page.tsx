@@ -103,13 +103,17 @@ function UDSRCDashboardUserPage() {
                               " ✨ Congratulations! You have successfully become a participant of the Dentistry Olympiad. Please make sure to read the Guidebook and Syllabus that will be  provided."
                             }
                           </>
-                        ) : (
+                        ) : eventDetails?.[0].status === "REVISION" ? (
                           <>
                             <span className="text-red-600">
-                              Check this message !
+                              Please Revised !
                             </span>
                             <br />
                             {eventDetails?.[0].revision_message}
+                          </>
+                        ) : (
+                          <>
+                            <span className="text-red-600">Rejected !</span>
                           </>
                         )}
                       </Typography>
@@ -252,8 +256,7 @@ function UDSRCDashboardUserPage() {
                     </div>
                     {/* Button Submit */}
 
-                    {(eventDetails?.[0].status === "REVISION" ||
-                      eventDetails?.[0].status === "REJECTED") && (
+                    {eventDetails?.[0].status === "REVISION" && (
                       <div className="my-[4px]">
                         <Typography
                           className="text-[16px] font-medium leading-[16px] text-[#A8A9AC]"
