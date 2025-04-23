@@ -10,10 +10,10 @@ export const UDSRCPosterSubmissionSchema = z.object({
   description: z
     .string()
     .min(10, { message: "Description must be at least 10 characters" })
-    .max(200, { message: "Description must be at most 200 characters" }),
+    .max(3000, { message: "Description must be at most 3000 characters" }),
   validationSheet: maxFileUploadTypeSize({
     allowedTypes: ["application/pdf"],
-    maxSizeInMB: 10,
+    maxSizeInMB: 5,
   }),
 });
 
@@ -25,7 +25,7 @@ export const UDSRC3MOPSubmissionSchema = z.object({
 
   validationSheet: maxFileUploadTypeSize({
     allowedTypes: ["application/pdf"],
-    maxSizeInMB: 10,
+    maxSizeInMB: 5,
   }),
 });
 

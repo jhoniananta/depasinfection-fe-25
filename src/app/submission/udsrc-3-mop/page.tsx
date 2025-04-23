@@ -14,16 +14,15 @@ import {
 } from "@/components/ui/dialog";
 import {
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
 
-import { toast } from "@/hooks/use-toast";
+import UploadFile from "@/components/UploadFile";
 import FormLayout from "@/layouts/FormLayout";
+import { getSessionDefault } from "@/lib/utils";
 import {
   UDSRC3MOPSubmissionData,
   UDSRC3MOPSubmissionSchema,
@@ -31,11 +30,11 @@ import {
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
+import { useUDSRCSubmissionMutation } from "../_hooks/@post/useSubmissionEvent";
 
 export default withAuth(UDSRC3MOPSubmissionPage, "USER");
 function UDSRC3MOPSubmissionPage() {
   const [openDialog, setOpenDialog] = useState(false);
-  // const [data, setData] = useState<UDSRC3MOPSubmissionData>();
 
   const handleOpenDialog = async () => {
     const isValid = await form.trigger();
@@ -48,16 +47,16 @@ function UDSRC3MOPSubmissionPage() {
     resolver: zodResolver(UDSRC3MOPSubmissionSchema),
   });
 
-  const onSubmit = (data: UDSRC3MOPSubmissionData) => {
-    toast({
-      title: "Submitted!",
-      description: (
-        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-          <code className="text-white">{JSON.stringify(data, null, 2)}</code>
-        </pre>
-      ),
+  const { mutate: submit3Mop, isPending } = useUDSRCSubmissionMutation();
+
+  function onSubmit() {
+    submit3Mop({
+      abstract: getSessionDefault("abstractFile"),
+      validation_sheet: getSessionDefault("validationSheet"),
+      poster: null,
+      description: null,
     });
-  };
+  }
 
   return (
     <FormLayout
@@ -83,20 +82,19 @@ function UDSRC3MOPSubmissionPage() {
           <div className="space-y-4">
             <FormField
               name="abstractFile"
-              render={({ field: { onChange, value, ...fieldProps } }) => (
+              render={({ field: { onChange, ...field } }) => (
                 <FormItem>
                   <FormLabel isRequired>Abstract File</FormLabel>
                   <FormControl>
-                    <Input
-                      {...fieldProps}
-                      type="file"
-                      accept="application/pdf"
-                      onChange={(event) =>
-                        onChange(event.target.files && event.target.files[0])
-                      }
+                    <UploadFile
+                      sessionIdName="abstractFile"
+                      {...field}
+                      uploadType="/upload-file/"
+                      accept={{ "application/pdf": [] }} //! there is 2 validation for this parameter, at component and zod
+                      maxSizeInBytes={25000000} //! there is 2 validation for this parameter, at component and zod
+                      onChange={(file) => onChange(file)}
                     />
                   </FormControl>
-                  <FormDescription>Upload on format .pdf</FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
@@ -104,20 +102,19 @@ function UDSRC3MOPSubmissionPage() {
 
             <FormField
               name="validationSheet"
-              render={({ field: { onChange, value, ...fieldProps } }) => (
+              render={({ field: { onChange, ...field } }) => (
                 <FormItem>
                   <FormLabel isRequired>Validation Sheet</FormLabel>
                   <FormControl>
-                    <Input
-                      {...fieldProps}
-                      type="file"
-                      accept="application/pdf"
-                      onChange={(event) =>
-                        onChange(event.target.files && event.target.files[0])
-                      }
+                    <UploadFile
+                      sessionIdName="validationSheet"
+                      {...field}
+                      uploadType="/upload-file/"
+                      accept={{ "application/pdf": [] }} //! there is 2 validation for this parameter, at component and zod
+                      maxSizeInBytes={5000000} //! there is 2 validation for this parameter, at component and zod
+                      onChange={(file) => onChange(file)}
                     />
                   </FormControl>
-                  <FormDescription>Upload on format .pdf</FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
@@ -127,6 +124,7 @@ function UDSRC3MOPSubmissionPage() {
           <Button
             onClick={handleOpenDialog}
             type="button"
+            disabled={isPending}
             className="text-olive-900 w-full bg-gradient-to-r from-amber-300 to-yellow-400 px-8 py-6 text-2xl font-bold text-[#a88a44] shadow-md hover:from-amber-400 hover:to-yellow-500 md:px-12 lg:px-14"
           >
             Submit
@@ -145,9 +143,10 @@ function UDSRC3MOPSubmissionPage() {
                   Cancel
                 </Button>
                 <Button
+                  disabled={isPending}
                   onClick={() => {
                     setOpenDialog(false);
-                    onSubmit(form.getValues());
+                    onSubmit();
                   }}
                 >
                   Yes, submit
