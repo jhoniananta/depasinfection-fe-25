@@ -9,6 +9,7 @@ import Sidebar from "@/layouts/SidebarUser";
 import Link from "next/link";
 import BioInformationSection from "../_components/BioInformation";
 import PaymentInformationSection from "../_components/PaymentInformation";
+import SubmissionDetailsSection from "../_components/SubmissionDetails";
 import { useGetDetailsEventQuery } from "../_hooks/@get/useGetDetailsEvent";
 
 export default withAuth(UDSRCDashboardUserPage, "USER");
@@ -39,14 +40,19 @@ function UDSRCDashboardUserPage() {
                             " ",
                           )[0]
                         }
-                        , selamat datang di dashboard
+                        , welcome to your dashboard!
                       </Typography>{" "}
                       <Typography
                         variant="h5"
                         weight="bold"
                         className="text-2xl leading-none"
                       >
-                        {eventDetails?.[0].event}
+                        {eventDetails?.[0].event}{" "}
+                        {eventDetails?.[0].sub_competition === "POSTER"
+                          ? "- Poster Competition"
+                          : eventDetails?.[0].sub_competition === "THREE_MOP"
+                            ? "- 3 Minutes Oral Competition"
+                            : ""}
                       </Typography>
                     </div>
                     {/* Hero Typography End */}
@@ -100,7 +106,7 @@ function UDSRCDashboardUserPage() {
                               Congratulations!
                             </span>
                             {
-                              " ✨ Congratulations! You have successfully become a participant of the Dentistry Olympiad. Please make sure to read the Guidebook and Syllabus that will be  provided."
+                              " ✨ You have successfully become a participant of the Dentistry Olympiad. Please make sure to read the Guidebook and Syllabus that will be  provided."
                             }
                           </>
                         ) : eventDetails?.[0].status === "REVISION" ? (
@@ -188,14 +194,14 @@ function UDSRCDashboardUserPage() {
                         Status
                       </Typography>
                     </div>
-                    <div className="flex w-full flex-col gap-4 lg:flex-row">
+                    <div className="flex w-full flex-col gap-4">
                       <div className="flex w-full flex-grow flex-col gap-4 lg:flex-row lg:gap-8">
                         <div>
                           <Typography
                             className="mb-[9px] text-[16px] font-medium leading-[16px] text-[#A8A9AC]"
                             weight="medium"
                           >
-                            Status Registrasi
+                            Registration
                           </Typography>
                           <Typography
                             className="text-[20px] font-bold leading-[24px] text-blue-700"
@@ -204,12 +210,13 @@ function UDSRCDashboardUserPage() {
                             {isLoading ? "loading..." : "Registered"}
                           </Typography>
                         </div>
+
                         <div>
                           <Typography
                             className="mb-[9px] text-[16px] font-medium leading-[16px] text-[#A8A9AC]"
                             weight="medium"
                           >
-                            Status Administrasi
+                            Administration
                           </Typography>
                           <Typography
                             className={`text-[20px] font-bold leading-[24px] ${
@@ -235,24 +242,36 @@ function UDSRCDashboardUserPage() {
                                     : ""}
                           </Typography>
                         </div>
-                      </div>
-                      {/* Submit Button after status === verified*/}
-                      {eventDetails?.[0].status === "APPROVED" && (
-                        <Link
-                          href={
-                            isPoster
-                              ? "/submission/udsrc-poster"
-                              : "/submission/udsrc-3-mop"
-                          }
-                        >
-                          <Button
-                            variant="purple"
-                            className="flex items-center justify-center gap-4 text-xs lg:ml-auto lg:text-lg"
+
+                        <div>
+                          <Typography
+                            className="mb-[9px] text-[16px] font-medium leading-[16px] text-[#A8A9AC]"
+                            weight="medium"
                           >
-                            Submit
-                          </Button>
-                        </Link>
-                      )}
+                            Submission
+                          </Typography>
+                          {/* Submit Button after status === verified*/}
+                          {eventDetails?.[0].status === "APPROVED" && (
+                            <Link
+                              href={
+                                isPoster
+                                  ? "/submission/udsrc-poster"
+                                  : "/submission/udsrc-3-mop"
+                              }
+                            >
+                              <Button
+                                variant="purple"
+                                className="flex items-center justify-center gap-4 text-xs lg:ml-auto lg:text-lg"
+                                disabled={eventDetails?.[0].submission_status}
+                              >
+                                {eventDetails?.[0].submission_status
+                                  ? "You have been submitted"
+                                  : "Submit your submission"}
+                              </Button>
+                            </Link>
+                          )}
+                        </div>
+                      </div>
                     </div>
                     {/* Button Submit */}
 
@@ -262,7 +281,7 @@ function UDSRCDashboardUserPage() {
                           className="text-[16px] font-medium leading-[16px] text-[#A8A9AC]"
                           weight="medium"
                         >
-                          Alasan
+                          Reason
                         </Typography>
                         <Typography
                           className={`mt-[9px] text-[20px] font-bold leading-[24px] ${
@@ -283,13 +302,13 @@ function UDSRCDashboardUserPage() {
                           className="text-[16px] font-medium leading-[16px] text-[#A8A9AC]"
                           weight="medium"
                         >
-                          Lakukan Revisi Pada
+                          Revised at
                         </Typography>
                         <Button
                           size="lg"
                           className="w-full bg-yellow-900 px-4 py-2 text-white md:w-[182px]"
                         >
-                          Revisi
+                          Revision
                         </Button>
                       </div>
                     )}
@@ -297,6 +316,11 @@ function UDSRCDashboardUserPage() {
                 </div>
               </div>
             </div>
+            {eventDetails?.[0].status === "APPROVED" &&
+              eventDetails?.[0].submission_status === true &&
+              eventDetails?.[0].submission_details && (
+                <SubmissionDetailsSection eventDetails={eventDetails} />
+              )}
             <BioInformationSection eventDetails={eventDetails} />
             <PaymentInformationSection eventDetails={eventDetails} />
           </div>

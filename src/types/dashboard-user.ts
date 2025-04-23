@@ -46,7 +46,17 @@ export type EventDetails = [
       leader_details: ParticipantDetails;
       members_details: ParticipantDetails[];
     };
+
     teacher_details?: teacherDetails;
+
+    submission_status?: boolean;
+
+    submission_details?: {
+      abstract: string | null;
+      validation_sheet: string | null;
+      poster: string | null;
+      description: string | null;
+    };
   },
 ];
 

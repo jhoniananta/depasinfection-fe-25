@@ -13,18 +13,18 @@ import {
 } from "@/components/ui/dialog";
 import {
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
 
 import withAuth from "@/components/WithAuth";
 import { Textarea } from "@/components/ui/textarea";
-import { toast } from "@/hooks/use-toast";
+
+import UploadFile from "@/components/UploadFile";
 import FormLayout from "@/layouts/FormLayout";
+import { getSessionDefault } from "@/lib/utils";
 import {
   UDSRCPosterSubmissionData,
   UDSRCPosterSubmissionSchema,
@@ -32,11 +32,17 @@ import {
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
+import { z } from "zod";
+import { useUDSRCSubmissionMutation } from "../_hooks/@post/useSubmissionEvent";
 
 export default withAuth(UDSRCPosterSubmissionPage, "USER");
 function UDSRCPosterSubmissionPage() {
   const [openDialog, setOpenDialog] = useState(false);
-  // const [data, setData] = useState<UDSRCPosterSubmissionData>();
+
+  const form = useForm<UDSRCPosterSubmissionData>({
+    mode: "onTouched",
+    resolver: zodResolver(UDSRCPosterSubmissionSchema),
+  });
 
   const handleOpenDialog = async () => {
     const isValid = await form.trigger();
@@ -44,21 +50,16 @@ function UDSRCPosterSubmissionPage() {
     setOpenDialog(true);
   };
 
-  const form = useForm<UDSRCPosterSubmissionData>({
-    mode: "onChange",
-    resolver: zodResolver(UDSRCPosterSubmissionSchema),
-  });
+  const { mutate: submitPoster, isPending } = useUDSRCSubmissionMutation();
 
-  const onSubmit = (data: UDSRCPosterSubmissionData) => {
-    toast({
-      title: "Submitted!",
-      description: (
-        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-          <code className="text-white">{JSON.stringify(data, null, 2)}</code>
-        </pre>
-      ),
+  function onSubmit(data: z.infer<typeof UDSRCPosterSubmissionSchema>) {
+    submitPoster({
+      abstract: null,
+      validation_sheet: getSessionDefault("validationSheet"),
+      poster: getSessionDefault("posterFile"),
+      description: data.description,
     });
-  };
+  }
 
   return (
     <FormLayout
@@ -84,20 +85,19 @@ function UDSRCPosterSubmissionPage() {
           <div className="space-y-4">
             <FormField
               name="posterFile"
-              render={({ field: { onChange, value, ...fieldProps } }) => (
+              render={({ field: { onChange, ...field } }) => (
                 <FormItem>
                   <FormLabel isRequired>Poster File</FormLabel>
                   <FormControl>
-                    <Input
-                      {...fieldProps}
-                      type="file"
-                      accept="application/pdf"
-                      onChange={(event) =>
-                        onChange(event.target.files && event.target.files[0])
-                      }
+                    <UploadFile
+                      sessionIdName="posterFile"
+                      {...field}
+                      uploadType="/upload-file/"
+                      accept={{ "application/pdf": [] }} //! there is 2 validation for this parameter, at component and zod
+                      maxSizeInBytes={25000000} //! there is 2 validation for this parameter, at component and zod
+                      onChange={(file) => onChange(file)}
                     />
                   </FormControl>
-                  <FormDescription>Upload on format .pdf</FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
@@ -107,7 +107,7 @@ function UDSRCPosterSubmissionPage() {
               name="description"
               render={({ field: { value, onChange, ...rest } }) => (
                 <FormItem>
-                  <FormLabel>Description</FormLabel>
+                  <FormLabel isRequired>Description</FormLabel>
                   <FormControl>
                     <Textarea
                       placeholder="Enter your description"
@@ -125,20 +125,19 @@ function UDSRCPosterSubmissionPage() {
 
             <FormField
               name="validationSheet"
-              render={({ field: { onChange, value, ...fieldProps } }) => (
+              render={({ field: { onChange, ...field } }) => (
                 <FormItem>
                   <FormLabel isRequired>Validation Sheet</FormLabel>
                   <FormControl>
-                    <Input
-                      {...fieldProps}
-                      type="file"
-                      accept="application/pdf"
-                      onChange={(event) =>
-                        onChange(event.target.files && event.target.files[0])
-                      }
+                    <UploadFile
+                      sessionIdName="validationSheet"
+                      {...field}
+                      uploadType="/upload-file/"
+                      accept={{ "application/pdf": [] }} //! there is 2 validation for this parameter, at component and zod
+                      maxSizeInBytes={5000000} //! there is 2 validation for this parameter, at component and zod
+                      onChange={(file) => onChange(file)}
                     />
                   </FormControl>
-                  <FormDescription>Upload on format .pdf</FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
@@ -148,6 +147,7 @@ function UDSRCPosterSubmissionPage() {
           <Button
             onClick={handleOpenDialog}
             type="button"
+            disabled={isPending}
             className="text-olive-900 w-full bg-gradient-to-r from-amber-300 to-yellow-400 px-8 py-6 text-2xl font-bold text-[#a88a44] shadow-md hover:from-amber-400 hover:to-yellow-500 md:px-12 lg:px-14"
           >
             Submit
@@ -166,6 +166,7 @@ function UDSRCPosterSubmissionPage() {
                   Cancel
                 </Button>
                 <Button
+                  disabled={isPending}
                   onClick={() => {
                     setOpenDialog(false);
                     onSubmit(form.getValues());

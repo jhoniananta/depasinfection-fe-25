@@ -41,7 +41,7 @@ function OKGDDashboardUserPage() {
                             " ",
                           )[0]
                         }
-                        , selamat datang di dashboard
+                        , welcome to your dashboard!
                       </Typography>{" "}
                       <Typography
                         variant="h5"
@@ -206,7 +206,7 @@ function OKGDDashboardUserPage() {
                             className="mb-[9px] text-[16px] font-medium leading-[16px] text-[#A8A9AC]"
                             weight="medium"
                           >
-                            Status Registrasi
+                            Registration
                           </Typography>
                           <Typography
                             className="text-[20px] font-bold leading-[24px] text-blue-700"
@@ -220,7 +220,7 @@ function OKGDDashboardUserPage() {
                             className="mb-[9px] text-[16px] font-medium leading-[16px] text-[#A8A9AC]"
                             weight="medium"
                           >
-                            Status Administrasi
+                            Administration
                           </Typography>
                           <Typography
                             className={`text-[20px] font-bold leading-[24px] ${
@@ -266,7 +266,7 @@ function OKGDDashboardUserPage() {
                           className="text-[16px] font-medium leading-[16px] text-[#A8A9AC]"
                           weight="medium"
                         >
-                          Alasan
+                          Reason
                         </Typography>
                         <Typography
                           className={`text-[20px] font-bold leading-[24px] ${
@@ -287,13 +287,13 @@ function OKGDDashboardUserPage() {
                           className="text-[16px] font-medium leading-[16px] text-[#A8A9AC]"
                           weight="medium"
                         >
-                          Lakukan Revisi Pada
+                          Revised at
                         </Typography>
                         <Button
                           size="lg"
                           className="w-full bg-yellow-900 px-4 py-2 text-white md:w-[182px]"
                         >
-                          Revisi
+                          Revision
                         </Button>
                       </div>
                     )}

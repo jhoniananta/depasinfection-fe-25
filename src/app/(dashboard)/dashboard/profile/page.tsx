@@ -120,8 +120,8 @@ function DashboardProfilePage() {
                         weight="bold"
                         className="mb-1 text-[20px] text-gray-600"
                       >
-                        Hi, {formData.full_name.split(" ")[0]}, selamat datang
-                        di dashboard
+                        Hi, {formData.full_name.split(" ")[0]}, welcome to your
+                        dashboard
                       </Typography>{" "}
                       <Typography
                         variant="h4"
