@@ -14,6 +14,22 @@ export function getSessionDefault(field: string) {
   return stored ? JSON.parse(stored).link : undefined;
 }
 
+export function getSessionStorageWithDefault(
+  key: string,
+  defaultValue: string,
+) {
+  const value = sessionStorage.getItem(key);
+  if (value !== null) {
+    try {
+      const parsedValue = JSON.parse(value);
+      return parsedValue.link !== undefined ? parsedValue.link : defaultValue;
+    } catch {
+      return defaultValue;
+    }
+  }
+  return defaultValue;
+}
+
 export function removeSessionFile(fields: string | string[]) {
   if (typeof window === "undefined") return;
 

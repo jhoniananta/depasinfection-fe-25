@@ -304,12 +304,16 @@ function UDSRCDashboardUserPage() {
                         >
                           Revised at
                         </Typography>
-                        <Button
-                          size="lg"
-                          className="w-full bg-yellow-900 px-4 py-2 text-white md:w-[182px]"
+                        <Link
+                          href={`/dashboard/udsrc/update/${eventDetails?.[0].participant_id}`}
                         >
-                          Revision
-                        </Button>
+                          <Button
+                            size="lg"
+                            className="w-full bg-yellow-900 px-4 py-2 text-white md:w-[182px]"
+                          >
+                            Revision
+                          </Button>
+                        </Link>
                       </div>
                     )}
                   </div>

@@ -15,12 +15,14 @@ import NextImage from "@/components/NextImage";
 import Typography from "@/components/Typography";
 import BioInformationSectionAdmin from "../../_components/BioInformation";
 import PaymentInformationSectionAdmin from "../../_components/PaymentInformation";
+
 import { useGetDetailParticipantQuery } from "../../_hooks/@get/useAdmin";
 
 import LoadingGlobalPage from "@/app/loading";
 import { Button } from "@/components/ui/button";
 import { FaArrowLeft } from "react-icons/fa6";
 import DialogConfirm from "../../_components/DialogConfirm";
+import SubmissionDetailsSectionAdmin from "../../_components/SubmissionDetailsSection";
 
 export default withAuth(DetailUDSRCUser, "ADMIN");
 function DetailUDSRCUser() {
@@ -243,6 +245,13 @@ function DetailUDSRCUser() {
               ) : (
                 <>
                   <BioInformationSectionAdmin eventDetails={eventDetails} />
+                  {eventDetails?.status === "APPROVED" &&
+                    eventDetails?.submission_status === true &&
+                    eventDetails?.submission_details && (
+                      <SubmissionDetailsSectionAdmin
+                        eventDetails={eventDetails}
+                      />
+                    )}
                   <PaymentInformationSectionAdmin eventDetails={eventDetails} />
                 </>
               )}
