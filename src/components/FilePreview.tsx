@@ -55,7 +55,7 @@ export default function FilePreview({
         )}
 
         <div
-          className="border-default-400 relative flex min-h-[120px] h-full cursor-pointer items-center justify-center overflow-hidden rounded-2xl border-2 border-dashed bg-white"
+          className="border-default-400 relative flex min-h-[120px] h-full max-h-[300px] cursor-pointer items-center justify-center overflow-hidden rounded-2xl border-2 border-dashed bg-white"
           onClick={() => imageData && setOpen(true)}
         >
           {!imageData && (

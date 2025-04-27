@@ -152,7 +152,7 @@ const UploadFile = React.forwardRef<HTMLDivElement, UploadFileProps>(
         ref={ref}
         {...getRootProps()}
         className={twMerge(
-          "relative flex cursor-pointer flex-col items-center justify-center rounded-md border border-input bg-background px-4 py-6 text-center text-sm transition-colors hover:bg-muted",
+          "w-full relative flex cursor-pointer flex-col items-center justify-center rounded-md border border-input bg-background px-4 py-6 text-center text-sm transition-colors hover:bg-muted",
           formError && "border-destructive bg-destructive/10",
         )}
       >

@@ -95,6 +95,15 @@ export type EventDetails = {
     members_details: ParticipantDetails[];
   };
   teacher_details?: teacherDetails;
+
+  submission_status?: boolean;
+
+  submission_details?: {
+    abstract: string | null;
+    validation_sheet: string | null;
+    poster: string | null;
+    description: string | null;
+  };
 };
 
 export type teacherDetails = {

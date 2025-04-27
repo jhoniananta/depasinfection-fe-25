@@ -39,7 +39,7 @@ export type EventDetails = [
     sub_competition?: string;
     revision_message?: string | null;
     revision_status?: boolean;
-    statement_letter?: string;
+    statement_letter: string;
     phase: string;
     payment_details: paymentDetails;
     team_details: {
@@ -85,6 +85,7 @@ export type ParticipantDetails = {
 
 export type paymentDetails = {
   payment_id: string;
+  bank_id: number;
   amount: number;
   sender_account: string;
   sender_bank: string;

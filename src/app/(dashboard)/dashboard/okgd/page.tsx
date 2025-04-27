@@ -249,13 +249,22 @@ function OKGDDashboardUserPage() {
                       </div>
                       {/* Download Student card after status === verified*/}
                       {eventDetails?.[0].status === "APPROVED" && (
-                        <Button
-                          variant="outlinePurple"
-                          className="flex items-center justify-center gap-4 text-xs lg:ml-auto lg:text-lg"
-                        >
-                          <FiDownload className="text-xs lg:text-lg" />
-                          Download Student Card
-                        </Button>
+                        <div className="flex w-full flex-col gap-0">
+                          <Typography
+                            className="mb-[9px] text-left text-[16px] font-medium leading-[16px] text-[#A8A9AC] lg:text-right"
+                            weight="medium"
+                          >
+                            Student card will available a week before tryout
+                          </Typography>
+                          <Button
+                            variant="outlinePurple"
+                            className="flex items-center justify-center gap-4 text-xs lg:ml-auto lg:text-lg"
+                            disabled
+                          >
+                            <FiDownload className="text-xs lg:text-lg" />
+                            Download Student Card
+                          </Button>
+                        </div>
                       )}
                     </div>
                     {/* Button download student card */}
@@ -289,12 +298,16 @@ function OKGDDashboardUserPage() {
                         >
                           Revised at
                         </Typography>
-                        <Button
-                          size="lg"
-                          className="w-full bg-yellow-900 px-4 py-2 text-white md:w-[182px]"
+                        <Link
+                          href={`/dashboard/okgd/update/${eventDetails?.[0].participant_id}`}
                         >
-                          Revision
-                        </Button>
+                          <Button
+                            size="lg"
+                            className="w-full bg-yellow-900 px-4 py-2 text-white md:w-[182px]"
+                          >
+                            Revision
+                          </Button>
+                        </Link>
                       </div>
                     )}
                   </div>
