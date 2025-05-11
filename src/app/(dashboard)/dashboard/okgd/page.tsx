@@ -18,6 +18,28 @@ function OKGDDashboardUserPage() {
   // Data Fetching Details Event Query
   const { data: eventDetails, isLoading, isError } = useGetDetailsEventQuery();
 
+  // phaseDetails content rendering
+  const phaseDetails = eventDetails?.[0].phase;
+
+  const phaseContent = {
+    PENYISIHAN: {
+      content:
+        "Welcome to all the amazing participants! The preliminary round is the first step in your journey. May you give your best and enjoy every moment of the process. Wishing you all the best of luck!",
+    },
+    PEREMPATFINAL: {
+      content:
+        "Congratulations to you for making it to the quarterfinals! Your journey is getting closer to the peak, and the challenges ahead are even greater. Keep up the hard work, and showcase your best abilities in this round!",
+    },
+    SEMIFINAL: {
+      content:
+        "Welcome to the semifinals! You've shown incredible dedication to get this far. Don't waste this opportunity stay focused and give your best performance in this stage.",
+    },
+    FINAL: {
+      content:
+        "Congratulations to you for making it to the finals! This is the culmination of all the effort and dedication you've put in. No matter the outcome, you have already shown great excellence. Wishing you success, and may you enjoy every moment!",
+    },
+  };
+
   return (
     <>
       <Sidebar title="Dashboard OKGD">
@@ -97,14 +119,17 @@ function OKGDDashboardUserPage() {
                         {eventDetails?.[0].status === "PENDING" ? (
                           "Congratulations! You are now registered for OKGD. Our admin team is currently verifying your account. Stay tuned!"
                         ) : eventDetails?.[0].status === "APPROVED" ? (
-                          <>
-                            <span className="text-purple-600">
-                              Congratulations!
-                            </span>
-                            {
-                              " ✨ Congratulations! You have successfully become a participant of the Dentistry Olympiad. Please make sure to read the Guidebook and Syllabus that will be  provided."
-                            }
-                          </>
+                          phaseDetails === "PENYISIHAN" ? (
+                            <>{phaseContent.PENYISIHAN.content}</>
+                          ) : phaseDetails === "PEREMPATFINAL" ? (
+                            <>{phaseContent.PEREMPATFINAL.content}</>
+                          ) : phaseDetails === "SEMIFINAL" ? (
+                            <>{phaseContent.SEMIFINAL.content}</>
+                          ) : phaseDetails === "FINAL" ? (
+                            <>{phaseContent.FINAL.content}</>
+                          ) : (
+                            <></>
+                          )
                         ) : eventDetails?.[0].status === "REVISION" ? (
                           <>
                             <span className="text-red-600">
