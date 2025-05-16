@@ -15,6 +15,7 @@ import {
   teacherDetails,
 } from "@/types/dashboard-admin";
 import { countries } from "country-data-list";
+import { Paperclip } from "lucide-react";
 
 interface BioInformationSectionProps {
   eventDetails?: EventDetails;
@@ -43,6 +44,21 @@ export default function BioInformationSection({
             <span className="font-bagnard text-purple-600">Information</span>
           </Typography>
         </div>
+
+        {/* Revision Message */}
+        {data.revision_status && data.revision_message && (
+          <div className="mb-4 rounded-md bg-yellow-50 p-4 text-sm text-yellow-800">
+            <Typography variant="p" weight="bold" className="mb-2 text-lg">
+              Revision Message
+            </Typography>
+            <div className="flex items-center gap-2">
+              <Paperclip size={16} />
+              <Typography variant="p" weight="medium">
+                {data.revision_message}
+              </Typography>
+            </div>
+          </div>
+        )}
 
         {/* Team + School */}
         <div className="flex flex-col gap-4 border-b border-gray-700 pb-4 md:flex-row">

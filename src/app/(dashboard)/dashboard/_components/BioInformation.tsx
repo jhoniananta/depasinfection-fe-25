@@ -31,6 +31,11 @@ export default function BioInformationSection({
   const teacher = data.teacher_details ? [data.teacher_details] : [];
   const eventName = data.event;
 
+  const subUDSRC =
+    data.sub_competition === "THREE_MOP"
+      ? "3 Minutes Competition"
+      : "Poster Competition";
+
   const isUDSRC = eventName === "UGM Dental Scientific Research Competition";
 
   return (
@@ -67,15 +72,33 @@ export default function BioInformationSection({
           </div>
 
           {isUDSRC && (
-            <div className="flex flex-col md:ml-8">
-              <Typography variant="p" weight="medium" className="text-gray-600">
-                Nationality
-              </Typography>
-              <Typography variant="p" weight="bold">
-                {countries.all.find(
-                  (country) => country.alpha3 === data.nationality,
-                )?.name || data.nationality}
-              </Typography>
+            <div className="flex flex-col gap-4 md:flex-row">
+              <div className="flex flex-col md:ml-8">
+                <Typography
+                  variant="p"
+                  weight="medium"
+                  className="text-gray-600"
+                >
+                  Nationality
+                </Typography>
+                <Typography variant="p" weight="bold">
+                  {countries.all.find(
+                    (country) => country.alpha3 === data.nationality,
+                  )?.name || data.nationality}
+                </Typography>
+              </div>
+              <div className="flex flex-col md:ml-8">
+                <Typography
+                  variant="p"
+                  weight="medium"
+                  className="text-gray-600"
+                >
+                  Sub Competition
+                </Typography>
+                <Typography variant="p" weight="bold">
+                  {subUDSRC}
+                </Typography>
+              </div>
             </div>
           )}
         </div>

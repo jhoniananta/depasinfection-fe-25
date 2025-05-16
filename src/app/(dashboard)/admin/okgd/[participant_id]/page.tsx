@@ -31,11 +31,26 @@ function DetailOKGDUser() {
   const [openDialogReject, setOpenDialogReject] = React.useState(false);
   const [openDialogRevision, setOpenDialogRevision] = React.useState(false);
 
+  const [disableButtonAccept, setDisableButtonAccept] = React.useState(false);
+  const [disableButtonReject, setDisableButtonReject] = React.useState(false);
+  const [disableButtonRevision, setDisableButtonRevision] =
+    React.useState(false);
+
   const {
     data: eventDetails,
     isLoading,
     isError,
   } = useGetDetailParticipantQuery();
+
+  // useEffect to disable buttons based on status
+  React.useEffect(() => {
+    if (eventDetails) {
+      const status = eventDetails.status;
+      setDisableButtonAccept(status === "APPROVED");
+      setDisableButtonReject(status === "REJECTED");
+      setDisableButtonRevision(status === "REVISION");
+    }
+  }, [eventDetails?.status]);
 
   const changeStatusMutation = useChangeStatusOKGD();
   const methods = useForm<ParticipantDetailsChangeRequest>({
@@ -139,7 +154,8 @@ function DetailOKGDUser() {
                 <div className="flex flex-wrap gap-3">
                   <button
                     onClick={() => handleStatusChange("APPROVED")}
-                    className="flex items-center gap-2 rounded-lg bg-[#245D77] px-4 py-2 text-white transition hover:bg-[#1a455a]"
+                    className="flex items-center gap-2 rounded-lg bg-[#245D77] px-4 py-2 text-white transition hover:bg-[#1a455a] disabled:cursor-not-allowed disabled:bg-[#1a455a] disabled:opacity-50"
+                    disabled={disableButtonAccept}
                   >
                     <TiTick className="text-lg" />
                     <Typography
@@ -152,7 +168,8 @@ function DetailOKGDUser() {
                   </button>
                   <button
                     onClick={() => handleStatusChange("REVISION")}
-                    className="flex items-center gap-2 rounded-lg bg-[#FCE94B] px-4 py-2 text-black transition hover:bg-[#e3d940]"
+                    className="flex items-center gap-2 rounded-lg bg-[#FCE94B] px-4 py-2 text-black transition hover:bg-[#e3d940] disabled:cursor-not-allowed disabled:bg-[#e3d940] disabled:opacity-50"
+                    disabled={disableButtonRevision}
                   >
                     <BsPencilSquare className="text-lg" />
                     <Typography
@@ -165,7 +182,8 @@ function DetailOKGDUser() {
                   </button>
                   <button
                     onClick={() => handleStatusChange("REJECTED")}
-                    className="flex items-center gap-2 rounded-lg bg-[#874CCC] px-4 py-2 text-white transition hover:bg-[#6f38a3]"
+                    className="flex items-center gap-2 rounded-lg bg-[#874CCC] px-4 py-2 text-white transition hover:bg-[#6f38a3] disabled:cursor-not-allowed disabled:bg-[#6f38a3] disabled:opacity-50"
+                    disabled={disableButtonReject}
                   >
                     <IoCloseCircleOutline className="text-lg" />
                     <Typography
