@@ -7,8 +7,8 @@ Disallow: /sandbox
 Disallow: /sandbox/*
 
 # Host
-Host: 'https://depasinfection.com/' # Site URL
+Host: 'https://depasinfection.com'
 
 # Sitemaps
-Sitemap: 'https://depasinfection.com/' # Site URL/sitemap.xml
+Sitemap: 'https://depasinfection.com'
 Sitemap: https://depasinfection.com/sitemap-0.xml

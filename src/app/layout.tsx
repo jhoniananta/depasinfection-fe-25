@@ -94,7 +94,7 @@ export default async function RootLayout({
       <body className={`${rubik.variable} ${bagnard.variable} bg-neutral-50`}>
         {/* Google Analytics 4 via gtag.js */}
         <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-2JXJ4TJPVJ"
+          src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID}`}
           strategy="afterInteractive"
         />
         <Script id="ga4-init" strategy="afterInteractive">
@@ -102,7 +102,7 @@ export default async function RootLayout({
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-      gtag('config', 'G-2JXJ4TJPVJ');
+      gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID}');
     `}
         </Script>
 
@@ -110,7 +110,7 @@ export default async function RootLayout({
         <Script
           defer
           src="https://cloud.umami.is/script.js"
-          data-website-id="f76a925c-deee-4803-9710-fd301586681d"
+          data-website-id={process.env.NEXT_PUBLIC_UMAMI_ANALYTICS_ID}
           strategy="afterInteractive"
         />
 
