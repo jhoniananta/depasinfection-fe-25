@@ -251,25 +251,31 @@ function UDSRCDashboardUserPage() {
                             Submission
                           </Typography>
                           {/* Submit Button after status === verified*/}
-                          {eventDetails?.[0].status === "APPROVED" && (
-                            <Link
-                              href={
-                                isPoster
-                                  ? "/submission/udsrc-poster"
-                                  : "/submission/udsrc-3-mop"
-                              }
-                            >
+                          {eventDetails?.[0].status === "APPROVED" &&
+                            (eventDetails?.[0].submission_status ? (
                               <Button
                                 variant="purple"
-                                className="flex items-center justify-center gap-4 text-xs lg:ml-auto lg:text-lg"
-                                disabled={eventDetails?.[0].submission_status}
+                                className="flex cursor-not-allowed items-center justify-center gap-4 text-xs lg:ml-auto lg:text-lg"
+                                disabled
                               >
-                                {eventDetails?.[0].submission_status
-                                  ? "You have been submitted"
-                                  : "Submit your submission"}
+                                You have been submitted
                               </Button>
-                            </Link>
-                          )}
+                            ) : (
+                              <Link
+                                href={
+                                  isPoster
+                                    ? "/submission/udsrc-poster"
+                                    : "/submission/udsrc-3-mop"
+                                }
+                              >
+                                <Button
+                                  variant="purple"
+                                  className="flex items-center justify-center gap-4 text-xs lg:ml-auto lg:text-lg"
+                                >
+                                  Submit your submission
+                                </Button>
+                              </Link>
+                            ))}
                         </div>
                       </div>
                     </div>
