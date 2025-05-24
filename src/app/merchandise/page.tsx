@@ -5,38 +5,75 @@ import Typography from "@/components/Typography";
 import withAuth from "@/components/WithAuth";
 import Button from "@/components/buttons/Button";
 import Layout from "@/layouts/Layout";
+import Link from "next/link";
 
 // Data merchandise untuk mapping
-const merchandiseItems = [
+const bundleMerch = [
   {
     id: 1,
-    title: "T-Shirt Exclusive",
-    price: "IDR 99.000",
-    image: "/images/dummy-card.png",
+    title: "Package A",
+    price: "IDR 20.000",
+    image: "/images/merch/merch-package-a.png",
+    link: "https://id.shp.ee/8hf2aoc",
   },
   {
     id: 2,
-    title: "T-Shirt Exclusive",
-    price: "IDR 99.000",
-    image: "/images/dummy-card.png",
+    title: "Package B",
+    price: "IDR 125.000",
+    image: "/images/merch/merch-package-b.png",
+    link: "https://id.shp.ee/9kwqt4g",
   },
   {
     id: 3,
-    title: "T-Shirt Exclusive",
-    price: "IDR 99.000",
-    image: "/images/dummy-card.png",
+    title: "Package C",
+    price: "IDR 70.000",
+    image: "/images/merch/merch-package-c.png",
+    link: "https://id.shp.ee/1NTX5HD",
   },
   {
     id: 4,
-    title: "T-Shirt Exclusive",
-    price: "IDR 99.000",
-    image: "/images/dummy-card.png",
+    title: "Package D",
+    price: "IDR 100.000",
+    image: "/images/merch/merch-package-d.png",
+    link: "https://id.shp.ee/qebbqpu",
   },
   {
     id: 5,
-    title: "T-Shirt Exclusive",
-    price: "IDR 99.000",
-    image: "/images/dummy-card.png",
+    title: "Take All Package",
+    price: "IDR 150.000",
+    image: "/images/merch/merch-package-all.png",
+    link: "https://id.shp.ee/kWv7Fht",
+  },
+];
+
+const merchandiseItems = [
+  {
+    id: 1,
+    title: "Cotton Combed 30s T-Shirt",
+    price: "IDR 80.000",
+    image: "/images/merch/merch-t-shirt.png",
+    link: "https://id.shp.ee/qaMjGwF",
+  },
+  {
+    id: 2,
+    title: "Keychain",
+    price: "IDR 12.000",
+    image: "/images/merch/merch-keychain.png",
+    link: "https://id.shp.ee/4jKZBNR",
+  },
+  {
+    id: 3,
+    title: "Canvas Totebag",
+    price: "IDR 50.000",
+    image: "/images/merch/merch-totebag.png",
+    link: "https://id.shp.ee/kUMNkN6",
+  },
+  {
+    id: 4,
+    title: "A6 Sticker",
+    price: "IDR 10.000",
+    image: "/images/merch/merch-sticker.png",
+    link: "https://id.shp.ee/6CxmcdT",
   },
 ];
 
@@ -104,42 +141,109 @@ function MerchandisePage() {
             Exclusive gear made just for true fans—authentic, stylish, and
             limited edition!
           </Typography>
+          <Typography
+            variant="h5"
+            font="Rubik"
+            className="font-bold text-neutral-900"
+          >
+            Open Pre-Order : 19 - 24 May 2025
+          </Typography>
         </div>
 
-        <div className="flex flex-wrap items-center justify-center gap-6 px-6 md:gap-8">
-          {merchandiseItems.map((item) => (
-            <div
-              key={item.id}
-              className="flex flex-col gap-4 rounded-2xl border border-neutral-200 p-4"
-            >
-              <NextImage
-                alt="dummy-card"
-                serverStaticImg
-                height={460}
-                width={320}
-                className="w-fit"
-                src={item.image}
-              />
-              <div className="flex flex-col">
-                <Typography
-                  variant="h6"
-                  weight="medium"
-                  font="Rubik"
-                  className="text-sm text-neutral-900"
-                >
-                  {item.title}
-                </Typography>
-                <Typography
-                  variant="h6"
-                  weight="medium"
-                  font="Rubik"
-                  className="text-base text-purple-500"
-                >
-                  {item.price}
-                </Typography>
-              </div>
-            </div>
-          ))}
+        <div className="flex flex-col gap-5 px-6">
+          <Typography
+            variant="h5"
+            font="Rubik"
+            className="font-medium text-neutral-900"
+          >
+            Our Best Deal Package
+          </Typography>
+
+          <div className="flex flex-wrap items-center justify-start gap-6 md:gap-8">
+            {bundleMerch.map((item) => (
+              <Link
+                href={item.link}
+                target="_blank"
+                key={item.id}
+                className="merch-card flex flex-col gap-4 rounded-2xl border border-neutral-200 p-4"
+              >
+                <NextImage
+                  alt={item.title}
+                  serverStaticImg
+                  height={460}
+                  width={320}
+                  className="w-fit"
+                  src={item.image}
+                />
+                <div className="flex flex-col">
+                  <Typography
+                    variant="h6"
+                    weight="medium"
+                    font="Rubik"
+                    className="text-sm text-neutral-900"
+                  >
+                    {item.title}
+                  </Typography>
+                  <Typography
+                    variant="h6"
+                    weight="medium"
+                    font="Rubik"
+                    className="text-base text-purple-500"
+                  >
+                    {item.price}
+                  </Typography>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+
+        <div className="flex flex-col gap-5 px-6">
+          <Typography
+            variant="h5"
+            font="Rubik"
+            className="font-medium text-neutral-900"
+          >
+            Our Merch
+          </Typography>
+
+          <div className="flex flex-wrap items-center justify-start gap-6 md:gap-8">
+            {merchandiseItems.map((item) => (
+              <Link
+                href={item.link}
+                target="_blank"
+                key={item.id}
+                className="merch-card flex flex-col gap-4 rounded-2xl border border-neutral-200 p-4"
+              >
+                <NextImage
+                  alt="dummy-card"
+                  serverStaticImg
+                  height={460}
+                  width={320}
+                  className="w-fit"
+                  src={item.image}
+                />
+                <div className="flex flex-col">
+                  <Typography
+                    variant="h6"
+                    weight="medium"
+                    font="Rubik"
+                    className="text-sm text-neutral-900"
+                  >
+                    {item.title}
+                  </Typography>
+                  <Typography
+                    variant="h6"
+                    weight="medium"
+                    font="Rubik"
+                    className="text-base text-purple-500"
+                  >
+                    {item.price}
+                  </Typography>
+                </div>
+              </Link>
+            ))}
+          </div>
         </div>
       </section>
     </Layout>

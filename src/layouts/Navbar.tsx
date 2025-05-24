@@ -56,7 +56,7 @@ export default function Navbar() {
     { label: "Home", href: "/" },
     { label: "OKGD", href: "/okgd-event" },
     { label: "UDSRC", href: "/udsrc-event" },
-    { label: "Merchandise", href: "/coming-soon" },
+    { label: "Merchandise", href: "/merchandise" },
   ];
 
   // Kelas untuk bagian tengah dan kanan saat belum discrolled
