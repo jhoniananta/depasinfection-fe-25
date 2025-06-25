@@ -1,6 +1,7 @@
 "use client";
 import NextImage from "@/components/NextImage";
 import Typography from "@/components/Typography";
+import { motion } from "motion/react";
 import Link from "next/link";
 
 type CardProps = {
@@ -16,9 +17,47 @@ export default function CardEvent({
   subtitle,
   urlLink,
 }: CardProps) {
+  const cardVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.6,
+        ease: "easeOut",
+      },
+    },
+    hover: {
+      scale: 1.05,
+      transition: {
+        duration: 0.3,
+        ease: "easeInOut",
+      },
+    },
+  };
+
+  const contentVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.4,
+        delay: 0.2,
+      },
+    },
+  };
+
   return (
     <>
-      <div className="relative min-w-[272px] min-h-[360px] max-w-[424px] max-h-[480px] w-full h-full rounded-3xl overflow-hidden group cursor-pointer transition-transform duration-100 hover:scale-105">
+      <motion.div
+        variants={cardVariants}
+        initial="hidden"
+        whileInView="visible"
+        whileHover="hover"
+        viewport={{ once: true, margin: "-50px" }}
+        className="relative min-w-[272px] min-h-[360px] max-w-[424px] max-h-[480px] w-full h-full rounded-3xl overflow-hidden group cursor-pointer"
+      >
         <Link href={urlLink}>
           <NextImage
             src={src}
@@ -28,7 +67,10 @@ export default function CardEvent({
             className="object-cover rounded-3xl"
             priority
           />
-          <div className="absolute inset-0 flex flex-col justify-end p-10 z-10">
+          <motion.div
+            variants={contentVariants}
+            className="absolute inset-0 flex flex-col justify-end p-10 z-10"
+          >
             <Typography
               variant="h1"
               weight="extrabold"
@@ -39,9 +81,9 @@ export default function CardEvent({
                 {subtitle}
               </span>
             </Typography>
-          </div>
+          </motion.div>
         </Link>
-      </div>
+      </motion.div>
     </>
   );
 }
