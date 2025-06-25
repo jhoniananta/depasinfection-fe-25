@@ -1,5 +1,6 @@
 import Typography from "@/components/Typography";
 import { cardSectionProps } from "@/types/event-page";
+import { motion } from "motion/react";
 import Link from "next/link";
 import { IoDocumentTextOutline } from "react-icons/io5";
 import ImageCarousel from "../ImageCarousel";
@@ -14,8 +15,34 @@ export default function CardComponent({
   requirements,
   showButton = true,
 }: cardSectionProps) {
+  const cardVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.6,
+        ease: "easeOut",
+      },
+    },
+    hover: {
+      y: -10,
+      transition: {
+        duration: 0.3,
+        ease: "easeInOut",
+      },
+    },
+  };
+
   return (
-    <div className="container z-10 mx-4 my-8 max-w-6xl rounded-3xl bg-purple-600 p-8 text-white md:mx-8 md:my-12 md:p-12 lg:h-full">
+    <motion.div
+      variants={cardVariants}
+      initial="hidden"
+      whileInView="visible"
+      whileHover="hover"
+      viewport={{ once: true, margin: "-50px" }}
+      className="container z-10 mx-4 my-8 max-w-6xl rounded-3xl bg-purple-600 p-8 text-white md:mx-8 md:my-12 md:p-12 lg:h-full"
+    >
       <div className="mx-auto max-w-7xl">
         {/* Carousel section */}
         <ImageCarousel images={images} className="mb-12 rounded-3xl" />
@@ -73,6 +100,6 @@ export default function CardComponent({
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }

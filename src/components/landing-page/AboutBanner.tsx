@@ -1,6 +1,7 @@
 import NextImage from "@/components/NextImage";
 import Typography from "@/components/Typography";
 import Button from "@/components/buttons/Button";
+import { motion } from "motion/react";
 import { useTranslations } from "next-intl";
 
 export interface ScrollProps {
@@ -12,11 +13,42 @@ export default function AboutBanner({
 }: ScrollProps): React.ReactElement {
   const t = useTranslations("HomePage");
 
+  const containerVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.6,
+        ease: "easeOut",
+        staggerChildren: 0.2,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, x: -20 },
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: {
+        duration: 0.5,
+        ease: "easeOut",
+      },
+    },
+  };
+
   return (
-    <div className="z-20 max-w-6xl rounded-xl bg-white shadow-xl">
+    <motion.div
+      variants={containerVariants}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: "-100px" }}
+      className="z-20 max-w-6xl rounded-xl bg-white shadow-xl"
+    >
       <div className="flex flex-col items-center justify-center gap-8 px-6 py-8 md:flex-row md:justify-between md:px-12 md:py-16">
         {/* Logo on the left */}
-        <div className="h-full w-full">
+        <motion.div variants={itemVariants} className="h-full w-full">
           <NextImage
             src="/landing-page/logo-depas.png"
             alt="Depa's Infection Logo"
@@ -25,10 +57,13 @@ export default function AboutBanner({
             className="flex h-full w-full items-center justify-center"
             priority
           />
-        </div>
+        </motion.div>
 
         {/* Content on the right */}
-        <div className="space-y-3 text-center md:text-left">
+        <motion.div
+          variants={itemVariants}
+          className="space-y-3 text-center md:text-left"
+        >
           <Typography
             variant="h2"
             font="Rubik"
@@ -48,7 +83,7 @@ export default function AboutBanner({
             {t("about.description")}
           </Typography>
 
-          <div className="pt-2">
+          <motion.div variants={itemVariants} className="pt-2">
             <Button
               variant="gradient-yellow"
               size="base"
@@ -57,9 +92,9 @@ export default function AboutBanner({
             >
               Explore Now
             </Button>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       </div>
-    </div>
+    </motion.div>
   );
 }
