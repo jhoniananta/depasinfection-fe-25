@@ -3,7 +3,7 @@ import { z } from "zod";
 // NIK: 16 digits, NISN: 10 digits
 export const nikRegex = /^\d{16}$/;
 export const nisnRegex = /^\d{10}$/;
-export const nimRegex = /^\d{9,24}$/;
+export const nimRegex = /^\d{5,24}$/;
 
 export function zDateFromString(): z.ZodType<Date, z.ZodTypeDef, unknown> {
   return z.preprocess(

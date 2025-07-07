@@ -96,7 +96,7 @@ export const stepLeaderSchema = z
       } else if (!nimRegex.test(data.leaderNIM)) {
         ctx.addIssue({
           code: z.ZodIssueCode.custom, // Or invalid_string
-          message: "NIM must be 9-24 digits",
+          message: "NIM must be 5-24 digits",
           path: ["leaderNIM"],
         });
       }
@@ -220,7 +220,7 @@ export const stepMembersSchema = z
       } else if (!nimRegex.test(data.member1NIM)) {
         ctx.addIssue({
           code: z.ZodIssueCode.custom,
-          message: "Member 1 NIM must be 9-24 digits",
+          message: "Member 1 NIM must be 5-24 digits",
           path: ["member1NIM"],
         });
       }
@@ -250,7 +250,7 @@ export const stepMembersSchema = z
       } else if (!nimRegex.test(data.member2NIM)) {
         ctx.addIssue({
           code: z.ZodIssueCode.custom,
-          message: "Member 2 NIM must be 9-24 digits",
+          message: "Member 2 NIM must be 5-24 digits",
           path: ["member2NIM"],
         });
       }
