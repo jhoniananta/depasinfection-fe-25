@@ -38,7 +38,7 @@ export const stepLeaderSchema = z.object({
     .optional(),
   leaderNIM: z
     .string()
-    .regex(nimRegex, { message: "NIM must be 9-24 digits" })
+    .regex(nimRegex, { message: "NIM must be 5-24 digits" })
     .optional(),
   leaderWhatsApp: z
     .string()
@@ -86,7 +86,7 @@ export const stepMembersSchema = z.object({
     .optional(),
   member1NIM: z
     .string()
-    .regex(nimRegex, { message: "NIM must be 9-24 digits" })
+    .regex(nimRegex, { message: "NIM must be 5-24 digits" })
     .optional(),
   member1WhatsApp: z
     .string()
@@ -132,7 +132,7 @@ export const stepMembersSchema = z.object({
     .optional(),
   member2NIM: z
     .string()
-    .regex(nimRegex, { message: "NIM must be 9-24 digits" })
+    .regex(nimRegex, { message: "NIM must be 5-24 digits" })
     .optional(),
   member2WhatsApp: z
     .string()
