@@ -1,9 +1,11 @@
+"use client";
 import NextImage from "@/components/NextImage";
 import Typography from "@/components/Typography";
 import Button from "@/components/buttons/Button";
 import { HeroEventProps } from "@/types/event-page";
 import { motion } from "motion/react";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
 export default function HeroEvent({
   title,
@@ -12,6 +14,36 @@ export default function HeroEvent({
   urlRegist,
   buttonText,
 }: HeroEventProps) {
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
+
+  useEffect(() => {
+    const checkButtonStatus = () => {
+      const now = new Date();
+      const targetDate = new Date(2025, 6, 13);
+
+      // Check if it's July 13, 2025
+      if (
+        now.getFullYear() === targetDate.getFullYear() &&
+        now.getMonth() === targetDate.getMonth() &&
+        now.getDate() === targetDate.getDate()
+      ) {
+        const currentHour = now.getHours();
+        // Disable between 1 AM (01:00) and 3 PM (15:00)
+        setIsButtonDisabled(currentHour >= 1 && currentHour < 15);
+      } else {
+        setIsButtonDisabled(false);
+      }
+    };
+
+    // Check immediately
+    checkButtonStatus();
+
+    // Check every minute
+    const interval = setInterval(checkButtonStatus, 60000);
+
+    return () => clearInterval(interval);
+  }, []);
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -36,7 +68,7 @@ export default function HeroEvent({
 
   return (
     <>
-      <section className="relative w-screen h-screen bg-purple-700">
+      <section className="relative h-screen w-screen bg-purple-700">
         {/* Hero Image background */}
         <motion.div
           initial={{ scale: 1.1, opacity: 0 }}
@@ -50,7 +82,7 @@ export default function HeroEvent({
             width={2560}
             height={600}
             priority
-            className="w-full absolute flex justify-center items-center"
+            className="absolute flex w-full items-center justify-center"
             imgClassName="w-screen lg:container object-cover h-screen"
             quality={100}
           />
@@ -60,11 +92,11 @@ export default function HeroEvent({
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="container relative z-20 md:mx-auto md:px-6 h-full flex flex-col justify-end pb-16 md:pb-24"
+          className="container relative z-20 flex h-full flex-col justify-end pb-16 md:mx-auto md:px-6 md:pb-24"
         >
           <motion.div
             variants={itemVariants}
-            className="grid grid-cols-1 md:grid-cols-2 gap-12 items-end"
+            className="grid grid-cols-1 items-end gap-12 md:grid-cols-2"
           >
             <div className="flex flex-col">
               {/* Main heading */}
@@ -73,7 +105,7 @@ export default function HeroEvent({
                   variant="h1"
                   font="Bagnard"
                   weight="regular"
-                  className="text-3xl min-[375px]:text-4xl md:text-5xl lg:text-7xl text-center md:text-left font-bold text-white leading-normal md:leading-tight mb-4"
+                  className="mb-4 text-center text-3xl font-bold leading-normal text-white min-[375px]:text-4xl md:text-left md:text-5xl md:leading-tight lg:text-7xl"
                 >
                   {title}
                 </Typography>
@@ -84,25 +116,32 @@ export default function HeroEvent({
                   variant="p"
                   font="Rubik"
                   weight="regular"
-                  className="text-lg md:text-xl lg:text-2xl text-white/90 mb-8 w-full md:max-w-md text-center md:text-left"
+                  className="mb-8 w-full text-center text-lg text-white/90 md:max-w-md md:text-left md:text-xl lg:text-2xl"
                 >
                   {subtitle}
                 </Typography>
               </motion.div>
             </div>
 
-            <div className="flex md:justify-end md:items-end justify-center items-center">
+            <div className="flex items-center justify-center md:items-end md:justify-end">
               <motion.div variants={itemVariants}>
                 <motion.div
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
+                  whileHover={{ scale: isButtonDisabled ? 1 : 1.05 }}
+                  whileTap={{ scale: isButtonDisabled ? 1 : 0.95 }}
                 >
                   <Button
                     variant="gradient-yellow"
                     size="lg"
-                    className="py-2 px-4 lg:py-6 lg:px-12 text-xl md:text-2xl"
+                    className={`px-4 py-2 text-xl md:text-2xl lg:px-12 lg:py-6 ${
+                      isButtonDisabled
+                        ? "pointer-events-none cursor-not-allowed opacity-50"
+                        : ""
+                    }`}
+                    disabled={isButtonDisabled}
                   >
-                    <Link href={urlRegist}>{buttonText}</Link>
+                    <Link href={isButtonDisabled ? "#" : urlRegist}>
+                      {isButtonDisabled ? "Pendaftaran Ditutup" : buttonText}
+                    </Link>
                   </Button>
                 </motion.div>
               </motion.div>
