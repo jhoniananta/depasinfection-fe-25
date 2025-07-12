@@ -61,7 +61,7 @@ export const getFeeInfoUDSRC = (
     }
   }
 
-  if (inRange("2025-05-19T00:00:00+07:00", "2025-07-12T23:59:59+07:00")) {
+  if (inRange("2025-05-19T00:00:00+07:00", "2025-07-27T07:00:00")) {
     if (subCompetition === "poster-competition") {
       return nationality === "IDN"
         ? { label: "IDR200.002,00", value: 200002 }
@@ -89,7 +89,7 @@ export const getFeeInfoOKGD = () => {
   if (inRange("2025-04-11T00:00:00+07:00", "2025-05-18T23:59:59+07:00")) {
     return { label: "IDR180.001,00", value: 180001 };
   }
-  if (inRange("2025-05-19T00:00:00+07:00", "2025-07-12T23:59:59+07:00")) {
+  if (inRange("2025-05-19T00:00:00+07:00", "2025-07-27T07:00:00")) {
     return { label: "IDR200.001,00", value: 200001 };
   }
   // fallback
