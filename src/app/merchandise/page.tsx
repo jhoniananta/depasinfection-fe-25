@@ -129,7 +129,7 @@ function MerchandisePage() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
-        className="flex min-h-screen w-screen flex-col items-center justify-center bg-neutral-50 bg-gradient-to-t from-purple-900 to-purple-700 py-52 lg:pb-32 lg:pt-60"
+        className="flex min-h-screen w-screen flex-col items-center justify-center overflow-hidden bg-neutral-50 bg-gradient-to-t from-purple-900 to-purple-700 py-52 lg:pb-32 lg:pt-60"
       >
         <motion.div
           variants={containerVariants}
@@ -186,7 +186,7 @@ function MerchandisePage() {
         whileInView={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
         viewport={{ once: true }}
-        className="mx-auto flex w-screen flex-col gap-12 bg-neutral-50 py-36 lg:container"
+        className="mx-auto flex w-screen flex-col gap-12 overflow-hidden bg-neutral-50 py-36 lg:container"
       >
         <motion.div
           variants={containerVariants}

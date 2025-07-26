@@ -91,6 +91,7 @@ function DashboardUserPage() {
                       title="okgd"
                       subtitle="Olimpiade Kedokteran Gigi Dasar"
                       urlLink="/event-register/okgd"
+                      isLinkDisabled={true}
                     />
                     {/* UDSRC Card */}
                     <RegisterCard
@@ -98,6 +99,7 @@ function DashboardUserPage() {
                       title="udsrc"
                       subtitle="UGM Dental Student Research Competition"
                       urlLink="/event-register/udsrc"
+                      isLinkDisabled={true}
                     />
                   </div>
                 </div>

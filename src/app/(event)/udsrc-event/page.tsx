@@ -67,9 +67,10 @@ function UDSRCHome() {
           title={t("home.title")}
           subtitle={t("home.subTitle")}
           urlRegist="/event-register/udsrc"
+          isButtonDisabled={true}
         />
         <AboutEvent
-          poster="/udsrc-page/UDSRC-poster.png"
+          poster="/udsrc-page/UDSRC-poster-terbaru.png"
           title="UDSRC"
           aboutTitle={t("about.title")}
           buttonText={"Download Poster"}

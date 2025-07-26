@@ -40,7 +40,7 @@ export default function RegistEvent({
           imgClassName="object-cover w-full h-full opacity-60 pointer-events-none select-none"
         />
       </motion.div>
-      <div className="mx-auto lg:container my-[5vh] flex min-h-screen w-full flex-col items-center justify-center gap-[5vw] lg:flex-row lg:gap-[8vw]">
+      <div className="mx-auto my-[5vh] flex min-h-screen w-full flex-col items-center justify-center gap-[5vw] lg:container lg:flex-row lg:gap-[8vw]">
         <motion.div
           initial={{ opacity: 0, x: -50 }}
           whileInView={{ opacity: 1, x: 0 }}
@@ -99,7 +99,7 @@ export default function RegistEvent({
               </Button>
             </motion.div>
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-              <Button variant="primary">
+              <Button variant="primary" disabled>
                 <Link href={registUrl}>Regist Now</Link>
               </Button>
             </motion.div>

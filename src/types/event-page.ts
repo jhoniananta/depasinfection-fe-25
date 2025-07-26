@@ -42,6 +42,7 @@ export interface HeroEventProps {
   subtitle: string;
   bgImage: string;
   urlRegist: string;
+  isButtonDisabled?: boolean;
 }
 
 export interface RegistEventProps {

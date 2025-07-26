@@ -5,7 +5,6 @@ import Button from "@/components/buttons/Button";
 import { HeroEventProps } from "@/types/event-page";
 import { motion } from "motion/react";
 import Link from "next/link";
-import { useEffect, useState } from "react";
 
 export default function HeroEvent({
   title,
@@ -13,37 +12,8 @@ export default function HeroEvent({
   bgImage,
   urlRegist,
   buttonText,
+  isButtonDisabled = false,
 }: HeroEventProps) {
-  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
-
-  useEffect(() => {
-    const checkButtonStatus = () => {
-      const now = new Date();
-      const targetDate = new Date(2025, 6, 13);
-
-      // Check if it's July 13, 2025
-      if (
-        now.getFullYear() === targetDate.getFullYear() &&
-        now.getMonth() === targetDate.getMonth() &&
-        now.getDate() === targetDate.getDate()
-      ) {
-        const currentHour = now.getHours();
-        // Disable between 1 AM (01:00) and 3 PM (15:00)
-        setIsButtonDisabled(currentHour >= 1 && currentHour < 15);
-      } else {
-        setIsButtonDisabled(false);
-      }
-    };
-
-    // Check immediately
-    checkButtonStatus();
-
-    // Check every minute
-    const interval = setInterval(checkButtonStatus, 60000);
-
-    return () => clearInterval(interval);
-  }, []);
-
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
