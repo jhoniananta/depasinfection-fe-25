@@ -79,10 +79,11 @@ function OKGDHome() {
           title={t("home.title")}
           subtitle={t("home.subTitle")}
           urlRegist="/event-register/okgd"
+          isButtonDisabled={true}
         />
         <AboutEvent
-          poster="/okgd-page/OKGD-poster.png"
-          title="OKGD"
+          poster="/okgd-page/OKGD-poster-terbaru.png"
+          title="OKGD-baru"
           aboutTitle={t("about.title")}
           buttonText={"Download Poster"}
           normalContent={t("about.description")}

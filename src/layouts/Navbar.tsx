@@ -15,6 +15,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import useAuthStore from "@/store/useAuthStore";
+import useIntlStore from "@/store/useIntlStore";
 import { Transition } from "@headlessui/react";
 import clsx from "clsx";
 import Link from "next/link";
@@ -28,6 +29,7 @@ export default function Navbar() {
   const pathname = usePathname();
 
   const user = useAuthStore.useUser();
+  const { locale, setLocale } = useIntlStore();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -36,6 +38,13 @@ export default function Navbar() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  // Custom locale change handler that triggers page refresh
+  const handleLocaleChange = (newLocale: string) => {
+    setLocale(newLocale);
+    // Refresh the page to apply the new locale on server-side
+    window.location.reload();
+  };
 
   const headerClasses = clsx(
     "fixed top-0 left-0 w-full z-50 h-auto",
@@ -127,7 +136,7 @@ export default function Navbar() {
 
         {/* BAGIAN KANAN: background kondisional */}
         <div className={rightSectionClasses}>
-          {/* <Select>
+          <Select value={locale} onValueChange={handleLocaleChange}>
             <SelectTrigger className="flex w-fit border-0 shadow-none focus:border-0 focus:outline-none focus:ring-0">
               <SelectValue placeholder="Pilih Bahasa" />
             </SelectTrigger>
@@ -135,7 +144,7 @@ export default function Navbar() {
               <SelectItem value="en">EN</SelectItem>
               <SelectItem value="id">ID</SelectItem>
             </SelectContent>
-          </Select> */}
+          </Select>
           {user ? (
             <>
               <span className="text-[12px] font-semibold">
@@ -230,7 +239,7 @@ export default function Navbar() {
               );
             })}
 
-            <Select>
+            <Select value={locale} onValueChange={handleLocaleChange}>
               <SelectTrigger className="border-0 shadow-none focus:outline-none">
                 <SelectValue placeholder="Theme" />
               </SelectTrigger>

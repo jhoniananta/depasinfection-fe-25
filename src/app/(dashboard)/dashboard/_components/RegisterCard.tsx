@@ -2,13 +2,13 @@
 import NextImage from "@/components/NextImage";
 import Typography from "@/components/Typography";
 import Link from "next/link";
-import { useEffect, useState } from "react";
 
 type CardProps = {
   src: string;
   title: string;
   subtitle: string;
   urlLink?: string;
+  isLinkDisabled?: boolean;
 };
 
 export default function RegisterCard({
@@ -16,37 +16,8 @@ export default function RegisterCard({
   title,
   subtitle,
   urlLink,
+  isLinkDisabled = false,
 }: CardProps) {
-  const [isLinkDisabled, setIsLinkDisabled] = useState(false);
-
-  useEffect(() => {
-    const checkLinkStatus = () => {
-      const now = new Date();
-      const targetDate = new Date(2025, 6, 13);
-
-      // Check if it's July 13, 2025
-      if (
-        now.getFullYear() === targetDate.getFullYear() &&
-        now.getMonth() === targetDate.getMonth() &&
-        now.getDate() === targetDate.getDate()
-      ) {
-        const currentHour = now.getHours();
-        // Disable between 1 AM (01:00) and 3 PM (15:00)
-        setIsLinkDisabled(currentHour >= 1 && currentHour < 15);
-      } else {
-        setIsLinkDisabled(false);
-      }
-    };
-
-    // Check immediately
-    checkLinkStatus();
-
-    // Check every minute
-    const interval = setInterval(checkLinkStatus, 60000);
-
-    return () => clearInterval(interval);
-  }, []);
-
   return (
     <>
       <div className="relative h-full max-h-[480px] min-h-[360px] w-full min-w-[272px] max-w-[424px] overflow-hidden rounded-3xl">
