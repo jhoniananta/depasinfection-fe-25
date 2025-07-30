@@ -28,6 +28,8 @@ export type eventType = {
 
 export type EventDetails = [
   {
+    moodle_account?: string;
+    moodle_password?: string;
     participant_id: string;
     team_name: string;
     university: string;

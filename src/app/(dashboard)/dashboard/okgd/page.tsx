@@ -7,6 +7,7 @@ import Sidebar from "@/layouts/SidebarUser";
 import Countdown from "@/components/Countdown";
 import withAuth from "@/components/WithAuth";
 import { Button } from "@/components/ui/button";
+import jsPDF from "jspdf";
 import Link from "next/link";
 import { FiDownload } from "react-icons/fi";
 import BioInformationSection from "../_components/BioInformation";
@@ -14,12 +15,99 @@ import PaymentInformationSection from "../_components/PaymentInformation";
 import { useGetDetailsEventQuery } from "../_hooks/@get/useGetDetailsEvent";
 
 export default withAuth(OKGDDashboardUserPage, "USER");
+
 function OKGDDashboardUserPage() {
   // Data Fetching Details Event Query
   const { data: eventDetails, isLoading, isError } = useGetDetailsEventQuery();
 
   // phaseDetails content rendering
   const phaseDetails = eventDetails?.[0].phase;
+
+  // Function to check if current time is after 5 PM today
+  const isDownloadTimeReached = () => {
+    const now = new Date();
+    const today5PM = new Date();
+    today5PM.setHours(18, 0, 0, 0); // Set to 5 PM today
+    return now >= today5PM;
+  };
+
+  // Function to generate and download student card PDF
+  const downloadStudentCard = () => {
+    if (!eventDetails?.[0]) return;
+
+    const participant = eventDetails[0];
+    const doc = new jsPDF();
+
+    // Set font
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(20);
+
+    // Title
+    doc.text("STUDENT CARD", 105, 30, { align: "center" });
+    doc.text("OKGD 2025", 105, 45, { align: "center" });
+
+    // Line separator
+    doc.setLineWidth(0.5);
+    doc.line(20, 55, 190, 55);
+
+    // Student Information
+    doc.setFont("helvetica", "normal");
+    doc.setFontSize(12);
+
+    const yStart = 70;
+    const lineHeight = 15;
+    let currentY = yStart;
+
+    // Moodle Access Information
+    doc.setFont("helvetica", "bold");
+    doc.text("MOODLE ACCESS INFORMATION:", 20, currentY);
+    currentY += lineHeight;
+
+    doc.setFont("helvetica", "normal");
+    doc.text(`Moodle Account: ${participant.moodle_account}`, 20, currentY);
+    currentY += lineHeight;
+
+    doc.text(
+      `Temporary Password: ${participant.moodle_password}`,
+      20,
+      currentY,
+    );
+    currentY += lineHeight + 10;
+
+    // Important Notice
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(11);
+    doc.setTextColor(255, 0, 0); // Red color
+    doc.text("IMPORTANT NOTICE:", 20, currentY);
+    currentY += lineHeight;
+
+    doc.setFont("helvetica", "normal");
+    doc.setFontSize(10);
+    doc.setTextColor(0, 0, 0); // Black color
+
+    const noticeText = [
+      "Please change your password immediately when you first log in to Moodle.",
+      "This temporary password is for initial access only and must be updated",
+      "for security purposes. Keep your new password secure and do not share",
+      "it with anyone.",
+    ];
+
+    noticeText.forEach((line) => {
+      doc.text(line, 20, currentY);
+      currentY += 10;
+    });
+
+    // Footer
+    currentY += 20;
+    doc.setFont("helvetica", "italic");
+    doc.setFontSize(8);
+    doc.text("Generated on: " + new Date().toLocaleString(), 20, currentY);
+    doc.text("Valid for OKGD 2025 Event Only", 20, currentY + 10);
+
+    // Save the PDF
+    const fileName = `OKGD_StudentCard_${participant.team_name.replace(/\s+/g, "_")}_${new Date().getTime()}.pdf`;
+    doc.save(fileName);
+  };
 
   const phaseContent = {
     PENYISIHAN: {
@@ -279,12 +367,15 @@ function OKGDDashboardUserPage() {
                             className="mb-[9px] text-left text-[16px] font-medium leading-[16px] text-[#A8A9AC] lg:text-right"
                             weight="medium"
                           >
-                            Student card will available a week before tryout
+                            {isDownloadTimeReached()
+                              ? "Student card is now available for download"
+                              : "Student card will be available at 5 PM today"}
                           </Typography>
                           <Button
                             variant="outlinePurple"
                             className="flex items-center justify-center gap-4 text-xs lg:ml-auto lg:text-lg"
-                            disabled
+                            disabled={!isDownloadTimeReached() || isLoading}
+                            onClick={downloadStudentCard}
                           >
                             <FiDownload className="text-xs lg:text-lg" />
                             Download Student Card
