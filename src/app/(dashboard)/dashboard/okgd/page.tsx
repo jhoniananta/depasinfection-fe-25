@@ -8,6 +8,7 @@ import Countdown from "@/components/Countdown";
 import withAuth from "@/components/WithAuth";
 import { Button } from "@/components/ui/button";
 import jsPDF from "jspdf";
+import { DateTime } from "luxon";
 import Link from "next/link";
 import { FiDownload } from "react-icons/fi";
 import BioInformationSection from "../_components/BioInformation";
@@ -25,10 +26,12 @@ function OKGDDashboardUserPage() {
 
   // Function to check if current time is after 5 PM today
   const isDownloadTimeReached = () => {
-    const now = new Date();
-    const today5PM = new Date();
-    today5PM.setHours(18, 0, 0, 0); // Set to 5 PM today
-    return now >= today5PM;
+    const now = DateTime.now().setZone("Asia/Jakarta");
+    const releaseTime = DateTime.fromISO("2025-07-30T18:00:00", {
+      zone: "Asia/Jakarta",
+    });
+
+    return now >= releaseTime;
   };
 
   // Function to generate and download student card PDF
@@ -64,7 +67,11 @@ function OKGDDashboardUserPage() {
     currentY += lineHeight;
 
     doc.setFont("helvetica", "normal");
-    doc.text(`Moodle Account: ${participant.moodle_account}`, 20, currentY);
+    doc.text(
+      `Exam Username Account: ${participant.moodle_account}`,
+      20,
+      currentY,
+    );
     currentY += lineHeight;
 
     doc.text(
@@ -87,9 +94,8 @@ function OKGDDashboardUserPage() {
 
     const noticeText = [
       "Please change your password immediately when you first log in to Moodle.",
-      "This temporary password is for initial access only and must be updated",
-      "for security purposes. Keep your new password secure and do not share",
-      "it with anyone.",
+      "This temporary password is for initial access only and must be updated for security purposes.",
+      "Keep your new password secure and do not share it with anyone.s",
     ];
 
     noticeText.forEach((line) => {
