@@ -1,11 +1,9 @@
 import NextImage from "@/components/NextImage";
 import Typography from "@/components/Typography";
-import {
-  imageCarouselOkgdFacultyTour,
-  requirementsOkgdFacultyTour,
-} from "@/contents/event-content";
+import { imageCarouselOkgdFacultyTour } from "@/contents/event-content";
 import { cardSectionProps } from "@/types/event-page";
 import { motion } from "motion/react";
+import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { IoDocumentTextOutline } from "react-icons/io5";
 import ImageCarousel from "../ImageCarousel";
@@ -39,9 +37,10 @@ export default function CardSectionOkgd({
       },
     },
   };
+  const t = useTranslations("OKGDpage");
 
   return (
-    <section className="w-full min-h-screen relative flex flex-col justify-center items-center">
+    <section className="relative flex min-h-screen w-full flex-col items-center justify-center">
       {/* Background Image */}
       <div className="absolute inset-0 z-0 h-full w-full">
         <NextImage
@@ -75,7 +74,7 @@ export default function CardSectionOkgd({
           </motion.div>
 
           {/* Content section */}
-          <div className="grid grid-cols-1 gap-8 md:gap-2 md:grid-cols-2">
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 md:gap-2">
             {/* Left column - Title */}
             <motion.div
               initial={{ opacity: 0, x: -20 }}
@@ -165,7 +164,7 @@ export default function CardSectionOkgd({
       <CardComponent
         title={{ main: "Special", sub: "Faculty Tour" }}
         images={imageCarouselOkgdFacultyTour}
-        requirements={requirementsOkgdFacultyTour}
+        requirements={[t("facultyTour.description")]}
         showButton={false}
       />
     </section>

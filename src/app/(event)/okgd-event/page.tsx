@@ -7,12 +7,7 @@ import HeroEvent from "@/components/event-component/HeroEvent";
 import MapEvent from "@/components/event-component/MapEvent";
 import RegistEvent from "@/components/event-component/RegistEvent";
 import TimelineEvent from "@/components/event-component/TimelineEvent";
-import {
-  imageCarouselOkgd,
-  lineSourceOkgd,
-  requirementsOkgd,
-  titleGeneral,
-} from "@/contents/event-content";
+import { imageCarouselOkgd, lineSourceOkgd } from "@/contents/event-content";
 import Layout from "@/layouts/Layout";
 import { useTranslations } from "next-intl";
 
@@ -83,7 +78,7 @@ function OKGDHome() {
         />
         <AboutEvent
           poster="/okgd-page/OKGD-poster-terbaru.png"
-          title="OKGD-baru"
+          title="OKGD"
           aboutTitle={t("about.title")}
           buttonText={"Download Poster"}
           normalContent={t("about.description")}
@@ -91,8 +86,8 @@ function OKGDHome() {
         />
         <CardSectionOkgd
           images={imageCarouselOkgd}
-          requirements={requirementsOkgd}
-          title={titleGeneral}
+          requirements={t.raw("requirements.items")}
+          title={t.raw("requirements.general")}
         />
         <TimelineEvent
           timelineContent={timelineContentOkgd}

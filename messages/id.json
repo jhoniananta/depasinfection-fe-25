@@ -31,6 +31,27 @@
       "title": "Tentang ",
       "description": "Olimpiade Kedokteran Gigi Dasar (OKGD) merupakan salah satu bagian dari rangkaian Depa's Infection yang diselenggarakan oleh Denta Paramitha Fakultas Kedokteran Gigi Universitas Gadjah Mada. Terhitung sejak tahun 2017, Olimpiade Kedokteran Gigi Dasar telah diselenggarakan tingkat Nasional dari yang sebelumnya hanya menjangkau peserta tingkat regional Jawa dan Bali. Melalui olimpiade ini, peserta diberikan wadah untuk berkompetisi dengan materi seputar kedokteran gigi dasar sesuai dengan silabus yang telah diberikan. ",
       "descriptionBold": "Babak penyisihan akan dilakukan secara daring melalui website depasinfection.com dan platform meeting online Zoom Meeting yang serentak dilakukan pada tanggal 2 Agustus 2025. Lima puluh tim terbaik akan melanjutkan kompetisi di babak perempat final pada 9 Agustus 2025 yang akan dilaksanakan secara daring melalui website depasinfection.com dan platform meeting online Zoom Meeting. Setelah itu, dua puluh tim terbaik akan melanjutkan kompetisi di babak semifinal pada tanggal 23 Agustus 2025. Enam tim terbaik akan melanjutkan ke babak final dan grand final pada 24 Agustus 2025. Babak semifinal, final, dan grand final akan dilaksanakan secara luring di Fakultas Kedokteran Gigi, Universitas Gadjah Mada."
+    },
+    "requirements": {
+      "general": {
+        "main": "Umum",
+        "sub": "Persyaratan"
+      },
+      "items": [
+        "Setiap tim terdiri atas 3 (tiga) orang peserta yang merupakan siswa/siswi aktif tingkat SMA/sederajat.",
+        "Setiap peserta hanya dibolehkan terdaftar dalam 1 tim. Setiap tim hanya diperbolehkan membuat 1 akun pada website depasinfection.com dan nama akun menggunakan nama ketua tim.",
+        "Ketiga anggota tim berasal dari instansi/sekolah yang sama (diperbolehkan dari angkatan yang berbeda). Pastikan penulisan nama instansi/sekolah sudah benar. Contoh penulisan nama instansi/sekolah yang benar: SMAN 1 Gadjah.",
+        "Jumlah maksimal tim yang berasal dari sekolah yang sama tidak dibatasi.",
+        "Setiap tim didampingi oleh 1 (satu) orang guru pendamping.",
+        "Peserta mendaftarkan diri melalui form sesuai dengan periode pendaftaran dan ketentuan yang telah diberikan serta membayar biaya pendaftaran, mengumpulkan pakta integritas sesuai format yang telah ditentukan, serta melampirkan bukti identitas berupa scan kartu pelajar masing-masing anggota tim.",
+        "Setiap keputusan panitia dalam kegiatan ini bersifat mutlak dan tidak dapat diganggu gugat. Oleh karena itu, setiap peserta yang mendaftarkan diri dianggap telah mengerti dan menyetujui ketentuan pada guideline."
+      ]
+    },
+    "facultyTour": {
+      "description": "Faculty Tour Fakultas Kedokteran Gigi UGM merupakan kegiatan yang disuguhkan secara eksklusif bagi peserta yang turut serta dalam lomba OKGD. Kegiatan ini memberikan kesempatan bagi para peserta untuk mengenal lebih dalam lingkungan dan fasilitas-fasilitas di Fakultas Kedokteran Gigi UGM. Peserta OKGD nantinya akan diajak berkeliling melihat lingkungan FKG UGM. Tidak hanya berkeliling melihat gedung yang ada di FKG UGM , peserta akan mengunjungi laboratorium yang digunakan untuk menunjang perkuliahan bagi mahasiswa/i FKG UGM. Kegiatan ini tidak hanya bertujuan untuk memperluas pengetahuan dan wawasan peserta mengenai Fakultas Kedokteran Gigi, tetapi untuk memotivasi mereka mengembangkan minat serta bakat di bidang kesehatan. Dengan pengalaman yang menyeluruh ini, diharapkan para peserta dapat terinspirasi dan lebih siap menapaki langkah apabila nantinya mereka menuju berminat berkarir di dunia kedokteran gigi."
+    },
+    "register": {
+      "title": "Pendaftaran Ditutup Dalam"
     }
   },
   "UDSRCpage": {
@@ -43,6 +64,22 @@
       "title": "Tentang ",
       "description": "UGM Dental Scientific Research Competition (UDSRC) merupakan acara bergengsi yang menampilkan presentasi poster dan segmen presentasi lisan tiga menit, yang akan diadakan untuk pertama kalinya di Depa's Infection. Kompetisi ini terbuka untuk mahasiswa pre-klinik dan klinik dari bidang yang berhubungan dengan kesehatan seperti kedokteran gigi, kedokteran, farmasi, kebidanan, keperawatan, dan kesehatan masyarakat, sebagai wadah luar biasa untuk memamerkan pengetahuan mendalam mereka tentang topik ilmu kesehatan.",
       "descriptionBold": "Peserta akan terlibat dalam wacana ilmiah, bertukar ide-ide inovatif, dan memamerkan kecakapan penelitian mereka dalam lingkungan yang kompetitif. Selain mengakui keunggulan akademis dan mendorong pengembangan profesional, UDSRC bertujuan untuk mempromosikan kolaborasi interdisipliner dan kemajuan ilmu kedokteran gigi. Dengan mengintegrasikan kriteria evaluasi yang ketat dan kesempatan untuk umpan balik yang membangun, acara ini bercita-cita untuk menjadi ciri khas tahunan keunggulan dalam pendidikan dan penelitian kedokteran gigi dalam komunitas perguruan tinggi."
+    },
+    "requirements": {
+      "items": [
+        "Peserta adalah mahasiswa sarjana yang mengambil jurusan kesehatan di semua institusi di seluruh dunia, ditunjukkan dengan kartu identitas mahasiswa yang valid. Jurusan-jurusan tersebut meliputi kedokteran, kedokteran gigi, farmasi, kebidanan, keperawatan, dan kesehatan masyarakat.",
+        "Tim berkompetisi, dan prasyaratnya adalah sebagai berikut: Setiap tim terdiri dari minimal 2 (dua anggota) dan maksimal 3 (tiga anggota) dan 1 (satu anggota) sebagai ketua tim.",
+        "Peserta dalam 1 (satu) tim mewakili universitas yang sama, dengan ketentuan bahwa setiap universitas diperbolehkan mengirim lebih dari 1 (satu) tim.",
+        "Setiap peserta dapat mengajukan lebih dari satu proyek karya dengan maksimal 2 (dua) karya tulis ilmiah dan menjadi pemimpin satu proyek saja.",
+        "Anggota tim harus berasal dari universitas tunggal namun dapat terdiri dari bidang studi yang berbeda. Peserta diharuskan mematuhi aturan dan pedoman yang telah ditetapkan.",
+        "Peserta akan dieliminasi jika secara konsisten tidak memenuhi kriteria pendaftaran yang telah diverifikasi.",
+        "Peserta diharuskan untuk tetap terlibat hingga semua fase selesai.",
+        "Peserta harus menyelesaikan pendaftaran menggunakan formulir yang disediakan dan membayar biaya pendaftaran sebelum batas waktu.",
+        "Mereka yang terbukti melakukan kegiatan penipuan akan didiskualifikasi."
+      ]
+    },
+    "cityTour": {
+      "description": "Sebagai bentuk apresiasi kepada 10 finalis UDSRC, kami mempersembahkan City Tour Eksklusif yang mengajak peserta merasakan langsung pesona budaya dan kuliner khas Yogyakarta. Perjalanan akan dimulai dengan menjelajahi Malioboro, kawasan legendaris yang menjadi ikon dan jantung Kota Yogyakarta. Deretan toko souvenir, bangunan arsitektur klasik, dan hiruk pikuk jalanan akan memberikan pengalaman tak terlupakan. Petualangan berlanjut ke Museum Sonobudoyo, dimana peserta diajak menyelami kekayaan budaya Jawa melalui koleksi wayang, keris, tekstil, dan berbagai artefak penuh filosofi dan nilai sejarah yang memukau. Terakhir, peserta akan diajak menikmati kuliner khas Jawa di restoran unik yang menawarkan suasana etnik yang autentik, menyempurnakan perjalanan dengan pengalaman makan malam yang berkesan. Rangkaian perjalanan yang tidak hanya menghibur, namun juga memperkaya wawasan budaya dan memberikan kenangan manis tentang Yogyakarta."
     }
   }
 }

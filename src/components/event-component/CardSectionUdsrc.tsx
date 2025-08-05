@@ -1,10 +1,8 @@
 import NextImage from "@/components/NextImage";
-import {
-  imageCarouselUdsrcCityTour,
-  requirementsUdsrcCityTour,
-} from "@/contents/event-content";
+import { imageCarouselUdsrcCityTour } from "@/contents/event-content";
 import { cardSectionProps } from "@/types/event-page";
 import { motion } from "motion/react";
+import { useTranslations } from "next-intl";
 import CardComponent from "./CardComponent";
 
 export default function CardSectionUdsrc({
@@ -13,13 +11,14 @@ export default function CardSectionUdsrc({
   requirements,
   showButton,
 }: cardSectionProps) {
+  const t = useTranslations("UDSRCpage");
   return (
     <motion.section
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       transition={{ duration: 0.8 }}
       viewport={{ once: true }}
-      className="w-full min-h-screen relative flex flex-col justify-center items-center"
+      className="relative flex min-h-screen w-full flex-col items-center justify-center"
     >
       {/* Background Image */}
       <motion.div
@@ -27,7 +26,7 @@ export default function CardSectionUdsrc({
         whileInView={{ opacity: 1 }}
         transition={{ duration: 1 }}
         viewport={{ once: true }}
-        className="absolute inset-0 w-full h-full z-0"
+        className="absolute inset-0 z-0 h-full w-full"
       >
         <NextImage
           src="/landing-page/bg-banner-section.png"
@@ -36,7 +35,7 @@ export default function CardSectionUdsrc({
           sizes="100vw"
           quality={100}
           priority
-          className="object-cover inset-0 w-full"
+          className="inset-0 w-full object-cover"
           imgClassName="object-cover w-full h-full opacity-60 select-none pointer-events-none"
         />
       </motion.div>
@@ -66,7 +65,7 @@ export default function CardSectionUdsrc({
         <CardComponent
           title={{ main: "Special", sub: "City Tour" }}
           images={imageCarouselUdsrcCityTour}
-          requirements={requirementsUdsrcCityTour}
+          requirements={[t("cityTour.description")]}
           showButton={false}
         />
       </motion.div>

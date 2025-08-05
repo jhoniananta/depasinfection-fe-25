@@ -7,12 +7,7 @@ import HeroEvent from "@/components/event-component/HeroEvent";
 import MapEvent from "@/components/event-component/MapEvent";
 import RegistEvent from "@/components/event-component/RegistEvent";
 import TimelineEvent from "@/components/event-component/TimelineEvent";
-import {
-  imageCarouselUdsrc,
-  lineSourceUdsrc,
-  requirementsUdsrc,
-  titleGeneral,
-} from "@/contents/event-content";
+import { imageCarouselUdsrc, lineSourceUdsrc } from "@/contents/event-content";
 import Layout from "@/layouts/Layout";
 import { useTranslations } from "next-intl";
 
@@ -79,8 +74,8 @@ function UDSRCHome() {
         />
         <CardSectionUdsrc
           images={imageCarouselUdsrc}
-          requirements={requirementsUdsrc}
-          title={titleGeneral}
+          requirements={t.raw("requirements.items")}
+          title={t.raw("requirements.general")}
         />
         <TimelineEvent
           timelineContent={timelineContentUdsrc}

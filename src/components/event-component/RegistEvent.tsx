@@ -5,6 +5,7 @@ import Typography from "@/components/Typography";
 import { Button } from "@/components/ui/button";
 import { RegistEventProps } from "@/types/event-page";
 import { motion } from "motion/react";
+import { useTranslations } from "next-intl";
 import Link from "next/link";
 
 export default function RegistEvent({
@@ -13,6 +14,7 @@ export default function RegistEvent({
   guidebookUrl,
   registUrl,
 }: RegistEventProps) {
+  const t = useTranslations("OKGDpage");
   return (
     <motion.section
       initial={{ opacity: 0 }}
@@ -73,7 +75,7 @@ export default function RegistEvent({
               weight="bold"
               className="text-balance text-center text-5xl text-black"
             >
-              Registration Close In
+              {t("register.title")}
             </Typography>
           </motion.div>
           <motion.div

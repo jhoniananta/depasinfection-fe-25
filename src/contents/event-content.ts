@@ -6,21 +6,6 @@ export const imageCarouselOkgd = [
   "/images/okgd-page/carousel-image-3.jpg",
 ];
 
-export const requirementsOkgd = [
-  "Each team consists of 3 (three) participants who are active high school students.",
-  "Each participant is only allowed to register in 1 team. Each team is only allowed to create 1 account on the depasinfection.com website and the account name uses the name of the team leader.",
-  "The three team members come from the same school (permitted from different classes/ years). Make sure the name of the school is written correctly. An example of the correct writing of the name of the school: SMAN 1 Gadjah.",
-  "The maximum number of teams from the same school is not limited.",
-  "Each team is accompanied by 1 (one) accompanying teacher.",
-  "Participants register themselves through the form according to the registration period and the provisions that have been given and pay the registration fee, collect the integrity pact according to the specified format, and attach proof of identity in the form of a scan of each team member's student card.",
-  "Every decision of the committee in this activity is absolute and cannot be contested. Therefore, every participant who registers is deemed to have understood and agreed to the provisions in the guidelines.",
-];
-
-export const titleGeneral = {
-  main: "General",
-  sub: "Requirements",
-};
-
 export const timelineContentOkgd: TimelineItem[] = [
   {
     date: "14 Apr - 17 May 2025",
@@ -91,22 +76,6 @@ export const imageCarouselOkgdFacultyTour = [
   "/images/okgd-page/faculty-tour-3.jpg",
 ];
 
-export const requirementsOkgdFacultyTour = [
-  "Faculty Tour of the Faculty of Dentistry UGM is an activity exclusively offered to participants of the OKGD competition. This event provides an opportunity for participants to become acquainted with the environment and facilities at the Faculty of Dentistry UGM. Participants will be invited to tour the Faculty's surroundings, including not only the buildings but also the laboratories that support the lectures for the Faculty's students. The activity aims not only to broaden participants' knowledge and insights into the field of dentistry but also to motivate them to develop their interests and talents in the health sector. With this comprehensive experience, it is hoped that the participants will be inspired and better prepared to take the next step toward a career in dentistry.",
-];
-
-export const requirementsUdsrc = [
-  "Participants are undergraduate students majoring in health at all institutions worldwide, as shown by a valid student identity card. These majors include medicine, dentistry, pharmacy, midwifery, nursing, and public health.",
-  "Teams compete, and the prerequisites are as follows: Each team consists of a minimum of 2 (two members) and a maximum of 3 (three members) and 1 (one member) as a team leader.",
-  "Participants in 1 (one) team represent the same university, with the provision that each university is allowed to send more than 1 (one) team.",
-  "Each participant may submit more than one work project with a maximum of 2 (two) written scientific works and become a leader of one project only.",
-  "Team members must come from single universities but may comprise different fields of study. Participants are required to abide by the established rules and guidelines.",
-  "Participants will be eliminated if they consistently do not meet the verified registration criteria.",
-  "It is required of participants to stay involved until all phases are finished.",
-  "Participants must complete their registration using the provided form and pay the registration fee before the deadline.",
-  "Those who are found to have engaged in fraudulent activity are disqualified.",
-];
-
 export const timelineContentUdsrc = [
   {
     date: "July 31 - August 28",
@@ -150,10 +119,6 @@ export const imageCarouselUdsrcCityTour = [
   "/images/udsrc-page/city-tour-1.jpg",
   "/images/udsrc-page/city-tour-2.jpg",
   "/images/udsrc-page/city-tour-3.jpg",
-];
-
-export const requirementsUdsrcCityTour = [
-  "As a form of appreciation for the 10 UDSRC finalists, we present an Exclusive City Tour that invites participants to experience firsthand the charm of Yogyakarta's culture and culinary specialties. The journey will begin by exploring Malioboro, a legendary area that is an icon and the heart of Yogyakarta City. Rows of souvenir shops, classic architectural buildings, and the hustle and bustle of the streets will provide an unforgettable experience. The adventure continues to the Sonobudoyo Museum, where participants are invited to dive into the richness of Javanese culture through collections of wayang, keris, textiles, and various artifacts full of philosophy and captivating historical value. Finally, participants will be invited to enjoy Javanese culinary delights at a unique restaurant that offers an authentic ethnic atmosphere, perfecting the journey with a memorable dinner experience. A series of trips that are not only entertaining, but also enrich cultural insights and provide sweet memories of Yogyakarta.",
 ];
 
 export const lineSourceUdsrc = {
